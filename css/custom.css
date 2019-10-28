@@ -1,0 +1,443 @@
+section {
+    transition: all .2s ease-in-out;
+}
+
+.btn-main{
+    min-width: 100%;
+    height: 80px;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.btn-main-container p {
+    width: 100%;
+    text-align: center;
+    margin-top:8px;
+    display:table;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.work .row {
+    margin: 20px 0px;
+    border-bottom: 2px solid #f5f5f5;
+    padding-bottom:10px;
+}
+.work-banner{
+	height: 400px;
+	width: 100%;
+	background: url(https://via.placeholder.com/1000x400?text=Kuulutuse+banner);
+	background-position: top center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.work-footer-contact ul li {
+    list-style: none;
+}
+
+#feedbackButton {
+    position: fixed;
+    bottom: 20px;
+    left: calc(100% - 240px);
+}
+
+.pt-5, .py-5 {
+    padding-top: 0rem!important;
+}
+
+.card {
+    background: linear-gradient(to right, #faa41a 40%, rgba(255,255,255,.6)), url(../img/portfolio/thumbnails/1.jpg);
+    color: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.3);
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.card:nth-child(even) {
+    background: linear-gradient(to top, #faa41a 40%, rgba(255,255,255,.6)), url(../img/portfolio/thumbnails/2.jpg);
+}
+
+.card-body {
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+.btn-primary, hr.divider {
+    background-color: #ff6f20;
+    background-color: #faa41a;
+}
+
+.btn-info {
+    background-color: #00a6e6;
+}
+
+.card-body a {
+    /*color: white;*/
+    font-size: 12px;
+    text-decoration: none !important;
+    color: #fff;
+}
+
+.card-body p {
+    font-size: 13px;
+    padding: 0;
+    color: #fff;
+}
+
+body{
+    background: #FFEFBA;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    background-attachment: fixed;
+
+}
+
+@media (min-width: 992px) {
+    #mainNav {
+        //background-color: #00a6e6;
+        //background-color: #102064;
+        //background-color: #2c5696;
+        //background-color: #ff6f20;
+       // background-color: #faa41a;
+    }
+}
+
+.card-text {
+    padding: 10px 10px;
+}
+.card-text p {
+    margin: 0;   
+}
+
+small {
+    border-bottom: 1px solid #f5f5f5;
+    width:100%;
+}
+
+#profiles .list-group-item{
+    color:#555!important;
+}
+
+li.list-group-item[aria-expanded=true] {
+    background: #f5f5f5;
+}
+
+li.list-group-item:hover {
+    background: #f5f5f5;
+    cursor: pointer;
+}
+
+#feedbackButton span, #feedbackButton {
+    transition: all .25s ease-in-out;
+}
+
+#feedbackButton span {
+    opacity: 0; 
+    width: 0px;
+    right:-200px;
+    position:relative;
+}
+
+#feedbackButton:hover span {
+    display: inline;
+    opacity: 1;
+    width: 500px;
+    right:0px;
+}
+
+#feedbackButton {
+    width:100px;
+    height:60px;
+    opacity:.5;
+    margin-right:-2000px;
+    left: 90%;
+
+}
+
+#feedbackButton:hover {
+    width: 300px;
+    height: 60px;
+    opacity:.98;
+    left: calc(100% - 250px);
+}
+
+.col-lg-12.work-footer-apply a {
+    width: 100%;
+}
+
+.work h4, .work h5 {
+    color: #6c757d;
+    border-left: 5px solid orange;
+    padding-left: 7px;
+}
+
+.work h2 {
+    text-align: right;
+    background: #faa41a;
+    color: white;
+    padding: 10px 12px;
+}
+
+
+
+.col-lg-2.work-share.text-muted {
+    display: table;
+}
+
+.col-lg-2.work-share.text-muted > div {
+    display: table-cell;
+    vertical-align: middle;
+    height: 60px;
+}
+
+.collapse.show div {
+    font-size: 14px;
+    opacity:1;
+}
+
+.collapse div {
+    opacity:0;
+    transition: all .25s ease-in-out;
+}
+
+.list-group-item[aria-expanded=true] h6 {
+    border-bottom: 6px solid orange;
+    padding-bottom: 6px;
+    border-radius: 3px;
+}
+
+.list-group-item h6{
+    transition: all .21s ease-in-out;
+}
+
+
+
+
+/* custom-forms.css */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  background-color: #f5f5f5;
+  overflow-x: hidden;
+  transition: 0.2s;
+  //padding: 20px
+}
+
+form {
+    font-family: "Merriweather Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-weight: 700;
+    color: #212529;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.2s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main, #mainNav, #formToggler , #page-top {
+  transition: margin-left .2s;
+  padding: 16px;
+}
+
+.front #main, .front #mainNav, .front #formToggler , #page-top.front  {
+  padding: 0px;
+}
+
+.toggleMenu {
+    display: block;
+	cursor: pointer;
+	text-align: center;
+    background: #f5f5f5;
+}
+
+.btn-form {
+    margin: 20px 0px 0px 0px;
+    width: 100%;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+#portfolio .col-lg-4.col-sm-6 {
+    border: 2px solid #fff;
+}
+
+
+/* sidenav open */
+.open {
+    margin-left: 400px;
+}
+.sidenav.open {
+    width: 400px;
+    margin-left: 0;
+}
+
+
+.container.work,section#about .container {
+    background: rgba(255,255,255,.98);
+}
+
+section#about .container {
+    padding-top:40px;
+    margin-top:-30px;
+}
+
+.practice section#about .container {
+    padding-top: 40px;
+    margin-top: -103px;
+    padding: 40px 40px 40px 40px;
+}
+
+div#ut-logo {
+    background-image: url(/userdata/tartu_ylikool_ringlogo.png);
+    height: 50px;
+    background-size: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 60px;
+}
+
+.container.work {
+    margin-top: -130px
+}
+
+#page-content {
+    transition: all .2s ease-in-out;
+    margin-top: -60px;
+}
+
+section.page-section.bg-primary {
+    margin: -16px;
+}
+#profiles .container {
+    background: white;
+    padding-top: 20px;
+    margin-top: -120px;
+}
+
+.btn-group.btn-group-md {
+    width: 100%;
+}
+
+.modal-body{
+  line-height: 1;
+}
+.modal-body p{
+  margin: 0 0 8px;
+}
+.modal-student-description{
+  font-weight: bold;
+}
+.diff-text{
+  font-size: 16px;
+  font-weight: normal;
+  padding-bottom: 8px;
+}
+.modal-image-container{
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+.modal-image-container .modal-image{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+#project-apply{
+  display: none;
+}
+.main-icons-container a:hover i,
+.main-icons-container a:focus i{
+  color: #f4623a !important;
+}
+.main-icons-container a:hover,
+.main-icons-container a:focus{
+  text-decoration: none !important;
+}
+
+.tooltip_mark{
+  position: absolute;
+  top: -6px;
+  font-size: 10px;
+  color: #f4623a;
+  margin: 2px 3px;
+  padding: 4px 2px 1px;
+  border: 1px solid #f4623a;
+  border-radius: 6px;
+}
+.project-link{
+  text-decoration: none !important;
+  color: #fff;
+}
+.upper,
+.lower{
+  min-height: 145px;
+}
+.upper.uneven,
+.lower.even{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4623a;
+  font-weight: bold;
+  color: #fff;
+}

@@ -1,0 +1,61 @@
+/*color: #0062ac;*/
+
+.navbar{
+	background-color: #0062ac;
+	color: #fff;
+}
+.navbar img{
+	background-color: #fff;
+	padding: 3px 10px;
+}
+.btn-primary{
+	background-color: #0062ac;
+}
+
+.section-images{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+.section-images .image-container{
+	position: relative;
+	height: 30vh;
+	overflow: hidden;
+	margin: 0 10px;
+}
+.section-images .image-container div{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-position: top center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	transition: .2s ease-out;
+}
+.section-images .image-container div.overlay{
+	height: 100%;
+	width: 100%;
+	background-image: url('../selected.svg');
+	background-size: contain;
+	background-color: #0062ac17;
+	border-radius: 10px;
+	
+}
+.section-images .image-container:hover div{
+	outline: 2px solid black;
+}
+
+.form-view{
+	display: block;
+}
+
+.test-view,
+.section-images{
+	display: none;
+}
+
+.question{
+	margin: 20px 0 20px;
+}

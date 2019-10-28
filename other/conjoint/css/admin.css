@@ -1,0 +1,31 @@
+body{
+	margin: 0px;
+	font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.form-control.question{
+	border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+}
+
+
+.pic_upl{
+	border: 1px solid #007bff;
+	border-radius: 10px;
+}
+
+.pic_upl .img-container{
+	border: 1px solid #007bff;
+	border-radius: 10px;
+}
+
+.img-container img{
+	width: 100%;
+	min-height: 100px;
+}
+
+.disabled{
+	display: none !important;
+}
+

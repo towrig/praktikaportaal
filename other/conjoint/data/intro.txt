@@ -1,0 +1,3 @@
+Tere! Oleme Tartu Ülikooli magistriõppe turunduse tudengid ning töötame välja kohvismuutit. Selleks, et smuuti vastaks võimalikult palju tarbijate soovidele, palume abi eeliskombinatsioonianalüüsi täitmisel. Seega palume järjestada 10 erinevat smuuti omaduste kombinatsiooni nii, et esimesena valitud kombinatsioon oleks teile kõige meeldivam ja viimasena valitud kombinatsioon kõige vähem meeldivam.
+
+JUHISED: Kõige enam meeldivale kombinatsioonile vajutage esimesena, paremuselt teisele kombinatsioonile klikkige teisena jne. Uuesti peale klikkides saab valiku tühistada. 

@@ -1,0 +1,342 @@
+<?php
+
+//public variables
+//currently unused cols: name,email,phone,tasks,experience,work_location,work_type,other,logopath,validationcode,heading,description,picturepath
+$name = "";
+$email = "";
+$phone = "";
+$tasks = "";
+$experience = "";
+$work_location = "";
+$work_type = "";
+$other = "";
+$logopath = "";
+$heading = "";
+$description = "";
+$picturepath = "";
+
+try {
+	$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+	// set the PDO error mode to exception
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$query = $conn->prepare('SELECT * FROM People WHERE validationcode = ?'); 
+	$query->execute(array($_GET["c"]));
+	$data = $query -> fetchAll();
+	foreach($data as $row){
+	
+		$name = $row["name"];
+		$email = $row["email"];
+		$phone = $row["phone"];
+		$tasks = $row["tasks"];
+		$experience = $row["experience"];
+		$work_location = $row["work_location"];
+		$work_type = $row["work_type"];
+		$other = $row["other"];
+		$logopath = $row["logopath"];
+		$heading = $row["heading"];
+		$description = $row["description"];
+		$picturepath = $row["picturepath"];
+		
+	}
+}catch (PDOException $e){
+	echo "Connection failed: " . $e->getMessage();
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Praktikavahenduste keskkond</title>
+
+    <!-- Font Awesome Icons -->
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="../../vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS - Includes Bootstrap -->
+    <link href="../../css/creative.min.css" rel="stylesheet">
+
+    <!-- Theme CSS - Includes Bootstrap -->
+    <link href="../../css/custom.css" rel="stylesheet">
+    <!-- Theme CSS - Includes Bootstrap -->
+    <link href="../../css/custom-form.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">Praktikavahenduste keskkond</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">Kuidas valida?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#services">Kuidas areneda?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Miks ...?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- work.php -->
+    <section>
+        <div class="container work">
+            <!-- start banner -->
+            <div class="row">
+                <div class="col-lg-12 work-banner"><img src="https://via.placeholder.com/1000x400?text=Kuulutuse+banner"></div>
+            </div> <!-- end -->
+            <!-- start title-share -->
+            <div class="row">
+                <div class="col-lg-11 work-title">
+                    <h2>Uhke töökoht OÜ</h2>
+                </div>
+                <div class="col-lg-1 work-share">
+                    <div><i class="fas fa-share fa-2x"></i>
+                        <i class="fab fa-facebook-f fa-2x"></i></div>
+                </div>
+            </div> <!-- end -->
+            <!-- start main-content -->
+            <div class="row">
+                <div class="col-lg-4 work-aside">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 work-aside-place">
+                                <h5>Töökoha asukoht</h5>
+                                <p>Töö asub aadressil: <br><?php echo $work_location; ?></p>
+                                <p>Äkki tuleb siia väike Google Maps ka....</p>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-12 work-aside-logo">
+                                <h5>Logo</h5>
+                                <img src="img/portfolio/thumbnails/2.jpg">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 work-aside-intro">
+                                <h5>Ettevõtte tutvustus</h5>
+                                <p><?php echo $other; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 work-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 work-content-intro">
+                                <h4>Töökoha tutvustus</h4>
+                                <p><?php echo $description; ?></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 work-content-tasks">
+                                <h4>Tööülesanded:</h4>
+                                <p>Enne üks lõik sissejuhatavat teksti ja siis nimekiri järgi kõikidest ülesannetest.</p>
+                                <ul>
+                                    <li>Ja siit nad siis tulevad.....</li>
+                                    <li>Teab ja tunneb CSS ja muud PHP</li>
+                                    <li>Tunneb teeke ja muud head kraami</li>
+                                    <li>Vähemalt läbinud 4 miljonit ainepunkti</li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 work-content-skills">
+                                    <h4>Vajalikud oskused ja kogemused:</h4>
+                                    <p><?php echo $experience; ?></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 work-content-sources">
+                                    <h4>Muu oluline info:</h4>
+                                    <p><?php echo $other; ?><p>
+                                    <p><?php echo $website; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end -->
+            <!-- start footer -->
+            <div class="row">
+
+                <div class="col-lg-4 work-footer-contact">
+
+                    <div class="row" style="overflow: hidden;">
+                        <div class="col-lg-4">
+                            <img src="img/portfolio/thumbnails/5.jpg" style="width:100px; height:100px;border-radius: 50px;">
+                        </div>
+                        <div class="col-lg-8" style="overflow: hidden;">
+                            <h5>Kontakt</h5>
+                            <ul style="margin-left:-40px;">
+                                <li><?php echo $name; ?></li>
+                                <li><i class="fas fa-envelope"></i> <?php echo $email; ?></li>
+                                <li><i class="fas fa-phone"></i> <?php echo $phone; ?></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8 work-footer-apply">
+                    <p>Siin peaks nüüd olema hunnik teksti ja oi kuidas ma siia nüüd kirjutan</p>
+                    <a class="btn btn-success btn-xl" href="#">Kandideeri</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12" style="text-align:left; float:right;">
+                    <p>JAGA LEHTE <i class="fas fa-share-square fa-1x"> </i></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+
+                    <h5 class="text-uppercase font-weight-bold mt-0">Sind võivad ka huvitada ka järgmised tööpakkumised</h5>
+                    <hr class="divider light my-4">
+
+                    <!-- reusable desing for work -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body text-left">
+                                    <h6 class="card-title text-uppercase font-weight-bold mt-0">Traineeship position for webdevelopers and webdesigners</h6>
+                                    <p class="card-text">Project starts February 2017</p>
+                                    <div class="row">
+                                        
+                                    <div class="col-lg-9">
+                                        <a href="#" class="">#traineeship</a>
+                                        <a href="#" class="">#isfae</a>
+                                    </div>
+                                        <div class="col-lg-3 text-right">
+                                        <i class="fa fa-heart"></i>
+                                        <i class="fa fa-share"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body text-left">
+                                    <h6 class="card-title text-uppercase font-weight-bold mt-0">Hiring junior / entry marketing and sales representative</h6>
+                                    <p class="card-text">Starting time: 26th August 2019</p>
+                                    <div class="row">
+                                        
+                                    <div class="col-lg-9">
+                                        <a href="#" class="">#work</a>
+                                        <a href="#" class="">#marketing</a>
+                                    </div>
+                                        <div class="col-lg-3 text-right">
+                                        <i class="fa fa-heart"></i>
+                                        <i class="fa fa-share"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body text-left">
+                                    <h6 class="card-title text-uppercase font-weight-bold mt-0">Otsime Eesti Geenivaramu projekti assistenti</h6>
+                                    <p class="card-text">Tööle asumise aeg: alates 15. augustist 2019</p>
+                                    <div class="row">
+                                        
+                                    <div class="col-lg-9">
+                                        <a href="#" class="">#geenivaramu</a>
+                                        <a href="#" class="">#töökuulutus</a>
+                                    </div>
+                                        <div class="col-lg-3 text-right align-bottom">
+                                        <i class="fa fa-heart"></i>
+                                        <i class="fa fa-share"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="divider light my-4">
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Call to Action Section -->
+    <!--
+  <section class="page-section bg-dark text-white">
+    <div class="container text-center">
+      <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
+      <a class="btn btn-light btn-xl" href="https://startbootstrap.com/themes/creative/">Download Now!</a>
+    </div>
+  </section>-->
+
+    <!-- Contact Section -->
+
+    <!--
+<div class="row">
+        <div class="col-lg-4 ml-auto text-center">
+          <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+          <div>+1 (202) 555-0149</div>
+        </div>
+        <div class="col-lg-4 mr-auto text-center">
+          <i class="fas fa-envelope fa-3x mb-3 text-muted"></i> 
+-->
+    <!-- Make sure to change the email address in anchor text AND the link below! -->
+    <!--         <a class="d-block" href="mailto:praktikamajanduses@ut.ee">praktikamajaduses@ut.ee</a>
+        </div>
+      </div>
+    </div>-->
+    <!--</section>-->
+
+    <!-- Footer -->
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+
+</body>
+
+</html>
