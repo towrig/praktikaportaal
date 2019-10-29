@@ -24,7 +24,7 @@
 					$answers = $_POST["answers"];
 					$result_string = $_POST["data"];
 					if($test_name == null) die("<h3>No test name!</h3>");
-					if($answers == null) die("<h3>No answers!</h3>");
+					//if($answers == null) die("<h3>No answers!</h3>");
 					if($result_string == null) die("<h3>No result string!</h3>");
 
 					//submit data
