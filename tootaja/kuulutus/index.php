@@ -90,7 +90,7 @@ try {
 
 <body id="page-top">
 
-    <?php echo loadHTML("../frags/navbar.html"); ?>
+    <?php echo loadHTML("../../frags/navbar.html"); ?>
 
     <!-- work.php -->
     <section>
@@ -112,7 +112,9 @@ try {
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12"><div class="work-banner"<?php if(!empty($pilt)) echo "style='background-image:url(../../userdata/pictures/".$pilt.")'"?>></div></div>
+                <div class="col-lg-12">
+                    <div class="work-banner" <?php if(!empty($pilt)) echo "style='background-image:url(../../userdata/pictures/".$pilt.")'"?>></div>
+                </div>
             </div> <!-- end -->
             <!-- start title-share -->
             <div class="row">

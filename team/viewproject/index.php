@@ -101,7 +101,7 @@ try {
 
 <body id="page-top">
 
-    <?php echo loadHTML("../frags/navbar.html"); ?>
+    <?php echo loadHTML("../../frags/navbar.html"); ?>
 
     <!-- work.php -->
     <section>
@@ -135,7 +135,7 @@ try {
 
                     <div class="row" style="overflow: hidden;">
                         <div class="col-lg-4">
-							<?php 
+                            <?php 
 							if(!empty($avatar)){
 								echo "<img src=".$avatar." style='width:100px; height:100px;border-radius: 50px;'>";
 							}else{
@@ -222,7 +222,7 @@ try {
                                 echo $bigString;
                             }
                         ?>
-                        
+
                     </div>
                     <hr class="divider light my-4">
 
@@ -281,57 +281,57 @@ try {
         var areasVisible = false;
         var editmode_key = "<?php echo $_GET["e"];?>";
 
-        $(document).ready(function(){
-            $(".edit_reg_b").on('click', function(event){
+        $(document).ready(function() {
+            $(".edit_reg_b").on('click', function(event) {
                 actionParticipant(event);
             });
 
             $('[data-toggle="tooltip"]').tooltip();
         });
 
-        function join(){
+        function join() {
             var form = $('#project-apply');
-            if(areasVisible){
+            if (areasVisible) {
                 var formData = form.serialize();
                 $.ajax({
                     type: 'POST',
                     url: form.attr('action'),
                     data: formData
-                }).done(function(response){
+                }).done(function(response) {
                     console.log(response);
                     form.after("<div class='alert alert-success'>Edukas registreerimine! Emailile tuleb teavitus vastuvõtmise kohta.</div>");
                     form.css('display', 'none');
-                }).fail(function(response){
+                }).fail(function(response) {
                     console.log(response);
                     form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel.</div>");
                 });
 
-            }else{
+            } else {
                 areasVisible = true;
                 form.css('display', 'block');
             }
         }
 
-        function actionParticipant(e){
+        function actionParticipant(e) {
             let formData = new FormData();
             formData.append("edit_key", editmode_key);
             formData.append("email", $(e.currentTarget).data('email'));
             formData.append("action", $(e.currentTarget).data('action'));
-            
+
             $.ajax({
-                    type: 'POST',
-                    url: 'project_api.php',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: formData
-                }).done(function(response){
-                    console.log(response);
-                    $(e.currentTarget).css("display", "none");
-                    
-                }).fail(function(response){
-                    console.log(response);
-                });
+                type: 'POST',
+                url: 'project_api.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData
+            }).done(function(response) {
+                console.log(response);
+                $(e.currentTarget).css("display", "none");
+
+            }).fail(function(response) {
+                console.log(response);
+            });
         }
 
     </script>
