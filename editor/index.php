@@ -331,7 +331,7 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                                 <h4>Töökoha tutvustus*</h4>
                                 <p>
 									<textarea class="form-control" id="kirjeldus" name="description">
-									<?php if (!empty($_POST || $edit_success) echo htmlspecialchars($description);?>
+									<?php if (!empty($_POST) || $edit_success) echo htmlspecialchars($description);?>
 									</textarea>
 								</p>
                             </div>
@@ -341,7 +341,7 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                                 <h4>Tööülesanded:*</h4>
                                 <p>
 									<textarea class="form-control" id="tooulesanded" name="tasks">
-									<?php if (!empty($_POST || $edit_success) echo htmlspecialchars($tasks);?>
+									<?php if (!empty($_POST) || $edit_success) echo htmlspecialchars($tasks);?>
 									</textarea>
 								</p>
                             </div>
@@ -350,7 +350,7 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                                     <h4>Vajalikud oskused ja kogemused:*</h4>
                                     <p>
 										<textarea class="form-control" id="oskused" name="oskused">
-										<?php if (!empty($_POST || $edit_success) echo htmlspecialchars($oskused);?>
+										<?php if (!empty($_POST) || $edit_success) echo htmlspecialchars($oskused);?>
 										</textarea>
 									</p>
                                 </div>
@@ -359,7 +359,7 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                                 <div class="col-lg-12 work-content-sources">
                                     <h4>Muu oluline info:</h4>
                                     <textarea class="form-control" id="other" name="other">
-									<?php if (!empty($_POST || $edit_success) echo htmlspecialchars($other);?>
+									<?php if (!empty($_POST) || $edit_success) echo htmlspecialchars($other);?>
 									</textarea>
                                 </div>
                             </div>
@@ -378,15 +378,15 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                             <ul style="margin-left:-40px;">
                                 <li>
 									<input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($website != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" 
-									id="name" name="name" <?php if (!empty($_POST || $edit_success) echo "value='".htmlspecialchars($name)."'";?>>
+									id="name" name="name" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($name)."'";?>>
 								</li>
                                 <li><i class="fas fa-envelope"></i> 
 									<input type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" 
-									id="email" aria-describedby="emailHelp" name="email" <?php if (!empty($_POST || $edit_success) echo "value='".htmlspecialchars($email)."'";?>>
+									id="email" aria-describedby="emailHelp" name="email" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($email)."'";?>>
 								</li>
                                 <li><i class="fas fa-phone"></i> 
 									<input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($phone != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" 
-									id="phone" name="phone" <?php if (!empty($_POST || $edit_success) echo "value='".htmlspecialchars($phone)."'";?>>
+									id="phone" name="phone" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($phone)."'";?>>
 								</li>
                             </ul>
                         </div>
