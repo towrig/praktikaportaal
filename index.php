@@ -260,6 +260,9 @@
 
     <!-- Custom scripts for this template -->
     <!--<script src="js/creative.min.js"></script>-->
+    <script>
+        console.log(sessionStorage.getItem("editkey"));
+    </script>
 
 </body>
 

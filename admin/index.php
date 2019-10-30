@@ -53,7 +53,7 @@
                 <h3>Sisesta võti ja vajuta nuppu muutmisreziimi aktiveerimiseks</h3>
                 <input type="text" name="key" class="admin-key-input">
                 <div class="btn-group btn-group-md align-self-center" id="editmodeActivator">
-                    <span class="btn btn-sm btn-success">Aktiveeri muutimisreziim</span>
+                    <span class="btn btn-sm btn-success" onclick="activateEditmode()">Aktiveeri muutimisreziim</span>
                 </div>
             </div>
             <div class="col-md-12 my-5">
@@ -93,27 +93,20 @@
     <script src="../js/creative.min.js"></script>-->
     <script src="../js/trumbowyg/trumbowyg.min.js"></script>
     <script type="text/javascript">
-        $('#area').trumbowyg({
-            autogrow: true
-        });
-
-        ('.trumbowyg-button-pane').css('display', 'none');
-        $('.trumbowyg-box').focusout(function(event) {
-            $(this).find('.trumbowyg-button-pane').fadeOut(200);
-        });
-        $('.trumbowyg-box').focusin(function(event) {
-            $(this).find('.trumbowyg-button-pane').fadeIn(200);
-        });
 
         function activateEditmode() {
             let formData = new FormData();
-            formData.append("edit_key", editmode_key);
+            formData.append("edit_key", $('.admin-key-input').val());
             $.ajax({
                 type: 'POST',
                 url: 'admin_api.php',
-                data: formData
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
             }).done(function(response) {
-                Cookies.set("editkey", response);
+                console.log(response);
+                sessionStorage.setItem("editkey",response);
                 $('#editmodeActivator').after("<div class='alert alert-success'>Muutmine aktiveeritud. Lülitub välja brauseri sulgemisel.</div>");
             }).fail(function(response) {
                 console.log(response);

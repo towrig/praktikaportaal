@@ -1,7 +1,7 @@
 <?php 
 $response = "";
 
-if(!empty($_POST["edit_key"])){
+if(!empty($_POST)){
     $conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query = $conn->prepare('SELECT * FROM editkeys WHERE keyname = ?');
