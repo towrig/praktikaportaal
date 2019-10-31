@@ -152,7 +152,7 @@
 									<div class="col-md-12">
 										<div class="card">
 											<div class="p-2">
-												<a class="project-link" href="viewproject?c='.$id.'">
+												<a class="project-link" href="../team/viewproject?c='.$id.'">
 												<div class="row">
 													<div class="col-md-12 d-flex"><!-- content -->
 														<h5 class="align-self-center">'.$title.'</h5>
@@ -162,7 +162,7 @@
 													</div>
 													<div class="col-md-4 d-flex"> <!-- buttons -->
 														<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
-															<span class="btn btn-sm btn-success" href="viewproject?c='.$id.'">Liitu!</span>
+															<span class="btn btn-sm btn-success" href="../team/viewproject?c='.$id.'">Liitu!</span>
 														</div>	
 													</div>
 												</div>

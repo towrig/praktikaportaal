@@ -2,7 +2,7 @@
 
 function sendNotificationMail($target, $data){ //add $target
 	$form_success = true;
-	$to = $target; //replace with $target
+	$to = 'praktika@ut.ee'; //replace with $target
 	$from = 'noreply@praktika.ut.ee';
 	$subject = 'Registreerimine projekti '.$data;
 	$message = 'Keegi registreeris projekti '.$data.'.';
@@ -14,22 +14,21 @@ function sendNotificationMail($target, $data){ //add $target
 	
 }
 
-function sendMail($target, $data, $action){ //add $target
+function sendMail($target, $data, $is_accepted){ //add $target
 	$form_success = true;
 	$to = $target; //replace with $target
 	$from = 'noreply@praktika.ut.ee';
 	$subject = 'Registreerimine projekti '.$data;
-	$message = '';
-	if($action == "approve"){
-		$message = 'Teie registreerimine projekti"'.$data.'"on kinnitatud!';
+	$message = 'Tervitus!\n';
+	if($is_accepted){
+		$message .= 'Teie registreerimine projekti"'.$data.'"on kinnitatud!';
 	}else{
-		$message = 'Teie registreerimine projekti"'.$data.'"on tühistatud.';
+		$message .= 'Teie registreerimine projekti"'.$data.'"on tühistatud.';
 	}
-
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	mail($to, $subject, $message, $headers) || print_r(error_get_last());
+	if(mail($to, $subject, $message, $headers) || print_r(error_get_last())) echo "Success!";
 	
 }
 
@@ -52,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		$query = $conn->prepare('INSERT INTO ProjectParticipants(project_id, name, email, degree, skills, has_profile, is_accepted) VALUES (?,?,?,?,?,0,0)'); 
 		$query->execute(array($hash, $name, $email, $degree, $skills));
 		$conn = null;
-		sendNotificationMail($email, $hash);
+		sendNotificationMail("praktika@ut.ee", $hash);
 		http_response_code(200);
 		echo response.";hash:".$hash;
 	}catch (PDOException $e){
@@ -134,16 +133,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 				$query = $conn->prepare('UPDATE ProjectParticipants SET is_accepted = 1 WHERE email = ? AND project_id = ?'); 
 				$query->execute(array($_POST["email"], $project_id));
 				$conn = null;
+                sendMail($_POST["email"], $project_name, true);
 				http_response_code(200);
 				echo "OK! Reponse:".$response;
-				sendMail($_POST["email"], $project_name, "approved");
 			}else{
 				$query = $conn->prepare('DELETE FROM ProjectParticipants WHERE email = ? AND project_id = ?'); 
 				$query->execute(array($_POST["email"], $project_id));
 				$conn = null;
+                sendMail($_POST["email"], $project_name, false);
 				http_response_code(200);
 				echo "OK! Reponse:".$response;
-				sendMail($_POST["email"], $project_name, "declined");
 			}
 		}
 	}catch (PDOException $e){
