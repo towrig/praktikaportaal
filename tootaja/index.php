@@ -76,174 +76,45 @@
 	<section id="profiles">
 		<div class="container">
 			<div class="row">
+                <div class="col-md-12 text-center">
+                    <p>Praktika- ja tööpakkumised</p>
+                </div>
+                <?php
 
-				<?php
+                try {
+                    $conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+                    // set the PDO error mode to exception
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $query = $conn->prepare('SELECT heading,description,validationcode,picturepath FROM WorkPosts WHERE isvalidated = ?'); 
+                    $query->execute(array(1));
+                    $data = $query -> fetchAll();
+                    foreach($data as $row){
+                        //currently unused cols: name,email,phone,tasks,experience,work_location,work_type,other,logopath
+                        $heading = $row["heading"];
+                        $description = $row["description"];
+                        $validationcode = $row["validationcode"];
+                        $picurl = "../userdata/pictures/".$row["picturepath"];
 
-					$locations = array();
+                        $bigstring = '<div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="card" style="background: linear-gradient(to top, #faa41a 40%, rgba(255,255,255,.6)), url('.$picurl.');">
+                                            <a href="../tootaja/kuulutus?c='.$validationcode.'">
+                                            <div class="card-body text-left">
+                                                <h6 class="card-title text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
+                                                <p class="card-text">'.$description.'</p>
+                                            </div>
+                                            </a>
+                                        </div>
+                                    </div>';
 
-					try {
-						$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
-						
-						// set the PDO error mode to exception
-						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-						
-						//echo "Connected to PDO successfully"; 
-						$query = $conn->prepare('SELECT DISTINCT location FROM People WHERE isvalidated = ? ');
-						$query->execute(array(1));
+                        echo $bigstring;
+                    }
 
-						$data = $query -> fetchAll();
-						foreach($data as $row){
-							$locations[] = $row["location"];
-						}
-						
-					}
-					catch(PDOException $e){
-						$error_code = $e->getCode();
-						if($error_code == "23000"){
-							//do something to clarify an email like this exists already.
-						}else{
-							echo "Connection failed (code: $error_code): " . $e->getMessage();
-						}
-					}
+                } catch(PDOException $e){
+                    echo "Connection failed: " . $e->getMessage();
+                }
+            ?>
 
-				?>
-
-				<form class="col-md-12 mb-4" target="_self" method="post" enctype="multipart/form-data">
-					<div class="form-row mb-2">
-
-						<div class="col-md-4">
-							<select class="form-control form-control-sm" name="cat" id="category">
-						  		<option value="date" <?php if($_POST["cat"] == "date") echo 'selected="selected"'; ?>>
-						  			Kuupäev
-						  		</option>
-						  		<option value="location" <?php if($_POST["cat"] == "location") echo 'selected="selected"'; ?>>
-						  			Asukoht
-						  		</option>
-						  	</select>
-						</div>
-
-						<div class="col-md-4" id="date_order" <?php if($_POST["cat"] == "date") echo 'style="display:none;"'; ?>>
-							<select class="form-control form-control-sm" name="date_order" >
-						  		<option value="new">
-						  			Uuemad
-						  		</option>
-						  		<option value="old">
-						  			Vanemad
-						  		</option>
-						  	</select>
-						</div>
-
-						<div class="col-md-4" id="locations" <?php if($_POST["cat"] == "location") echo 'style="display:none;"'; ?>>
-							<select class="form-control form-control-sm" name="locations">
-								<?php
-									foreach($locations as $loc){
-										$loc_op = '<option value="'.$loc.'">
-											  			'.$loc.'
-											  		</option>';
-										echo $loc_op;
-									}
-								?>
-						  	</select>
-						</div>
-
-						<div class="col-md-4">
-							<input type="hidden" name="selected_sort" value="date">
-							<button class="btn btn-primary" type="submit">Sorteeri</button>
-						</div>
-
-					</div>
-				</form>
-			</div>
-			<div class="row">
-				<?php
-				try {
-					$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
-					// set the PDO error mode to exception
-					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					if(!empty($_POST)){
-						$cat = $_POST["cat"];
-						$location = $_POST["locations"];
-						$date = $_POST["date_order"];
-
-						$queryString = "";
-						if($cat == "date"){
-							$queryString.="ORDER BY datetime_uploaded ";
-							if($date == "new"){
-								$queryString.="DESC";
-							}else{
-								$queryString.="ASC";
-							}
-							$query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ? '+$queryString);
-							$query->execute(array(1));
-						}else{
-							$query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ? AND location = ?');
-							$query->execute(array(1, $location));
-						}
-
-					}else{
-						$query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ?');
-						$query->execute(array(1));
-					}
-					$data = $query -> fetchAll();
-					foreach($data as $row){
-						
-						//currently unused cols: 
-						$name = $row["name"];
-						$degree = $row["major"]." | ".$row["institute"];
-						$pic = "../userdata/pictures/".$row["picturepath"]; //https://dummyimage.com/1000x1000/fff/aaa
-						$cv = "../userdata/cvs/".$row["cvpath"];
-						$email = $row["email"];
-						$tugevused = $row["skills"];
-						$kogemused = $row["experience"];
-						$work = $row["work"];
-						$asukoht = $row["location"]; 
-						
-						//bullet list creator
-						$parsed_kogemused = "<ul>";
-						foreach(explode("\n", $kogemused) as $line){
-							$parsed_kogemused .= "<li>$line</li>";
-						}
-						$parsed_kogemused .= "</ul>";
-						unset($line);
-						
-						$bigstring = '
-						<div class="col-md-12">
-							<div class="card js-modal" data-pic="'.$pic.'" data-name="'.$name.'" data-degree="'.$degree.'" data-skills="'.$tugevused.'" data-experience="'.$kogemused.'" data-loc="'.$asukoht.'" data-email="'.$email.'" data-work="'.$work.'">
-								<div class="p-2">
-
-									<div class="row">
-										<div class="col-md-2"><!-- picture -->
-											<img class="card-img-top rounded-circle" style="max-height: 100px; width:100px; padding: 0px; text-align: center;margin:auto 0;" src="'.$pic.'" alt="Card image cap">
-										</div>
-										<div class="col-md-3 d-flex"><!-- content -->
-											<h5 class="align-self-center">'.$name.'</h5>
-										</div>
-										<div class="col-md-3 d-flex">
-											<h6 class="align-self-center">'.$degree.'</h6>
-										</div>
-										<div class="col-md-4 d-flex"> <!-- buttons -->
-											<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
-												<a class="btn btn-sm btn-light" href="'.$cv.'" download><i class="far fa-file-pdf"></i> Vaata CV-d</a>
-												<a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i> Võta ühendust</a>
-											</div>	
-										</div>
-									</div>
-									
-								</div>
-							</div>
-						</div>';
-						$bigstring = str_replace("\n","",$bigstring);
-						$bigstring = str_replace("\t","",$bigstring);
-						echo $bigstring;
-						
-						
-					}
-				} catch (PDOException $e){
-					echo "Connection failed: " . $e->getMessage();
-				}
-				
-				?>
-			</div>
+            </div>
 		</div>
 	</section>
 	

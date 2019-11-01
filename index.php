@@ -66,7 +66,7 @@
                         <a class="col-md-4" href="/praktika" style="padding: 0 0 80px">
                             <div class="text-uppercase text-white font-weight-bold">
                                 <i class="fas fa-user fa-4x"></i>
-                                <p>üliõpilane</p>
+                                <p>Üliõpilased</p>
                             </div>
                         </a>
 
@@ -87,7 +87,7 @@
                         <a class="col-md-4" href="/tootaja" style="transform: translate(-25%,0);">
                             <div class="text-uppercase text-white font-weight-bold">
                                 <i class="fas fa-city fa-4x"></i>
-                                <p>organisatsioon</p>
+                                <p>Töö- ja praktikapakkumised</p>
                             </div>
                         </a>
 
