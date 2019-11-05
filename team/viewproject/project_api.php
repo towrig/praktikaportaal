@@ -28,7 +28,7 @@ function sendMail($target, $data, $is_accepted){ //add $target
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	if(mail($to, $subject, $message, $headers) || print_r(error_get_last())) echo "Success!";
+	if(mail($to, $subject, $message, $headers)) echo "Success! Sent to: ".$to.";";
 	
 }
 

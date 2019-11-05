@@ -81,7 +81,7 @@
 	<section id="profiles">
 		<div class="container">
 
-			<div class="row">
+			<div class="row"> 
 				<?php
 				try {
 					$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
