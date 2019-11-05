@@ -10,25 +10,24 @@ function sendNotificationMail($target, $data){ //add $target
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	mail($to, $subject, $message, $headers) || print_r(error_get_last());
+	mail('karl32123@gmail.com', $subject, $message, $headers) || print_r(error_get_last());
 	
 }
 
 function sendMail($target, $data, $is_accepted){ //add $target
 	$form_success = true;
-	$to = $target; //replace with $target
 	$from = 'noreply@praktika.ut.ee';
-	$subject = 'Registreerimine projekti '.$data;
-	$message = 'Tervitus!\n';
+	$subject = 'Registreerimine projekti';
+	$message = 'Tervitus!';
 	if($is_accepted){
-		$message .= 'Teie registreerimine projekti"'.$data.'"on kinnitatud!';
+		$message .= 'Teie registreerimine projekti on kinnitatud!';
 	}else{
-		$message .= 'Teie registreerimine projekti"'.$data.'"on tühistatud.';
+		$message .= 'Teie registreerimine projekti on tühistatud.';
 	}
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	if(mail($to, $subject, $message, $headers)) echo "Success! Sent to: ".$to.";";
+	mail($target, $subject, $message, $headers) || print_r(error_get_last());
 	
 }
 
@@ -112,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 	$response="Edit_key:".$_POST["edit_key"].";";
 	try {
 		$project_id = "";
-		$project_name = "";
+		$project_name = '';
 		$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -121,7 +120,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		$data = $query -> fetchAll();
 		foreach ($data as $row) {
 			$project_id = $row["id"];
-			$project_name = $row["title"];
+			$project_name .= $row["title"];
 		}
 		$conn = null;
 		$response .= "ID:".$project_id;
