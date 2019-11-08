@@ -61,8 +61,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 }else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 	$response = "";
 	$title = $_POST["project_title"];
-	$end_date_raw = explode('/', $_POST["project_end_date"]);
-	$end_date = $end_date_raw[2]."-".$end_date_raw[0]."-".$end_date_raw[1]." 00:00:00";
 	$org_name = $_POST["project_org_name"];
 	$org_email = $_POST["project_org_email"];
 	$pdf = $_FILES["project_pdf"];
@@ -97,8 +95,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, end_date, pdf_path, title, org_email, org_name, isactivated, edit_key) VALUES (NOW(),?,?,?,?,?,?,?)'); 
-		$query->execute(array($end_date, $pdf_path, $title, $org_email, $org_name, 0, $editkey));
+		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, org_email, org_name, isactivated, edit_key) VALUES (NOW(),?,?,?,?,?,?)'); 
+		$query->execute(array($pdf_path, $title, $org_email, $org_name, 0, $editkey));
 		$conn = null;
 		http_response_code(200);
 		echo $response;

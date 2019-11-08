@@ -65,7 +65,7 @@
 
                 </div> <!-- .col-->
                 <div class="col-lg-3">
-                	<a class="toggleMenu btn-lg" href="../userdata/DELTAki_projekti_taotlus.docx" download>
+                	<a class="toggleMenu btn-lg" href="../userdata/Projektipraktika_taotlusvorm.docx" download>
 					  PROJEKTIVORM<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Täitmiseks lae alla">?</span>
 					</a>
                 </div>

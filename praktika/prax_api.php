@@ -72,7 +72,7 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 	
 	//files
 	if($passedValidation){
-		if(!empty($cv) && !empty($pilt)){
+		if(!empty($cv) || !empty($pilt)){
 			
 			//pilt
 			if (isset($_FILES['pilt']) && $_FILES['pilt']['error'] === UPLOAD_ERR_OK){
@@ -93,8 +93,6 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 					}
 				
 				}
-			}else{
-				$passedValidation = false;
 			}
 			
 			//cv
@@ -116,15 +114,10 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 					}
 				
 				}
-			}else{
-				$passedValidation = false;
 			}
-		}else{
-			$passedValidation = false;
 		}
 	}
-	$response .= "Files uploaded: ";
-	$response .= $passedValidation ? 'true' : 'false';
+
 	//after validation, log into database and send data
 	if($passedValidation){
 		
@@ -147,7 +140,6 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 		}catch(PDOException $e){
 			$error_code = $e->getCode();
 			if($error_code == "23000"){
-				//do something to clarify an email like this exists already.
 				http_response_code(403);
 				echo "Tekkis viga! Vea kirjeldus: Sellise emailiga postitus juba eksisteerib!";
 			}else{
