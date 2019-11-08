@@ -1,49 +1,11 @@
-<?php
-
-    function loadHTML($filename){
-        $target = fopen($filename, "r") or die("Failed to open file!");
-        $html_to_return = fread($target, filesize($filename));
-        fclose($target);
-        return $html_to_return;
-    }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Praktikavahenduste keskkond</title>
-
-    <!-- Font Awesome Icons -->
-    <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
-    <!-- Plugin CSS -->
-    <link href="../vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="../css/creative.min.css" rel="stylesheet">
-
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="../css/custom.css?v=2" rel="stylesheet">
-
-</head>
+<?php $title="Projektid ja tiimid"; include_once './../templates/header.php';?>
 
 <body id="page-top">
 
-    <?php echo loadHTML("../frags/navbar.html"); ?>
+    <?php include_once './../templates/top-navbar.php';?>
 	
 	<div id="page-content">
 	
@@ -84,7 +46,7 @@
 			<div class="row"> 
 				<?php
 				try {
-					$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+					$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 					// set the PDO error mode to exception
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$query = $conn->prepare('SELECT * FROM ProjectPosts WHERE isactivated = ?');

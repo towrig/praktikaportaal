@@ -1,4 +1,23 @@
 <?php
+
+
+
+// Load config.php
+$CFG = new stdClass();
+$CFG->docroot = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
+if (!is_readable($CFG->docroot . 'config.php')) {
+    // If it is not readable then exit.
+    exit;
+}
+require($CFG->docroot . 'config.php');
+$CFG = (object)array_merge((array)$cfg, (array)$CFG);
+$wwwroot = $CFG->wwwroot;
+
+$dbhost = $CFG->dbhost;
+$dbname = $CFG->dbname;
+$dbuser = $CFG->dbuser;
+$dbpassword = $CFG->dbpasswd;
+
 //error reporting for testing
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
@@ -125,7 +144,7 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 		$validationcode = bin2hex(random_bytes(16));
 		$response .= "generated key...";
 		try {
-			$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+			$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
@@ -164,7 +183,7 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 	
 	if($email_valid){
 		try {
-			$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+			$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 

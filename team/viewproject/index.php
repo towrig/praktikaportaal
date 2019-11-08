@@ -1,10 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+    
 <?php
-function loadHTML($filename){
-    $target = fopen($filename, "r") or die("Failed to open file!");
-    $html_to_return = fread($target, filesize($filename));
-    fclose($target);
-    return $html_to_return;
-}
+
+
+$title="Projekt"; 
+    // Two levels deep
+include_once './../../templates/header.php';
 
 //public variables
 //currently unused cols: name,email,phone,tasks,experience,work_location,work_type,other,logopath,validationcode,heading,description,picturepath
@@ -21,7 +23,7 @@ $phone = "";
 
 
 try {
-	$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+	$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 	// set the PDO error mode to exception
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $data = array();
@@ -67,41 +69,9 @@ try {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Praktikavahenduste keskkond</title>
-
-    <!-- Font Awesome Icons -->
-    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
-    <!-- Plugin CSS -->
-    <link href="../../vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="../../css/creative.min.css" rel="stylesheet">
-
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="../../css/custom.css" rel="stylesheet">
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="../../css/custom-form.css" rel="stylesheet">
-
-</head>
-
 <body id="page-top">
 
-    <?php echo loadHTML("../../frags/navbar.html"); ?>
+    <?php include_once './../../templates/top-navbar.php';?>
 
     <!-- work.php -->
     <section>

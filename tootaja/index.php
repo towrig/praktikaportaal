@@ -1,47 +1,10 @@
-<?php
-
-    function loadHTML($filename){
-        $target = fopen($filename, "r") or die("Failed to open file!");
-        $html_to_return = fread($target, filesize($filename));
-        fclose($target);
-        return $html_to_return;
-    }
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Praktikavahenduste keskkond</title>
-
-    <!-- Font Awesome Icons -->
-    <!--<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
-    <!-- Plugin CSS -->
-    <link href="../vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="../css/creative.min.css" rel="stylesheet">
-
-    <!-- Theme CSS - Includes Bootstrap -->
-    <link href="../css/custom.css?v=2" rel="stylesheet">
-
-</head>
+<?php $title="Organisatsioonid"; include_once './../templates/header.php';?>
 
 <body id="page-top">
-
-    <?php echo loadHTML("../frags/navbar.html"); ?>
+    <?php include_once './../templates/top-navbar.php';?>
 	
 	<div id="page-content">
 	
@@ -61,12 +24,6 @@
 				<div class="col-lg-3">
 					<a href="../team" id="formToggler" class="toggleMenu btn-lg">ESITA PROJEKT<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
 				</div>
-				<div class="col-lg-3">
-					<a href="../praktika" target="_blank" rel="noopener noreferrer">
-						<span class="toggleMenu btn-lg" style="padding: 16px;">VAATA PAKKUMISI<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Teiste poolt lisatud praktika- ja tööpakkumised ning projektid">?</span></span>
-					</a>
-				</div>
-				<div class="col-lg-12">Sinu tulevased praktikandid/töötajad!</div>
 
             </div> <!-- .row -->
         </div> <!-- .container -->
@@ -77,12 +34,12 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-md-12 text-center">
-                    <p>Praktika- ja tööpakkumised</p>
+                    <h2>Praktika- ja tööpakkumised</h2>
                 </div>
                 <?php
 
                 try {
-                    $conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
                     // set the PDO error mode to exception
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $query = $conn->prepare('SELECT heading,description,validationcode,picturepath FROM WorkPosts WHERE isvalidated = ?'); 
@@ -96,10 +53,12 @@
                         $picurl = "../userdata/pictures/".$row["picturepath"];
 
                         $bigstring = '<div class="col-sm-12 col-md-12 col-lg-12">
-                                        <div class="card" style="background: linear-gradient(to top, #faa41a 40%, rgba(255,255,255,.6)), url('.$picurl.');">
+                                        <div class="card">
                                             <a href="../tootaja/kuulutus?c='.$validationcode.'">
                                             <div class="card-body text-left">
                                                 <h6 class="card-title text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
+                                                <h5 class="card-text">SIIA TULEB ORG NIMI</h5>
+                                                <h4 class="card-text">KUupäev</h4>
                                                 <p class="card-text">'.$description.'</p>
                                             </div>
                                             </a>
