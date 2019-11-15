@@ -46,8 +46,8 @@ $checkpoint = "";
 //for form visuals etc...
 $removeing = false;
 $email_valid = false;
-$pic_success = false;
-$logo_success = false;
+$pic_success = true;
+$logo_success = true;
 $form_success = false;
 
 if(!empty($_POST) && $_POST["submit"] == "add"){
@@ -107,8 +107,9 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
 					
 					if(move_uploaded_file($_FILES['pilt']['tmp_name'], $dest_path)){
 					  $picPath = $newFileName;
-					  $pic_success = true;
-					}
+					}else{
+                      $pic_success = false;
+                    }
 				
 				}
 			}
@@ -125,8 +126,9 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
 					
 					if(move_uploaded_file($_FILES['logo']['tmp_name'], $dest_path)){
 					  $logoPath = $newFileName;
-					  $logo_success = true;
-					}
+					}else{
+                      $logo_success = false;
+                    }
 				
 				}
 			}
@@ -232,48 +234,50 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
     <link href="../css/custom.css" rel="stylesheet">
     <!-- Theme CSS - Includes Bootstrap -->
     <link href="../css/custom-form.css" rel="stylesheet">
-	
-	<link rel="stylesheet" href="../js/trumbowyg/ui/trumbowyg.min.css">
-	<style>
-		.trumbowyg-editor,
-		.trumbowyg-box{ 
-			min-height: 100px !important;
-		}
-	</style>
+
+    <link rel="stylesheet" href="../js/trumbowyg/ui/trumbowyg.min.css">
+    <style>
+        .trumbowyg-editor,
+        .trumbowyg-box {
+            min-height: 100px !important;
+        }
+
+    </style>
 
 </head>
 
 <body id="page-top">
 
-	<?php echo loadHTML("../frags/navbar.html"); ?>
+    <?php echo loadHTML("../frags/navbar.html"); ?>
 
     <!-- work.php -->
     <section>
         <form class="container work" target="_self" method="post" enctype="multipart/form-data">
             <!-- start banner -->
             <div class="row">
-                <div class="col-lg-12"><div class="work-banner" id="bannerTag" style="<?php if(!empty($_POST) || $edit_success){ if ($pilt != "") {echo "background-image: url(../userdata/pictures/".$pilt.");";} } ?>"></div></div> <!-- image -->
-				<div class="col-lg-12 col-md-12">
-					<label for="pilt">Banner*:</label>
-					<input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$pic_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt">
-					<div class='invalid-feedback'>Sisesta banner!</div>
-				</div>
-				
-				<div class="col-lg-12 col-md-12 type_container">
-					<label for="type">Kuulutuse tüüp*</label>
-					<select class="form-control" id="type" name="type">
-					  <option>Praktika</option>
-					  <option>Töökoht</option>
-					</select>
-				</div>
+                <div class="col-lg-12">
+                    <div class="work-banner" id="bannerTag" style="<?php if(!empty($_POST) || $edit_success){ if ($pilt != "") {echo "background-image: url(../userdata/pictures/".$pilt.");";} } ?>"></div>
+                </div> <!-- image -->
+                <div class="col-lg-12 col-md-12">
+                    <label for="pilt">Banner*:</label>
+                    <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$pic_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt">
+                    <div class='invalid-feedback'>Sisesta banner!</div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 type_container">
+                    <label for="type">Kuulutuse tüüp*</label>
+                    <select class="form-control" id="type" name="type">
+                        <option>Praktika</option>
+                        <option>Töökoht</option>
+                    </select>
+                </div>
             </div> <!-- end -->
             <!-- start title-share -->
             <div class="row">
                 <div class="col-lg-12 work-title">
-					<h2>
-						<input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($heading == "") { echo "is-invalid"; } } ?>" 
-						id="heading" name="heading" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($heading)."'";?> placeholder="Sisesta kuulutuse pealkiri...">
-					</h2>
+                    <h2>
+                        <input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($heading == "") { echo "is-invalid"; } } ?>" id="heading" name="heading" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($heading)."'";?> placeholder="Sisesta kuulutuse pealkiri...">
+                    </h2>
                 </div>
             </div> <!-- end -->
             <!-- start main-content -->
@@ -284,9 +288,8 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                             <div class="col-lg-12 work-aside-place">
                                 <h5>Töökoha asukoht*</h5>
                                 <p>Töö asub aadressil: <br>
-									<span><input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($location != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" 
-									id="location" name="location" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($location)."'";?>></span>
-								</p>
+                                    <span><input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($location != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="location" name="location" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($location)."'";?>></span>
+                                </p>
                             </div>
                         </div>
                         <div class="row">
@@ -300,24 +303,23 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                             <div class="col-lg-12 work-aside-logo">
                                 <h5>Logo*</h5>
                                 <img src="<?php if(!empty($_POST) || $edit_success){ if ($logo != "") {echo "../userdata/pictures/".$logo;} }else {echo "../userdata/blank_profile_pic.png";} ?>" id="logoTag">
-								<input type="file" class="form-control-file <?php if(!empty($_POST) || $edit_success) { if(!$logo_success) { echo "is-invalid"; } } ?>" id="logo" name="logo">
-								<div class='invalid-feedback'>Sisesta Logo!</div>
+                                <input type="file" class="form-control-file <?php if(!empty($_POST) || $edit_success) { if(!$logo_success) { echo "is-invalid"; } } ?>" id="logo" name="logo">
+                                <div class='invalid-feedback'>Sisesta Logo!</div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 work-aside-intro">
                                 <h5>Organisatsiooni tutvustus*</h5>
                                 <p>
-									<textarea class="form-control <?php if(!empty($_POST) || $edit_success) { if($work_desc != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="work_desc" name="work_desc">
+                                    <textarea class="form-control <?php if(!empty($_POST) || $edit_success) { if($work_desc != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="work_desc" name="work_desc">
 									<?php if (!empty($_POST) || $edit_success) echo htmlspecialchars($work_desc);?>
 									</textarea>
-								</p>
-								<h5>Veebiaadress:*</h5>
-								<p>
-									<input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($website != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" 
-									id="website" name="website" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($website)."'";?>>
-		
-								</p>
+                                </p>
+                                <h5>Veebiaadress:*</h5>
+                                <p>
+                                    <input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($website != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="website" name="website" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($website)."'";?>>
+
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -328,29 +330,29 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                             <div class="col-lg-12 work-content-intro">
                                 <h4>Töökoha tutvustus*</h4>
                                 <p>
-									<textarea class="form-control" id="kirjeldus" name="description">
+                                    <textarea class="form-control" id="kirjeldus" name="description">
 									<?php if (!empty($_POST) || $edit_success){echo htmlspecialchars($description);}?>
 									</textarea>
-								</p>
+                                </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 work-content-tasks">
                                 <h4>Tööülesanded:*</h4>
                                 <p>
-									<textarea class="form-control" id="tooulesanded" name="tasks">
+                                    <textarea class="form-control" id="tooulesanded" name="tasks">
 									<?php if (!empty($_POST) || $edit_success){echo htmlspecialchars($tasks);}?>
 									</textarea>
-								</p>
+                                </p>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 work-content-skills">
                                     <h4>Vajalikud oskused ja kogemused:*</h4>
                                     <p>
-										<textarea class="form-control" id="oskused" name="oskused">
+                                        <textarea class="form-control" id="oskused" name="oskused">
 										<?php if (!empty($_POST) || $edit_success){echo htmlspecialchars($oskused);}?>
 										</textarea>
-									</p>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
@@ -375,31 +377,28 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                             <h5>Kontakt*</h5>
                             <ul style="margin-left:-40px;">
                                 <li>
-									<input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($website != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" 
-									id="name" name="name" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($name)."'";?>>
-								</li>
-                                <li><i class="fas fa-envelope"></i> 
-									<input type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" 
-									id="email" aria-describedby="emailHelp" name="email" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($email)."'";?>>
-								</li>
-                                <li><i class="fas fa-phone"></i> 
-									<input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($phone != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" 
-									id="phone" name="phone" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($phone)."'";?>>
-								</li>
+                                    <input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($website != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="name" name="name" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($name)."'";?>>
+                                </li>
+                                <li><i class="fas fa-envelope"></i>
+                                    <input type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($email)."'";?>>
+                                </li>
+                                <li><i class="fas fa-phone"></i>
+                                    <input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($phone != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="phone" name="phone" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($phone)."'";?>>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-8 work-footer-apply">
-					
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input <?php if(!empty($_POST) || $edit_success) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint">
-						<label class="custom-control-label" for="checkpoint">*Olen teadlik, et andmeid näidatakse avalikult…</label>
-					</div>
-				
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input <?php if(!empty($_POST) || $edit_success) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint">
+                        <label class="custom-control-label" for="checkpoint">*Olen teadlik, et andmeid näidatakse avalikult…</label>
+                    </div>
+
                     <button type="submit" class="btn btn-success btn-xl" name="submit" value="add">Lae mind andmebaasi</button>
-					
+
                 </div>
             </div>
             <div class="row">
@@ -427,76 +426,75 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
 
     <!-- Custom scripts for this template
     <script src="../js/creative.min.js"></script> -->
-	
-	<script src="../js/trumbowyg/trumbowyg.min.js"></script>
-	<script>
-		
-    	//$("#datepicker").datepicker();
 
-    	var FORM_SUCCESS = <?php echo ($form_success)?"true":"false";?>;
-    	if(FORM_SUCCESS){
-    		$('.type_container') .after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink ja muutmislink!</div>");
-    	}
+    <script src="../js/trumbowyg/trumbowyg.min.js"></script>
+    <script>
+        //$("#datepicker").datepicker();
 
-		$('#kirjeldus').trumbowyg({
-			autogrow: true
-		});
-		$('#tooulesanded').trumbowyg({
-			autogrow: true
-		});
-		$('#oskused').trumbowyg({
-			autogrow: true
-		});
-		$('#other').trumbowyg({
-			autogrow: true
-		});
-		$('#work_desc').trumbowyg({
-			autogrow: true
-		});
-		
-		function readURL(input, target) {
-		  if (input.files && input.files[0]) {
-			var reader = new FileReader();
+        var FORM_SUCCESS = <?php echo ($form_success)?"true":"false";?>;
+        if (FORM_SUCCESS) {
+            $('.type_container').after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink ja muutmislink!</div>");
+        }
 
-			reader.onload = function(e) {
-			  $(target).css('background-image', 'url('+e.target.result+')');
-			}
+        $('#kirjeldus').trumbowyg({
+            autogrow: true
+        });
+        $('#tooulesanded').trumbowyg({
+            autogrow: true
+        });
+        $('#oskused').trumbowyg({
+            autogrow: true
+        });
+        $('#other').trumbowyg({
+            autogrow: true
+        });
+        $('#work_desc').trumbowyg({
+            autogrow: true
+        });
 
-			reader.readAsDataURL(input.files[0]);
-		  }
-		}
-		
-		function readURL2(input, target) {
-		  if (input.files && input.files[0]) {
-			var reader = new FileReader();
+        function readURL(input, target) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-			reader.onload = function(e) {
-			  $(target).attr('src', e.target.result);
-			}
+                reader.onload = function(e) {
+                    $(target).css('background-image', 'url(' + e.target.result + ')');
+                }
 
-			reader.readAsDataURL(input.files[0]);
-		  }
-		}
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
-		$("#logo").change(function() {
-		  readURL2(this, "#logoTag");
-		});
-		$("#pilt").change(function() {
-		  readURL(this, ".work-banner");
-		});
-		$("#profile").change(function() {
-		  readURL2(this, "#profileTag");
-		});
-		
-		$('.trumbowyg-button-pane').css('display','none');
-		$('.trumbowyg-box').focusout(function(event){
-			$(this).find('.trumbowyg-button-pane').fadeOut(200);
-		});
-		$('.trumbowyg-box').focusin(function(event){
-			$(this).find('.trumbowyg-button-pane').fadeIn(200);
-		});
-		
-	</script>
+        function readURL2(input, target) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $(target).attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#logo").change(function() {
+            readURL2(this, "#logoTag");
+        });
+        $("#pilt").change(function() {
+            readURL(this, ".work-banner");
+        });
+        $("#profile").change(function() {
+            readURL2(this, "#profileTag");
+        });
+
+        $('.trumbowyg-button-pane').css('display', 'none');
+        $('.trumbowyg-box').focusout(function(event) {
+            $(this).find('.trumbowyg-button-pane').fadeOut(200);
+        });
+        $('.trumbowyg-box').focusin(function(event) {
+            $(this).find('.trumbowyg-button-pane').fadeIn(200);
+        });
+
+    </script>
 
 </body>
 
