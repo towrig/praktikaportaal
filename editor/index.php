@@ -132,9 +132,7 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
 			}
 		}
 	}
-	//echo "File success: ".$logo_success.", ".$pic_success.".";
-	//echo "File paths: ".$logoPath.", ".$picPath.".";
-	//echo "Passed validation: ".$passedValidation.".";
+	
 	//after validation, log into database and send data
 	if($passedValidation){
 		
