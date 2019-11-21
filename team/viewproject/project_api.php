@@ -1,5 +1,23 @@
 <?php
 
+// Load config.php
+$CFG = new stdClass();
+// Two level deep
+$CFG->docroot = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR;
+if (!is_readable($CFG->docroot . 'config.php')) {
+    // If it is not readable then exit.
+    exit;
+}
+require($CFG->docroot . 'config.php');
+$CFG = (object)array_merge((array)$cfg, (array)$CFG);
+$wwwroot = $CFG->wwwroot;
+
+$dbhost = $CFG->dbhost;
+$dbname = $CFG->dbname;
+$dbuser = $CFG->dbuser;
+$dbpassword = $CFG->dbpasswd;
+
+
 function sendNotificationMail($target, $data){ //add $target
 	$form_success = true;
 	$to = 'praktika@ut.ee'; //replace with $target
@@ -44,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		return 0;
 	}
 	try {
-		$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $conn->prepare('INSERT INTO ProjectParticipants(project_id, name, email, degree, skills, has_profile, is_accepted) VALUES (?,?,?,?,?,0,0)'); 
@@ -93,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 	}
 
 	try {
-		$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?)'); 
@@ -111,7 +129,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 	try {
 		$project_id = "";
 		$project_name = '';
-		$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $conn->prepare('SELECT * FROM ProjectPosts WHERE edit_key = ?'); 
@@ -124,7 +142,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		$conn = null;
 		$response .= "ID:".$project_id;
 		if(isset($project_id)){
-			$conn = new PDO('mysql:host=localhost;dbname=userdata', 'root', 'Kilud123');
+			$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			if($_POST["action"] == "approve"){
