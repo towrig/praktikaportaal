@@ -2,9 +2,9 @@
 
 $cfg = new stdClass();
 // NB! With trailing slash!
-$cfg->wwwroot   = 'http://example.com/';
+$cfg->wwwroot   = 'http://praktika.ut.ee/';
 
 $cfg->dbhost 	  = 'localhost';
-$cfg->dbname 	  = 'dbname';
-$cfg->dbuser 	  = 'dbuser';
-$cfg->dbpasswd 	= 'dbpassword';
+$cfg->dbname 	  = 'userdata';
+$cfg->dbuser 	  = 'root';
+$cfg->dbpasswd 	= 'Kilud123';

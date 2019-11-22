@@ -2,7 +2,7 @@
 <html>
     <?php $title="Avaleht"; include_once './templates/header.php';?>
     <body id="page-top" class="front">
-        <?php include_once './templates/top-navbar.php';?>
+        <?php var_dump(include_once './templates/top-navbar.php');?>
         <!-- Masthead -->
         <?php include_once './templates/frontpage/frontpage-masthead.php';?>
         <!-- Activities -->
