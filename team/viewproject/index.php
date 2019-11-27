@@ -16,6 +16,7 @@ $pdf_path = "";
 $participants = array();
 $end_date_raw = "";
 $editmode = false;
+$max_participants = 0;
 //contact
 $email = "";
 $name = "";
@@ -42,7 +43,7 @@ try {
 		$heading = $row["title"];
 		$pdf_path = "../../userdata/projects/".$row["pdf_path"];
         $end_date_raw = $row["end_date"];
-        
+        $max_participants = $row["max_part"];
 		$name = $row["org_name"];
 		$email = $row["org_email"];
         		
@@ -163,7 +164,7 @@ try {
             <div class="row">
                 <div class="col-lg-12 text-center">
 
-                    <h5 class="text-uppercase font-weight-bold mt-0">Liitunud üliõpilased<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Peale vajutades avaneb nende üliõpilaste info, kellel on profiil või lisainfo sisestatud. Profiili loomine pole projektiga liitumiseks kohustuslik">?</span></h5>
+                    <h5 class="text-uppercase font-weight-bold mt-0">Liitunud üliõpilased <?php echo count($participants)."/".$max_participants; ?><span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Peale vajutades avaneb nende üliõpilaste info, kellel on profiil või lisainfo sisestatud. Profiili loomine pole projektiga liitumiseks kohustuslik">?</span></h5>
                     <hr class="divider light my-4">
 
                     <!-- reusable desing for work -->
