@@ -290,16 +290,10 @@
                                         <input type="checkbox" class="custom-control-input <?php if(!empty($_POST) && !$removeing) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint" required="required">
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
-<<<<<<< HEAD
-                                    </div>
-                                    <button type="button" class="btn btn-success btn-lg js-ajax btn-form" data-value="add">Lae üles!</button>
-                                    <button type="button" class="btn btn- btn-lg js-scroll-trigger btn-form" data-value="remove">Soovin end andmebaasist eemaldada</button>
-
-=======
->>>>>>> master
                                 </div>
                                 <button type="button" class="btn btn-success btn-lg js-ajax btn-form" data-value="add">Lae üles!</button>
                                 <button type="button" class="btn btn- btn-lg js-scroll-trigger btn-form" data-value="remove">Soovin end andmebaasist eemaldada</button>
+
 
                             </div>
 
