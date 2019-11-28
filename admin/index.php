@@ -32,6 +32,7 @@
 	    	$entity["id"] = $row["id"];
 	    	$entity["title"] = $row["title"];
 	    	$entity["edit_key"] = $row["edit_key"];
+            $entity["isactivated"] = $row["isactivated"];
 	        $projects[$i] = $entity;
 	        $entity = null; 
 	        $i+= 1;
@@ -84,6 +85,7 @@
                                             <p class="card-text">Loodud: '.$p["start_date"].'<br> Reg. lõpp: '.$p["end_date"].'<br></p>
                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
                                                 <a class="btn btn-sm btn-success" href="../team/viewproject?c='.$p["id"].'&e='.$p["edit_key"].'">Mine muutma</a>
+                                                '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-editkey='.$p["edit_key"].'>Aktiveeri!</a>').'
                                             </div>
                                         </div>
                                     </div>
@@ -128,6 +130,27 @@
                 $('#editmodeActivator').after("<div class='alert alert-danger'>Muutmise aktiveeritmine ebaõnnestus!</div>");
             });
         }
+        
+        function activateProject(e) {
+            var key = $(e.currentTarget).data("editkey");
+            let formData = new FormData();
+            formData.append("edit_key", key);
+            formData.append("activateProject", 1);
+            $.ajax({
+                type: 'POST',
+                url: 'admin_api.php',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(response) {
+                $(e.currentTarget).remove();
+                console.log(response);
+            }).fail(function(response) {
+                console.log(response);
+            });
+        }
+        $('.activate-btn').on('click', activateProject);
 
     </script>
 </body>

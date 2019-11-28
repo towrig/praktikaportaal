@@ -16,8 +16,15 @@ $dbuser = $CFG->dbuser;
 $dbpassword = $CFG->dbpasswd;
 
 $response = "";
-
-if(!empty($_POST) && $_POST["edit_key"]){
+if(!empty($_POST) && $_POST["edit_key"] && $_POST["activateProject"]){
+    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $query = $conn->prepare('UPDATE ProjectPosts SET isactivated = ? WHERE edit_key = ?');
+    $query->execute(array(1, $_POST["edit_key"]));
+    
+    http_response_code(200);
+    echo $response;
+}else if(!empty($_POST) && $_POST["edit_key"]){
     $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query = $conn->prepare('SELECT * FROM editkeys WHERE keyname = ?');

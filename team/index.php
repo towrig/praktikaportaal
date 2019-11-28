@@ -136,6 +136,10 @@
 			    					<label>Teie email:</label>
 			    					<input type="text" name="project_org_email" class="form-control">
 			    				</div>
+                                <div class="form-group">
+			    					<label>Maksimaalne registreerijate arv:</label>
+			    					<input type="text" name="max_part" class="form-control">
+			    				</div>
 			    				<div class="form-group">
 			    					<input type="button" name="submit-form" class="btn btn-success btn-md" onclick="ajaxSubmit()" value="Esita">
 			    				</div>

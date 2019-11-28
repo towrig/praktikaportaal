@@ -28,7 +28,7 @@ function sendNotificationMail($target, $data){ //add $target
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	mail('karl32123@gmail.com', $subject, $message, $headers) || print_r(error_get_last());
+	mail($to, $subject, $message, $headers) || print_r(error_get_last());
 	
 }
 
@@ -79,6 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 }else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 	$response = "";
 	$title = $_POST["project_title"];
+    $max_part = intval($_POST["max_part"]);
 	$org_name = $_POST["project_org_name"];
 	$org_email = $_POST["project_org_email"];
 	$pdf = $_FILES["project_pdf"];
@@ -113,8 +114,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, org_email, org_name, isactivated, edit_key) VALUES (NOW(),?,?,?,?,?,?)'); 
-		$query->execute(array($pdf_path, $title, $org_email, $org_name, 0, $editkey));
+		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?)'); 
+		$query->execute(array($pdf_path, $title, $org_email, $org_name, 0, $editkey, $max_part));
 		$conn = null;
 		http_response_code(200);
 		echo $response;

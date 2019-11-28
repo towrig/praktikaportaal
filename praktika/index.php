@@ -38,8 +38,8 @@
                 <div class="row">
                     <div class="col-lg-12"></div>
                     <div class="col-lg-12 text-center">
-                        <div class="row"> 
-                        <?php
+                        <div class="row">
+                            <?php
 
                             $locations = array();
 
@@ -188,7 +188,7 @@
                                                     </div>
                                                     <div class="col-md-4 d-flex"> <!-- buttons -->
                                                         <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
-                                                            <a class="btn btn-sm btn-light" href="'.$cv.'" download><i class="far fa-file-pdf"></i> Vaata CV-d</a>
+                                                            <a class="btn btn-sm btn-light js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i> Vaata CV-d</a>
                                                             <a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i> Võta ühendust</a>
                                                         </div>	
                                                     </div>
@@ -290,11 +290,18 @@
                                         <input type="checkbox" class="custom-control-input <?php if(!empty($_POST) && !$removeing) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint" required="required">
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
+<<<<<<< HEAD
                                     </div>
                                     <button type="button" class="btn btn-success btn-lg js-ajax btn-form" data-value="add">Lae üles!</button>
                                     <button type="button" class="btn btn- btn-lg js-scroll-trigger btn-form" data-value="remove">Soovin end andmebaasist eemaldada</button>
 
+=======
+>>>>>>> master
                                 </div>
+                                <button type="button" class="btn btn-success btn-lg js-ajax btn-form" data-value="add">Lae üles!</button>
+                                <button type="button" class="btn btn- btn-lg js-scroll-trigger btn-form" data-value="remove">Soovin end andmebaasist eemaldada</button>
+
+                            </div>
 
                         </form>
 
@@ -305,6 +312,23 @@
         </div>
     </div>
 
+    <div class="modal fade modal-cv" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">CV</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -320,6 +344,7 @@
     <script>
         $(document).ready(function() {
             $('.js-modal').on('click', openModal);
+            $('.js-open-cv').on('click', openCV);
             $('.js-ajax').on('click', function(e) {
                 ajaxSubmit(e);
             });
@@ -331,7 +356,21 @@
             });
         });
 
+        function openCV(e) {
+            var modal = $('.modal-cv').first();
+            var target = $(e.currentTarget);
+            var cvpath = $(target).data('cv');
+
+            var cvembed = $('<embed>').attr('src', cvpath).css('width', '100%').css('min-height', '512px');
+            modal.find('.modal-body').empty();
+            modal.find('.modal-body').html(cvembed);
+
+            modal.modal('show');
+        }
+
         function openModal(e) {
+            if (e.target !== this)
+                return;
             var modal = $('.modal').first();
             modal.modal('show');
         }
