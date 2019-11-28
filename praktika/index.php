@@ -15,7 +15,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <hr class="divider light my-4">
-                        <h2 class="text-white text-uppercase font-weight-bold mt-0">Üliõpilane 222</h2>
+                        <h2 class="text-white text-uppercase font-weight-bold mt-0">Üliõpilane</h2>
                         <p class="text-white font-weight-light mb-5">
                             Tutvu praktika- ja tööpakkumistega või liitu DELTAki projektiga!
                             Sul on projektiidee? Esita see juba täna ja koos leiame Sulle meeskonna ja juhendaja!
@@ -363,7 +363,7 @@
         }
 
         function openModal(e) {
-            if (e.target !== this)
+            if (e !== undefined && e.target !== this)
                 return;
             var modal = $('.modal').first();
             modal.modal('show');
