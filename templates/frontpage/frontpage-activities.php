@@ -1,7 +1,41 @@
- <!-- Activities Section -->
-<section id="activities" class="page-section h-100  d-flex flex-wrap align-content-center">
+    <div class=" container-fluid">
+        <h2 class="text-center mt-5">Mis see sulle annab!</h2>
+        <hr class="divider my-4">
+        
+        <div class="row text-center text-primary mb-5">
+             
+                 <div class="col-md-4">
+                     <!--<i class="fas fa-4x fa-thumbs-up mt-3"></i>-->
+                     <div>
+                         <h4>Võrgustik</h4>
+                         <span class="text-muted">Tutvused, mis viivad uute võimalusteni.</span>
+                     </div>
+                 </div>
+                 <div class="col-md-4 text-white">
+                     <!--<i class="fas fa-4x fa-retweet mt-3"></i>-->
+                     <div>
+                         <h4>Konkurents</h4>
+                         <span class="text-muted">Kogemused, mis on tööturul ja ühiskonnas edasiviivad.
+</span>
+                     </div>
+                 </div>
+                 <div class="col-md-4">
+                     <!--<i class="fas fa-4x fa-check mt-3"></i>-->
+                     <div>
+                         <h4>Areng</h4>
+                         <span class="text-muted">Oskused ja teadmised, et saavutada enda eesmärgid.</span>
+                     </div>
+                 </div>
+             </div>
+            
+    </div>
+
+<!-- Activities Section -->
+<section id="activities" class="page-section d-flex flex-wrap align-content-center">
+    
+
     <div class="container">
-        <h2 class="text-center mt-0">Praktikavahenduste keskkond on Sinu edu hooandja!</h2>
+        <h2 class="text-center mt-0">See konkreetne tekst läheb millekski muuks.</h2>
         <hr class="divider my-4">
         <div class="row">
             <div class="col-lg-3 col-md-6 text-center">

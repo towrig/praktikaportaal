@@ -60,23 +60,8 @@ try {
 
     <!-- work.php -->
     <section>
-        <div class="container work" style="margin-top: 20px">
+        <div class="container work">
             <!-- start banner -->
-            <div class="row">
-                <div class="col-lg-4 org-logo-container">
-                    <?php 
-                        if(!empty($logo)){
-                            echo "<img src='../../userdata/pictures/".$logo."' style='border-radius: 50%'>";
-                        }else{
-                            echo "<img src='../userdata/blank_profile_pic.png' style='border-radius: 50%'>";
-                        }
-                    ?>
-                </div>
-                <div class="col-lg-8">
-                    <h5>Töökoha asukoht</h5>
-                    <p>Töö asub aadressil: <br><?php echo $work_location; ?></p>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="work-banner" <?php if(!empty($pilt)) echo "style='background-image:url(../../userdata/pictures/".$pilt.")'"?>></div>
@@ -93,12 +78,25 @@ try {
                 <div class="col-lg-4 work-aside">
                     <div class="container">
                         <div class="row">
-
+                            <div class="col-lg-12 org-logo-container">
+                                <?php 
+                                    if(!empty($logo)){
+                                        echo "<img src='../../userdata/pictures/".$logo."'>";
+                                    }else{
+                                        echo "<img src='../userdata/blank_profile_pic.png'>";
+                                    }
+                                ?>
+                            </div>
                             <div class="col-lg-12">
-                                <h2>Kandideeri: saada oma cv ja motivatsioonikiri</h2>
-                                <h3>Kontaktisik</h3>
-                                <ul style="margin-left:-40px;">
-                                    <li><?php echo $name; ?></li>
+                                <h5>Töökoha asukoht</h5>
+                                <p>Töö asub aadressil: <br><?php echo $work_location; ?></p>
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <h4>Kandideeri: saada oma cv ja motivatsioonikiri</h4>
+                                <h5>Kontaktisik</h5>
+                                <ul>
+                                    <li><i class="fas fa-user"></i> <?php echo $name; ?></li>
                                     <li><i class="fas fa-envelope"></i> <?php echo $email; ?></li>
                                     <li><i class="fas fa-phone"></i> <?php echo $phone; ?></li>
                                 </ul>
@@ -181,24 +179,9 @@ try {
       </div>
     </div>-->
     <!--</section>-->
-
-    <!-- Footer -->
-    <footer class="bg-light py-5">
-        <div class="container">
-            <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-    <!-- Custom scripts for this template
-    <script src="../../js/creative.min.js"></script>-->
+   <?php 
+    // Two levels deep
+    include_once './../../templates/footer.php'; ?>
 
 </body>
 

@@ -13,24 +13,21 @@
         <section class="page-section bg-primary">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-6">
                         <hr class="divider light my-4">
-                        <h2 class="text-white text-uppercase font-weight-bold mt-0">Üliõpilane</h2>
-                        <p class="text-white-75 font-weight-light mb-5">
+                        <h2 class="text-white text-uppercase font-weight-bold mt-0">Üliõpilane 222</h2>
+                        <p class="text-white font-weight-light mb-5">
                             Tutvu praktika- ja tööpakkumistega või liitu DELTAki projektiga!
                             Sul on projektiidee? Esita see juba täna ja koos leiame Sulle meeskonna ja juhendaja!
                             Loe rohkem DELTAki projektist siit (tuleb link kuhugi)!
                         </p>
                         <hr class="divider light my-4">
                     </div> <!-- .col-->
-                    <div class="col-lg-3">
+                    <div class="col-md-6 d-flex flex-column align-self-center">
+                    <div class="mlr-8">
                         <span id="formToggler" class="toggleMenu btn-lg" onclick="openModal()">Lisa profiil!<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span></span>
                     </div>
-                    <div class="col-lg-3">
-                        <a id="formToggler" class="toggleMenu btn-lg" href="../team" style="text-decoration: none !important; color: black;">Esita oma PROJEKTIidee kohe!</a>
-                        <p style="font-size:12px">Projektitaotluse esitamise tähtaeg on 1. oktoober ja 1. märts!</p>
-                    </div>
-
+                        </div>
 
                 </div> <!-- .row -->
             </div> <!-- .container -->
@@ -76,7 +73,7 @@
                             <form class="col-md-12 mb-4" target="_self" method="post" enctype="multipart/form-data">
                                 <div class="form-row mb-2">
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <select class="form-control form-control-sm" name="cat" id="category">
                                             <option value="date" <?php if($_POST["cat"] == "date") echo 'selected="selected"'; ?>>
                                                 Kuupäev
@@ -87,7 +84,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4" id="date_order" <?php if($_POST["cat"] == "date") echo 'style="display:none;"'; ?>>
+                                    <div class="col-md-3" id="date_order" <?php if($_POST["cat"] == "date") echo 'style="display:none;"'; ?>>
                                         <select class="form-control form-control-sm" name="date_order" >
                                             <option value="new">
                                                 Uuemad
@@ -98,7 +95,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4" id="locations" <?php if($_POST["cat"] == "location") echo 'style="display:none;"'; ?>>
+                                    <div class="col-md-3" id="locations" <?php if($_POST["cat"] == "location") echo 'style="display:none;"'; ?>>
                                         <select class="form-control form-control-sm" name="locations">
                                             <?php
                                                 foreach($locations as $loc){
@@ -111,7 +108,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <input type="hidden" name="selected_sort" value="date">
                                         <button class="btn btn-primary" type="submit">Sorteeri</button>
                                     </div>
@@ -179,13 +176,15 @@
 
                                                 <div class="row">
                                                     <div class="col-md-2"><!-- picture -->
-                                                        <img class="card-img-top rounded-circle" style="max-height: 100px; width:100px; padding: 0px; text-align: center;margin:auto 0;" src="'.$pic.'" alt="Card image cap">
+                                                        <img class="card-img-top" style="max-height: 50px; width:100px;" src="'.$pic.'" alt="Card image cap">
                                                     </div>
-                                                    <div class="col-md-3 d-flex"><!-- content -->
-                                                        <h5 class="align-self-center">'.$name.'</h5>
-                                                    </div>
-                                                    <div class="col-md-3 d-flex">
-                                                        <h6 class="align-self-center">'.$degree.'</h6>
+                                                    <div class="col-md-6">
+                                                        <div class="col-md-12 d-flex"><!-- content -->
+                                                            <h5 class="align-self-center">'.$name.'</h5>
+                                                        </div>
+                                                        <div class="col-md-12 d-flex">
+                                                            <h6 class="align-self-center">'.$degree.'</h6>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-4 d-flex"> <!-- buttons -->
                                                         <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
@@ -217,8 +216,8 @@
     </div>
 
     <!-- modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -249,6 +248,15 @@
                                     <div class='invalid-feedback'>Sisesta oma nimi!</div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="email">Kontakt ehk Email*</label>
+                                    <input type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email" <?php echo "value='".htmlspecialchars($email)."'";?>>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-12">
+                                 <div class="form-group">
                                     <label for="work">Eriala*</label>
                                     <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major" <?php echo "value='".htmlspecialchars($major)."'";?>>
                                 </div>
@@ -256,20 +264,6 @@
                                     <label for="work">Instituut*</label>
                                     <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute" <?php echo "value='".htmlspecialchars($institute)."'";?>>
                                 </div>
-                                <div class="form-group">
-                                    <label for="email">Kontakt ehk Email*</label>
-                                    <input type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email" <?php echo "value='".htmlspecialchars($email)."'";?>>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CV">CV</label>
-                                    <input type="file" class="form-control-file <?php if(!empty($_POST) && !$removeing) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="CV" name="cv">
-                                    <div class='invalid-feedback'>Sisesta CV!</div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-12">
-
                                 <div class="form-group">
                                     <label for="work">Soovitav praktika/töö valdkond*</label>
                                     <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="work" name="work" <?php echo "value='".htmlspecialchars($work)."'";?>>
@@ -287,11 +281,16 @@
                                     <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($location != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="location" name="location" <?php echo "value='".htmlspecialchars($location)."'";?>>
                                 </div>
                                 <div class="form-group">
+                                    <label for="CV">CV</label>
+                                    <input type="file" class="form-control-file <?php if(!empty($_POST) && !$removeing) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="CV" name="cv">
+                                    <div class='invalid-feedback'>Sisesta CV!</div>
+                                </div>
+                                <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input <?php if(!empty($_POST) && !$removeing) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint" required="required">
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
-                                    </divWS>
+                                    </div>
                                     <button type="button" class="btn btn-success btn-lg js-ajax btn-form" data-value="add">Lae üles!</button>
                                     <button type="button" class="btn btn- btn-lg js-scroll-trigger btn-form" data-value="remove">Soovin end andmebaasist eemaldada</button>
 

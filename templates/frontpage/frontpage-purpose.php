@@ -1,4 +1,3 @@
- <!-- About Section -->
  <section id="purpose" class="page-section bg-primary h-100 d-flex flex-wrap align-content-center m-0 p-0">
      <div class="container">
          <div class="row">
@@ -12,22 +11,23 @@
                      <div class="card">
                          <i class="fas fa-4x fa-thumbs-up mt-3"></i>
                          <div class="card-body">
-                             <h4 class="card-title">Konkurents</h4>
-                             <span class="card-text">Olla tööturul hinnatud ja konkurentsivõimeline</span>
+                             <h4 class="card-title">Võrgustik</h4>
+                             <span class="card-text">Tutvused, mis viivad uute võimalusteni.</span>
                          </div>
                      </div>
                      <div class="card">
                          <i class="fas fa-4x fa-retweet mt-3"></i>
                          <div class="card-body">
-                             <h4 class="card-title">Arenemine</h4>
-                             <span class="card-text">Keskenduda oma tugevuste parendamisele ja nõrkuste arendamisele</span>
+                             <h4 class="card-title">Konkurents</h4>
+                             <span class="card-text">Kogemused, mis on tööturul ja ühiskonnas edasiviivad.
+</span>
                          </div>
                      </div>
                      <div class="card">
                          <i class="fas fa-4x fa-check mt-3"></i>
                          <div class="card-body">
-                             <h4 class="card-title">Võrgustik</h4>
-                             <span class="card-text">Osaleda ja panustada inspireerivasse võrgustikku koos ägedate üliõpilaste, andekate juhendajate ja tipptööandjatega!</span>
+                             <h4 class="card-title">Areng</h4>
+                             <span class="card-text">Oskused ja teadmised, et saavutada enda eesmärgid.</span>
                          </div>
                      </div>
                  </div>

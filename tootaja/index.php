@@ -52,16 +52,42 @@
                         $validationcode = $row["validationcode"];
                         $picurl = "../userdata/pictures/".$row["picturepath"];
 
-                        $bigstring = '<div class="col-sm-12 col-md-12 col-lg-12">
+                        $bigstring = '<div class="col-md-12">
                                         <div class="card">
-                                            <a href="../tootaja/kuulutus?c='.$validationcode.'">
                                             <div class="card-body text-left">
-                                                <h6 class="card-title text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
-                                                <h5 class="card-text">SIIA TULEB ORG NIMI</h5>
-                                                <h4 class="card-text">KUupäev</h4>
-                                                <p class="card-text">'.$description.'</p>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img src="'.$picurl.'" alt="Ettevõtte logo">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <a href="../tootaja/kuulutus?c='.$validationcode.'"><h6 class="card-title text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
+                                                                </a>
+                                                                <p class="card-text">'.$description.'</p>
+                                                                <hr>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p class="card-text"><i class="fa fa-suitcase"></i> RobotBot Inc</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p class="card-text"><i class="fa fa-calendar"></i> Lisatud 12 minutit tagasi</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                
+                                                                <p class="card-text"><i class="fa fa-map-marker"></i> Asukoht</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p class="card-text"><i class="fa fa-calendar-times"></i> Lõpptähtaeg</p>
+                                                            </div>
+                                                       </div> 
+                                                    </div>
+                                                    <div class="col-md-2 text-center align-self-center">
+                                                        <i class="fa fa-2x fa-heart "></i>
+                                                        <p>Kandideeri <br> Like </p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            </a>
                                         </div>
                                     </div>';
 

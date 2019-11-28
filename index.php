@@ -10,7 +10,7 @@
         <!-- Why -->
         <?php include_once './templates/frontpage/frontpage-why.php';?>
         <!-- Purpose -->    
-        <?php include_once './templates/frontpage/frontpage-purpose.php';?>     
+        <!--<php include_once './templates/frontpage/frontpage-purpose.php';?>  -->   
         <!-- Contact + Modal -->
         <?php include_once './templates/frontpage/frontpage-contact.php';?>
         <?php include_once './templates/frontpage/frontpage-contact-modal.php';?>

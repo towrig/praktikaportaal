@@ -26,11 +26,6 @@
                     <hr class="divider light my-4">
 
                 </div> <!-- .col-->
-                <div class="col-lg-3">
-                	<a class="toggleMenu btn-lg" href="../userdata/Projektipraktika_taotlusvorm.docx" download>
-					  PROJEKTIVORM<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Täitmiseks lae alla">?</span>
-					</a>
-                </div>
 				<div class="col-lg-3">
 					<a id="formToggler" class="toggleMenu btn-lg" onclick="openModal()">Esita projekt!</a>
 				</div>
@@ -68,21 +63,21 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="p-2">
-									<a class="project-link" href="viewproject?c='.$id.'">
 									<div class="row">
-										<div class="col-md-12 d-flex"><!-- content -->
+										<div class="col-md-12"><!-- content -->
 											<h5 class="align-self-center">'.$title.'</h5>
 										</div>
-										<div class="col-md-8 d-flex">
+										<div class="col-md-8">
 											<h6 class="align-self-center">Kandideerimise lõpptähtaeg: <b>'.$end_date_string.'</b></h6>
 										</div>
-										<div class="col-md-4 d-flex"> <!-- buttons -->
-											<div class="btn-group btn-group-md align-self-center">
-												<span class="btn btn-sm btn-success" href="viewproject?c='.$id.'">Liitu!</span>
-											</div>	
+										<div class="col-md-4 text-right"> <!-- buttons -->
+                    <a class="project-link" href="viewproject?c='.$id.'">
+											<button class="btn btn-success">
+												<span>Vaata / Liitu!</span>
+											</button>	
+                      </a>
 										</div>
 									</div>
-									</a>
 								</div>
 							</div>
 						</div>';
@@ -121,8 +116,14 @@
 			    	<div class="row">
 			    		<div class="col-lg-12">
 			    			<form method="POST" action="viewproject/project_api.php" enctype="multipart/form-data" id="project_submission">
+                  
+                    <div class="form-group">
+                        <label>Projekti esitamiseks lae alla ja täida projektivorm.</label>
+                        <a class="btn btn-warning btn-sm" href="../userdata/Projektipraktika_taotlusvorm.docx" download>PROJEKTIVORM<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Täitmiseks lae alla">?</span>-->
+                        </a>
+                  </div>
 			    				<div class="form-group">
-			    					<label>Projekti pealkiri<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Pealkirja maksimaalne pikkus 85 tähemärki">?</span></label>
+			    					<label>Projekti pealkiri<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Pealkirja maksimaalne pikkus 85 tähemärki">?</span>--></label>
 			    					<input type="text" name="project_title" class="form-control" maxlength="85">
 			    				</div>
 			    				<div class="form-group">
@@ -136,7 +137,7 @@
 			    					<input type="text" name="project_org_email" class="form-control">
 			    				</div>
 			    				<div class="form-group">
-			    					<input type="button" name="submit-form" class="btn btn-success" onclick="ajaxSubmit()" value="Registreeri!">
+			    					<input type="button" name="submit-form" class="btn btn-success btn-md" onclick="ajaxSubmit()" value="Esita">
 			    				</div>
 			    			</form>
 			    			
