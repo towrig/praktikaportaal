@@ -576,10 +576,11 @@ body {
 
 header.masthead {
     background: linear-gradient(to bottom,#4117b8 0,rgba(92, 66, 66, 0.8) 100%),url(../img/bg-masthead.jpg);
-    background: #F7971E;
+    background: linear-gradient(to bottom,#00000026 0,rgba(92, 66, 66, 0.8) 100%),url(../img/bg-masthead.jpg);
+    //background: #F7971E;
     //background: -webkit-linear-gradient(to left, #FFD200, #F7971E);
     //background: linear-gradient(to left, #ffd2004a, #f7971e00),url(../img/bg-masthead.jpg);
-    background: #333;
+    //background: #333;
 }
 
 .masthead i.fas.fa-4x {
@@ -947,4 +948,101 @@ label {
 
 .mlr-8 {
     margin: 0 8rem;
+}
+
+
+/* Praktika */
+
+.practice .card {
+    border:none;
+}
+.practice .card-body img{
+	height: 80px !important;
+    width: 80px;
+}
+.flip-div{
+	cursor: pointer;
+}
+.flip-div:hover .back,.flip-div.hover .back {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+.flip-div:hover .front,.flip-div.hover .front {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+.flip-main{
+    -webkit-transition: .5s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: .5s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.front{
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+    
+}
+.front .card, .back .card {
+    min-height: 260px;
+}
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+   /* -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);*/
+}
+.back ul li a{
+	font-size: 18px;
+}
+.front,.back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: .5s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: .5s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: .5s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: .5s;
+    -ms-transform-style: preserve-3d;
+    transition: .5s;
+    transform-style: preserve-3d;
+    
+    width: 100%;
+}
+
+
+.practice .form-control-sm {
+
+    height: calc(2.25rem + 2px);
+    border-radius: 0;
+}
+
+.practice .toggleMenu  {
+    min-width: 50%;
+    margin: auto;
+    max-width: 200px;
 }

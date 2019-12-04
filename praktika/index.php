@@ -24,22 +24,11 @@
                         <hr class="divider light my-4">
                     </div> <!-- .col-->
                     <div class="col-md-6 d-flex flex-column align-self-center">
-                    <div class="mlr-8">
-                        <span id="formToggler" class="toggleMenu btn-lg" onclick="openModal()">Lisa profiil!<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span></span>
+                    <div>
+                        <span id="formToggler" class="toggleMenu btn btn-md" onclick="openModal()">Lisa profiil!<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span></span>
                     </div>
-                        </div>
-
-                </div> <!-- .row -->
-            </div> <!-- .container -->
-        </section>
-        <!-- Portfolio Section -->
-        <section class="" id="about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12"></div>
-                    <div class="col-lg-12 text-center">
-                        <div class="row">
-                            <?php
+                        
+                        <?php
 
                             $locations = array();
 
@@ -68,12 +57,13 @@
                                 }
                             }
 
-                        ?>
-
-                            <form class="col-md-12 mb-4" target="_self" method="post" enctype="multipart/form-data">
+                        ?>   
+                        
+                        <form class="col-md-12 mb-4" target="_self" method="post" enctype="multipart/form-data">
                                 <div class="form-row mb-2">
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-12">
+                                        <small>Aeg/Asukoht</small>
                                         <select class="form-control form-control-sm" name="cat" id="category">
                                             <option value="date" <?php if($_POST["cat"] == "date") echo 'selected="selected"'; ?>>
                                                 Kuupäev
@@ -84,7 +74,8 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-3" id="date_order" <?php if($_POST["cat"] == "date") echo 'style="display:none;"'; ?>>
+                                    <div class="col-md-12" id="date_order" <?php if($_POST["cat"] == "date") echo 'style="display:none;"'; ?>>
+                                        <small>Aeg</small>
                                         <select class="form-control form-control-sm" name="date_order" >
                                             <option value="new">
                                                 Uuemad
@@ -95,7 +86,8 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-3" id="locations" <?php if($_POST["cat"] == "location") echo 'style="display:none;"'; ?>>
+                                    <div class="col-md-12" id="locations" <?php if($_POST["cat"] == "location") echo 'style="display:none;"'; ?>>
+                                        <small>Asukohad</small>
                                         <select class="form-control form-control-sm" name="locations">
                                             <?php
                                                 foreach($locations as $loc){
@@ -108,13 +100,28 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-12">
                                         <input type="hidden" name="selected_sort" value="date">
                                         <button class="btn btn-primary" type="submit">Sorteeri</button>
                                     </div>
 
                                 </div>
                             </form>
+                        </div>
+
+                </div> <!-- .row -->
+            </div> <!-- .container -->
+        </section>
+        <!-- Portfolio Section -->
+        <section class="" id="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12"></div>
+                    <div class="col-lg-12 text-center">
+                        <div class="row">
+                            
+
+
                         </div>
 
                         <div class="row">
@@ -153,7 +160,11 @@
                                     //currently unused cols: 
                                     $name = $row["name"];
                                     $degree = $row["major"]." | ".$row["institute"];
+
                                     $pic = "../userdata/pictures/".$row["picturepath"]; //https://dummyimage.com/1000x1000/fff/aaa
+                                    if($row["picturepath"]==""){
+                                       $pic ="../userdata/blank_profile_pic.png";
+                                    }
                                     $cv = "../userdata/cvs/".$row["cvpath"];
                                     $email = $row["email"];
                                     $tugevused = $row["skills"];
@@ -170,30 +181,36 @@
                                     unset($line);
 
                                     $bigstring = '
-                                    <div class="col-md-12">
-                                        <div class="card js-modal" data-pic="'.$pic.'" data-name="'.$name.'" data-degree="'.$degree.'" data-skills="'.$tugevused.'" data-experience="'.$kogemused.'" data-loc="'.$asukoht.'" data-email="'.$email.'" data-work="'.$work.'">
-                                            <div class="p-2">
-
-                                                <div class="row">
-                                                    <div class="col-md-2"><!-- picture -->
-                                                        <img class="card-img-top" style="max-height: 50px; width:100px;" src="'.$pic.'" alt="Card image cap">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="col-md-12 d-flex"><!-- content -->
-                                                            <h5 class="align-self-center">'.$name.'</h5>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="flip-div">
+                                            <div class="flip-main">
+                                                <div class="front">
+                                                    <div class="card">
+                                                        <div class="card-body text-center pb-2">
+                                                            <p><img class="rounded-circle" src="'.$pic.'" alt="Profile pic of '.$name.'"></p>
+                                                            <h5 class="card-title"><strong>'.$name.'</strong></h5>
+                                                            <p class="card-text text-muted">'.$degree.'</p>
+                                                            <p class="card-text">'.$work.'</p>
+                                                            <a href="#" class="btn btn-default btn-sm"><i class="fa fa-arrow-right"></i></a>
                                                         </div>
-                                                        <div class="col-md-12 d-flex">
-                                                            <h6 class="align-self-center">'.$degree.'</h6>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 d-flex"> <!-- buttons -->
-                                                        <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
-                                                            <a class="btn btn-sm btn-light js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i> Vaata CV-d</a>
-                                                            <a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i> Võta ühendust</a>
-                                                        </div>	
                                                     </div>
                                                 </div>
+                                                <div class="back rounded">
+                                                    <div class="card">
+                                                        <div class="card-body text-center">
+                                                            <h4 class="card-title"><strong>'.$name.'</strong></h4>
+                                                            <small class="text-muted">Tugevused</small>
+                                                            <p class="card-text">'.$tugevused.'</p>
+                                                            <small class="text-muted">Kogemused</small>
+                                                            <p class="card-text">'.$kogemused.'</p>
 
+                                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
+                                                                <a class="btn btn-sm btn-info js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i></a>
+                                                                <a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i></a>
+                                                            </div>	
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>';
@@ -323,17 +340,9 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-    <!-- Custom scripts for this template
-    <script src="../js/creative.min.js"></script>-->
+    
+    <!-- Footer -->
+    <?php include_once './../templates/footer.php';?>
 
     <script>
         $(document).ready(function() {
