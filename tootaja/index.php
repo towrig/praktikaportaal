@@ -5,25 +5,25 @@
 
 <body id="page-top">
     <?php include_once './../templates/top-navbar.php';?>
-	
+	    <div id="main"></div>
 	<div id="page-content">
 	
     <section class="page-section bg-primary">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-6">
                     <hr class="divider light my-4">
-                    <h2 class="text-white text-uppercase font-weight-bold mt-0">Organisatsioon</h2>
+                    <h2 class="text-white text-uppercase font-weight-bold mt-0">Praktikapakkumised</h2>
                     <p class="text-white-75 font-weight-light mb-5">Otsid praktikanti, töötajat või meeskonda? Lisa oma pakkumine või projektiidee juba täna!</p>
                     <hr class="divider light my-4">
 
                 </div> <!-- .col-->
-				<div class="col-lg-3">
-					<a href="../editor" id="formToggler" class="toggleMenu btn-lg">LISA PAKKUMINE<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
+				<div class="col-lg-6 d-flex flex-column align-self-center">
+					<a href="../editor" id="formToggler" class="toggleMenu btn btn-md">LISA PAKKUMINE<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
 				</div>
-				<div class="col-lg-3">
+				<!--<div class="col-lg-3">
 					<a href="../team" id="formToggler" class="toggleMenu btn-lg">ESITA PROJEKT<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
-				</div>
+				</div>-->
 
             </div> <!-- .row -->
         </div> <!-- .container -->
@@ -33,24 +33,27 @@
 	<section id="profiles">
 		<div class="container">
 			<div class="row">
-                <div class="col-md-12 text-center">
+                <!--<div class="col-md-12 text-center">
                     <h2>Praktika- ja tööpakkumised</h2>
-                </div>
+                </div>-->
                 <?php
 
                 try {
                     $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
                     // set the PDO error mode to exception
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $query = $conn->prepare('SELECT heading,description,validationcode,picturepath FROM WorkPosts WHERE isvalidated = ?'); 
+                    $query = $conn->prepare('SELECT heading,description,validationcode,picturepath,work_location,datetime_uploaded FROM WorkPosts WHERE isvalidated = ?'); 
                     $query->execute(array(1));
                     $data = $query -> fetchAll();
                     foreach($data as $row){
-                        //currently unused cols: name,email,phone,tasks,experience,work_location,work_type,other,logopath
+                        //currently unused cols: name,email,phone,tasks,experience,work_type,other,logopath
                         $heading = $row["heading"];
                         $description = $row["description"];
                         $validationcode = $row["validationcode"];
                         $picurl = "../userdata/pictures/".$row["picturepath"];
+                        
+                        $location = $row["work_location"];
+                        $uploaded = $row["datetime_uploaded"];
 
                         $bigstring = '<div class="col-md-12">
                                         <div class="card">
@@ -68,23 +71,23 @@
                                                                 <hr>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <p class="card-text"><i class="fa fa-suitcase"></i> RobotBot Inc</p>
+                                                                <p class="card-text text-muted"><i class="fa fa-suitcase"></i> RobotBot Inc</p>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <p class="card-text"><i class="fa fa-calendar"></i> Lisatud 12 minutit tagasi</p>
+                                                                <p class="card-text text-muted"><i class="fa fa-calendar"></i> '.$uploaded.'</p>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 
-                                                                <p class="card-text"><i class="fa fa-map-marker"></i> Asukoht</p>
+                                                                <p class="card-text text-muted"><i class="fa fa-map-marker"></i> '.$location.'</p>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <p class="card-text"><i class="fa fa-calendar-times"></i> Lõpptähtaeg</p>
+                                                                <p class="card-text text-muted"><i class="fa fa-calendar-times"></i> Lõpptähtaeg</p>
                                                             </div>
                                                        </div> 
                                                     </div>
                                                     <div class="col-md-2 text-center align-self-center">
                                                         <i class="fa fa-2x fa-heart "></i>
-                                                        <p>Kandideeri <br> Like </p>
+                                                        <p class="text-muted">Kandideeri <br> Like <br> Vaatamisi </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,21 +154,15 @@
 	    </div>
 	</div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-    <!-- Custom scripts for this template
-    <script src="../js/creative.min.js"></script> -->
+    <!-- Footer -->
+    <?php include_once './../templates/footer.php';?>
 
     <script type="text/javascript">
     	$(document).ready(function(){
 
     		$('.js-modal').on('click', openModal);
+          
+        $('[data-toggle="tooltip"]').tooltip();
 
     		$("#category").change(function(){
 

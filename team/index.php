@@ -7,27 +7,28 @@
 
     <?php include_once './../templates/top-navbar.php';?>
 	
+    <div id="main"></div>
+    
 	<div id="page-content">
 	
     <section class="page-section bg-primary">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-6">
                     <hr class="divider light my-4">
                     <h2 class="text-white text-uppercase font-weight-bold mt-0">Projektid ja Tiimid</h2>
                     <p class="text-white-75 font-weight-light mb-5">Teosta oma praktika DELTAki projektis ja kasuta oma kogemusi ja teadmisi reaalsete probleemide lahendamiseks!</p>
-          
-					<p class="text-white-75">
-						Projektitaotluse esitamise tähtajad on 1. oktoober ja 1. märts.<br>
-						Üliõpilaste registreerumine projektidesse toimub 8.-14. oktoober ja märts.<br>
-						Projektid alustavad kaks korda aastas - 15. oktoobril ja 15. märtsil!<br>
-						Kuidas täita projektitaotlust? VAATA <a class="text-white" href="https://docs.google.com/document/d/17CI47SEDeFnIVwmLptqmgXLR4OTgO5w_lIqJDqjbpBc/edit" target="_blank" rel="noopener noreferrer">SIIA!</a>
-					</p>
+                    <p class="text-white-75">
+                        Projektitaotluse esitamise tähtajad on 1. oktoober ja 1. märts.<br>
+                        Üliõpilaste registreerumine projektidesse toimub 8.-14. oktoober ja märts.<br>
+                        Projektid alustavad kaks korda aastas - 15. oktoobril ja 15. märtsil!<br>
+                        Kuidas täita projektitaotlust? VAATA <a class="text-white" href="https://docs.google.com/document/d/17CI47SEDeFnIVwmLptqmgXLR4OTgO5w_lIqJDqjbpBc/edit" target="_blank" rel="noopener noreferrer">SIIA!</a>
+                    </p>
                     <hr class="divider light my-4">
 
                 </div> <!-- .col-->
-				<div class="col-lg-3">
-					<a id="formToggler" class="toggleMenu btn-lg" onclick="openModal()">Esita projekt!</a>
+				<div class="col-lg-6 d-flex flex-column align-self-center">
+					<a id="formToggler" class="toggleMenu btn btn-md" onclick="openModal()">Esita projekt!</a>
 				</div>
 
             </div> <!-- .row -->
@@ -153,17 +154,8 @@
 	    </div>
 	</div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!-- Custom scripts for this template
-    <script src="../js/creative.min.js"></script> -->
+    <!-- Footer -->
+    <?php include_once './../templates/footer.php';?>
 
     <script type="text/javascript">
     	$(document).ready(function(){

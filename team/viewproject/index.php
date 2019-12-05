@@ -73,7 +73,7 @@ try {
 <body id="page-top">
 
     <?php include_once './../../templates/top-navbar.php';?>
-
+    <div id="main"></div>
     <!-- work.php -->
     <section>
         <div class="container work">
@@ -92,7 +92,14 @@ try {
                         <div class="row">
                             <div class="col-lg-12 embed-container">
                                 <embed class="pdf-embed" type="application/pdf" src="<?php if(isset($pdf_path)){ echo "../../userdata/projects/".$pdf_path;}else{echo "../../userdata/projects/lorem-ipsum.pdf";} ?>" style="width: 100%; min-height: 500px;"></embed>
-                                <p style="margin-top: 10px;">Kandideerimise lõpptähtaeg: <b><?php echo $end_date_string; ?></b></p>
+                            <div class="row">    
+                                <div class="col-lg-10">
+                                    <p style="margin-top: 10px;">Kandideerimise lõpptähtaeg: <b><?php echo $end_date_string; ?></b></p>
+                                </div>
+                                <div class="col-lg-2">
+                                    <p><i class="fas fa-share-square fa-1x"> </i> Jaga lehte</p>
+                                </div>
+                                </div>
                             </div>
                         </div>
 
@@ -105,27 +112,30 @@ try {
                 <div class="col-lg-4 work-footer-contact">
 
                     <div class="row" style="overflow: hidden;">
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             <?php 
 							if(!empty($avatar)){
-								echo "<img src=".$avatar." style='width:100px; height:100px;border-radius: 50px;'>";
+								echo "<img src=".$avatar.">";
 							}else{
-								echo "<img src='../../img/portfolio/thumbnails/5.jpg' style='width:100px; height:100px;border-radius: 50px;'>";
+								echo "<img src='../../img/portfolio/thumbnails/5.jpg'>";
 							}
 							?>
                         </div>
-                        <div class="col-lg-8" style="overflow: hidden;">
+                        <div class="col-lg-12">
                             <h5>Kontakt</h5>
-                            <ul style="margin-left:-40px;">
+                            <ul style="padding-inline-start:0px">
                                 <li><?php echo $name; ?></li>
                                 <li><i class="fas fa-envelope"></i> <?php echo $email; ?></li>
-                                <li><i class="fas fa-phone"></i> <?php echo $phone; ?></li>
+                                <li><i class="fas fa-phone"></i> <?php echo $phone; if(empty($phone)) { echo "-";} ?></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-8 work-footer-apply">
+                    <div class="col-md-12">
+                        
+                    </div>
                     <p>Projektiga liitumiseks vajutage allolevat nuppu.</p>
                     <form id="project-apply" method="post" action="project_api.php">
 
@@ -147,13 +157,8 @@ try {
                         </div>
                         <input type="hidden" name="hash" id="project_hash" value=<?php echo '"'.$_GET["c"].'"';?>>
                     </form>
-                    <a class="btn btn-success btn-xl" onclick="join()">Liitu</a>
-                    <a class="btn btn-success btn-xl" href="../../praktika">Loo profiil?</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12" style="text-align:left; float:right;">
-                    <p>JAGA LEHTE <i class="fas fa-share-square fa-1x"> </i></p>
+                    <a class="btn btn-info btn-xl" onclick="join()">Liitu</a>
+                    <!--<a class="btn btn-success btn-xl" href="../../praktika">Loo profiil?</a>-->
                 </div>
             </div>
         </div>
@@ -232,22 +237,9 @@ try {
     <!--</section>-->
 
     <!-- Footer -->
-    <footer class="bg-light py-5">
-        <div class="container">
-            <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
-        </div>
-    </footer>
+    <?php include_once './../../templates/footer.php';?>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../../vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-    <!-- Custom scripts for this template
-    <script src="../../js/creative.min.js"></script> -->
     <script type="text/javascript">
         var areasVisible = false;
         var editmode_key = "<?php echo $_GET["e"];?>";
@@ -270,11 +262,11 @@ try {
                     data: formData
                 }).done(function(response) {
                     console.log(response);
-                    form.after("<div class='alert alert-success'>Edukas registreerimine! Emailile tuleb teavitus vastuvõtmise kohta.</div>");
+                    form.after('<div class="alert alert-success alert-dismissible fade show">Edukas registreerimine! Emailile tuleb teavitus vastuvõtmise kohta.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
                     form.css('display', 'none');
                 }).fail(function(response) {
                     console.log(response);
-                    form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel.</div>");
+                    form.after('<div class="alert alert-danger alert-dismissible fade show">Ups! Midagi läks valesti registreerimisel.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
                 });
 
             } else {

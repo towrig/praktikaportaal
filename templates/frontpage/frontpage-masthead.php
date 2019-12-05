@@ -13,7 +13,7 @@
                 <h4 class="text-white-75 font-weight-light mb-5 text-right">" Tulevik algab sinust "</h4>
             </div>
             <div class="col-lg-6 col-md-12">
-                <div class="d-flex flex-lg-nowrap flex-wrap">
+                <div class="d-flex flex-lg-nowrap justify-content-center flex-wrap">
                   <div class="card m-1">
                     <div class="card-body">
                       <i class="fas fa-user fa-4x mb-4"></i>

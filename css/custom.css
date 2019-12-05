@@ -1041,8 +1041,39 @@ label {
     border-radius: 0;
 }
 
-.practice .toggleMenu  {
+.toggleMenu  {
     min-width: 50%;
     margin: auto;
     max-width: 200px;
+}
+
+.card {
+    background: rgba(255,255,255,0.9);
+    border: none;
+}
+
+small {
+    border: none;
+}
+
+/* tootaja/kuulutus */
+
+.h4, h4 {
+    font-size: 1rem;
+}
+
+.h5, h5 {
+    font-size: 0.83em;
+}
+
+.org-logo-container {
+    margin-bottom: 20px;
+}
+
+.work-content p {
+    margin-bottom: 0;
+}
+
+.work-aside ul {
+    padding-inline-start: 1.2rem;
 }
