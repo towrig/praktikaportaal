@@ -195,6 +195,7 @@ try {
                                         </div>
                                     </div>
                                 </div>';
+                                $edit_button = "";
                                 echo $bigString;
                             }
                         ?>

@@ -17,7 +17,11 @@ $dbname = $CFG->dbname;
 $dbuser = $CFG->dbuser;
 $dbpassword = $CFG->dbpasswd;
 
+function sendMail(){
+    
+}
 
+//Mail to praktika.ut.ee to notify that a participant has registered to a project
 function sendNotificationMail($target, $data){ //add $target
 	$form_success = true;
 	$to = 'praktika@ut.ee'; //replace with $target
@@ -32,6 +36,7 @@ function sendNotificationMail($target, $data){ //add $target
 	
 }
 
+//Mail to participant (accepted/not accepted)
 function sendMail($target, $data, $is_accepted){ //add $target
 	$form_success = true;
 	$from = 'noreply@praktika.ut.ee';
@@ -40,15 +45,16 @@ function sendMail($target, $data, $is_accepted){ //add $target
 	if($is_accepted){
 		$message .= 'Teie registreerimine projekti on kinnitatud!';
 	}else{
-		$message .= 'Teie registreerimine projekti on tühistatud.';
+		$message .= 'Tere!\r\n\r\nTeie liitumine projektiga “Projekti pealkiri” on heaks kiidetud. ÕISi lisatakse projektipraktika automaatselt projekti lõpuseminari ajaks.\r\n\r\nHeade soovidega\r\npraktika.ut.ee';
 	}
+    $message = wordwrap($message, 70, "\r\n");
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
 	mail($target, $subject, $message, $headers) || print_r(error_get_last());
 	
 }
-
+//runs when participant registers to project
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 	$response = "";
 	$name = $_POST["fullname"];
@@ -76,7 +82,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		echo "Tekkis viga! Vea kirjeldus: ".$e->getMessage();
 	}
 
-}else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
+}
+//runs when a project is posted
+else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){ 
 	$response = "";
 	$title = $_POST["project_title"];
     $max_part = intval($_POST["max_part"]);
@@ -124,7 +132,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		echo "Tekkis viga! Vea kirjeldus: ".$e->getMessage();
 	}
 
-}else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["edit_key"]){
+}
+//runs when participant approved or not approved
+else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["edit_key"]){ 
 	$response="Edit_key:".$_POST["edit_key"].";";
 	try {
 		$project_id = "";
@@ -165,9 +175,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		http_response_code(403);
 		echo "Tekkis viga! Vea kirjeldus: ".$e->getMessage();
 	}
-}else{
+}
+//something has gone terribly wrong
+else{
 	http_response_code(403);
 	echo "Tekkis viga! Proovige uuesti.";
 }
+
 
 ?>
