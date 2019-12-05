@@ -10,7 +10,7 @@
             
             <div class="col-lg-6 col-md-12 align-self-center">
                 <h1 class="text-white font-weight-bold">f<span>UT</span>ulab</h1>
-                <h4 class="text-white-75 font-weight-light mb-5 text-right">" Tulevik algab sinust "</h4>
+                <h4 class="text-white-75 font-weight-light mb-5 text-right">tulevik algab Sinust!</h4>
             </div>
             <div class="col-lg-6 col-md-12">
                 <div class="d-flex flex-lg-nowrap justify-content-center flex-wrap">
@@ -18,8 +18,8 @@
                     <div class="card-body">
                       <i class="fas fa-user fa-4x mb-4"></i>
                       <h5 class="card-title text-uppercase">Üliõpilased</h5>
-                      <p class="card-text text-muted">Tahad ennast nähtavaks teha? Siis tule ja lisa enda profiil ja astu esimene samm juba täna!</p>
-                      <a class="" href="./praktika"><button class="btn btn-primary">Loe rohkem</button></a>
+                      <p class="card-text text-muted">Uued tutvused ja huvitavad praktikakohad.</p>
+                      <a class="" href="./praktika"><button class="btn btn-sm btn-primary">Lisa profiil!</button></a>
                     </div>
                     <div class="card-footer">
                       <small class="text-muted"><span>4</span> profiili</small>
@@ -29,8 +29,8 @@
                     <div class="card-body">
                       <i class="fas fa-users fa-4x mb-4"></i>
                       <h5 class="card-title text-uppercase">Projektid</h5>
-                      <p class="card-text text-muted">Tahad leida huvitavat ettevõtmist ja võtta osa projektist? Või soovid esitada projekti ning leida abilisi?</p>
-                      <a class="" href="./team"><button class="btn btn-primary">Loo rohkem</button></a>
+                      <p class="card-text text-muted">Koostöös sündinud lahendused Sinu projektiideele.</p>
+                      <a class="" href="./team"><button class="btn btn-sm btn-primary">Lisa projekt!</button></a>
                     </div>
                     <div class="card-footer">
                       <small class="text-muted"><span>2</span> projekti</small>
@@ -39,9 +39,9 @@
                   <div class="card m-1">
                     <div class="card-body">
                       <i class="fas fa-city fa-4x mb-4"></i>
-                      <h5 class="card-title text-uppercase">Praktika-pakkumised</h5>
-                      <p class="card-text text-muted">Tahad leida praktikante või pakkuda tööd? Lisa oma praktikapakkumine ning leia endale parim abiline</p>
-                      <a class="" href="./tootaja"><button class="btn btn-primary">Loe rohkem</button></a>
+                      <h5 class="card-title text-uppercase">Praktika<wbr>pakkumised</h5>
+                      <p class="card-text text-muted">Motiveeritud praktikandid ja tulevased töötajad.</p>
+                      <a class="" href="./tootaja"><button class="btn btn-sm btn-primary">Lisa praktika<wbr>pakkumine!</button></a>
                     </div>
                     <div class="card-footer">
                       <small class="text-muted"><span>7</span> pakkumist</small>

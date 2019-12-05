@@ -1,8 +1,9 @@
-    <div class=" container-fluid">
-        <h2 class="text-center mt-5">Mis see sulle annab!</h2>
+    <div class=" container-fluid text-center">
+        <h2 class="mt-5">Miks FUTULAB?</h2>
+        <small>fUTulab toetab Sinu tuleviku- ja karjäärivõimalusi</small>
         <hr class="divider my-4">
         
-        <div class="row text-center text-primary mb-5">
+        <div class="row text-primary mb-5">
              
                  <div class="col-md-4">
                      <!--<i class="fas fa-4x fa-thumbs-up mt-3"></i>-->
@@ -15,8 +16,7 @@
                      <!--<i class="fas fa-4x fa-retweet mt-3"></i>-->
                      <div>
                          <h4>Konkurents</h4>
-                         <span class="text-muted">Kogemused, mis on tööturul ja ühiskonnas edasiviivad.
-</span>
+                         <span class="text-muted">Kogemused, mis on tööturul ja ühiskonnas edasiviivad.</span>
                      </div>
                  </div>
                  <div class="col-md-4">
@@ -31,22 +31,22 @@
     </div>
 
 <!-- Activities Section -->
-<section id="activities" class="page-section d-flex flex-wrap align-content-center">
+<section id="activities" class="page-section d-flex flex-wrap align-content-center text-center">
     
 
     <div class="container">
-        <h2 class="text-center mt-0">See konkreetne tekst läheb millekski muuks.</h2>
+        <h2 class="text-center mt-0">Üliõpilasel on võimalus osaleda:</h2>
         <hr class="divider my-4">
         <div class="row">
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="mt-5">
                     <i class="fas fa-4x fa-gem text-primary mb-4"></i>
-                    <h3 class="h4 mb-2 text-uppercase">Praktika</h3>
+                    <h3 class="h4 mb-2 text-uppercase">Praktikad</h3>
                     <p class="text-muted mb-0">Üliõpilase arengule suunatud erinevad praktikavõimalused.<br>
                         Tutvu ja kandideeri!</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 text-center">
+            <div class="col-lg-3 col-md-6 ">
                 <div class="mt-5">
                     <i class="fas fa-4x fa-laptop-code text-primary mb-4"></i>
                     <h3 class="h4 mb-2 text-uppercase">Projektid</h3>
@@ -54,7 +54,7 @@
                         Vaata siia!</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 text-center">
+            <div class="col-lg-3 col-md-6">
                 <div class="mt-5">
                     <i class="fas fa-4x fa-globe text-primary mb-4"></i>
                     <h3 class="h4 mb-2 text-uppercase">Liidriprogramm</h3>
@@ -62,7 +62,7 @@
                         Tule Liidriks!</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 text-center">
+            <div class="col-lg-3 col-md-6">
                 <div class="mt-5">
                     <i class="fas fa-4x fa-heart text-primary mb-4"></i>
                     <h3 class="h4 mb-2 text-uppercase">Seminarid</h3>

@@ -58,13 +58,14 @@
     </div>
 </section>
 
-<section id="why" class="my-5 h-100 page-section">
-    <div class="container mb-5">
+<section id="why" class="my-5 mb-5 h-50 page-section">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 style="margin-bottom: 12px">Miks on vaja praktikavahenduste keskkonda?</h1>
+                <h1 style="margin-bottom: 12px">Mis teeb FUTULABi unikaalseks?</h1>
+                <small>Ülikoolist kogemused, mis aitavad eriala teadmisi rakendada ning toetavad sinu arengut mitmekülgselt.</small>
                 <hr class="divider mt-4">
-                <h6>Ülikoolist kogemused, mis aitavad eriala teadmisi rakendada ning toetavad sinu arengut mitmekülgselt.</h6>
+                
             </div>
         </div>
     </div>
@@ -136,7 +137,8 @@
                         </div>
 
                         <div class="mt-3 mb-1">
-                            <h6 class="small text-left text-white">Sina otsustad millised ideed ellu viia, kuidas ...</h6>
+                            <h6 class="small text-left text-white">fUTulabis otsustad ise, millal, kus ja kuidas osaleda, sest nii piirid kui ka väljakutsed sead endale ise.
+</h6>
                         </div>
                     </div>
                 </div>
