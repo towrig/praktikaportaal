@@ -25,11 +25,12 @@
                 <?php endif; ?>
                 
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#services">Juhendajale</a>
+                    <a class="nav-link js-scroll-trigger" href="https://sisu.ut.ee/praktikamajanduses/juhendajale">Juhendajale</a>
                 </li>
-                <li class="nav-item">
+                
+                <!--<li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#services">Karjäärinõu</a>
-                </li>
+                </li>-->
                 <!--<li class="nav-item">
                     <a class="nav-link" href="https://sisu.ut.ee/praktikamajanduses">Lähen praktikale</a>
                 </li>-->
