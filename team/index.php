@@ -16,13 +16,12 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <hr class="divider light my-4">
-                    <h2 class="text-white text-uppercase font-weight-bold mt-0">Projektid ja Tiimid</h2>
-                    <p class="text-white-75 font-weight-light mb-5">Teosta oma praktika DELTAki projektis ja kasuta oma kogemusi ja teadmisi reaalsete probleemide lahendamiseks!</p>
-                    <p class="text-white-75">
-                        Projektitaotluse esitamise tähtajad on 1. oktoober ja 1. märts.<br>
-                        Üliõpilaste registreerumine projektidesse toimub 8.-14. oktoober ja märts.<br>
-                        Projektid alustavad kaks korda aastas - 15. oktoobril ja 15. märtsil!<br>
-                        Kuidas täita projektitaotlust? VAATA <a class="text-white" href="https://docs.google.com/document/d/17CI47SEDeFnIVwmLptqmgXLR4OTgO5w_lIqJDqjbpBc/edit" target="_blank" rel="noopener noreferrer">SIIA!</a>
+                    <h2 class="text-white text-uppercase font-weight-bold mt-0">Projektid</h2>
+                    <p class="text-white-75 font-weight-light mb-5">Lisa oma projektiidee ja erinevate erialade üliõpilased töötavad koos, et viia ellu Sinu jaoks oluline ja üliõpilastele väljakutset pakkuv projekt. </p>
+                    <p class="alert alert-warning">
+                        Projektitaotluste esitamise viimane tähtaeg on 02.03! 
+<br>Üliõpilased saavad projektidega liituda 09.-15.03.
+                        <br>Vaata ajakava siit!
                     </p>
                     <hr class="divider light my-4">
 
@@ -65,16 +64,32 @@
 							<div class="card">
 								<div class="p-2">
 									<div class="row">
-										<div class="col-md-12"><!-- content -->
-											<h5 class="align-self-center">'.$title.'</h5>
+										<div class="col-md-10"><!-- content -->
+                    <div class="row">
+                    <div class="col-md-12">
+											<h4 class="align-self-center">'.$title.'</h4>
+                  </div>
+                  <div class="col-md-12">
+                  <div class="row text-muted">
+                    <div class="col-md-4">
+                    <p class="align-self-center"><i class="fa fa-user"></i> '.$org_name.'</p>
+                    </div>
+                    <div class="col-md-4">
+                    <p class="align-self-center"><i class="fa fa-building"></i> Tartu Ülikool</p>
+                    </div>
+                    <div class="col-md-4">
+                    <p class="align-self-center"><i class="fa fa-users"></i> 4/10 </p>
+                    </div>
+                  </div>
+											
+                      </div>
+                      </div>
 										</div>
-										<div class="col-md-8">
-											<h6 class="align-self-center">Kandideerimise lõpptähtaeg: <b>'.$end_date_string.'</b></h6>
-										</div>
-										<div class="col-md-4 text-right"> <!-- buttons -->
+
+										<div class="col-md-2 text-right"> <!-- buttons -->
                     <a class="project-link" href="viewproject?c='.$id.'">
-											<button class="btn btn-success">
-												<span>Vaata / Liitu!</span>
+											<button class="btn btn-sm btn-success">
+												<span>Vaata</span>
 											</button>	
                       </a>
 										</div>
@@ -108,7 +123,7 @@
 	    	<div class="modal-content">
 
 	    		<div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLongTitle">Esita projekt</h5>
+			        <h4 class="modal-title" id="exampleModalLongTitle">Esita projekt</h4>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
@@ -119,31 +134,39 @@
 			    			<form method="POST" action="viewproject/project_api.php" enctype="multipart/form-data" id="project_submission">
                   
                     <div class="form-group">
-                        <label>Projekti esitamiseks lae alla ja täida projektivorm.</label>
-                        <a class="btn btn-warning btn-sm" href="../userdata/Projektipraktika_taotlusvorm.docx" download>PROJEKTIVORM<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Täitmiseks lae alla">?</span>-->
-                        </a>
+                        <label>Projekti esitamiseks lae alla ja täida <a href="../userdata/Projektipraktika_taotlusvorm.docx" download>projektivorm.</a></label>
+                         
                   </div>
 			    				<div class="form-group">
-			    					<label>Projekti pealkiri<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Pealkirja maksimaalne pikkus 85 tähemärki">?</span>--></label>
+			    					<label>Projekti pealkiri:<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Pealkirja maksimaalne pikkus 85 tähemärki">?</span></label>
 			    					<input type="text" name="project_title" class="form-control" maxlength="85">
 			    				</div>
-			    				<div class="form-group">
-			    					<label>Projekti PDF:</label>
-			    					<input type="file" name="project_pdf" id="project_pdf">
-			    				</div>
+			    				
 			    				<div class="form-group">
 			    					<label>Teie nimi:</label>
-			    					<input type="text" name="project_org_name" class="form-control">
+			    					<!--<input type="text" name="project_org_name" class="form-control">-->
+                    <input type="text" name="project_org_personal_name" class="form-control">
+                      </div>
+                      <div class="form-group">
 			    					<label>Teie email:</label>
-			    					<input type="text" name="project_org_email" class="form-control">
+			    					<input type="text" name="project_org_personal_email" class="form-control">
+                          </div>
+                          <div class="form-group">
+                    <label>Organisatsiooni nimi:</label>
+			    					<input type="text" name="project_org_name" class="form-control">
 			    				</div>
-                                <div class="form-group">
-			    					<label>Maksimaalne registreerijate arv:</label>
+                  <div class="form-group">
+			    					<label>Meeskonna suurus (max 10):</label>
 			    					<input type="text" name="max_part" class="form-control">
+			    				</div>
+                    <div class="form-group">
+			    					<label>Lae täidetud projektivorm PDF formaadis:</label>
+			    					<input type="file" name="project_pdf" id="project_pdf">
 			    				</div>
 			    				<div class="form-group">
 			    					<input type="button" name="submit-form" class="btn btn-success btn-md" onclick="ajaxSubmit()" value="Esita">
 			    				</div>
+                    
 			    			</form>
 			    			
 			    		</div>

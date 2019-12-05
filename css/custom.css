@@ -1077,3 +1077,11 @@ small {
 .work-aside ul {
     padding-inline-start: 1.2rem;
 }
+
+p.align-self-center {
+    font-size: small;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: "Rubik";
+}

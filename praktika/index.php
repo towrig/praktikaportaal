@@ -58,7 +58,7 @@
                             }
 
                         ?>   
-                        
+                        <!--
                         <form class="col-md-12 mb-4" target="_self" method="post" enctype="multipart/form-data">
                                 <div class="form-row mb-2">
 
@@ -106,7 +106,7 @@
                                     </div>
 
                                 </div>
-                            </form>
+                            </form>-->
                         </div>
 
                 </div> <!-- .row -->
