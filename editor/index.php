@@ -21,19 +21,18 @@ $dbpassword = $CFG->dbpasswd;
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
-//sends both removal and activation emails.
+//sends post activation email
 function sendMail($key, $target, $heading, $action){ //add $target
 	$form_success = true;
-	$to = $target; //replace with $target
 	$from = 'admin@praktika.ut.ee';
 
 	$subject = 'Valideerimislink: '.$heading;
-	$message = 'Vajuta sellele lingile et aktiveerida oma postitus praktikaportaalis: <a href="http://praktika.ut.ee/validator?key='.$key.'&action=add&t=1">kliki siia!</a><br>Postituse muutmiseks <a href="http://praktika.ut.ee/editor?e='.$key.'">kliki siia!</a>';
+    $message = 'Tere!<br><br>Olete lisanud TÜ praktika keskkonda pakkumise “'.$heading.'”. Palun kinnitage pakkumise lisamine vajutades <a href="http://praktika.ut.ee/validator?key='.$key.'&action=add&t=1">kliki siia!</a>. Pärast kinnitamist läheb pakkumine kodulehele üles.<br><br>Heade soovidega<br>praktika.ut.ee';
 
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	mail($to, $subject, $message, $headers) || print_r(error_get_last());	
+	mail($target, $subject, $message, $headers) || print_r(error_get_last());	
 }
 function loadHTML($filename){
     $target = fopen($filename, "r") or die("Failed to open file!");
