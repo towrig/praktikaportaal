@@ -17,22 +17,17 @@ $dbname = $CFG->dbname;
 $dbuser = $CFG->dbuser;
 $dbpassword = $CFG->dbpasswd;
 
-function sendMail(){
-    
-}
-
-//Mail to praktika.ut.ee to notify that a participant has registered to a project
-function sendNotificationMail($target, $data){ //add $target
-	$form_success = true;
-	$to = 'praktika@ut.ee'; //replace with $target
+//Mail to praktika.ut.ee to notify that a participant has registered to a project (WORKS)
+function sendNotificationMail($name, $p_id, $project_title, $project_edit_key, $p_email){ //add $target
+	$to = 'praktika@ut.ee'; //replace with praktika@ut.ee
 	$from = 'noreply@praktika.ut.ee';
-	$subject = 'Registreerimine projekti '.$data;
-	$message = 'Keegi registreeris projekti '.$data.'.';
-
+	$subject = 'Registreerimine projekti';
+	$message = 'Projektiga “'.$project_title.'” on liitunud '.$name.'.<br>VAATA <a href="http://praktika.ut.ee/team/viewproject?c='.$p_id.'&e='.$project_edit_key.'">MUUTMA</a>';
+    $message_p = 'Tere!<br><br>Olete liitunud projektiga “Projekti pealkiri”. Teie liitumine kinnitatakse ühe nädala jooksul. <br><br>Heade soovidega<br>praktika.ut.ee';
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	mail($to, $subject, $message, $headers) || print_r(error_get_last());
+	return ((mail($to, $subject, $message, $headers) && mail($p_email, $subject, $message_p, $headers)) || print_r(error_get_last()));
 	
 }
 
@@ -43,17 +38,18 @@ function sendMail($target, $data, $is_accepted){ //add $target
 	$subject = 'Registreerimine projekti';
 	$message = 'Tervitus!';
 	if($is_accepted){
-		$message .= 'Teie registreerimine projekti on kinnitatud!';
+		$message .= 'Tere!<br><br>Teie liitumine projektiga “Projekti pealkiri” on heaks kiidetud. ÕISi lisatakse projektipraktika automaatselt projekti lõpuseminari ajaks.<br><br>Heade soovidega<br>praktika.ut.ee';
 	}else{
-		$message .= 'Tere!\r\n\r\nTeie liitumine projektiga “Projekti pealkiri” on heaks kiidetud. ÕISi lisatakse projektipraktika automaatselt projekti lõpuseminari ajaks.\r\n\r\nHeade soovidega\r\npraktika.ut.ee';
+		$message .= 'Tere!<br><br>Teie liitumine projektiga “projekti pealkiri” on tagasi lükatud. Liitumine lükatakse tagasi enamasti kahel põhjusel:<br>- Projektis on teie eriala tudengeid liiga palju<br>- Projekt on täis<br>Soovitame liituda mõne teise projektiga.<br><br>Heade soovidega<br>praktika.ut.ee';
 	}
     $message = wordwrap($message, 70, "\r\n");
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
-	mail($target, $subject, $message, $headers) || print_r(error_get_last());
+	return (mail($target, $subject, $message, $headers) || print_r(error_get_last()));
 	
 }
+
 //runs when participant registers to project
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 	$response = "";
@@ -68,15 +64,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		return 0;
 	}
 	try {
+        $project_title = '';
+        $project_edit_key = '';
+        
 		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $conn->prepare('INSERT INTO ProjectParticipants(project_id, name, email, degree, skills, has_profile, is_accepted) VALUES (?,?,?,?,?,0,0)'); 
 		$query->execute(array($hash, $name, $email, $degree, $skills));
 		$conn = null;
-		sendNotificationMail("praktika@ut.ee", $hash);
-		http_response_code(200);
-		echo response.";hash:".$hash;
+		
+        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+		// set the PDO error mode to exception
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$query = $conn->prepare('SELECT * FROM ProjectPosts WHERE id = ?'); 
+		$query->execute(array($hash));
+        $data = $query -> fetchAll();
+        foreach($data as $row){
+            $project_title = $row["title"];
+            $project_edit_key = $row["edit_key"];
+            break;
+        }
+		$conn = null;
+        
+		$success = sendNotificationMail($name, $hash, $project_title, $project_edit_key, $email);
+        if($success){
+            http_response_code(200);
+            echo response.";hash:".$hash;
+        }else{
+            http_response_code(403);
+            echo "Tekkis viga kirja saatmisel!";   
+        }
 	}catch (PDOException $e){
 		http_response_code(403);
 		echo "Tekkis viga! Vea kirjeldus: ".$e->getMessage();
@@ -125,6 +143,9 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?)'); 
 		$query->execute(array($pdf_path, $title, $org_email, $org_name, 0, $editkey, $max_part));
 		$conn = null;
+        
+        //need a sendMail function here
+        
 		http_response_code(200);
 		echo $response;
 	}catch (PDOException $e){
