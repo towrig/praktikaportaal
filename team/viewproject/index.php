@@ -136,7 +136,14 @@ try {
                     <div class="col-md-12">
                         
                     </div>
-                    <p>Projektiga liitumiseks vajutage allolevat nuppu.</p>
+                    <?php 
+                        if(count($participants) < $max_participants){
+                            echo '<p>Projektiga liitumiseks vajutage allolevat nuppu.</p>';
+                        }
+                        else{
+                            echo '<p>Projekti kohad on täis.</p>';
+                        }
+                    ?>
                     <form id="project-apply" method="post" action="project_api.php">
 
                         <div class="form-group">
@@ -157,7 +164,11 @@ try {
                         </div>
                         <input type="hidden" name="hash" id="project_hash" value=<?php echo '"'.$_GET["c"].'"';?>>
                     </form>
-                    <a class="btn btn-info btn-xl" onclick="join()">Liitu</a>
+                    <?php 
+                        if(count($participants) < $max_participants){
+                            echo '<a class="btn btn-info btn-xl" onclick="join()">Liitu</a>';
+                        }
+                    ?>
                     <!--<a class="btn btn-success btn-xl" href="../../praktika">Loo profiil?</a>-->
                 </div>
             </div>
