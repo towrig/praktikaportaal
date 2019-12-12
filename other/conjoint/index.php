@@ -116,7 +116,7 @@
 		var img_string = "<?php echo $img_string ?>";
 		var q_string = "<?php echo $questions ?>";
 		var q_count = q_string.split(";").length;
-		console.log("Test img_string: "+img_string);
+		console.log("img_string: "+img_string);
 
 		
 		$(document).ready(function(){
@@ -128,9 +128,11 @@
 				$('#answers').val(collectAnswers());
 			});
 			
-			var images = img_string.split(",");
+			var images = img_string.replace(/ /g,'%20').split(",");
+            
 			for (i = 0 ; i < images.length; i++){
 				srcPildid[i] = "./images/"+images[i];
+                console.log(srcPildid[i]);
 				$('.section-images').append("<div class='image-container col-md-3 mb-4'><div></div></div>");
 				$('.image-container:nth-child('+(i+1)+') div').css('background-image', 'url('+srcPildid[i].toString()+')');
 				$('.image-container:nth-child('+(i+1)+')').click(changeImage(i));
@@ -141,16 +143,16 @@
 		function collectAnswers(){
 			var resultString = "";
 			var questions = q_string.split(";");
-			console.log(q_string.toString());
+			//console.log(q_string.toString());
 			for (var i = 0; i < q_count; i++) {
-				console.log("Loop: "+questions[i].split("|")[0]);
+				//console.log("Loop: "+questions[i].split("|")[0]);
 				if(questions[i].split("|")[0] == "radio"){
 					resultString+= $('input[name=a'+i+']:checked', '#data-form').val()+";";
 				}else if (questions[i].split("|")[0] == "text") {
 					resultString+= $('input[name=a'+i+']', '#data-form').val()+";";
 				}
 			}
-			console.log("RS: "+resultString);
+			//console.log("RS: "+resultString);
 			return resultString;
 		}
 

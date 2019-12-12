@@ -449,7 +449,7 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
 
         var FORM_SUCCESS = <?php echo ($form_success)?"true":"false";?>;
         if (FORM_SUCCESS) {
-            $('.type_container').after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink ja muutmislink!</div>");
+            $('.type_container').after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink!</div>");
         }
 
         $('#kirjeldus').trumbowyg({

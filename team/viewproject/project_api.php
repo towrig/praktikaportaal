@@ -118,8 +118,9 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 	$response = "";
 	$title = $_POST["project_title"];
     $max_part = intval($_POST["max_part"]);
-	$org_name = $_POST["project_org_name"];
-	$org_email = $_POST["project_org_email"];
+    $organisation = $_POST["project_org_name"];
+	$org_name = $_POST["project_org_personal_name"];
+	$org_email = $_POST["project_org_personal_email"];
 	$pdf = $_FILES["project_pdf"];
 	$pdf_path = "";
 
@@ -142,7 +143,8 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 			}
 			
 		}
-	}else{
+	}
+    else{
 		http_response_code(403);
 		echo "Faili üleslaadimisel tekkis viga!";
 		return 0;
@@ -152,15 +154,16 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?)'); 
-		$query->execute(array($pdf_path, $title, $org_email, $org_name, 0, $editkey, $max_part));
+		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, organisation, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?)'); 
+		$query->execute(array($pdf_path, $title, $organisation, $org_email, $org_name, 0, $editkey, $max_part));
 		$conn = null;
         
         $success = sendPostNotificationMail($org_email, $title);
         if($success){
             http_response_code(200);
             echo $response;
-        }else{
+        }
+        else{
             http_response_code(403);
             echo "Tekkis viga! Vea kirjeldus: ".$e->getMessage();
         }
