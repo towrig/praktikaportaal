@@ -27,15 +27,10 @@ $dbpassword = $CFG->dbpasswd;
 function sendMail($key, $target, $action){ //add $target
 	$form_success = true;
 	$to = $target; //replace with $target
-	$from = 'admin@praktika.ut.ee';
-	if($action == "remove"){
-		$subject = 'Eemaldamislink';
-		$message = 'Vajuta sellele lingile et eemaldada oma postitus praktikaportaalis: <a href="http://praktika.ut.ee/validator?key='.$key.'&action=remove&t=0">kliki siia!</a>';
-	}else{
-		$subject = 'Valideerimislink';
-		$message = 'Vajuta sellele lingile et aktiveerida oma postitus praktikaportaalis: <a href="http://praktika.ut.ee/validator?key='.$key.'&action=add&t=0">kliki siia!</a>';
-	}
-	//add additional headers if required (X-Mailer etc.)
+	$from = 'noreply@praktika.ut.ee';
+    $subject = 'Valideerimislink';
+    $message = 'Tere!<br><br>Olete lisanud praktika keskkonda oma profiili. Palun kinnitage oma profiili lisamine <a href="http://praktika.ut.ee/validator?key='.$key.'&action=add&t=0">siin</a>. Pärast kinnitamist läheb profiil kodulehele üles. Profiili kuvatakse kodulehel kuus kuud. Kui soovite profiili varem kodulehelt eemaldada, siis kirjutage praktika@ut.ee<br><br>Heade soovidega<br>praktika.ut.ee';
+    //add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
 	mail($to, $subject, $message, $headers) || print_r(error_get_last());

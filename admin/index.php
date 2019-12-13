@@ -31,6 +31,7 @@
 	    	$entity["end_date"] = $row["end_date"];
 	    	$entity["id"] = $row["id"];
 	    	$entity["title"] = $row["title"];
+            $entity["org_email"] = $row["org_email"];
 	    	$entity["edit_key"] = $row["edit_key"];
             $entity["isactivated"] = $row["isactivated"];
 	        $projects[$i] = $entity;
@@ -85,7 +86,7 @@
                                             <p class="card-text">Loodud: '.$p["start_date"].'<br> Reg. lõpp: '.$p["end_date"].'<br></p>
                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
                                                 <a class="btn btn-sm btn-success" href="../team/viewproject?c='.$p["id"].'&e='.$p["edit_key"].'">Mine muutma</a>
-                                                '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-editkey='.$p["edit_key"].'>Aktiveeri!</a>').'
+                                                '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
                                             </div>
                                         </div>
                                     </div>
@@ -133,8 +134,12 @@
         
         function activateProject(e) {
             var key = $(e.currentTarget).data("editkey");
+            var title = $(e.currentTarget).data("title");
+            var email = $(e.currentTarget).data("email");
             let formData = new FormData();
             formData.append("edit_key", key);
+            formData.append("title", title);
+            formData.append("email", email);
             formData.append("activateProject", 1);
             $.ajax({
                 type: 'POST',

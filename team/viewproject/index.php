@@ -274,7 +274,7 @@ try {
                     data: formData
                 }).done(function(response) {
                     console.log(response);
-                    form.after('<div class="alert alert-success alert-dismissible fade show">Edukas registreerimine! Emailile tuleb teavitus vastuvõtmise kohta.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                    form.after('<div class="alert alert-success alert-dismissible fade show">Projektiga liitumise kinnitus tuleb Teile emaili peale mõne päeva jooksul. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
                     form.css('display', 'none');
                 }).fail(function(response) {
                     console.log(response);
