@@ -45,10 +45,10 @@ img {
     left: calc(100% - 240px);
 }
 
-.pt-5, .py-5 {
+/*.pt-5, .py-5 {
     padding-top: 0rem!important;
 }
-
+*/
 .card {
     /*
     background: linear-gradient(to right, #faa41a 40%, rgba(255,255,255,.6)), url(../img/portfolio/thumbnails/1.jpg);
@@ -123,10 +123,6 @@ body{
 small {
     border-bottom: 1px solid #f5f5f5;
     width:100%;
-}
-
-#profiles .list-group-item{
-    color:#555!important;
 }
 
 li.list-group-item[aria-expanded=true] {
@@ -239,9 +235,7 @@ li.list-group-item:hover {
 }
 
 form {
-    font-family: "Merriweather Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    font-weight: 700;
-    color: #212529;
+
 }
 
 .sidenav a {
@@ -274,12 +268,12 @@ form {
   padding: 0px;
 }
 
-.toggleMenu {
+/*.toggleMenu {
     display: block;
   cursor: pointer;
   text-align: center;
     background: #f5f5f5;
-}
+}*/
 
 .btn-form {
     margin: 20px 0px 0px 0px;
@@ -326,24 +320,9 @@ form {
     margin-left: 0;
 }
 
-
-.container.work,section#about .container {
-    background: rgba(255,255,255,.98);
-}
-
-section#about .container {
-    padding-top:40px;
-    margin-top:-30px;
-}
-
-.practice section#about .container {
-    padding-top: 40px;
-    margin-top: -103px;
-    padding: 40px 40px 40px 40px;
-}
-
 div#ut-logo {
-    background-image: url(../img/ut-logo-et-blue.png);
+    background: url(../img/icons.png)!important;
+    background-position: -28px -15px!important;
     height: 40px;
     background-size: 100%;
     background-position: center;
@@ -357,10 +336,6 @@ div#ut-logo {
     opacity: 1;
 }
 
-.container.work {
-    margin-top: -130px
-}
-
 #page-content {
     transition: all .2s ease-in-out;
     margin-top: -60px;
@@ -368,11 +343,6 @@ div#ut-logo {
 
 section.page-section.bg-primary {
     margin: -16px;
-}
-#profiles .container {
-    background: white;
-    padding-top: 20px;
-    margin-top: -120px;
 }
 
 .btn-group.btn-group-md {
@@ -735,12 +705,12 @@ nav#mainNav {
 .card-group .card {
     border: none;
 }
-
+/*
 .container-fluid .col-md-4 {
     padding: 100px 10px 100px 10px;
     background-color: rgba(221,221,221,1);
     background-position: center center;
-}
+}*/
 
 .card {
     width: 90%;
@@ -750,11 +720,11 @@ nav#mainNav {
 html {
   scroll-behavior: smooth;
 }
-
+/*
 .container-fluid .col-md-4:nth-child(odd) {
     background: #fff;
-}
-
+}*/
+/*
 .container-fluid .col-md-4 div {
     //transform: skew(33deg);
 }
@@ -765,7 +735,7 @@ html {
     background-position: center center;
     //transform: skew(-33deg, 0deg);
 }
-
+*/
 
 /*.divider-content:before {
     margin-left: -50%;
@@ -938,10 +908,6 @@ i.fa {
     color: #2c5696;
 }
 
-#profiles p.card-text {
-    font-size: 1rem;
-}
-
 label {
     margin-top: .5rem;
 }
@@ -956,21 +922,20 @@ label {
 .practice .card {
     border:none;
 }
-.practice .card-body img{
-	height: 80px !important;
-    width: 80px;
-}
+
 .flip-div{
 	cursor: pointer;
 }
-.flip-div:hover .back,.flip-div.hover .back {
+/*.flip-div:hover .back,.flip-div.hover .back {*/
+.flip-div.hover .back {
     -webkit-transform: rotateY(0deg);
     -moz-transform: rotateY(0deg);
     -o-transform: rotateY(0deg);
     -ms-transform: rotateY(0deg);
     transform: rotateY(0deg);
 }
-.flip-div:hover .front,.flip-div.hover .front {
+/*.flip-div:hover .front,.flip-div.hover .front {*/
+.flip-div.hover .front {*/
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
     -o-transform: rotateY(180deg);
@@ -997,7 +962,7 @@ label {
     
 }
 .front .card, .back .card {
-    min-height: 260px;
+    min-height: 400px;
 }
 .back{
     position: absolute;
@@ -1040,15 +1005,15 @@ label {
     height: calc(2.25rem + 2px);
     border-radius: 0;
 }
-
+/*
 .toggleMenu  {
     min-width: 50%;
     margin: auto;
     max-width: 200px;
-}
+}*/
 
 .card {
-    background: rgba(255,255,255,0.9);
+    background: transparent;
     border: none;
 }
 
@@ -1057,14 +1022,6 @@ small {
 }
 
 /* tootaja/kuulutus */
-
-.h4, h4 {
-    font-size: 1rem;
-}
-
-.h5, h5 {
-    font-size: 0.83em;
-}
 
 .org-logo-container {
     margin-bottom: 20px;
@@ -1084,4 +1041,588 @@ p.align-self-center {
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     font-family: "Rubik";
+}
+
+
+/* New styles */
+/* PS! DELETE OLD STYLES */
+/* -------------------------------------------------- */
+.masthead .card {
+  transform:rotate(30deg);
+  overflow: hidden;
+}
+
+.masthead .card .card-body{
+    transform: rotate(-30deg);
+}
+
+.masthead .card .card-footer {
+    transform: rotate(-30deg);
+    width: 140%;
+    background: #e94700;
+    text-align: center;
+    height: 146px;
+    margin: 15px 0px -40px -11px;
+}
+
+.masthead .card .card-body span {
+  display: block;
+}
+.masthead .card .card-body span:nth-child(1) {margin-left: 0;}
+.masthead .card .card-body span:nth-child(2) {margin-left: -1rem;}
+.masthead .card .card-body span:nth-child(3) {margin-left: -2rem;}
+.masthead .card .card-body span:nth-child(4) {margin-left: -3rem;}
+.masthead .card .card-body span:nth-child(5) {margin-left: -4rem;}
+.masthead .card .card-body span:nth-child(6) {margin-left: -5rem;}
+.masthead .card .card-body span:nth-child(7) {margin-left: -6rem;}
+.masthead .card .card-body span:nth-child(8) {margin-left: -7rem;}
+.masthead .card .card-body span:nth-child(9) {margin-left: -8rem;}
+.masthead .card .card-body span:nth-child(10) {margin-left: -9rem;}
+
+.masthead .card {
+    background: #01499d;
+    color: white;
+    text-align:left;
+}
+
+.card.m-5.second {
+    top: -90px;
+    left: 60px;
+}
+
+.card.m-5.third {
+    top: 120px;
+    left: -60px;
+}
+
+h5.card-title.text-uppercase {
+    color: #e94700;
+    font-weight:600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-left: 1rem;  
+}
+.third h5.card-title.text-uppercase {
+    margin-left: 1rem;
+    text-indent: 1rem;
+}
+p.card-text.text-muted {
+    color:white!important;
+    font-weight:100;
+}
+
+i.fa-4x.mb-4 {
+    color:white!important;
+    margin-top:20px;
+    margin-left: 50%;
+}
+
+.masthead .card button.btn.btn-sm.btn-primary {
+    background: transparent;
+    font-weight: 600;
+    font-size: 1rem;
+    border-bottom: 1px solid white;
+    width: 60%;
+}
+/* Title */
+h2.mb-5 {
+    color: #01499d;
+    font-size: 5rem;
+    font-weight: 100;
+}
+h2.mb-5 span {
+    font-weight: 500;
+}
+
+header.masthead {
+  background: #f1f1f1;
+}
+
+small {
+    font-size: 18px;
+    background: transparent;
+    padding: 0;
+    font-weight: 600;
+    color: white;
+}
+
+.bg-container {
+    background: linear-gradient(to bottom, #e94700de 0% , #e94700de 100% );
+    position: absolute;
+    width: 400px;
+    height: 117vh;
+    transform: rotate(30deg);
+    z-index: 0;
+    top: -92px;
+    left: 30%;
+    overflow: hidden;
+}
+.img-cont {
+    background: linear-gradient(to bottom, #e94700de 0% , #e94700de 100% ), url(../img/taust.jpg);
+    transform: rotate(-30deg);
+    background-size: 3930%,200%;
+    background-attachment: fixed,fixed;
+    height: 246%;
+    width: 499%;
+    background-position: left;
+    top: -1645px;
+    lefT: -805px;
+    margin-top: 829px;
+    position: relative;
+  }
+
+div#ut-logo {
+    background-image: url(../img/logo-white.jpg);
+    height: 70px;
+    /*background-size: 100%;
+    background-position: center;
+    background-size: unset;
+    background-repeat: no-repeat;*/
+    width: 321px;
+    opacity: 1;
+    margin-left: -20px;
+    margin-top: 2rem;
+    transition: .5s all ease-in-out;
+}
+
+
+@media (min-width: 992px) {
+  header.masthead {
+      padding-top: 12rem;
+
+  }
+  
+  #mainNav.navbar-scrolled {
+    background-color: #f1f1f1;
+  }
+  #mainNav.navbar-scrolled #ut-logo{
+    background-color: #f1f1f1;
+    margin-top:0;
+  }
+}
+
+body, .navbar {
+  background: #f1f1f1;
+}
+
+i.fas.fa-user.fa-4x.mb-4 {
+    background: url(../img/first.jpg) no-repeat;
+    width: 62px;
+    height: 76px;
+    background-size: 132%;
+}
+
+i.fas.fa-users.fa-4x.mb-4 {
+    background: url(../img/second.jpg) no-repeat;
+    width: 80px;
+    height: 76px;
+    background-size: 100%;
+}
+
+i.fas.fa-city.fa-4x.mb-4 {
+    background: url(../img/third.jpg) no-repeat;
+    width: 86px;
+    height: 76px;
+    background-size: 100%;
+}
+
+.masthead i.fas:before {
+    content:"";
+}
+
+a.nav-link {
+    border-bottom: 2px solid orange;
+    text-align: center!important;
+    padding: 10px 14px!important;
+    color: #666565!important;
+    margin: 0;
+    font-family: "Rubik"!important;
+    font-weight: 400!important;
+    margin: 0 1rem;
+}
+
+a.nav-link.lang-switch {
+  color: #01499d!important;
+  border:none;
+  font-weight: 600!important;
+  text-align: right;
+}
+
+#scrollTop {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 40000;
+}
+
+#why h2 span,#unique h2 span {
+    display: block;
+    font-weight: 600;
+}
+
+#why h2,#unique h2 {
+    font-size: 4rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #da3400;
+}
+
+div#why-vorgustik .col{
+    background: #01499d;
+}
+
+div#why-konkurents .col{
+    background: #e94700;
+}
+
+div#why-areng .col{
+    background: #46444a;
+}
+
+#why h4 {
+    font-weight: 100;
+    font-size: 3rem;
+    text-align: left;
+}
+
+#why img {
+  max-width: 150px;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+#why small, #unique small {
+    max-width: 33.33%!important;
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-weight: 100;
+    color: #46444a;
+    margin-bottom: 3rem;
+    line-height: 2rem;
+}
+
+div#why {
+    margin-top: 10rem;
+}
+
+/* activities */
+#activities h3, #stats h3 {
+  color: #01499d;
+}
+#activities h5, #stats h5 {
+  color: #1b1c21;
+  font-weight: 600;
+}
+
+hr.divider.my-5 {
+    max-width: 30rem;
+    border-width: 0.1rem;
+    border-color: #f4623a;
+}
+.unique-box {
+  height: min-content;
+}
+.unique-box .col {
+    /* height: max-content; */
+    min-height: 390px;
+}
+.unique-box h3 {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: white;
+  text-align: left;
+}
+
+.unique-box img {
+  width:100%;
+}
+
+.unique-box span {
+  color: white;
+  text-align: left;
+  font-weight: 100;
+}
+#unique-kaedkulge .col {
+  background: #01499d;
+}
+#unique-interditsiplinaarne .col {
+  margin-top: 3rem;
+  background: #e94700;
+}
+#unique-tulevikuoskused .col {
+  margin-top: 6rem;
+  background: #01499d;
+}
+#unique-paindlik .col {
+  margin-top: 9rem;
+  background: #46444a;
+}
+.unique-box .col {
+    position: relative;
+}
+.unique-box .col span {
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   padding: 1rem;
+}
+
+footer .contact-us {
+  color: #01499d;
+  line-height: 2.4rem;
+  font-weight: 600;
+  font-size: 2.1rem;
+}
+footer .contact-us-info {
+  font-weight: 100;
+}
+footer a {
+  color: #f4623a;
+  font-weight: 600;
+}
+footer .socialmedia {
+  float: right;
+}
+footer .copyright {
+  font-weight: 600;
+}
+footer .socialmedia {
+  margin-top: -1.5rem;
+}
+footer .socialmedia i {
+  margin-left:.5rem;
+}
+
+footer .footer-bottom {
+  margin-top: 6rem;
+}
+
+a.scrollUp.text-uppercase:before {
+  content: "<";
+  margin-right: 1rem;
+  font-size: 29px;
+  position: relative;
+  top: 5px;
+  font-weight: 100;
+}
+
+a.scrollUp.text-uppercase {
+  font-weight:600;
+  color:#3d3d3d;
+  text-decoration: none;
+  transform: rotate(270deg);
+}
+
+#scrollTop {
+    position: fixed;
+    bottom: 82px;
+    right: -35px;
+    z-index: 40000;
+    transform: rotate(270deg);
+}
+
+#stats i , #masthead i, #why i, #unique i {
+    background: url(http://192.168.56.101/praktikaveeb/img/icons.png);
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin: auto;
+}
+
+#stats i#stat-praktikant {
+    background-position: -25px -360px;
+}
+
+#stats i#stat-projekt {
+    background-position: -110px -360px;
+}
+
+#stats i#stat-praktikapakkumine {
+    background-position: -220px -360px;
+}
+
+#stats i#stat-organisatsioon {
+    background-position: -314px -360px;
+}
+#masthead i {
+  margin-left: 2rem;
+}
+
+
+#masthead i#masthead-yliopilane {
+    background-position: 0px -100px;
+}
+
+#masthead i#masthead-projekt {
+    background-position: -80px -100px;
+}
+
+#masthead i#masthead-praktikapakkumine {
+    background-position: -180px -100px;
+}
+#why i {
+  height: 150px;
+  width: 130px;
+  margin: 0;
+}
+#why i#why--vorgustik {
+  background-position: -26px -215px;
+}
+#why i#why--konkurents {
+  background-position: -302px -215px;
+}
+#why i#why--areng {
+  background-position: -168px -215px;
+}
+#unique i {
+  height: 130px;
+  width: 210px;
+  margin: 0px;
+  display: block;
+}
+#unique i#unique-arrow {
+  background-position: -24px -476px;
+}
+
+body.practice .card-body{
+  padding:0;
+}
+
+#about img {
+    filter: saturate(0);
+}
+
+.toggleMenu {
+    display: block;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    border-bottom: 2px solid;
+    padding: 0!important;
+    padding-bottom: 1rem!important;
+    color: #01499d;
+}
+
+body.practice .page-section h5 {
+  color: #01499d;
+}
+
+section h1 {
+    font-size: 4.5rem;
+    color: #f4623a;
+}
+
+.back {
+    outline: 2.4rem solid #f4623a;
+    background: #f4623a;
+    color: white;
+    max-height: 350px;
+    //overflow: auto;
+}
+
+.page-section {
+    padding-bottom: 2rem;
+}
+
+i.arrow-front {
+  background-position: 100px -200px;
+}
+
+.practice section .card i {
+    background: url(http://192.168.56.101/praktikaveeb/img/icons.png);
+    height: 50px;
+    width: 85%;
+    display: block;
+    margin: auto;
+    margin-left: 0px;
+    position: absolute;
+    bottom: 0;
+}
+
+i.arrow-front {
+    background-position: -32px -593px!important;
+}
+/* Raise it to same level as flipped card */
+.front i.arrow-front {
+    bottom: 2.4rem!important;
+}
+
+.back i.arrow-front {
+    filter: brightness(10);
+}
+
+.back .links a {
+    color: #00489d;
+    text-decoration: none !important;
+    font-weight: 600;
+    display: block;
+}
+
+.front .card-body {
+  overflow: auto;
+  max-height: 165px;
+}
+
+.back .card {
+    min-height: calc(400px - 2.4rem);
+}
+
+.links {
+    position: absolute;
+    bottom: calc(0px + 2.4rem);
+}
+
+.back .card-body {
+    max-height: 270px!important;
+    overflow: auto;
+}
+
+body.project .card {
+    background: white;
+  min-height: 250px;
+  outline: 1rem solid white;
+}
+
+body.project .card h6 {
+  color: #00489d;
+}
+
+body.project .card .card-footer {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0 -15px;
+    position: absolute;
+    bottom: 0;
+}
+
+body.practiceoffers .col-lg-2.work-banner-crop {
+    padding-bottom: 80px!important;
+    overflow: hidden;
+    height: 0;
+}
+
+p {
+    font-size: .9rem;
+}
+
+b,strong {
+  font-weight: bold;
+}
+
+body.practiceoffers .apply a {
+    border-bottom: 2px solid;
+    width: 100%;
+    display: block;
+}
+body.practiceoffers .apply p {
+  position: absolute;
+  bottom: 0;
+  left: calc(100% - 150px);
+}
+
+body.practiceoffers hr {
+  border-top: 2px solid #00489d;
 }
