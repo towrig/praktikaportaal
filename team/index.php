@@ -15,8 +15,8 @@
                     <p class="font-weight-light">
                       Lisa oma projektiidee ja erinevate erialade üliõpilased töötavad koos, et viia ellu Sinu jaoks oluline ja üliõpilastele väljakutset pakkuv projekt. </p>
                     <p class="font-weight-light">
-                        Projektitaotluste esitamise viimane tähtaeg on <b>02.03</b>!
-                        <br>Üliõpilased saavad projektidega liituda <b>09.-15.03</b>.
+                        Projektitaotluste esitamise viimane tähtaeg on <b>02.03!</b>
+                        <br>Üliõpilased saavad projektidega liituda <b>09.-15.03.</b>
                     </p>
                     <a href="#" class="text-uppercase font-weight-bold">Vaata ajakava siit!</a>
                   </div> <!-- .col-->
@@ -118,30 +118,25 @@
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
 
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLongTitle">Esita projekt</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                
                 <div class="modal-body">
+                 
                     <div class="row">
                         <div class="col-lg-12">
                             <form method="POST" action="viewproject/project_api.php" enctype="multipart/form-data" id="project_submission">
                                 <nav class="nav nav-pills flex-column flex-sm-row " id="pills-tab" role="tablist">
-                                  <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">(1) <span>Lae alla projekti taotlus</span></a>
-                                  <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold"  id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">(2) <span>Täida vormi andmed</span></a>
-                                  <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold"  id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">(3) <span>Lae ülesse täidetud projekti taotlus ning avalda</span></a>
+                                  <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span>Projektivorm</span></a>
+                                  <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold"  id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span>Esita projekt</span></a>
                                 </nav>
                                 <div class="tab-content" id="pills-tabContent">
                                   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">                                <div class="form-group">
-                                    <label>Projekti esitamiseks lae alla ja täida <a href="../userdata/Projektipraktika_taotlusvorm.docx" download>projektivorm.</a></label>
-                                    <iframe src="../userdata/projekti-alus.pdf" width="100%" height="500px"></iframe>
+                                    <h4 class="text-center my-3"><!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a href="../userdata/Projektipraktika_taotlusvorm.docx" download>siia.</a></label></h4>
+                                    <iframe src="../userdata/projekti-alus.pdf#toolbar=0" width="100%" height="500px"></iframe>
                                 </div>
                                   </div>
                                   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                    <div class="form-group">
-                                      <label>Projekti pealkiri:<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Pealkirja maksimaalne pikkus 85 tähemärki">?</span></label>
+                                    <div class="form-group mt-3">
+                                      <label>Projekti pealkiri:</label>
                                           <input type="text" name="project_title" class="form-control" maxlength="85">
                                       </div>
 
@@ -162,25 +157,16 @@
                                           <label>Meeskonna suurus (max 10):</label>
                                           <input type="text" name="max_part" class="form-control">
                                       </div>
-                                  </div>
-                                  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                                  
-                                    <div class="form-group">
-                                        <label>Lae täidetud projektivorm PDF formaadis:</label>
-                                        <input type="file" name="project_pdf" id="project_pdf">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="button" name="submit-form" class="btn btn-success btn-md" onclick="ajaxSubmit()" value="Esita">
-                                    </div>
+                                      <div class="form-group">
+                                          <label>Lae täidetud projektivorm PDF formaadis:</label>
+                                          <input type="file" name="project_pdf" id="project_pdf">
+                                      </div>
+                                      <div class="form-group mt-3">
+                                          <input type="button" name="submit-form" class="text-center text-uppercase btn" onclick="ajaxSubmit()" value="Esita">
+                                      </div>
                                   </div>
                                 </div>
-                                
-                                
-                                
-
                             </form>
-                          
-
                         </div>
                     </div>
                 </div>

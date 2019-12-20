@@ -25,7 +25,7 @@
                     <a href="#" class="text-uppercase font-weight-bold">Loe rohkem siit!</a>
                   </div> 
                     <div class="col-lg-2">
-                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Lisa profiil<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span>--></span>
+                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Lisa profiil</span>
                   </div>
                   <div class="col-lg-12">
                     <h5 class="text-uppercase text-center font-weight-bold mt-3">Liitunud</h5>
@@ -269,25 +269,12 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
 
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Lisa profiil</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
                 <div class="modal-body">
                     <div class="container">
 
                         <form class="row <?php if ($form_success){ echo "hidden"; }?>" action="prax_api.php" method="post" enctype="multipart/form-data" id="form_student">
 
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <img src="../userdata/blank_profile_pic.png" style="width:100px; height:100px;border-radius: 50px;" id="profileImg">
-                                    <label for="pilt">Pilt</label>
-                                    <input type="file" class="form-control-file <?php if(!empty($_POST) && !$removeing) { if(!$pic_success) { echo "is-invalid"; } } ?>" id="student_pilt" name="pilt">
-                                    <div class='invalid-feedback'>Sisesta pilt!</div>
-                                </div>
-                            </div>
+                            
 
                             <div class="col-lg-8">
 
@@ -297,18 +284,26 @@
                                     <div class='invalid-feedback'>Sisesta oma nimi!</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Kontakt ehk Email*</label>
+                                    <label for="email">E-mail*</label>
                                     <input type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email" <?php echo "value='".htmlspecialchars($email)."'";?>>
                                 </div>
-
-
-                            </div>
-
-                            <div class="col-lg-12">
-                                 <div class="form-group">
+                                <div class="form-group">
                                     <label for="work">Eriala*</label>
                                     <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major" <?php echo "value='".htmlspecialchars($major)."'";?>>
                                 </div>
+
+                            </div>
+                          
+                          <div class="col-lg-4">
+                                <div class="form-group">
+                                    <img src="../userdata/blank_profile_pic.png" id="profileImg">
+                                    <label for="pilt">Pilt</label>
+                                    <input type="file" class="form-control-file <?php if(!empty($_POST) && !$removeing) { if(!$pic_success) { echo "is-invalid"; } } ?>" id="student_pilt" name="pilt">
+                                    <div class='invalid-feedback'>Sisesta pilt!</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="work">Instituut*</label>
                                     <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute" <?php echo "value='".htmlspecialchars($institute)."'";?>>
@@ -340,11 +335,8 @@
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-success btn-lg js-ajax btn-form" data-value="add">Lae üles!</button>
-                                <button type="button" class="btn btn- btn-lg js-scroll-trigger btn-form" data-value="remove">Soovin end andmebaasist eemaldada</button>
-
-
-                            </div>
+                                <input type="button" class="mt-3 text-center text-uppercase btn js-ajax" data-value="add" value="Lae üles!">
+                              </div>
 
                         </form>
 

@@ -1095,6 +1095,24 @@ p.align-self-center {
     left: -60px;
 }
 
+@media (max-width:992px) {
+  .masthead .card, .masthead .card .card-body, .masthead .card .card-footer {
+    transform:rotate(0deg);
+  }
+  .masthead .card .card-body span {
+    margin: auto!important;
+    display:inline!important;
+  }
+  .masthead .second, .masthead .third {
+    top: unset!important;
+    left: unset!important;
+  }
+  .masthead .card-footer{ 
+    width: 100%!important;
+    height: unset;
+  }
+}
+
 h5.card-title.text-uppercase {
     color: #e94700;
     font-weight:600;
@@ -1131,7 +1149,7 @@ h2.mb-5 {
     font-weight: 100;
 }
 h2.mb-5 span {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 header.masthead {
@@ -1231,10 +1249,10 @@ i.fas.fa-city.fa-4x.mb-4 {
 }
 
 a.nav-link {
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid #f4623a;
     text-align: center!important;
     padding: 10px 14px!important;
-    color: #666565!important;
+    color: #000!important;
     margin: 0;
     font-family: "Rubik"!important;
     font-weight: 400!important;
@@ -1625,4 +1643,68 @@ body.practiceoffers .apply p {
 
 body.practiceoffers hr {
   border-top: 2px solid #00489d;
+}
+
+body.project .modal .nav-pills .nav-link.active, body.project .modal .nav-pills .show>.nav-link {
+    color: #fff!important;
+    background-color: #ffffff!important;
+    font-weight: 600!important;
+    border-bottom: 2px solid #01499d!important;
+    border-radius: 0!important;
+    color: #01499d!important;
+    background: url(http://192.168.56.101/praktikaveeb/img/icons.png);
+  background-position: 100px -200px;
+}
+
+body.project .modal a.nav-link {
+    border-bottom: 2px solid #f4623a!important;
+    text-align: center!important;
+    padding: 10px 14px!important;
+    color: #666565!important;
+    margin: 0!important;
+    font-family: "Rubik"!important;
+    font-weight: 400!important;
+    margin: 0 1rem!important;
+    color: #f4623a!important;
+    font-weight: 600!important;
+}
+
+body.project .modal a.nav-link {
+    border-bottom: 2px solid #c1c1c1!important;
+    text-align: center!important;
+    padding: 10px 14px!important;
+    color: #b3b3b3!important;
+    margin: 0!important;
+    font-family: "Rubik"!important;
+    font-weight: 400!important;
+    margin: 0 1rem!important;
+    /* color: #f4623a!important; */
+    font-weight: 500!important;
+}
+
+input#project_pdf {
+    display: block;
+}
+
+input[type=button] {
+    color: #fff;
+    background-color: #f4623a;
+    border-color: #ffffff;
+    font-weight: 600;
+    font-family: "Rubik"!important;
+}
+
+@media (min-width: 1200px)
+.container {
+    max-width: 1350px;
+}
+}
+
+body.practice .modal label {
+    font-weight: 300!important;
+    color: #000!important;
+}
+
+body.practice .modal img#profileImg {
+    max-width: 196px;
 }

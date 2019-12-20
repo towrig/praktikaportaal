@@ -265,27 +265,32 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
 <body id="page-top">
 
     <?php echo loadHTML("../frags/navbar.html"); ?>
-
+  <div id="main"></div>
+  <div id="main"></div>
+  <div id="main"></div>
+  <div id="main"></div>
+  <div id="main"></div>
     <!-- work.php -->
     <section>
         <form class="container work" target="_self" method="post" enctype="multipart/form-data">
             <!-- start banner -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="work-banner" id="bannerTag" style="<?php if(!empty($_POST) || $edit_success){ if ($pilt != "") {echo "background-image: url(../userdata/pictures/".$pilt.");";} } ?>"></div>
+                  <!--
+                    <div class="work-banner" id="bannerTag" style="<?php if(!empty($_POST) || $edit_success){ if ($pilt != "") {echo "background-image: url(../userdata/pictures/".$pilt.");";} } ?>"></div>-->
                 </div> <!-- image -->
                 <div class="col-lg-12 col-md-12">
-                    <label for="pilt">Banner*:</label>
+                    <!--<label for="pilt">Banner*:</label>
                     <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$pic_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt">
-                    <div class='invalid-feedback'>Sisesta banner!</div>
+                    <div class='invalid-feedback'>Sisesta banner!</div>-->
                 </div>
 
                 <div class="col-lg-12 col-md-12 type_container">
-                    <label for="type">Kuulutuse tüüp*</label>
+                    <!--<label for="type">Kuulutuse tüüp*</label>
                     <select class="form-control" id="type" name="type">
                         <option>Praktika</option>
                         <option>Töökoht</option>
-                    </select>
+                    </select>-->
                 </div>
             </div> <!-- end -->
             <!-- start title-share -->
@@ -302,15 +307,15 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 work-aside-place">
-                                <h5>Töökoha asukoht*</h5>
-                                <p>Töö asub aadressil: <br>
+                                <h5>Asukoht</h5>
+                                <p>
                                     <span><input type="text" class="form-control <?php if(!empty($_POST) || $edit_success) { if($location != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="location" name="location" <?php if (!empty($_POST) || $edit_success) echo "value='".htmlspecialchars($location)."'";?>></span>
                                 </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 work-aside-place">
-                                <h5>Kandideerimise lõpptähtaeg*</h5>
+                                <h5>Kandideerimise tähtaeg*</h5>
                                 <input type="text" id="datepicker" name="end_date">
                             </div>
                         </div>
