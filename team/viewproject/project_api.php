@@ -1,5 +1,4 @@
 <?php
-
 // Load config.php
 $CFG = new stdClass();
 // Two level deep
@@ -32,15 +31,15 @@ function sendNotificationMail($name, $p_id, $project_title, $project_edit_key, $
 }
 
 //Mail to participant (accepted/not accepted)
-function sendMail($target, $data, $is_accepted){ //add $target
+function sendMail($target, $heading, $is_accepted){ //add $target
 	$form_success = true;
 	$from = 'noreply@praktika.ut.ee';
 	$subject = 'Registreerimine projekti';
-	$message = 'Tervitus!';
+	$message = '';
 	if($is_accepted){
-		$message .= 'Tere!<br><br>Teie liitumine projektiga “Projekti pealkiri” on heaks kiidetud. ÕISi lisatakse projektipraktika automaatselt projekti lõpuseminari ajaks.<br><br>Heade soovidega<br>praktika.ut.ee';
+		$message .= 'Tere!<br><br>Teie liitumine projektiga “'.$heading.'” on heaks kiidetud. ÕISi lisatakse projektipraktika automaatselt projekti lõpuseminari ajaks.<br><br>Heade soovidega<br>praktika.ut.ee';
 	}else{
-		$message .= 'Tere!<br><br>Teie liitumine projektiga “projekti pealkiri” on tagasi lükatud. Liitumine lükatakse tagasi enamasti kahel põhjusel:<br>- Projektis on teie eriala tudengeid liiga palju<br>- Projekt on täis<br>Soovitame liituda mõne teise projektiga.<br><br>Heade soovidega<br>praktika.ut.ee';
+		$message .= 'Tere!<br><br>Teie liitumine projektiga “'.$heading.'” on tagasi lükatud. Liitumine lükatakse tagasi enamasti kahel põhjusel:<br>- Projektis on teie eriala tudengeid liiga palju<br>- Projekt on täis<br>Soovitame liituda mõne teise projektiga.<br><br>Heade soovidega<br>praktika.ut.ee';
 	}
     $message = wordwrap($message, 70, "\r\n");
 	//add additional headers if required (X-Mailer etc.)
@@ -154,7 +153,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, organisation, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?)'); 
+		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, organisation, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?,?)'); 
 		$query->execute(array($pdf_path, $title, $organisation, $org_email, $org_name, 0, $editkey, $max_part));
 		$conn = null;
         
