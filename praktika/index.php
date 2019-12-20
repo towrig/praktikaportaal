@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php $title="Üliõpilased"; include_once './../templates/header.php';?>
+<?php $title="Üliõpilane"; include_once './../templates/header.php';?>
 
 <body id="page-top" class="practice">
 
@@ -10,23 +9,27 @@
     <div id="main"></div>
 
     <div id="page-content">
-        <section class="page-section bg-primary">
+      
+        <section class="page-section">
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <hr class="divider light my-4">
-                        <h2 class="text-white text-uppercase font-weight-bold mt-0">Üliõpilane</h2>
-                        <p class="text-white font-weight-light mb-5">
-                            Tutvu praktika- ja tööpakkumistega või liitu DELTAki projektiga!
-                            Sul on projektiidee? Esita see juba täna ja koos leiame Sulle meeskonna ja juhendaja!
-                            Loe rohkem DELTAki projektist siit (tuleb link kuhugi)!
-                        </p>
-                        <hr class="divider light my-4">
-                    </div> <!-- .col-->
-                    <div class="col-md-6 d-flex flex-column align-self-center">
-                    <div>
-                        <span id="formToggler" class="toggleMenu btn btn-md" onclick="openModal()">Lisa profiil!<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span></span>
-                    </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Üliõpilane</h1>
+                  </div>
+                  <div class="col-lg-4">
+                    <p class="font-weight-light">
+                        Tutvu praktika- ja tööpakkumistega või liitu DELTAki projektiga!
+                        Sul on projektiidee? Esita see juba täna ja koos leiame Sulle meeskonna ja juhendaja!
+                        Loe rohkem DELTAki projektist siit (tuleb link kuhugi)!
+                    </p>
+                    <a href="#" class="text-uppercase font-weight-bold">Loe rohkem siit!</a>
+                  </div> 
+                    <div class="col-lg-2">
+                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Lisa profiil<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span>--></span>
+                  </div>
+                  <div class="col-lg-12">
+                    <h5 class="text-uppercase text-center font-weight-bold mt-3">Liitunud</h5>
+                  </div>
                         
                         <?php
 
@@ -107,7 +110,7 @@
 
                                 </div>
                             </form>-->
-                        </div>
+                        
 
                 </div> <!-- .row -->
             </div> <!-- .container -->
@@ -117,15 +120,36 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12"></div>
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12">
                         <div class="row">
                             
-
-
-                        </div>
+                      </div>
 
                         <div class="row">
                             <?php
+                          
+                          function substringwords($text, $maxchar = 40, $end = "..."){
+                            if (strlen($text) > $maxchar || $text = '') {
+                              $words = preg_split('/\s/', $text);
+                              $output = '';
+                              $i = 0;
+                              while (1) {
+                                $length = strlen($output) + strlen($words[$i]);
+                                if ($length > $maxchar) {
+                                  break;
+                                }
+                                else {
+                                  $output .= " " . $words[$i];
+                                  ++$i;
+                                }
+                              }
+                              $output .= " " . $end;
+                            }
+                            else {
+                              $output = $text;
+                            }
+                            return $output;
+                          }
                             try {
                                 $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
                                 // set the PDO error mode to exception
@@ -157,9 +181,9 @@
                                 $data = $query -> fetchAll();
                                 foreach($data as $row){
 
-                                    //currently unused cols: 
-                                    $name = $row["name"];
-                                    $degree = $row["major"]." | ".$row["institute"];
+                                    // Everything on new lines
+                                    $name = str_replace(" ", "<br>", $row["name"]);
+                                    $degree = $row["major"]."<br>".$row["institute"];
 
                                     $pic = "../userdata/pictures/".$row["picturepath"]; //https://dummyimage.com/1000x1000/fff/aaa
                                     if($row["picturepath"]==""){
@@ -181,34 +205,42 @@
                                     unset($line);
 
                                     $bigstring = '
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="col-xs-12 col-sm-6 col-md-2">
                                         <div class="flip-div">
                                             <div class="flip-main">
                                                 <div class="front">
                                                     <div class="card">
-                                                        <div class="card-body text-center pb-2">
-                                                            <p><img class="rounded-circle" src="'.$pic.'" alt="Profile pic of '.$name.'"></p>
-                                                            <h5 class="card-title"><strong>'.$name.'</strong></h5>
-                                                            <p class="card-text text-muted">'.$degree.'</p>
-                                                            <p class="card-text">'.$work.'</p>
-                                                            <a href="#" class="btn btn-default btn-sm"><i class="fa fa-arrow-right"></i></a>
+                                                        <p><img class="" src="'.$pic.'" alt="'.$name.'"></p>
+                                                        <div class="card-body pb-2">
+                                                            <p class="card-title font-weight-bold">'.$name.'</p>
+                                                            <p class="card-text font-weight-light">'.$degree.'</p>
+                                                            <p class="card-text font-weight-light text-primary">'.$work.'</p>
                                                         </div>
+                                                        <a href="#" class=""><i class="arrow-front"></i></a>
                                                     </div>
                                                 </div>
-                                                <div class="back rounded">
+                                                <div class="back">
                                                     <div class="card">
-                                                        <div class="card-body text-center">
-                                                            <h4 class="card-title"><strong>'.$name.'</strong></h4>
-                                                            <small class="text-muted">Tugevused</small>
-                                                            <p class="card-text">'.$tugevused.'</p>
-                                                            <small class="text-muted">Kogemused</small>
-                                                            <p class="card-text">'.$kogemused.'</p>
-
-                                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
+                                                        <div class="card-body">
+                                                            <p class="card-title font-weight-bold">'.$name.'</p>
+                                                            <p class="card-text font-weight-light">'.$degree.'</p>
+                                                            <p class="card-text font-weight-light">'.$work.'</p>
+                                                            <p class="font-weight-bold">Tugevused:</p>
+                                                            <p class="card-text font-weight-light">'.substringwords($tugevused).'</p>
+                                                            <p class="font-weight-bold">Kogemused:</p>
+                                                            <p class="card-text font-weight-light">'.substringwords($kogemused).'</p>
+                                                            <!-- Leaving this in in case we still want this CV and e-mail button -->
+                                                             <!--<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">----
                                                                 <a class="btn btn-sm btn-info js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i></a>
                                                                 <a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i></a>
-                                                            </div>	
+                                                            </div>	-->
+                                                            
                                                         </div>
+                                                        <div class="links">
+                                                          <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>
+                                                          <a href="#" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>
+                                                        </div>
+                                                        <i class="arrow-front"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -357,6 +389,10 @@
             $("#student_pilt").change(function() {
                 readURL2(this, "#profileImg");
             });
+           $( ".flip-div" ).click(function() {
+            $( this ).toggleClass( "hover" );
+            console.log("Initialized", $(this));
+          });
         });
 
         function openCV(e) {
@@ -412,6 +448,9 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+      
+        
+     
 
     </script>
 

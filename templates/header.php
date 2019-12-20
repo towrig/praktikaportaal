@@ -37,7 +37,7 @@
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
     -->
     
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i|Merriweather+Sans:300,300i,400,400i,700,700i,800,800i|Merriweather:300,300i,400,400i,700,700i,900,900i|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
 
 
     <!-- Plugin CSS -->
@@ -47,7 +47,7 @@
     <link href="<?php echo $wwwroot; ?>css/creative.min.css" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link href="<?php echo $wwwroot; ?>css/custom.css?v=2" rel="stylesheet">
+    <link href="<?php echo $wwwroot; ?>css/custom.css" rel="stylesheet">
     
      <link rel="stylesheet" href="<?php echo $wwwroot; ?>vendor/ui/jquery-ui.min.css">
 

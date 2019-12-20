@@ -154,7 +154,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, organisation, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?)'); 
+		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, organisation, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?,?)'); 
 		$query->execute(array($pdf_path, $title, $organisation, $org_email, $org_name, 0, $editkey, $max_part));
 		$conn = null;
         

@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php $title="Organisatsioonid"; include_once './../templates/header.php';?>
-
-<body id="page-top">
+<?php $title="Praktikapakkumised"; include_once './../templates/header.php';?>
+<body id="page-top" class="practiceoffers">
     <?php include_once './../templates/top-navbar.php';?>
-	    <div id="main"></div>
-	<div id="page-content">
-	
-    <section class="page-section bg-primary">
+    <div id="main"></div>
+    <div id="page-content">
+      <section class="page-section">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <hr class="divider light my-4">
-                    <h2 class="text-white text-uppercase font-weight-bold mt-0">Praktikapakkumised</h2>
-                    <p class="text-white-75 font-weight-light mb-5">Otsid praktikanti, töötajat või meeskonda? Lisa oma pakkumine või projektiidee juba täna!</p>
-                    <hr class="divider light my-4">
-
-                </div> <!-- .col-->
-				<div class="col-lg-6 d-flex flex-column align-self-center">
-					<a href="../editor" id="formToggler" class="toggleMenu btn btn-md">LISA PAKKUMINE<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
-				</div>
-				<!--<div class="col-lg-3">
-					<a href="../team" id="formToggler" class="toggleMenu btn-lg">ESITA PROJEKT<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
-				</div>-->
-
-            </div> <!-- .row -->
+          <div class="row">
+            <div class="col-lg-12">
+               <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktikapakkumised</h1>
+            </div>
+            <div class="col-lg-4">
+              <p class="font-weight-light mb-5">Otsid praktikanti, töötajat või meeskonda? Lisa oma pakkumine või projektiidee juba täna!</p>
+              <a href="#" class="text-uppercase font-weight-bold">Vaata rohkem siit!</a>
+            </div> <!-- .col-->
+            <div class="col-lg-2">
+              <a href="../editor" id="formToggler" class="toggleMenu text-uppercase">Lisa pakkumine<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span>--></a>
+            </div>
+        <!--<div class="col-lg-3">
+          <a href="../team" id="formToggler" class="toggleMenu btn-lg">ESITA PROJEKT<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
+        </div>-->
+            <div class="col-lg-12">
+              <h5 class="text-uppercase text-center font-weight-bold mt-3">Aktiivsed pakkumised</h5>
+            </div>
+          </div> <!-- .row -->
         </div> <!-- .container -->
-    </section>
+      </section>
 
 	
 	<section id="profiles">
@@ -53,46 +52,34 @@
                         $picurl = "../userdata/pictures/".$row["picturepath"];
                         
                         $location = $row["work_location"];
-                        $uploaded = $row["datetime_uploaded"];
+                        $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));;
 
-                        $bigstring = '<div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-body text-left">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <img src="'.$picurl.'" alt="Ettevõtte logo">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <a href="../tootaja/kuulutus?c='.$validationcode.'"><h6 class="card-title text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
-                                                                </a>
-                                                                <p class="card-text">'.$description.'</p>
-                                                                <hr>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p class="card-text text-muted"><i class="fa fa-suitcase"></i> RobotBot Inc</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p class="card-text text-muted"><i class="fa fa-calendar"></i> '.$uploaded.'</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                
-                                                                <p class="card-text text-muted"><i class="fa fa-map-marker"></i> '.$location.'</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p class="card-text text-muted"><i class="fa fa-calendar-times"></i> Lõpptähtaeg</p>
-                                                            </div>
-                                                       </div> 
-                                                    </div>
-                                                    <div class="col-md-2 text-center align-self-center">
-                                                        <i class="fa fa-2x fa-heart "></i>
-                                                        <p class="text-muted">Kandideeri <br> Like <br> Vaatamisi </p>
-                                                    </div>
-                                                </div>
+                        $bigstring = '<div class="col-lg-12">
+                                        <div class="row">
+                                          <div class="col-lg-1 text-uppercase font-weight-bold">
+                                            <p>'.$uploaded.'</p>
+                                          </div>
+                                            <div class="col-lg-2 work-banner-crop">
+                                              <img src="'.$picurl.'" alt="Ettevõtte logo">
                                             </div>
+                                            <div class="col-lg-4">
+                                                <a href="../tootaja/kuulutus?c='.$validationcode.'">
+                                                  <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
+                                                </a>
+                                                <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
+                                            </div>
+                                          <div class="col-lg-3">
+                                            <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> PUUDU</p>
+                                            <p class="m-0 p-0 font-weight-light"><b>Asukoht:</b> '.$location.'</p>
+                                            <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> PUUDU</p>
+                                          </div>
+                                          <div class="col-lg-2 text-center apply">
+                                            <a class="text-uppercase font-weight-bold" href="../tootaja/kuulutus?c='.$validationcode.'">Kandideeri</a>
+                                            <p>Vaatamisi <span class="views font-weight-bold">PUUDU</span></p>
+                                          </div>
                                         </div>
-                                    </div>';
+                                        <hr>
+                                      </div>';
 
                         echo $bigstring;
                     }
