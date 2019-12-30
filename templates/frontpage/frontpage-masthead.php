@@ -9,7 +9,7 @@
     <div class="img-cont"></div>
   </div>
     <div id="main" class="container">
-        <div class="row text-center">
+        <div class="row">
             
             <div class="col-lg-3 col-md-12">
                 <h2 class="mb-5"><span>TULEVIK</span> ALGAB SINUST</h2>
@@ -27,7 +27,7 @@
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
-                        <span><small>4</small> profiili</span>
+                        <span class="main-stats"><small>4</small> profiili</span>
                       </p>
                       
                     </div>
@@ -46,7 +46,7 @@
                         <span>projektiideele.</span>
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
-                        <span><small>2</small> projekti</span>
+                        <span class="main-stats"><small>2</small> projekti</span>
                       </p>
                       
                     </div>
@@ -64,7 +64,7 @@
                         <span>ja tulevased</span>
                         <span>töötajad.</span>
                         <span>&nbsp;</span>
-                        <span><small>7</small> pakkumist</span>
+                        <span class="main-stats"><small>7</small> pakkumist</span>
                       </p>
                       
                     </div>

@@ -41,7 +41,7 @@
                         <h2 class=" my-4">7</h2>
                     </div>
                     <div>
-                      <h5 class="h6 text-uppercase mb-2">praktikapakkumist</h5>
+                      <h5 class="h6 text-uppercase mb-2">praktika<wbr>pakkumist</h5>
                     </div>
                 </div>
             </div>

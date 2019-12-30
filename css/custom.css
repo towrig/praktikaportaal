@@ -1062,7 +1062,7 @@ p.align-self-center {
     background: #e94700;
     text-align: center;
     height: 146px;
-    margin: 15px 0px -40px -11px;
+    margin: 8px 0px -50px 0px;
 }
 
 .masthead .card .card-body span {
@@ -1213,11 +1213,13 @@ div#ut-logo {
   #mainNav.navbar-scrolled {
     background-color: #f1f1f1;
   }
+
+}
+
   #mainNav.navbar-scrolled #ut-logo{
     background-color: #f1f1f1;
     margin-top:0;
   }
-}
 
 body, .navbar {
   background: #f1f1f1;
@@ -1664,9 +1666,9 @@ body.project .modal a.nav-link {
     margin: 0!important;
     font-family: "Rubik"!important;
     font-weight: 400!important;
-    margin: 0 1rem!important;
     color: #f4623a!important;
     font-weight: 600!important;
+  border-radius: 0!important;
 }
 
 body.project .modal a.nav-link {
@@ -1675,10 +1677,8 @@ body.project .modal a.nav-link {
     padding: 10px 14px!important;
     color: #b3b3b3!important;
     margin: 0!important;
-    font-family: "Rubik"!important;
     font-weight: 400!important;
-    margin: 0 1rem!important;
-    /* color: #f4623a!important; */
+    margin: 0!important;
     font-weight: 500!important;
 }
 
@@ -1708,3 +1708,107 @@ body.practice .modal label {
 body.practice .modal img#profileImg {
     max-width: 196px;
 }
+
+#seminar-modal .modal-body {
+  max-height: 300px;
+  overflow: auto;
+}
+
+#seminar-modal .event-modal {
+  box-shadow: 0px 5px 10px #ccc;
+  padding: 1.5rem 0.5rem;
+}
+
+#seminar-modal .modal-body a {
+    display: block;
+    text-decoration: none;
+}
+
+#seminar-modal .modal-body span.event-date {
+    position: absolute;
+    font-size: 50px;
+    right: 30px;
+    font-weight: bolder;
+    opacity: .5;
+    color: #232225;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper .btn {
+  border: 2px solid #00489d;
+  color: #00489d;
+  background-color: white;
+  padding: 8px 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.modal-body .form-control {
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    background: #EEEEEE;
+}
+
+.modal-body label {
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+@media (min-width: 1200px) {
+  .container {
+      max-width: 1440px;
+  }
+}
+@media (max-width: 992px) {
+  #masthead .card-body {
+    text-align: center!important;
+  }
+  #masthead i {
+    margin-left: auto;
+  }
+  #masthead .main-stats {
+    display: block!important;
+    position: relative;
+    top: 10px;
+  }
+  #masthead .card.m-5 {
+    margin: 1rem!important;
+  }
+  
+  #why h4 {
+    font-size: 2rem;
+  } 
+}
+@media (max-width: 768px) {
+  #why small, #unique small {
+      max-width: 100%!important;
+  }
+  
+  #unique-paindlik .col, #unique-tulevikuoskused .col,
+  #unique-interditsiplinaarne .col{
+      margin-top: 3rem;
+  }
+
+}
+
+@media (max-width: 830px) {
+  .scrollUp  {
+    display: none;
+  }
+
+}
+
