@@ -23,13 +23,10 @@ img {
 
 .work .row {
     margin: 20px 0px;
-    /*border-bottom: 2px solid #f5f5f5;
-    padding-bottom:10px;*/
 }
 .work-banner{
   height: 400px;
   width: 100%;
-  //background: url(https://via.placeholder.com/1000x400?text=Kuulutuse+banner);
   background-position: top center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -45,26 +42,10 @@ img {
     left: calc(100% - 240px);
 }
 
-/*.pt-5, .py-5 {
-    padding-top: 0rem!important;
-}
-*/
 .card {
-    /*
-    background: linear-gradient(to right, #faa41a 40%, rgba(255,255,255,.6)), url(../img/portfolio/thumbnails/1.jpg);
-    box-shadow: 2px 2px 10px rgba(0,0,0,.3);
-    color: white;
-    */
     cursor: pointer;
-
     margin-bottom: 10px;
     width: 100%;
-}
-
-.card:nth-child(even) {
-    /*
-    background: linear-gradient(to top, #faa41a 40%, rgba(255,255,255,.6)), url(../img/portfolio/thumbnails/2.jpg); 
-    */
 }
 
 .card-body {
@@ -82,35 +63,13 @@ img {
 }
 
 .card-body a {
-    /*color: white;*/
     font-size: 12px;
     text-decoration: none !important;
-    /*color: #fff;*/
 }
 
 .card-body p {
     font-size: 13px;
     padding: 0;
-    /* color: #fff; */
-}
-
-body{
-    /*background: #FFEFBA;  
-    background: -webkit-linear-gradient(to top, #FFFFFF, #FFEFBA);
-    background: linear-gradient(to top, #FFFFFF, #FFEFBA); 
-    
-    background-attachment: fixed;*/
-
-}
-
-@media (min-width: 992px) {
-    #mainNav {
-        //background-color: #00a6e6;
-        //background-color: #102064;
-        //background-color: #2c5696;
-        //background-color: #ff6f20;
-       // background-color: #faa41a;
-    }
 }
 
 .card-text {
@@ -174,14 +133,9 @@ li.list-group-item:hover {
 
 .work h4, .work h5 {
     color: #6c757d;
-   /* border-left: 5px solid orange;
-    padding-left: 7px;*/
 }
 
 .work h2 {
-    /*text-align: right;
-    background: #faa41a;
-    color: white;*/
     padding: 10px 12px;
 }
 
@@ -203,7 +157,6 @@ li.list-group-item:hover {
 }
 
 .collapse div {
-    //opacity:0;
     transition: all .25s ease-in-out;
 }
 
@@ -217,9 +170,6 @@ li.list-group-item:hover {
     transition: all .21s ease-in-out;
 }
 
-
-
-
 /* custom-forms.css */
 .sidenav {
   height: 100%;
@@ -231,11 +181,6 @@ li.list-group-item:hover {
   background-color: #f5f5f5;
   overflow-x: hidden;
   transition: 0.2s;
-  //padding: 20px
-}
-
-form {
-
 }
 
 .sidenav a {
@@ -267,13 +212,6 @@ form {
 .front #main, .front #mainNav, .front #formToggler , #page-top.front  {
   padding: 0px;
 }
-
-/*.toggleMenu {
-    display: block;
-  cursor: pointer;
-  text-align: center;
-    background: #f5f5f5;
-}*/
 
 .btn-form {
     margin: 20px 0px 0px 0px;
@@ -395,15 +333,7 @@ section.page-section.bg-primary {
 }
 
 .tooltip_mark{
-  /*position: absolute;
-  top: -6px;
-  font-size: 10px;
-  color: #f4623a;
-  margin: 2px 3px;
-  padding: 4px 2px 1px;
-  border: 1px solid #f4623a;
-  border-radius: 6px;*/
-    
+
     position: relative;
     left: 22px;
     border-radius: 50px;
@@ -429,60 +359,6 @@ section.page-section.bg-primary {
   color: #fff;
 }
 
-/* Transparent button with hover effect */
-
-.btn-transparent {
-  background: transparent !important;
-  border-color: #f2f2f2;
-  /* color: #f2f2f2; */
-  /* transition: background-color 0.5s linear; */
-  transition: 0.5s;
-}
-
-.btn-transparent:hover {
-  background-color: #03a9f4 !important;
-  border-color: #03a9f4 !important;
-  color: #f2f2f2 !important;
-}
-
-/* UT Banner Button */
-
-.ut-banner-button-container {
-  min-height: 27.5vw;
-}
-/* .ut-banner-button-container > div { height: 100%; } */  /* container div override */
-/* .ut-banner-button-container > div > div { height: 100%; } /* contextual region div override */
-
-.ut-banner-button-content-overlay {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  /* background: #000000; */ /* override from twig */
-  opacity: .35;
-}
-
-.ut-banner-button-content {
-  padding: 2vw;
-  font-size: 1.3rem;
-  z-index: 1;
-  /* align-self: flex-end; */
-}
-
-.ut-banner-button-content-text {
-  line-height: 1.6;
-}
-
-/*
-
-    font-family: 'Merriweather', serif;
-
-    font-family: 'Merriweather Sans', sans-serif;
-
-    font-family: 'Rubik', sans-serif;
-
-    font-family: 'Lora', serif;
-
-*/
 
 body {
     font-family: 'Rubik', sans-serif;
@@ -554,9 +430,6 @@ header.masthead {
 }
 
 .masthead i.fas.fa-4x {
-    /*background: #FF9800;
-    padding: 1rem;
-    border-radius: 20px;*/
     color: #2c5696;
 }
 
@@ -601,10 +474,6 @@ div#main {
 section#why {
     z-index: 1000!important;
 }
-
-/*.modal-dialog {
-    max-width: 90%!important;
-}*/
 
 .modal-content {
     border-radius: 0;
@@ -658,11 +527,6 @@ nav#mainNav {
     }
 }
 
-.nav-link {
-    //font-size: 1.5rem!important;
-}
-
-
 @media (min-width: 1200px){
     header.masthead h1 {
         font-size: 7rem;
@@ -687,30 +551,15 @@ nav#mainNav {
 
 .intro-box .col-md-4 {
     background: white;
-    //border: 40px solid #f7971e;
-   // border-radius: 3rem;
-    //box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 }
 
 .intro-box .col-md-4  a{
     color: #3d3d3d;
 }
 
-.practice .bg-primary {
-    /*background: url(../img/bg.jpg);
-    background-attachment: fixed;
-    background-position: center;*/
-}
-
 .card-group .card {
     border: none;
 }
-/*
-.container-fluid .col-md-4 {
-    padding: 100px 10px 100px 10px;
-    background-color: rgba(221,221,221,1);
-    background-position: center center;
-}*/
 
 .card {
     width: 90%;
@@ -720,45 +569,6 @@ nav#mainNav {
 html {
   scroll-behavior: smooth;
 }
-/*
-.container-fluid .col-md-4:nth-child(odd) {
-    background: #fff;
-}*/
-/*
-.container-fluid .col-md-4 div {
-    //transform: skew(33deg);
-}
-
-.container-fluid .col-md-4 {
-    padding: 100px 10px 100px 10px;
-    background-color: rgb(44, 44, 44);
-    background-position: center center;
-    //transform: skew(-33deg, 0deg);
-}
-*/
-
-/*.divider-content:before {
-    margin-left: -50%;
-    text-align: right;
-}
-.divider-content:before, .divider-content:after {
-    position: absolute;
-    top: 50%;
-    overflow: hidden;
-    width: 50%;
-    height: 1px;
-    content: '';
-    border-top: 0 solid #e5e5e5;
-    margin-top: 0;
-}
-
-.divider-content:before, 
-.divider-content:after {
-    border-top-width: 1px;
-    margin-top: -1px;
-    border-top-color: #6ed12f;
-    border-top-style: dashed;
-}*/
 
 .d-flex.h-100 {
     background: #333!important;
@@ -1443,7 +1253,7 @@ a.scrollUp.text-uppercase {
 }
 
 #stats i , #masthead i, #why i, #unique i {
-    background: url(http://192.168.56.101/praktikaveeb/img/icons.png);
+    background: url(../img/icons.png);
     height: 100px;
     width: 100px;
     display: block;
@@ -1551,7 +1361,7 @@ i.arrow-front {
 }
 
 .practice section .card i {
-    background: url(http://192.168.56.101/praktikaveeb/img/icons.png);
+    background: url(../img/icons.png);
     height: 50px;
     width: 85%;
     display: block;
