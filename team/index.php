@@ -130,39 +130,59 @@
                                 </nav>
                                 <div class="tab-content" id="pills-tabContent">
                                   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">                                <div class="form-group">
-                                    <h4 class="text-center my-3"><!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a href="../userdata/Projektipraktika_taotlusvorm.docx" download>siia.</a></label></h4>
+                                    <p class="mt-4">Antud aknas saad kiirelt tutvuda ning eelvaadelda projekti taotlusvormi, mille palume järgnevalt allalaadida ning ka ära täita. Seejärel palume liikuda järgmisele viigule "Esita projekt" ning täita sealne kontaktvorm, et saaksime teiega vajadusel ühendust võtta ning lõpetuseks ootame eeltäitud vormi PDF kujul."
+    
+                                    </p><h4 class="text-center my-3"><!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a class="btn btn-lg btn-primary" href="../userdata/Projektipraktika_taotlusvorm.docx" download="">siia</a></label></h4>
                                     <iframe src="../userdata/projekti-alus.pdf#toolbar=0" width="100%" height="500px"></iframe>
+                            
                                 </div>
                                   </div>
                                   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                     <div class="form-group mt-3">
-                                      <label>Projekti pealkiri:</label>
+                                      <label>Projekti pealkiri</label>
                                           <input type="text" name="project_title" class="form-control" maxlength="85">
                                       </div>
-
-                                      <div class="form-group">
-                                          <label>Teie nimi:</label>
-                                          <!--<input type="text" name="project_org_name" class="form-control">-->
-                                          <input type="text" name="project_org_personal_name" class="form-control">
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Teie nimi</label>
+                                            <!--<input type="text" name="project_org_name" class="form-control">-->
+                                            <input type="text" name="project_org_personal_name" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Teie email</label>
+                                            <input type="text" name="project_org_personal_email" class="form-control">
+                                        </div>
                                       </div>
-                                      <div class="form-group">
-                                          <label>Teie email:</label>
-                                          <input type="text" name="project_org_personal_email" class="form-control">
+                                      <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label>Organisatsiooni nimi</label>
+                                            <input type="text" name="project_org_name" class="form-control">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Meeskonna suurus (max 10)</label>
+                                          <select name="max_part" class="form-control">
+                                            <option selected>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                          </select>
+                                        </div>
                                       </div>
-                                      <div class="form-group">
-                                          <label>Organisatsiooni nimi:</label>
-                                          <input type="text" name="project_org_name" class="form-control">
-                                      </div>
-                                      <div class="form-group">
-                                          <label>Meeskonna suurus (max 10):</label>
-                                          <input type="text" name="max_part" class="form-control">
-                                      </div>
-                                      <div class="form-group">
-                                          <label>Lae täidetud projektivorm PDF formaadis:</label>
+                                      <div class="form-group text-center">
+                                        <div class="upload-btn-wrapper">
+                                          <button class="btn">Lae ülesse täidetud projektivorm PDF formaadis</button>
                                           <input type="file" name="project_pdf" id="project_pdf">
+                                        </div>
+                                          
                                       </div>
-                                      <div class="form-group mt-3">
-                                          <input type="button" name="submit-form" class="text-center text-uppercase btn" onclick="ajaxSubmit()" value="Esita">
+                                      <div class="form-group mt-3 text-center">
+                                          <input type="button" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="ajaxSubmit()" value="Esita projekt">
                                       </div>
                                   </div>
                                 </div>
