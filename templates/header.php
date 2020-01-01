@@ -33,6 +33,8 @@
 
     <!-- Plugin CSS -->
     <!--<link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">-->
+    <!-- For profile img crop -->
+    <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
 
     <!-- Theme CSS - Includes Bootstrap -->
     <link href="<?php echo $wwwroot; ?>css/creative.min.css" rel="stylesheet">
