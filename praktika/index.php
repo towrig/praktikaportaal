@@ -18,17 +18,16 @@
                   </div>
                   <div class="col-lg-4">
                     <p class="font-weight-light">
-                        Tutvu praktika- ja tööpakkumistega või liitu DELTAki projektiga!
-                        Sul on projektiidee? Esita see juba täna ja koos leiame Sulle meeskonna ja juhendaja!
-                        Loe rohkem DELTAki projektist siit (tuleb link kuhugi)!
+                        Lisa profiil ning leia endale sobiv praktikakoht!<br>
+                        Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist, võib olla Sinu järgmiseks töökohaks ning saada aimu, milliseid oskusi ja teadmisi tööandjad väärtustavad.
                     </p>
-                    <a href="#" class="text-uppercase font-weight-bold">Loe rohkem siit!</a>
+                    <a href="#" class="text-uppercase font-weight-bold">Lisatud profiil säilib kuus kuud</a>
                   </div> 
                     <div class="col-lg-2">
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Lisa profiil</span>
                   </div>
                   <div class="col-lg-12">
-                    <h5 class="text-uppercase text-center font-weight-bold mt-3">Liitunud</h5>
+                    <h5 class="text-uppercase text-center font-weight-bold mt-5">Liitunud</h5>
                   </div>
                         
                         <?php
@@ -127,29 +126,29 @@
 
                         <div class="row">
                             <?php
-                          
-                          function substringwords($text, $maxchar = 40, $end = "..."){
-                            if (strlen($text) > $maxchar || $text = '') {
-                              $words = preg_split('/\s/', $text);
-                              $output = '';
-                              $i = 0;
-                              while (1) {
-                                $length = strlen($output) + strlen($words[$i]);
-                                if ($length > $maxchar) {
-                                  break;
+                              // Function to show maxchars if to much text
+                              function substringwords($text, $maxchar = 40, $end = "..."){
+                                if (strlen($text) > $maxchar || $text = '') {
+                                  $words = preg_split('/\s/', $text);
+                                  $output = '';
+                                  $i = 0;
+                                  while (1) {
+                                    $length = strlen($output) + strlen($words[$i]);
+                                    if ($length > $maxchar) {
+                                      break;
+                                    }
+                                    else {
+                                      $output .= " " . $words[$i];
+                                      ++$i;
+                                    }
+                                  }
+                                  $output .= " " . $end;
                                 }
                                 else {
-                                  $output .= " " . $words[$i];
-                                  ++$i;
+                                  $output = $text;
                                 }
+                                return $output;
                               }
-                              $output .= " " . $end;
-                            }
-                            else {
-                              $output = $text;
-                            }
-                            return $output;
-                          }
                             try {
                                 $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
                                 // set the PDO error mode to exception
@@ -182,7 +181,8 @@
                                 foreach($data as $row){
 
                                     // Everything on new lines
-                                    $name = str_replace(" ", "<br>", $row["name"]);
+                                    $name = $row["name"];
+                                    $name_br = str_replace(" ", "<br>", $name);
                                     $degree = $row["major"]."<br>".$row["institute"];
 
                                     $pic = "../userdata/pictures/".$row["picturepath"]; //https://dummyimage.com/1000x1000/fff/aaa
@@ -210,9 +210,9 @@
                                             <div class="flip-main">
                                                 <div class="front">
                                                     <div class="card">
-                                                        <p><img class="" src="'.$pic.'" alt="'.$name.'"></p>
+                                                        <p><img class="" src="'.$pic.'" alt="'.$name.'" title="'.$name.'"></p>
                                                         <div class="card-body pb-2">
-                                                            <p class="card-title font-weight-bold">'.$name.'</p>
+                                                            <p class="card-title font-weight-bold">'.$name_br.'</p>
                                                             <p class="card-text font-weight-light">'.$degree.'</p>
                                                             <p class="card-text font-weight-light text-primary">'.$work.'</p>
                                                         </div>
@@ -222,13 +222,13 @@
                                                 <div class="back">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <p class="card-title font-weight-bold">'.$name.'</p>
+                                                            <p class="card-title font-weight-bold">'.$name_br.'</p>
                                                             <p class="card-text font-weight-light">'.$degree.'</p>
                                                             <p class="card-text font-weight-light">'.$work.'</p>
-                                                            <p class="font-weight-bold">Tugevused:</p>
-                                                            <p class="card-text font-weight-light">'.substringwords($tugevused).'</p>
-                                                            <p class="font-weight-bold">Kogemused:</p>
-                                                            <p class="card-text font-weight-light">'.substringwords($kogemused).'</p>
+                                                            <p class="font-weight-bold mb-0">Tugevused</p>
+                                                            <p class="card-text font-weight-light">'.$tugevused.'</p>
+                                                            <p class="font-weight-bold mb-0">Kogemused</p>
+                                                            <p class="card-text font-weight-light">'.$kogemused.'</p>
                                                             <!-- Leaving this in in case we still want this CV and e-mail button -->
                                                              <!--<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">----
                                                                 <a class="btn btn-sm btn-info js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i></a>
@@ -272,77 +272,89 @@
                 <div class="modal-body">
                     <div class="container">
 
-                        <form class="row <?php if ($form_success){ echo "hidden"; }?>" action="prax_api.php" method="post" enctype="multipart/form-data" id="form_student">
-
-                            
+                        <form class="needs-validation row <?php if ($form_success){ echo "hidden"; }?>" action="./prax_api.php" method="post" enctype="multipart/form-data" id="form_student">
 
                             <div class="col-lg-8">
 
                                 <div class="form-group">
-                                    <label for="name">Ees- ja perekonnanimi*</label>
-                                    <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($name == "") { echo "is-invalid"; } } ?>" id="name" name="name" <?php echo "value='".htmlspecialchars($name)."'";?>>
-                                    <div class='invalid-feedback'>Sisesta oma nimi!</div>
+                                    <label for="name">Ees- ja perekonnanimi</label>
+                                    <input required type="text" class="form-control <?php if(!empty($_POST)) { if($name == "") { echo "is-invalid"; } else {echo "is-valid";} } ?>" id="name" name="name">
+                                    <div class='invalid-feedback'>Palun lisa oma nimi</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">E-mail*</label>
-                                    <input type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email" <?php echo "value='".htmlspecialchars($email)."'";?>>
+                                    <label for="email">E-mail</label>
+                                    <input required type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email">
+                                  <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Eriala*</label>
-                                    <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major" <?php echo "value='".htmlspecialchars($major)."'";?>>
+                                    <label for="work">Eriala</label>
+                                    <input required type="text" class="form-control <?php if(!empty($_POST)) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major">
+                                  <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
                                 </div>
-
                             </div>
                           
                           <div class="col-lg-4">
                                 <div class="form-group">
-                                    <img src="../userdata/blank_profile_pic.png" id="profileImg">
-                                    <label for="pilt">Pilt</label>
-                                    <input type="file" class="form-control-file <?php if(!empty($_POST) && !$removeing) { if(!$pic_success) { echo "is-invalid"; } } ?>" id="student_pilt" name="pilt">
+                                    <!--<img src="../userdata/blank_profile_pic.png" id="profileImg">-->
+                                    <label for="pilt" class="<?php if(!empty($_POST)) { if(!$pic_success) { echo "is-invalid"; } } ?>">Pilt</label>
+                                    <!--<input type="file" onchange="previewFile()"><br>-->
+                                  <div id="preview">
+                                    <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                  </div>
+                                  <div class="upload-btn-wrapper">
+                                    <button class="btn">Lae ülesse oma profiili pilt</button>
+                                    <input type="file" accept="image/*" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt_full" onchange="previewFile()">
+                                    <div class='invalid-feedback'>Lae profiilipilt!</div>
+                                  </div>
+
+                                    <!--<div class="dropzone" id="my-awesome-dropzone" name="pilt"></div>-->
                                     <div class='invalid-feedback'>Sisesta pilt!</div>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="work">Instituut*</label>
-                                    <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute" <?php echo "value='".htmlspecialchars($institute)."'";?>>
+                                    <label for="work">Instituut</label>
+                                    <input required type="text" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
+                                    <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Soovitav praktika/töö valdkond*</label>
-                                    <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="work" name="work" <?php echo "value='".htmlspecialchars($work)."'";?>>
+                                    <label for="work">Soovitav praktika/töö valdkond</label>
+                                    <input required type="text" class="form-control <?php if(!empty($_POST)) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="work" name="work">
+                                    <div class='invalid-feedback'>Ära unusta märkida, mis valdkonnas soovid töötada</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="oskused">Tugevused/oskused*</label>
-                                    <textarea class="form-control" id="oskused" rows="3" name="oskused"><?php if(!empty($_POST)) {echo htmlspecialchars($oskused);}?></textarea>
+                                    <label for="oskused">Tugevused/oskused</label>
+                                    <textarea required class="form-control  <?php if(!empty($_POST)) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="oskused" rows="3" name="oskused"></textarea>
+                                    <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="kogemused">Kogemused</label>
-                                    <textarea class="form-control" id="kogemused" rows="3" name="kogemused"><?php if(!empty($_POST)) {echo htmlspecialchars($kogemused);}?></textarea>
+                                    <textarea class="form-control" id="kogemused" rows="3" name="kogemused"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="location">Soovitud asukoht</label>
-                                    <input type="text" class="form-control <?php if(!empty($_POST) && !$removeing) { if($location != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="location" name="location" <?php echo "value='".htmlspecialchars($location)."'";?>>
+                                    <input type="text" class="form-control <?php if(!empty($_POST)) { if($location != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="location" name="location">
                                 </div>
-                                <div class="form-group">
-                                    <label for="CV">CV</label>
-                                    <input type="file" class="form-control-file <?php if(!empty($_POST) && !$removeing) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="CV" name="cv">
-                                    <div class='invalid-feedback'>Sisesta CV!</div>
+                                <div class="form-group text-center">
+                                    <div class="upload-btn-wrapper">
+                                      <button class="btn">Lae ülesse oma CV</button>
+                                      <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="cv" name="cv" onchange="showFileName(this.files)">
+                                      <div class='invalid-feedback'>Lae ülesse oma CV</div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input <?php if(!empty($_POST) && !$removeing) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint" required="required">
+                                        <input type="checkbox" class="custom-control-input <?php if(!empty($_POST)) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint" required="required">
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
                                 </div>
-                                <input type="button" class="mt-3 text-center text-uppercase btn js-ajax" data-value="add" value="Lae üles!">
+                              <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add">Lisa profiil</button>
                               </div>
 
                         </form>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -367,23 +379,26 @@
     
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
-
+    <script src="https://unpkg.com/dropzone"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
     <script>
+      //Dropzone.autoDiscover = false;
+      // Global FormData
+
+      var blobImg;
+      try{
+
+      }catch(err){
+        console.log(err);
+      }
         $(document).ready(function() {
             $('.js-modal').on('click', openModal);
             $('.js-open-cv').on('click', openCV);
             $('.js-ajax').on('click', function(e) {
                 ajaxSubmit(e);
             });
-
-            $('[data-toggle="tooltip"]').tooltip();
-
-            $("#student_pilt").change(function() {
-                readURL2(this, "#profileImg");
-            });
            $( ".flip-div" ).click(function() {
             $( this ).toggleClass( "hover" );
-            console.log("Initialized", $(this));
           });
         });
 
@@ -392,7 +407,7 @@
             var target = $(e.currentTarget);
             var cvpath = $(target).data('cv');
 
-            var cvembed = $('<embed>').attr('src', cvpath).css('width', '100%').css('min-height', '512px');
+            var cvembed = $('<embed>').attr({'src':cvpath+'#toolbar=0','type':'application/pdf'}).css('width', '100%').css('min-height', '512px').html('<div class="alert alert-warning">Antud veebilehtiseja ei toeta PDFi avamist aknas. Palun lae PDF alla <a href="'+cvpath+'" target="_blank"><strong>siit</strong>.</a></div>');
             modal.find('.modal-body').empty();
             modal.find('.modal-body').html(cvembed);
 
@@ -404,14 +419,158 @@
                 return;
             var modal = $('.modal').first();
             modal.modal('show');
-        }
 
-        function ajaxSubmit(e) {
+            /*var myDropzone = new Dropzone("#my-awesome-dropzone", {
+              paramName: "pilt",
+              autoProcessQueue: false,
+              url: "./prax_api.php",
+              parallelUploads: 3,
+              maxFiles: 1,
+              addRemoveLinks: true,
+              dictDefaultMessage: "Lae oma pilt ülesse siit!",
+              dictRemoveFile: "Eemalda pilt",
+              dictMaxFilesExceeded: "Lubatud on vaid üks pilt",
+              dictInvalidFileType: "Lubatud vaid pildifailid",
+              acceptedFiles: "image/jpg, image/png",
+              dictFileTooBig: "Lisatud {{filename}} ületab lubatud {{maxFilesize}} suurust.",
+              maxFilesize: 5,
+              thumbnailWidth: 200,
+              thumbnailHeight: 200,
+              thumbnailMethod: 'contain',
+              resizeWidth: 256,
+              resizeMimeType: 'image/jpeg',
+              resizeMethod: 'contain',
+              resizeQuality: 0.7,
+
+              transformFile: function(file, done) {
+                var myDropZone = this;
+                // Create the image editor overlay
+                var editor = document.createElement('div');
+                editor.classList.add("cropper-overlay");
+                // Create the confirm button
+                var confirm = document.createElement('button');
+                confirm.textContent = 'Lõika';
+                confirm.classList.add("btn");
+                confirm.classList.add("btn-primary");
+                confirm.classList.add("text-uppercase");
+                confirm.classList.add("btn-cropper-overlay");
+
+                confirm.addEventListener('click', function() {
+                  // Get the canvas with image data from Cropper.js
+                  var canvas = cropper.getCroppedCanvas({
+                    width: 256,
+                    height: 256
+                  });
+
+                  // Turn the canvas into a Blob (file object without a name)
+                  canvas.toBlob(function(blob) {
+                    // Update the image thumbnail with the new image data
+                    myDropZone.createThumbnail(
+                      blob,
+                      myDropZone.options.thumbnailWidth,
+                      myDropZone.options.thumbnailHeight,
+                      myDropZone.options.thumbnailMethod,
+                      false,
+                      function(dataURL) {
+                        // Update the Dropzone file thumbnail
+                        myDropZone.emit('thumbnail', file, dataURL);
+                        // Return modified file to dropzone
+                        done(blob);
+                      }
+                    );
+                  });
+                  // Remove the editor from view
+                  editor.parentNode.removeChild(editor);
+                });
+                editor.appendChild(confirm);
+                // Load the image
+                var image = new Image();
+                image.src = URL.createObjectURL(file);
+                editor.appendChild(image);
+                // Append the editor to the page
+                document.body.appendChild(editor);
+                // Create Cropper.js and pass image
+                var cropper = new Cropper(image, {
+                  aspectRatio: 1
+                });
+              } ,
+                // The setting up of the dropzone
+              init: function() {
+                var myDropzoneInit = this;
+
+                // First change the button to actually tell Dropzone to process the queue.
+                document.getElementById("submit-all").addEventListener("click", function(e) {
+                  // Make sure that the form isn't actually being sent.
+                  //let formData = new FormData(document.getElementById('form_student'));
+                  e.preventDefault();
+                  e.stopPropagation();
+                  myDropzoneInit.processQueue();
+                });
+
+                this.on("sending", function(file, xhr, formData) {
+
+                  var action = $('.js-ajax').data("value");
+                  formData.append("action", action);
+
+                  var data = $('#form_student').serializeArray();
+                  $.each(data, function(key, el) {
+                      formData.append(el.name, el.value);
+                  });
+                  // Have to add CV file seperately in order to POST it with others
+                  var cv = document.getElementById("cv");
+                  formData.append("cv", cv.files[0]);
+                });
+
+                this.on("success", function(file, response) {
+                  var form = $('#form_student');
+
+                  console.log(response);
+                  form.before('<div class="alert alert-success alert-dismissible fade show" role="alert">\
+                                <strong>Aitäh!</strong> Teie emailile tuleb postituse aktiveerimislink!\
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
+                                  <span aria-hidden="true">&times;</span>\
+                                </button>\
+                              </div>');
+                  form.css('display', 'none');
+                  form.trigger("reset");
+                  setTimeout(function() {modal.modal("hide");},3000);
+                });
+
+               this.on("error", function(file, response) {
+                 console.log(response);
+                  var form = $('#form_student');
+                  form.addClass('was-validated');
+                  form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
+                              <strong>Viga!</strong> ' + response + '\
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
+                                <span aria-hidden="true">&times;</span>\
+                              </button>\
+                            </div>');
+               });
+                this.on("addedfile", function(file) {
+                  console.log("A file was just added");
+                });
+
+              }
+            });*/
+        }
+      function ajaxSubmit(e) {
             var action = $(e.currentTarget).data("value");
             var form = $('#form_student');
-            let formData = new FormData(document.getElementById('form_student'));
+            e.preventDefault();
+            e.stopPropagation();
+        let formData = new FormData(document.getElementById('form_student'));
             formData.append("action", action);
-
+            /*var data = $('#form_student').serializeArray();
+            $.each(data, function(key, el) {
+              if (el.value == "") {
+                // If value empty then do not append
+              } else {
+                formData.append(el.name, el.value);
+              }
+            });*/
+            formData.delete("pilt_full");
+            formData.append("pilt",blobImg,"profilepic.jpg");
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
@@ -423,26 +582,93 @@
                 console.log(response);
                 form.after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink!</div>");
                 form.css('display', 'none');
+                form.trigger("reset");
+                setTimeout(function() {modal.modal("hide");},3000);
             }).fail(function(response) {
                 console.log(response);
-                form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel.</div>");
+                form.addClass('was-validated');
+                form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
+                              <strong>Viga!</strong> ' + response + '\
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
+                                <span aria-hidden="true">&times;</span>\
+                              </button>\
+                            </div>');
             });
         }
 
-        function readURL2(input, target) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $(target).attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
+      function showFileName(files) {
+        try {
+          var fname = document.getElementById("cv-upload-data");
+          fname.innerHTML = files[0].name +" ("+ (files[0].size/1024).toFixed(2) + "KB)";
+          document.getElementById("cv").parentElement.appendChild(fname);
+        } catch(err) {
+          var fname = document.createElement("div");
+          fname.classList.add("pt-3");
+          fname.id = "cv-upload-data";
+          fname.innerHTML = files[0].name +" ("+ (files[0].size/1024).toFixed(2) + "KB)";
+          document.getElementById("cv").parentElement.appendChild(fname);
         }
+      }
       
-        
-     
+      function previewFile() {
+        var preview = document.querySelector('#preview');
+        var files   = document.querySelector('input[type=file]').files[0];
+
+        function readAndPreview(file) {
+          // Make sure `file.name` matches our extensions criteria
+          if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+            var reader = new FileReader();
+            reader.addEventListener("load", function () {
+              var image = document.getElementById('profileImg');
+              image.height = 100;
+              image.title = file.name;
+              image.src = this.result;
+              preview.appendChild( image );
+            }, false);
+            reader.readAsDataURL(file);
+          }
+        }
+        if (files) {
+          readAndPreview(files);
+          var editor = document.createElement('div');
+          editor.classList.add("cropper-overlay");
+          // Create the confirm button
+          var confirm = document.createElement('button');
+          confirm.textContent = 'Kärbi';
+          confirm.classList.add("btn");
+          confirm.classList.add("btn-primary");
+          confirm.classList.add("text-uppercase");
+          confirm.classList.add("btn-cropper-overlay");
+
+          confirm.addEventListener('click', function() {
+            // Get the canvas with image data from Cropper.js
+            var canvas = cropper.getCroppedCanvas({
+              width: 256,
+              height: 256
+            });
+
+            // Turn the canvas into a Blob (file object without a name)
+            canvas.toBlob(function(blob) {
+              // Set #profileImg src to blob and use blobImg global to use later in formData
+              document.getElementById('profileImg').src = URL.createObjectURL(blob);
+              blobImg = blob;
+            });
+            // Remove the editor from view
+            editor.parentNode.removeChild(editor);
+          });
+          editor.appendChild(confirm);
+          // Load the image
+          var image = new Image();
+          image.src = URL.createObjectURL(files);
+          editor.appendChild(image);
+          // Append the editor to the page
+          document.body.appendChild(editor);
+          // Create Cropper.js and pass image
+          var cropper = new Cropper(image, {
+            aspectRatio: 1
+          });
+        }
+      }
 
     </script>
 

@@ -60,6 +60,8 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 	//harder things to parse
 	$pilt = $_FILES["pilt"];
 	$cv = $_FILES["cv"];
+
+  error_log(date('y-d-m h:i:s')."1. Post not EMPTY and action == add!\n", 3, "/var/tmp/my-errors.log");
 	
 	//start validating the form (name, oppekava, pilt, cv, töö, asukoht, email, checked)
 	$passedValidation = true;
@@ -77,7 +79,7 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 	}else{
 		$email_valid = true;
 	}
-	$response .= "Pased: ";
+	$response .= "Passed: ";
 	$response .= $passedValidation ? 'true' : 'false';
 	
 	//paths to be used later
@@ -86,10 +88,12 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 	
 	//files
 	if($passedValidation){
+    error_log(date('y-d-m h:i:s')."1. Passed validation!\n", 3, "/var/tmp/my-errors.log");
 		if(!empty($cv) || !empty($pilt)){
-			
+			error_log(date('y-d-m h:i:s')."2. Passed CV OR PIC!\n", 3, "/var/tmp/my-errors.log");
 			//pilt
 			if (isset($_FILES['pilt']) && $_FILES['pilt']['error'] === UPLOAD_ERR_OK){
+        error_log(date('y-d-m h:i:s')."3. Doing PIC action\n", 3, "/var/tmp/my-errors.log");
 				$fileName = $_FILES['pilt']['name'];
 				$fileNameCmps = explode(".", $fileName);
 				$fileExtension = strtolower(end($fileNameCmps));
@@ -155,7 +159,7 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 			$error_code = $e->getCode();
 			if($error_code == "23000"){
 				http_response_code(403);
-				echo "Tekkis viga! Vea kirjeldus: Sellise emailiga postitus juba eksisteerib!";
+				echo "Selle meili aadressiga on juba kasutaja registreeritud";
 			}else{
 				http_response_code(403);
 				echo "Tekkis viga! Vea kirjeldus: ".$e->getMessage();
