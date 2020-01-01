@@ -35,59 +35,102 @@
                 <!--<div class="col-md-12 text-center">
                     <h2>Praktika- ja tööpakkumised</h2>
                 </div>-->
-                <?php
+                <div id="carouselPager" class="carousel slide">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">                    
+                    <?php
 
-                try {
-                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
-                    // set the PDO error mode to exception
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    $query = $conn->prepare('SELECT heading,description,validationcode,picturepath,work_location,datetime_uploaded FROM WorkPosts WHERE isvalidated = ?'); 
-                    $query->execute(array(1));
-                    $data = $query -> fetchAll();
-                    foreach($data as $row){
-                        //currently unused cols: name,email,phone,tasks,experience,work_type,other,logopath
-                        $heading = $row["heading"];
-                        $description = $row["description"];
-                        $validationcode = $row["validationcode"];
-                        $picurl = "../userdata/pictures/".$row["picturepath"];
-                        
-                        $location = $row["work_location"];
-                        $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));;
+                        try {
+                            $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+                            // set the PDO error mode to exception
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $query = $conn->prepare('SELECT heading,description,validationcode,picturepath,work_location,datetime_uploaded FROM WorkPosts WHERE isvalidated = ?'); 
+                            $query->execute(array(1));
+                            $data = $query -> fetchAll();
+                            $j = 0;
+                            $max_per_page = 3;
+                            $pages = 1;
+                            $queue = false;
+                            foreach($data as $row){
+                                //currently unused cols: name,email,phone,tasks,experience,work_type,other,logopath
+                                $heading = $row["heading"];
+                                $description = $row["description"];
+                                $validationcode = $row["validationcode"];
+                                $picurl = "../userdata/pictures/".$row["picturepath"];
 
-                        $bigstring = '<div class="col-lg-12">
-                                        <div class="row">
-                                          <div class="col-lg-1 text-uppercase font-weight-bold">
-                                            <p>'.$uploaded.'</p>
-                                          </div>
-                                            <div class="col-lg-2 work-banner-crop">
-                                              <img src="'.$picurl.'" alt="Ettevõtte logo">
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <a href="../tootaja/kuulutus?c='.$validationcode.'">
-                                                  <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
-                                                </a>
-                                                <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
-                                            </div>
-                                          <div class="col-lg-3">
-                                            <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> PUUDU</p>
-                                            <p class="m-0 p-0 font-weight-light"><b>Asukoht:</b> '.$location.'</p>
-                                            <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> PUUDU</p>
-                                          </div>
-                                          <div class="col-lg-2 text-center apply">
-                                            <a class="text-uppercase font-weight-bold" href="../tootaja/kuulutus?c='.$validationcode.'">Kandideeri</a>
-                                            <p>Vaatamisi <span class="views font-weight-bold">PUUDU</span></p>
-                                          </div>
-                                        </div>
-                                        <hr>
-                                      </div>';
+                                $location = $row["work_location"];
+                                $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));;
+                                
+                                if($queue){
+                                    echo '<div class="carousel-item">';
+                                    $queue = false;
+                                }
 
-                        echo $bigstring;
-                    }
+                                $bigstring = '<div class="col-lg-12">
+                                                <div class="row">
+                                                  <div class="col-lg-1 text-uppercase font-weight-bold">
+                                                    <p>'.$uploaded.'</p>
+                                                  </div>
+                                                    <div class="col-lg-2 work-banner-crop">
+                                                      <img src="'.$picurl.'" alt="Ettevõtte logo">
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <a href="../tootaja/kuulutus?c='.$validationcode.'">
+                                                          <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
+                                                        </a>
+                                                        <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
+                                                    </div>
+                                                  <div class="col-lg-3">
+                                                    <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> PUUDU</p>
+                                                    <p class="m-0 p-0 font-weight-light"><b>Asukoht:</b> '.$location.'</p>
+                                                    <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> PUUDU</p>
+                                                  </div>
+                                                  <div class="col-lg-2 text-center apply">
+                                                    <a class="text-uppercase font-weight-bold" href="../tootaja/kuulutus?c='.$validationcode.'">Kandideeri</a>
+                                                    <p>Vaatamisi <span class="views font-weight-bold">PUUDU</span></p>
+                                                  </div>
+                                                </div>
+                                                <hr>
+                                              </div>';
 
-                } catch(PDOException $e){
-                    echo "Connection failed: " . $e->getMessage();
-                }
-            ?>
+                                echo $bigstring;
+                                $j++;
+                                if ($j == $max_per_page){
+                                    $pages++;
+                                    $j = 0;
+                                    $queue = true;
+                                    echo "</div>";
+                                }
+                            }
+
+                        } catch(PDOException $e){
+                            echo "Connection failed: " . $e->getMessage();
+                        }
+                    ?>
+                    </div>
+                  </div>
+                </div>
+                <nav aria-label="Pager">
+                  <ul class="pagination">
+                    <li class="page-item" data-index="prev">
+                      <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <?php
+                      for($i=0; $i < $pages; $i++){
+                          echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
+                      }
+                    ?>
+                    <li class="page-item" data-index="next">
+                      <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
 
             </div>
 		</div>
@@ -149,7 +192,7 @@
 
     		$('.js-modal').on('click', openModal);
           
-        $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').tooltip();
 
     		$("#category").change(function(){
 
@@ -161,8 +204,26 @@
     				$("#locations").show();
     			}
     		});
+            
+            $('.pagination .page-item').on('click', paginatorClick);
+            $('#carouselPager').carousel({
+                interval: false,
+                wrap: false
+            });
+            $('#carouselPager').on('slide.bs.carousel', function(e){
+                $('.pagination .page-item').eq(e.from+1).toggleClass('active');
+                $('.pagination .page-item').eq(e.to+1).toggleClass('active');
+            })
 
     	});
+        
+        function paginatorClick(e){
+            console.log('moving');
+            var carousel = $('#carouselPager');
+            var target = $(e.currentTarget);
+            var index = target.data('index');
+            carousel.carousel(index);
+        }
 
     	function openModal(e){
     		var target = $(e.currentTarget);
