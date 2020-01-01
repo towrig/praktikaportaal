@@ -46,8 +46,9 @@ foreach ($eventdata as $event => $data) {
               "<div class='mt-1 font-weight-light'>
                 <span class='event-date'>" 
                   . $event_date_formatted . 
-                "</span><br>" 
-                . $data["values"]["regstart"] . 
+                "</span>"
+                . $data["values"]["regstart"] .
+        "<br>" . $data["values"]["place"].
               "</div>
               </a>
             </div>
