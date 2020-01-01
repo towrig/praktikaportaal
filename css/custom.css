@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 section {
     transition: all .2s ease-in-out;
 }
@@ -998,7 +1002,9 @@ small {
     margin-top: 829px;
     position: relative;
   }
-
+#mainNav {
+  background: inherit;
+}
 div#ut-logo {
     background-image: url(../img/logo-white.jpg);
     height: 70px;
@@ -1008,8 +1014,8 @@ div#ut-logo {
     background-repeat: no-repeat;*/
     width: 321px;
     opacity: 1;
-    margin-left: -20px;
-    margin-top: 2rem;
+    /*margin-left: -20px;
+    margin-top: 2rem;*/
     transition: .5s all ease-in-out;
 }
 
@@ -1211,21 +1217,13 @@ footer a {
   color: #f4623a;
   font-weight: 600;
 }
-footer .socialmedia {
-  float: right;
-}
+
 footer .copyright {
   font-weight: 600;
 }
-footer .socialmedia {
-  margin-top: -1.5rem;
-}
+
 footer .socialmedia i {
   margin-left:.5rem;
-}
-
-footer .footer-bottom {
-  margin-top: 6rem;
 }
 
 a.scrollUp.text-uppercase:before {
@@ -1345,7 +1343,7 @@ section h1 {
 }
 
 .back {
-    outline: 2.4rem solid #f4623a;
+    outline: 1.8rem solid #f4623a;
     background: #f4623a;
     color: white;
     max-height: 350px;
@@ -1363,7 +1361,7 @@ i.arrow-front {
 .practice section .card i {
     background: url(../img/icons.png);
     height: 50px;
-    width: 85%;
+    width: 120px;
     display: block;
     margin: auto;
     margin-left: 0px;
@@ -1566,6 +1564,11 @@ body.practice .modal img#profileImg {
   opacity: 0;
 }
 
+.upload-btn-wrapper:hover .btn {
+    color: orange;
+    border: 2px solid orange;
+}
+
 .modal-body .form-control {
     border: none;
     border-bottom: 1px solid #ced4da;
@@ -1580,7 +1583,7 @@ body.practice .modal img#profileImg {
 
 @media (min-width: 1200px) {
   .container {
-      max-width: 1440px;
+      max-width: 1350px;
   }
 }
 @media (max-width: 992px) {
@@ -1610,7 +1613,7 @@ body.practice .modal img#profileImg {
   
   #unique-paindlik .col, #unique-tulevikuoskused .col,
   #unique-interditsiplinaarne .col{
-      margin-top: 3rem;
+      margin-top: 1rem;
   }
 
 }
@@ -1622,3 +1625,131 @@ body.practice .modal img#profileImg {
 
 }
 
+.alert {
+  border-radius: 0;
+}
+
+
+.cropper-bg {
+    background-image: none!important;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+    background: transparent;
+    margin: 0;
+}
+
+.dropzone {
+    min-height: 210px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: none;
+    background: #eeeeee;
+    padding: 20px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropzone .dz-preview .dz-image {
+  border-radius: 0;
+  margin: auto;
+  width: 100%;
+  margin-bottom: 1rem;
+  height: auto;
+}
+
+.dropzone {
+    min-height: 210px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border: none;
+    background: #eeeeee;
+    border-bottom: 1px solid #ced4da;
+    padding: 20px 20px;
+}
+
+.dz-default.dz-message {
+    height: 170px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.alert-dismissible .close {
+  padding: 0.55rem 1.25rem;
+}
+
+.btn {
+  font-family: "Rubik";
+}
+
+.custom-control.custom-checkbox {
+  text-align: center;
+
+}
+.custom-control.custom-checkbox label.custom-control-label {
+  padding-top: 5px;
+}
+
+.modal #submit-all {
+  width: 100%;
+}
+.cropper-overlay {
+  position : fixed;
+  left : 0;
+  right: 0;
+  top : 0;
+  bottom : 0;
+  z-index : 99999;
+  background : #000;
+}
+.btn-cropper-overlay {
+  position : absolute;
+  width : 100px;
+  left : calc(50% - 50px);
+  bottom : 50px;
+  z-index : 99999;
+}
+
+@media (max-width: 1200px) {
+    i#unique-arrow {
+        background-size: 150%;
+        background-position: 300px 100px!important;
+        height: 60px;
+    }
+}
+
+@media (max-width: 992px) {
+    i#unique-arrow {
+        background-size: 484px;
+        background-position: 452px 156px!important;
+        height: 100px;
+    }
+    .unique-box .col.p-3 {
+        min-height: 350px;
+    }
+    #unique-tulevikuoskused .col{
+        margin-top: 0rem;
+    }
+
+    #unique-paindlik .col{
+        margin-top: 2rem;
+    }
+
+}
+
+@media (max-width: 768px) {
+    i#unique-arrow {
+        background-size: 484px;
+        background-position: 452px 156px!important;
+        height: 100px;
+    }
+    .unique-box .col.p-3 {
+        min-height: inherit;
+      margin-top:1rem!important;
+    }
+    .unique-box .col span {
+      position: inherit;
+      padding: 0;
+    }
+
+  #why h2 span, #unique h2 span, h1 {
+    font-size: 10vw!important;
+  }
+
+}
