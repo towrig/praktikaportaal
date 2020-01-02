@@ -77,6 +77,7 @@
                                         if($queue){
                                             echo '</div></div></div><div class="carousel-item"><div class="container"><div class="row">';
                                             $queue = false;
+                                            $pages++;
                                         }
                                         $bigstring = '
                                         <div class="col-md-4">
@@ -110,7 +111,6 @@
                                         echo $bigstring;
                                         $j++;
                                         if ($j == $max_per_page){
-                                            $pages++;
                                             $j = 0;
                                             $queue = true;
                                         }
