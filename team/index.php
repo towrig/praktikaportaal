@@ -75,7 +75,7 @@
                                             $amount = $row["amount"];
                                         }
                                         if($queue){
-                                            echo '<div class="carousel-item"><div class="container"><div class="row">';
+                                            echo '</div></div></div><div class="carousel-item"><div class="container"><div class="row">';
                                             $queue = false;
                                         }
                                         $bigstring = '
@@ -113,7 +113,6 @@
                                             $pages++;
                                             $j = 0;
                                             $queue = true;
-                                            echo "</div></div></div>";
                                         }
                                     }
                                 } catch (PDOException $e){

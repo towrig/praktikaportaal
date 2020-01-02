@@ -62,7 +62,7 @@
                                 $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));;
                                 
                                 if($queue){
-                                    echo '<div class="carousel-item">';
+                                    echo '</div><div class="carousel-item">';
                                     $queue = false;
                                 }
 
@@ -99,7 +99,6 @@
                                     $pages++;
                                     $j = 0;
                                     $queue = true;
-                                    echo "</div>";
                                 }
                             }
 

@@ -210,7 +210,7 @@
                                                         unset($line);
                                                         
                                                         if($queue){
-                                                            echo '<div class="carousel-item"><div class="container"><div class="row">';
+                                                            echo '</div></div></div><div class="carousel-item"><div class="container"><div class="row">';
                                                             $queue = false;
                                                         }
                                                         
@@ -264,7 +264,6 @@
                                                             $pages++;
                                                             $j = 0;
                                                             $queue = true;
-                                                            echo "</div></div></div>";
                                                         }
 
                                                     }
