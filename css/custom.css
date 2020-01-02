@@ -25,6 +25,12 @@ img {
     height: auto;
 }
 
+/* quickfixes */
+.carousel-item.team-carousel.active{
+    /*display: flex;*/
+}
+/* end quickfixes*/
+
 .work .row {
     margin: 20px 0px;
 }

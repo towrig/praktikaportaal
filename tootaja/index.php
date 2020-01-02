@@ -48,7 +48,7 @@
                             $query->execute(array(1));
                             $data = $query -> fetchAll();
                             $j = 0;
-                            $max_per_page = 3;
+                            $max_per_page = 5;
                             $pages = 1;
                             $queue = false;
                             foreach($data as $row){
