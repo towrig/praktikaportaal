@@ -1468,8 +1468,8 @@ body.project .modal .nav-pills .nav-link.active, body.project .modal .nav-pills 
     border-bottom: 2px solid #01499d!important;
     border-radius: 0!important;
     color: #01499d!important;
-    background: url(http://192.168.56.101/praktikaveeb/img/icons.png);
-  background-position: 100px -200px;
+    background: url(../img/icons.png);
+    background-position: 100px -200px;
 }
 
 body.project .modal a.nav-link {
@@ -1520,7 +1520,7 @@ body.practice .modal label {
 }
 
 body.practice .modal img#profileImg {
-    max-width: 196px;
+    max-width: 225px;
 }
 
 #seminar-modal .modal-body {
@@ -1758,4 +1758,69 @@ body.practice .modal img#profileImg {
     font-size: 10vw!important;
   }
 
+}
+
+
+a.page-link {
+    background: transparent;
+    border: none;
+    font-family: "Rubik";
+    font-weight: 600;
+    color: #00489d!important;
+}
+
+.page-item.active .page-link {
+    color: #ff5622!important;
+    background: none;
+}
+
+
+a.page-link[aria-label=Next]:after {
+    content: " ";
+    background: url(../img/icons.png);
+    height: 35px;
+    width: 22px;
+    display: block;
+    margin: auto;
+    margin-left: 14px;
+    position: absolute;
+    background-position: -166px 51px;
+    top: 1px;
+}
+
+a.page-link[aria-label=Next] span {
+    display: none;
+}
+
+
+a.page-link[aria-label=Previous]:after {
+    content: " ";
+    background: url(../img/icons.png);
+    height: 35px;
+    width: 22px;
+    display: block;
+    margin: auto;
+    margin-left: -34px;
+    position: absolute;
+    background-position: -152px 50px;
+    top: 1px;
+}
+
+a.page-link[aria-label=Previous] span {
+    display: none;
+}
+
+a.page-link[aria-label=Previous]:hover,
+a.page-link[aria-label=Next]:hover {
+  background: none;
+  border: none;
+}
+
+a.page-link[aria-label=Previous]:hover:after,
+a.page-link[aria-label=Next]:hover:after {
+  transform: scale(1.1);
+}
+
+.carousel-item {
+    margin-top: 2rem;
 }

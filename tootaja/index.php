@@ -110,7 +110,7 @@
                   </div>
                 </div>
                 <nav aria-label="Pager">
-                  <ul class="pagination">
+                  <ul class="pagination justify-content-center">
                     <li class="page-item" data-index="prev">
                       <a class="page-link" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
