@@ -121,141 +121,183 @@
                     <div class="col-lg-12"></div>
                     <div class="col-lg-12">
                         <div class="row">
-                            
-                      </div>
+                            <div id="carouselPager" class="carousel slide col-md-12">
+                              <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="container">
+                                        <div class="row">
+                                            <?php
+                                                // Function to show maxchars if to much text
+                                                function substringwords($text, $maxchar = 40, $end = "..."){
+                                                if (strlen($text) > $maxchar || $text = '') {
+                                                  $words = preg_split('/\s/', $text);
+                                                  $output = '';
+                                                  $i = 0;
+                                                  while (1) {
+                                                    $length = strlen($output) + strlen($words[$i]);
+                                                    if ($length > $maxchar) {
+                                                      break;
+                                                    }
+                                                    else {
+                                                      $output .= " " . $words[$i];
+                                                      ++$i;
+                                                    }
+                                                  }
+                                                  $output .= " " . $end;
+                                                }
+                                                else {
+                                                  $output = $text;
+                                                }
+                                                return $output;
+                                                }
+                                                try {
+                                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+                                                    // set the PDO error mode to exception
+                                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                    if(!empty($_POST)){
+                                                        $cat = $_POST["cat"];
+                                                        $location = $_POST["locations"];
+                                                        $date = $_POST["date_order"];
 
-                        <div class="row">
-                            <?php
-                              // Function to show maxchars if to much text
-                              function substringwords($text, $maxchar = 40, $end = "..."){
-                                if (strlen($text) > $maxchar || $text = '') {
-                                  $words = preg_split('/\s/', $text);
-                                  $output = '';
-                                  $i = 0;
-                                  while (1) {
-                                    $length = strlen($output) + strlen($words[$i]);
-                                    if ($length > $maxchar) {
-                                      break;
-                                    }
-                                    else {
-                                      $output .= " " . $words[$i];
-                                      ++$i;
-                                    }
-                                  }
-                                  $output .= " " . $end;
-                                }
-                                else {
-                                  $output = $text;
-                                }
-                                return $output;
-                              }
-                            try {
-                                $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
-                                // set the PDO error mode to exception
-                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                if(!empty($_POST)){
-                                    $cat = $_POST["cat"];
-                                    $location = $_POST["locations"];
-                                    $date = $_POST["date_order"];
+                                                        $queryString = "";
+                                                        if($cat == "date"){
+                                                            $queryString.="ORDER BY datetime_uploaded ";
+                                                            if($date == "new"){
+                                                                $queryString.="DESC";
+                                                            }else{
+                                                                $queryString.="ASC";
+                                                            }
+                                                            $query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ? '+$queryString);
+                                                            $query->execute(array(1));
+                                                        }else{
+                                                            $query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ? AND location = ?');
+                                                            $query->execute(array(1, $location));
+                                                        }
 
-                                    $queryString = "";
-                                    if($cat == "date"){
-                                        $queryString.="ORDER BY datetime_uploaded ";
-                                        if($date == "new"){
-                                            $queryString.="DESC";
-                                        }else{
-                                            $queryString.="ASC";
-                                        }
-                                        $query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ? '+$queryString);
-                                        $query->execute(array(1));
-                                    }else{
-                                        $query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ? AND location = ?');
-                                        $query->execute(array(1, $location));
-                                    }
+                                                    }else{
+                                                        $query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ?');
+                                                        $query->execute(array(1));
+                                                    }
+                                                    $data = $query -> fetchAll();
+                                                    $j = 0;
+                                                    $max_per_page = 12;
+                                                    $pages = 1;
+                                                    $queue = false;
+                                                    foreach($data as $row){
 
-                                }else{
-                                    $query = $conn->prepare('SELECT * FROM People WHERE isvalidated = ?');
-                                    $query->execute(array(1));
-                                }
-                                $data = $query -> fetchAll();
-                                foreach($data as $row){
+                                                        // Everything on new lines
+                                                        $name = $row["name"];
+                                                        $name_br = str_replace(" ", "<br>", $name);
+                                                        $degree = $row["major"]."<br>".$row["institute"];
 
-                                    // Everything on new lines
-                                    $name = $row["name"];
-                                    $name_br = str_replace(" ", "<br>", $name);
-                                    $degree = $row["major"]."<br>".$row["institute"];
+                                                        $pic = "../userdata/pictures/".$row["picturepath"]; //https://dummyimage.com/1000x1000/fff/aaa
+                                                        if($row["picturepath"]==""){
+                                                           $pic ="../userdata/blank_profile_pic.png";
+                                                        }
+                                                        $cv = "../userdata/cvs/".$row["cvpath"];
+                                                        $email = $row["email"];
+                                                        $tugevused = $row["skills"];
+                                                        $kogemused = $row["experience"];
+                                                        $work = $row["work"];
+                                                        $asukoht = $row["location"]; 
 
-                                    $pic = "../userdata/pictures/".$row["picturepath"]; //https://dummyimage.com/1000x1000/fff/aaa
-                                    if($row["picturepath"]==""){
-                                       $pic ="../userdata/blank_profile_pic.png";
-                                    }
-                                    $cv = "../userdata/cvs/".$row["cvpath"];
-                                    $email = $row["email"];
-                                    $tugevused = $row["skills"];
-                                    $kogemused = $row["experience"];
-                                    $work = $row["work"];
-                                    $asukoht = $row["location"]; 
+                                                        //bullet list creator
+                                                        $parsed_kogemused = "<ul>";
+                                                        foreach(explode("\n", $kogemused) as $line){
+                                                            $parsed_kogemused .= "<li>$line</li>";
+                                                        }
+                                                        $parsed_kogemused .= "</ul>";
+                                                        unset($line);
+                                                        
+                                                        if($queue){
+                                                            echo '<div class="carousel-item"><div class="container"><div class="row">';
+                                                            $queue = false;
+                                                        }
+                                                        
+                                                        $bigstring = '
+                                                        <div class="col-xs-12 col-sm-6 col-md-2">
+                                                            <div class="flip-div">
+                                                                <div class="flip-main">
+                                                                    <div class="front">
+                                                                        <div class="card">
+                                                                            <p><img class="" src="'.$pic.'" alt="'.$name.'" title="'.$name.'"></p>
+                                                                            <div class="card-body pb-2">
+                                                                                <p class="card-title font-weight-bold">'.$name_br.'</p>
+                                                                                <p class="card-text font-weight-light">'.$degree.'</p>
+                                                                                <p class="card-text font-weight-light text-primary">'.$work.'</p>
+                                                                            </div>
+                                                                            <a href="#" class=""><i class="arrow-front"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="back">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <p class="card-title font-weight-bold">'.$name_br.'</p>
+                                                                                <p class="card-text font-weight-light">'.$degree.'</p>
+                                                                                <p class="card-text font-weight-light">'.$work.'</p>
+                                                                                <p class="font-weight-bold mb-0">Tugevused</p>
+                                                                                <p class="card-text font-weight-light">'.$tugevused.'</p>
+                                                                                <p class="font-weight-bold mb-0">Kogemused</p>
+                                                                                <p class="card-text font-weight-light">'.$kogemused.'</p>
+                                                                                <!-- Leaving this in in case we still want this CV and e-mail button -->
+                                                                                 <!--<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">----
+                                                                                    <a class="btn btn-sm btn-info js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i></a>
+                                                                                    <a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i></a>
+                                                                                </div>	-->
 
-                                    //bullet list creator
-                                    $parsed_kogemused = "<ul>";
-                                    foreach(explode("\n", $kogemused) as $line){
-                                        $parsed_kogemused .= "<li>$line</li>";
-                                    }
-                                    $parsed_kogemused .= "</ul>";
-                                    unset($line);
+                                                                            </div>
+                                                                            <div class="links">
+                                                                              <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>
+                                                                              <a href="#" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>
+                                                                            </div>
+                                                                            <i class="arrow-front"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>';
+                                                        $bigstring = str_replace("\n","",$bigstring);
+                                                        $bigstring = str_replace("\t","",$bigstring);
+                                                        echo $bigstring;
+                                                        $j++;
+                                                        if ($j == $max_per_page){
+                                                            $pages++;
+                                                            $j = 0;
+                                                            $queue = true;
+                                                            echo "</div></div></div>";
+                                                        }
 
-                                    $bigstring = '
-                                    <div class="col-xs-12 col-sm-6 col-md-2">
-                                        <div class="flip-div">
-                                            <div class="flip-main">
-                                                <div class="front">
-                                                    <div class="card">
-                                                        <p><img class="" src="'.$pic.'" alt="'.$name.'" title="'.$name.'"></p>
-                                                        <div class="card-body pb-2">
-                                                            <p class="card-title font-weight-bold">'.$name_br.'</p>
-                                                            <p class="card-text font-weight-light">'.$degree.'</p>
-                                                            <p class="card-text font-weight-light text-primary">'.$work.'</p>
-                                                        </div>
-                                                        <a href="#" class=""><i class="arrow-front"></i></a>
-                                                    </div>
-                                                </div>
-                                                <div class="back">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <p class="card-title font-weight-bold">'.$name_br.'</p>
-                                                            <p class="card-text font-weight-light">'.$degree.'</p>
-                                                            <p class="card-text font-weight-light">'.$work.'</p>
-                                                            <p class="font-weight-bold mb-0">Tugevused</p>
-                                                            <p class="card-text font-weight-light">'.$tugevused.'</p>
-                                                            <p class="font-weight-bold mb-0">Kogemused</p>
-                                                            <p class="card-text font-weight-light">'.$kogemused.'</p>
-                                                            <!-- Leaving this in in case we still want this CV and e-mail button -->
-                                                             <!--<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">----
-                                                                <a class="btn btn-sm btn-info js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i></a>
-                                                                <a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i></a>
-                                                            </div>	-->
-                                                            
-                                                        </div>
-                                                        <div class="links">
-                                                          <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>
-                                                          <a href="#" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>
-                                                        </div>
-                                                        <i class="arrow-front"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                    }
+                                                } catch (PDOException $e){
+                                                    echo "Connection failed: " . $e->getMessage();
+                                                }
+                                            ?>
                                         </div>
-                                    </div>';
-                                    $bigstring = str_replace("\n","",$bigstring);
-                                    $bigstring = str_replace("\t","",$bigstring);
-                                    echo $bigstring;
-
-
-                                }
-                            } catch (PDOException $e){
-                                echo "Connection failed: " . $e->getMessage();
-                            }
-                            ?>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <nav aria-label="Pager" class="col-md-12">
+                              <ul class="pagination">
+                                <li class="page-item" data-index="prev">
+                                  <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                  </a>
+                                </li>
+                                <?php
+                                  for($i=0; $i < $pages; $i++){
+                                      echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
+                                  }
+                                ?>
+                                <li class="page-item" data-index="next">
+                                  <a class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                  </a>
+                                </li>
+                              </ul>
+                            </nav>
                         </div>
                     </div>
 
@@ -397,10 +439,29 @@
             $('.js-ajax').on('click', function(e) {
                 ajaxSubmit(e);
             });
-           $( ".flip-div" ).click(function() {
-            $( this ).toggleClass( "hover" );
-          });
+            $( ".flip-div" ).click(function() {
+                $( this ).toggleClass( "hover" );
+            });
+            
+            $('.pagination .page-item').on('click', paginatorClick);
+            $('#carouselPager').carousel({
+                interval: false,
+                wrap: false
+            });
+            $('#carouselPager').on('slide.bs.carousel', function(e){
+                $('.pagination .page-item').eq(e.from+1).toggleClass('active');
+                $('.pagination .page-item').eq(e.to+1).toggleClass('active');
+            });
+            
         });
+        
+        function paginatorClick(e){
+            console.log('moving');
+            var carousel = $('#carouselPager');
+            var target = $(e.currentTarget);
+            var index = target.data('index');
+            carousel.carousel(index);
+        }
 
         function openCV(e) {
             var modal = $('.modal-cv').first();

@@ -50,7 +50,7 @@
                                     $query->execute(array(1));
                                     $data = $query -> fetchAll();
                                     $j = 0;
-                                    $max_per_page = 2;
+                                    $max_per_page = 6;
                                     $pages = 1;
                                     $queue = false;
                                     foreach($data as $row){
