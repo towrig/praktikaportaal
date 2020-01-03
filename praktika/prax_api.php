@@ -63,7 +63,7 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 
   error_log(date('y-d-m h:i:s')."1. Post not EMPTY and action == add!\n", 3, "/var/tmp/my-errors.log");
 	
-	//start validating the form (name, oppekava, pilt, cv, töö, asukoht, email, checked)
+	//start validating the form (name, oppekava, pilt, cv, töö, asukoht, email, checked) and filesizes
 	$passedValidation = true;
 	
 	$response .= "Testing for validation...";
@@ -76,24 +76,42 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 	//email
 	if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$passedValidation = false;
+        $response .= "Email check failed!";
 	}else{
 		$email_valid = true;
 	}
+    //filesizes (server has 16MB max post data)
+    if($passedValidation){
+        if(isset($_FILES['cv'])){
+            if($_FILES['cv']['size'] > 8192000){ //8MB (size in bytes)
+                $passedValidation = false;
+                $response .= "Failed! CV file too big! (File needs to be smaller then 8MB)\n";
+            }
+        }
+        if(isset($_FILES['pilt'])){
+            if($_FILES['pilt']['size'] > 8192000){ //8MB (size in bytes)
+                $passedValidation = false;
+                $response .= "Failed! Picture file too big! (File needs to be smaller then 8MB)\n";
+            }
+        }
+    }
+    
 	$response .= "Passed: ";
 	$response .= $passedValidation ? 'true' : 'false';
 	
 	//paths to be used later
 	$picPath = null;
 	$cvPath = null;
-	
+    
 	//files
-	if($passedValidation){
-    error_log(date('y-d-m h:i:s')."1. Passed validation!\n", 3, "/var/tmp/my-errors.log");
+    if($passedValidation){
+            
+        error_log(date('y-d-m h:i:s')."1. Passed validation!\n", 3, "/var/tmp/my-errors.log");
 		if(!empty($cv) || !empty($pilt)){
 			error_log(date('y-d-m h:i:s')."2. Passed CV OR PIC!\n", 3, "/var/tmp/my-errors.log");
 			//pilt
 			if (isset($_FILES['pilt']) && $_FILES['pilt']['error'] === UPLOAD_ERR_OK){
-        error_log(date('y-d-m h:i:s')."3. Doing PIC action\n", 3, "/var/tmp/my-errors.log");
+                error_log(date('y-d-m h:i:s')."3. Doing PIC action\n", 3, "/var/tmp/my-errors.log");
 				$fileName = $_FILES['pilt']['name'];
 				$fileNameCmps = explode(".", $fileName);
 				$fileExtension = strtolower(end($fileNameCmps));
