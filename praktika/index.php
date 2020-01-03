@@ -9,25 +9,25 @@
     <div id="main"></div>
 
     <div id="page-content">
-      
+
         <section class="page-section">
             <div class="container">
                 <div class="row">
-                  <div class="col-lg-12">
-                    <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Üliõpilased</h1>
-                  </div>
-                  <div class="col-lg-4">
-                    <p class="font-weight-light">
-                        Lisa profiil ning leia endale sobiv praktikakoht!<br>
-                        Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist, võib olla Sinu järgmiseks töökohaks ning saada aimu, milliseid oskusi ja teadmisi tööandjad väärtustavad.
-                    </p>
-                  </div> 
+                    <div class="col-lg-12">
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Üliõpilased</h1>
+                    </div>
+                    <div class="col-lg-4">
+                        <p class="font-weight-light">
+                            Lisa profiil ning leia endale sobiv praktikakoht!<br>
+                            Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist, võib olla Sinu järgmiseks töökohaks ning saada aimu, milliseid oskusi ja teadmisi tööandjad väärtustavad.
+                        </p>
+                    </div>
                     <div class="col-lg-2">
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Lisa profiil</span>
-                  </div>
-                  <div class="col-lg-12">
-                    <h5 class="text-uppercase text-center font-weight-bold mt-5">Liitunud</h5>
-                  </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5">Liitunud</h5>
+                    </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
         </section>
@@ -39,11 +39,11 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div id="carouselPager" class="carousel slide col-md-12">
-                              <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="container">
-                                        <div class="row">
-                                            <?php
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="container">
+                                            <div class="row">
+                                                <?php
                                                 // Function to show maxchars if to much text
                                                 function substringwords($text, $maxchar = 40, $end = "..."){
                                                 if (strlen($text) > $maxchar || $text = '') {
@@ -188,31 +188,31 @@
                                                     echo "Connection failed: " . $e->getMessage();
                                                 }
                                             ?>
+                                            </div>
                                         </div>
                                     </div>
-                                  </div>
                                 </div>
                             </div>
                             <nav aria-label="Pager" class="col-md-12">
-                              <ul class="pagination justify-content-center">
-                                <li class="page-item" data-index="prev">
-                                  <a class="page-link" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                  </a>
-                                </li>
-                                <?php
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" data-index="prev">
+                                        <a class="page-link" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <?php
                                   for($i=0; $i < $pages; $i++){
                                       echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
                                   }
                                 ?>
-                                <li class="page-item" data-index="next">
-                                  <a class="page-link" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                  </a>
-                                </li>
-                              </ul>
+                                    <li class="page-item" data-index="next">
+                                        <a class="page-link" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </nav>
                         </div>
                     </div>
@@ -242,28 +242,28 @@
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
                                     <input required type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email">
-                                  <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                    <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="work">Eriala</label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major">
-                                  <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
+                                    <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
                                 </div>
                             </div>
-                          
-                          <div class="col-lg-4">
+
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <!--<img src="../userdata/blank_profile_pic.png" id="profileImg">-->
                                     <label for="pilt" class="<?php if(!empty($_POST)) { if(!$pic_success) { echo "is-invalid"; } } ?>">Pilt</label>
                                     <!--<input type="file" onchange="previewFile()"><br>-->
-                                  <div id="preview">
-                                    <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
-                                  </div>
-                                  <div class="upload-btn-wrapper">
-                                    <button class="btn">Lae ülesse oma profiili pilt</button>
-                                    <input type="file" accept="image/*" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt_full" onchange="previewFile()">
-                                    <div class='invalid-feedback'>Lae profiilipilt!</div>
-                                  </div>
+                                    <div id="preview">
+                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                    </div>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn">Lae ülesse oma profiili pilt</button>
+                                        <input type="file" accept="image/*" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt_full" onchange="previewFile()">
+                                        <div class='invalid-feedback'>Lae profiilipilt!</div>
+                                    </div>
 
                                     <!--<div class="dropzone" id="my-awesome-dropzone" name="pilt"></div>-->
                                     <div class='invalid-feedback'>Sisesta pilt!</div>
@@ -296,9 +296,9 @@
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                      <button class="btn">Lae ülesse oma CV</button>
-                                      <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="cv" name="cv" onchange="showFileName(this.files)">
-                                      <div class='invalid-feedback'>Lae ülesse oma CV</div>
+                                        <button class="btn">Lae ülesse oma CV</button>
+                                        <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="cv" name="cv" onchange="showFileName(this.files)">
+                                        <div class='invalid-feedback'>Lae ülesse oma CV</div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -307,8 +307,8 @@
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
                                 </div>
-                              <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add">Lisa profiil</button>
-                              </div>
+                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add">Lisa profiil</button>
+                            </div>
 
                         </form>
                     </div>
@@ -334,40 +334,40 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
     <script src="https://unpkg.com/cropperjs"></script>
     <script>
-      var blobImg;
-      try{
+        var blobImg;
+        try {
 
-      }catch(err){
-        console.log(err);
-      }
+        } catch (err) {
+            console.log(err);
+        }
         $(document).ready(function() {
             $('.js-modal').on('click', openModal);
             $('.js-open-cv').on('click', openCV);
             $('.js-ajax').on('click', function(e) {
                 ajaxSubmit(e);
             });
-            $( ".flip-div" ).click(function() {
-                $( this ).toggleClass( "hover" );
+            $(".flip-div").click(function() {
+                $(this).toggleClass("hover");
             });
-            
+
             $('.pagination .page-item').on('click', paginatorClick);
             $('#carouselPager').carousel({
                 interval: false,
                 wrap: false
             });
-            $('#carouselPager').on('slide.bs.carousel', function(e){
-                $('.pagination .page-item').eq(e.from+1).toggleClass('active');
-                $('.pagination .page-item').eq(e.to+1).toggleClass('active');
+            $('#carouselPager').on('slide.bs.carousel', function(e) {
+                $('.pagination .page-item').eq(e.from + 1).toggleClass('active');
+                $('.pagination .page-item').eq(e.to + 1).toggleClass('active');
             });
-            
+
         });
-        
-        function paginatorClick(e){
+
+        function paginatorClick(e) {
             console.log('moving');
             var carousel = $('#carouselPager');
             var target = $(e.currentTarget);
@@ -380,7 +380,10 @@
             var target = $(e.currentTarget);
             var cvpath = $(target).data('cv');
 
-            var cvembed = $('<embed>').attr({'src':cvpath+'#toolbar=0','type':'application/pdf'}).css('width', '100%').css('min-height', '512px').html('<div class="alert alert-warning">Antud veebilehtiseja ei toeta PDFi avamist aknas. Palun lae PDF alla <a href="'+cvpath+'" target="_blank"><strong>siit</strong>.</a></div>');
+            var cvembed = $('<embed>').attr({
+                'src': cvpath + '#toolbar=0',
+                'type': 'application/pdf'
+            }).css('width', '100%').css('min-height', '512px').html('<div class="alert alert-warning">Antud veebilehtiseja ei toeta PDFi avamist aknas. Palun lae PDF alla <a href="' + cvpath + '" target="_blank"><strong>siit</strong>.</a></div>');
             modal.find('.modal-body').empty();
             modal.find('.modal-body').html(cvembed);
 
@@ -393,7 +396,8 @@
             var modal = $('.modal').first();
             modal.modal('show');
         }
-      function ajaxSubmit(e) {
+
+        function ajaxSubmit(e) {
             var action = $(e.currentTarget).data("value");
             var form = $('#form_student');
             e.preventDefault();
@@ -409,28 +413,19 @@
               }
             });*/
             formData.delete("pilt_full");
-            formData.append("pilt",blobImg,"profilepic.jpg");
-            var filesizePic = true;
-            var filesizeCV = true;
-            if($('#pilt')[0].files.length != 0 && $('#pilt')[0].files[0].size > 8192000) { // 8 MB (size in bytes)
-                filesizePic = false;
-            }
-            if($('#cv')[0].files.length != 0 && $('#cv')[0].files[0].size > 8192000) { // 8 MB (size in bytes)
-                filesizeCV = false;
-            }
-            if(!filesizePic || !filesizeCV){
-                text = "";
-                if(!filesizePic) text += "Pildifaili suurus on liiga suur!";
-                if(!filesizeCV) text += "CV faili suurus on liiga suur!";
+            if (blobImg != undefined)
+                formData.append("pilt", blobImg, "profilepic.jpg");
+            
+            if ($('#cv')[0].files.length != 0 && $('#cv')[0].files[0].size > 8192000) { // 8 MB (size in bytes)
                 form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
-                              <strong>Viga!</strong> ' + text + '\
+                              <strong>Viga!</strong> CV faili suurus on liiga suur!\
                               <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
                                 <span aria-hidden="true">&times;</span>\
                               </button>\
                             </div>');
                 return;
             }
-          
+
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
@@ -443,7 +438,9 @@
                 form.after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink!</div>");
                 form.css('display', 'none');
                 form.trigger("reset");
-                setTimeout(function() {modal.modal("hide");},3000);
+                setTimeout(function() {
+                    modal.modal("hide");
+                }, 3000);
             }).fail(function(response) {
                 console.log(response);
                 form.addClass('was-validated');
@@ -456,79 +453,79 @@
             });
         }
 
-      function showFileName(files) {
-        try {
-          var fname = document.getElementById("cv-upload-data");
-          fname.innerHTML = files[0].name +" ("+ (files[0].size/1024).toFixed(2) + "KB)";
-          document.getElementById("cv").parentElement.appendChild(fname);
-        } catch(err) {
-          var fname = document.createElement("div");
-          fname.classList.add("pt-3");
-          fname.id = "cv-upload-data";
-          fname.innerHTML = files[0].name +" ("+ (files[0].size/1024).toFixed(2) + "KB)";
-          document.getElementById("cv").parentElement.appendChild(fname);
+        function showFileName(files) {
+            try {
+                var fname = document.getElementById("cv-upload-data");
+                fname.innerHTML = files[0].name + " (" + (files[0].size / 1024).toFixed(2) + "KB)";
+                document.getElementById("cv").parentElement.appendChild(fname);
+            } catch (err) {
+                var fname = document.createElement("div");
+                fname.classList.add("pt-3");
+                fname.id = "cv-upload-data";
+                fname.innerHTML = files[0].name + " (" + (files[0].size / 1024).toFixed(2) + "KB)";
+                document.getElementById("cv").parentElement.appendChild(fname);
+            }
         }
-      }
-      
-      function previewFile() {
-        var preview = document.querySelector('#preview');
-        var files   = document.querySelector('input[type=file]').files[0];
 
-        function readAndPreview(file) {
-          // Make sure `file.name` matches our extensions criteria
-          if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
-            var reader = new FileReader();
-            reader.addEventListener("load", function () {
-              var image = document.getElementById('profileImg');
-              image.height = 100;
-              image.title = file.name;
-              image.src = this.result;
-              preview.appendChild( image );
-            }, false);
-            reader.readAsDataURL(file);
-          }
+        function previewFile() {
+            var preview = document.querySelector('#preview');
+            var files = document.querySelector('input[type=file]').files[0];
+
+            function readAndPreview(file) {
+                // Make sure `file.name` matches our extensions criteria
+                if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    var reader = new FileReader();
+                    reader.addEventListener("load", function() {
+                        var image = document.getElementById('profileImg');
+                        image.height = 100;
+                        image.title = file.name;
+                        image.src = this.result;
+                        preview.appendChild(image);
+                    }, false);
+                    reader.readAsDataURL(file);
+                }
+            }
+            if (files) {
+                readAndPreview(files);
+                var editor = document.createElement('div');
+                editor.classList.add("cropper-overlay");
+                // Create the confirm button
+                var confirm = document.createElement('button');
+                confirm.textContent = 'Kärbi';
+                confirm.classList.add("btn");
+                confirm.classList.add("btn-primary");
+                confirm.classList.add("text-uppercase");
+                confirm.classList.add("btn-cropper-overlay");
+
+                confirm.addEventListener('click', function() {
+                    // Get the canvas with image data from Cropper.js
+                    var canvas = cropper.getCroppedCanvas({
+                        width: 256,
+                        height: 256
+                    });
+
+                    // Turn the canvas into a Blob (file object without a name)
+                    canvas.toBlob(function(blob) {
+                        // Set #profileImg src to blob and use blobImg global to use later in formData
+                        document.getElementById('profileImg').src = URL.createObjectURL(blob);
+                        blobImg = blob;
+                    });
+                    // Remove the editor from view
+                    editor.parentNode.removeChild(editor);
+                });
+                editor.appendChild(confirm);
+                // Load the image
+                var image = new Image();
+                image.src = URL.createObjectURL(files);
+                editor.appendChild(image);
+                // Append the editor to the page
+                document.body.appendChild(editor);
+                // Create Cropper.js and pass image
+                var cropper = new Cropper(image, {
+                    aspectRatio: 1
+                });
+            }
         }
-        if (files) {
-          readAndPreview(files);
-          var editor = document.createElement('div');
-          editor.classList.add("cropper-overlay");
-          // Create the confirm button
-          var confirm = document.createElement('button');
-          confirm.textContent = 'Kärbi';
-          confirm.classList.add("btn");
-          confirm.classList.add("btn-primary");
-          confirm.classList.add("text-uppercase");
-          confirm.classList.add("btn-cropper-overlay");
-
-          confirm.addEventListener('click', function() {
-            // Get the canvas with image data from Cropper.js
-            var canvas = cropper.getCroppedCanvas({
-              width: 256,
-              height: 256
-            });
-
-            // Turn the canvas into a Blob (file object without a name)
-            canvas.toBlob(function(blob) {
-              // Set #profileImg src to blob and use blobImg global to use later in formData
-              document.getElementById('profileImg').src = URL.createObjectURL(blob);
-              blobImg = blob;
-            });
-            // Remove the editor from view
-            editor.parentNode.removeChild(editor);
-          });
-          editor.appendChild(confirm);
-          // Load the image
-          var image = new Image();
-          image.src = URL.createObjectURL(files);
-          editor.appendChild(image);
-          // Append the editor to the page
-          document.body.appendChild(editor);
-          // Create Cropper.js and pass image
-          var cropper = new Cropper(image, {
-            aspectRatio: 1
-          });
-        }
-      }
 
     </script>
 

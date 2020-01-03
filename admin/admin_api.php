@@ -18,7 +18,7 @@ $dbpassword = $CFG->dbpasswd;
 function notifyProjectPoster($to, $heading){
 	$from = 'noreply@praktika.ut.ee';
     $subject = 'Praktikaportaali projekt';
-    $message = 'Tere!<br><br>Teie projekt “'.$heading.'” on heaks kiidetud. Rohkem infot edasiste tegevuste kohta loe siit.<br><br>Heade soovidega<br>praktika.ut.ee';
+    $message = 'Tere!<br><br>Teie projekt “'.$heading.'” on heaks kiidetud. Vaata kindlasti projektipraktika ajakava <a href="https://docs.google.com/document/d/e/2PACX-1vT7B16RNai2EJQrSf8PDTHWFiGHwrQB_MF1jhhZwo61Ox9HWJDBlL_IEFBOkHnNzvczU7R1jAy1xOc4/pub?embedded=true">siit</a>.<br><br>Heade soovidega<br>praktika.ut.ee';
     $headers = "From: ".$from."\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8"."\r\n";
     mail($to, $subject, $message, $headers) || print_r(error_get_last());
