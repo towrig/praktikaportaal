@@ -410,6 +410,27 @@
             });*/
             formData.delete("pilt_full");
             formData.append("pilt",blobImg,"profilepic.jpg");
+            var filesizePic = true;
+            var filesizeCV = true;
+            if($('#pilt')[0].files.length != 0 && $('#pilt')[0].files[0].size > 8192000) { // 8 MB (size in bytes)
+                filesizePic = false;
+            }
+            if($('#cv')[0].files.length != 0 && $('#cv')[0].files[0].size > 8192000) { // 8 MB (size in bytes)
+                filesizeCV = false;
+            }
+            if(!filesizePic || !filesizeCV){
+                text = "";
+                if(!filesizePic) text += "Pildifaili suurus on liiga suur!";
+                if(!filesizeCV) text += "CV faili suurus on liiga suur!";
+                form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
+                              <strong>Viga!</strong> ' + text + '\
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
+                                <span aria-hidden="true">&times;</span>\
+                              </button>\
+                            </div>');
+                return;
+            }
+          
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
