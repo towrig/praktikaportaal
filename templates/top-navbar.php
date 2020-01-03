@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-scrolled" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
       <a href="<?php echo $wwwroot; ?>"><div id="ut-logo"></div></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,27 +7,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <?php if ($_SERVER["PHP_SELF"] == '/praktika/index.php'): ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Avaleht
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">               
-                        <a class="dropdown-item  js-scroll-trigger" href="<?php echo $wwwroot ?>#page-top">Avaleht</a>
-                        
-                        <a class="dropdown-item  js-scroll-trigger" href="#why">Miks</a>
-                        <a class="dropdown-item  js-scroll-trigger" href="#purpose">Eesmärk</a>
-                        <a class="dropdown-item  js-scroll-trigger" href="#activities">Tegevused</a>
-                        <a class="dropdown-item  js-scroll-trigger" href="#contact">Kontakt</a>
-                        <a class="dropdown-item  js-scroll-trigger" href="#page-top">Tagasi üles</a>
-                    </div>
-                </li>
-                <?php endif; ?>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="#">Üliõpilasele</a>
+                    <a class="nav-link" target="_blank" href="https://sisu.ut.ee/praktikamajanduses">Üliõpilasele</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="#">Juhendajale</a>
+                    <a class="nav-link" target="_blank" href="https://sisu.ut.ee/praktikamajanduses/juhendajale">Juhendajale</a>
                 </li>
               <li class="nav-item">
                 <a class="nav-link lang-switch" target="_blank" href="#">EST</a>
