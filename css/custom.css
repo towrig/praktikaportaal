@@ -511,6 +511,7 @@ form {
 nav#mainNav {
     z-index: 5000;
     transition: .5s all ease-in-out;
+    background: none;
 }
 
 .modal.fade.show {

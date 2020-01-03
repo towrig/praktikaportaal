@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title="Üliõpilane"; include_once './../templates/header.php';?>
+<?php $title="Üliõpilased"; include_once './../templates/header.php';?>
 
 <body id="page-top" class="practice">
 
@@ -14,14 +14,13 @@
             <div class="container">
                 <div class="row">
                   <div class="col-lg-12">
-                    <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Üliõpilane</h1>
+                    <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Üliõpilased</h1>
                   </div>
                   <div class="col-lg-4">
                     <p class="font-weight-light">
                         Lisa profiil ning leia endale sobiv praktikakoht!<br>
                         Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist, võib olla Sinu järgmiseks töökohaks ning saada aimu, milliseid oskusi ja teadmisi tööandjad väärtustavad.
                     </p>
-                    <a href="#" class="text-uppercase font-weight-bold">Lisatud profiil säilib kuus kuud</a>
                   </div> 
                     <div class="col-lg-2">
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Lisa profiil</span>
@@ -29,88 +28,6 @@
                   <div class="col-lg-12">
                     <h5 class="text-uppercase text-center font-weight-bold mt-5">Liitunud</h5>
                   </div>
-                        
-                        <?php
-
-                            $locations = array();
-
-                            try {
-                                $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
-
-                                // set the PDO error mode to exception
-                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                                //echo "Connected to PDO successfully"; 
-                                $query = $conn->prepare('SELECT DISTINCT location FROM People WHERE isvalidated = ? ');
-                                $query->execute(array(1));
-
-                                $data = $query -> fetchAll();
-                                foreach($data as $row){
-                                    $locations[] = $row["location"];
-                                }
-
-                            }
-                            catch(PDOException $e){
-                                $error_code = $e->getCode();
-                                if($error_code == "23000"){
-                                    //do something to clarify an email like this exists already.
-                                }else{
-                                    echo "Connection failed (code: $error_code): " . $e->getMessage();
-                                }
-                            }
-
-                        ?>   
-                        <!--
-                        <form class="col-md-12 mb-4" target="_self" method="post" enctype="multipart/form-data">
-                                <div class="form-row mb-2">
-
-                                    <div class="col-md-12">
-                                        <small>Aeg/Asukoht</small>
-                                        <select class="form-control form-control-sm" name="cat" id="category">
-                                            <option value="date" <?php if($_POST["cat"] == "date") echo 'selected="selected"'; ?>>
-                                                Kuupäev
-                                            </option>
-                                            <option value="location" <?php if($_POST["cat"] == "location") echo 'selected="selected"'; ?>>
-                                                Asukoht
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-12" id="date_order" <?php if($_POST["cat"] == "date") echo 'style="display:none;"'; ?>>
-                                        <small>Aeg</small>
-                                        <select class="form-control form-control-sm" name="date_order" >
-                                            <option value="new">
-                                                Uuemad
-                                            </option>
-                                            <option value="old">
-                                                Vanemad
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-12" id="locations" <?php if($_POST["cat"] == "location") echo 'style="display:none;"'; ?>>
-                                        <small>Asukohad</small>
-                                        <select class="form-control form-control-sm" name="locations">
-                                            <?php
-                                                foreach($locations as $loc){
-                                                    $loc_op = '<option value="'.$loc.'">
-                                                                    '.$loc.'
-                                                                </option>';
-                                                    echo $loc_op;
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <input type="hidden" name="selected_sort" value="date">
-                                        <button class="btn btn-primary" type="submit">Sorteeri</button>
-                                    </div>
-
-                                </div>
-                            </form>-->
-                        
-
                 </div> <!-- .row -->
             </div> <!-- .container -->
         </section>
@@ -420,12 +337,8 @@
     
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
-    <script src="https://unpkg.com/dropzone"></script>
     <script src="https://unpkg.com/cropperjs"></script>
     <script>
-      //Dropzone.autoDiscover = false;
-      // Global FormData
-
       var blobImg;
       try{
 
@@ -479,147 +392,13 @@
                 return;
             var modal = $('.modal').first();
             modal.modal('show');
-
-            /*var myDropzone = new Dropzone("#my-awesome-dropzone", {
-              paramName: "pilt",
-              autoProcessQueue: false,
-              url: "./prax_api.php",
-              parallelUploads: 3,
-              maxFiles: 1,
-              addRemoveLinks: true,
-              dictDefaultMessage: "Lae oma pilt ülesse siit!",
-              dictRemoveFile: "Eemalda pilt",
-              dictMaxFilesExceeded: "Lubatud on vaid üks pilt",
-              dictInvalidFileType: "Lubatud vaid pildifailid",
-              acceptedFiles: "image/jpg, image/png",
-              dictFileTooBig: "Lisatud {{filename}} ületab lubatud {{maxFilesize}} suurust.",
-              maxFilesize: 5,
-              thumbnailWidth: 200,
-              thumbnailHeight: 200,
-              thumbnailMethod: 'contain',
-              resizeWidth: 256,
-              resizeMimeType: 'image/jpeg',
-              resizeMethod: 'contain',
-              resizeQuality: 0.7,
-
-              transformFile: function(file, done) {
-                var myDropZone = this;
-                // Create the image editor overlay
-                var editor = document.createElement('div');
-                editor.classList.add("cropper-overlay");
-                // Create the confirm button
-                var confirm = document.createElement('button');
-                confirm.textContent = 'Lõika';
-                confirm.classList.add("btn");
-                confirm.classList.add("btn-primary");
-                confirm.classList.add("text-uppercase");
-                confirm.classList.add("btn-cropper-overlay");
-
-                confirm.addEventListener('click', function() {
-                  // Get the canvas with image data from Cropper.js
-                  var canvas = cropper.getCroppedCanvas({
-                    width: 256,
-                    height: 256
-                  });
-
-                  // Turn the canvas into a Blob (file object without a name)
-                  canvas.toBlob(function(blob) {
-                    // Update the image thumbnail with the new image data
-                    myDropZone.createThumbnail(
-                      blob,
-                      myDropZone.options.thumbnailWidth,
-                      myDropZone.options.thumbnailHeight,
-                      myDropZone.options.thumbnailMethod,
-                      false,
-                      function(dataURL) {
-                        // Update the Dropzone file thumbnail
-                        myDropZone.emit('thumbnail', file, dataURL);
-                        // Return modified file to dropzone
-                        done(blob);
-                      }
-                    );
-                  });
-                  // Remove the editor from view
-                  editor.parentNode.removeChild(editor);
-                });
-                editor.appendChild(confirm);
-                // Load the image
-                var image = new Image();
-                image.src = URL.createObjectURL(file);
-                editor.appendChild(image);
-                // Append the editor to the page
-                document.body.appendChild(editor);
-                // Create Cropper.js and pass image
-                var cropper = new Cropper(image, {
-                  aspectRatio: 1
-                });
-              } ,
-                // The setting up of the dropzone
-              init: function() {
-                var myDropzoneInit = this;
-
-                // First change the button to actually tell Dropzone to process the queue.
-                document.getElementById("submit-all").addEventListener("click", function(e) {
-                  // Make sure that the form isn't actually being sent.
-                  //let formData = new FormData(document.getElementById('form_student'));
-                  e.preventDefault();
-                  e.stopPropagation();
-                  myDropzoneInit.processQueue();
-                });
-
-                this.on("sending", function(file, xhr, formData) {
-
-                  var action = $('.js-ajax').data("value");
-                  formData.append("action", action);
-
-                  var data = $('#form_student').serializeArray();
-                  $.each(data, function(key, el) {
-                      formData.append(el.name, el.value);
-                  });
-                  // Have to add CV file seperately in order to POST it with others
-                  var cv = document.getElementById("cv");
-                  formData.append("cv", cv.files[0]);
-                });
-
-                this.on("success", function(file, response) {
-                  var form = $('#form_student');
-
-                  console.log(response);
-                  form.before('<div class="alert alert-success alert-dismissible fade show" role="alert">\
-                                <strong>Aitäh!</strong> Teie emailile tuleb postituse aktiveerimislink!\
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
-                                  <span aria-hidden="true">&times;</span>\
-                                </button>\
-                              </div>');
-                  form.css('display', 'none');
-                  form.trigger("reset");
-                  setTimeout(function() {modal.modal("hide");},3000);
-                });
-
-               this.on("error", function(file, response) {
-                 console.log(response);
-                  var form = $('#form_student');
-                  form.addClass('was-validated');
-                  form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
-                              <strong>Viga!</strong> ' + response + '\
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
-                                <span aria-hidden="true">&times;</span>\
-                              </button>\
-                            </div>');
-               });
-                this.on("addedfile", function(file) {
-                  console.log("A file was just added");
-                });
-
-              }
-            });*/
         }
       function ajaxSubmit(e) {
             var action = $(e.currentTarget).data("value");
             var form = $('#form_student');
             e.preventDefault();
             e.stopPropagation();
-        let formData = new FormData(document.getElementById('form_student'));
+            var formData = new FormData(document.getElementById('form_student'));
             formData.append("action", action);
             /*var data = $('#form_student').serializeArray();
             $.each(data, function(key, el) {
