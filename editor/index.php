@@ -41,6 +41,7 @@ function loadHTML($filename){
     return $html_to_return;
 }
 
+
 //for form validation
 $heading = "";
 $description = "";
@@ -180,7 +181,8 @@ if(!empty($_POST) && $_POST["submit"] == "add"){
 		
 	}
 	
-}else if($_GET["e"]){
+}
+else if($_GET["e"]){
 	
 	$e_key = $_GET["e"];
 	$edit_success = false;

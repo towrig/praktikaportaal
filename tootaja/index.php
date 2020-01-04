@@ -18,9 +18,6 @@
             <div class="col-lg-2">
               <a href="../editor" id="formToggler" class="toggleMenu text-uppercase">Lisa pakkumine<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span>--></a>
             </div>
-        <!--<div class="col-lg-3">
-          <a href="../team" id="formToggler" class="toggleMenu btn-lg">ESITA PROJEKT<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span></a>
-        </div>-->
             <div class="col-lg-12">
               <h5 class="text-uppercase text-center font-weight-bold mt-3">Aktiivsed pakkumised</h5>
             </div>
@@ -32,34 +29,43 @@
 	<section id="profiles">
 		<div class="container">
 			<div class="row">
-                <!--<div class="col-md-12 text-center">
-                    <h2>Praktika- ja tööpakkumised</h2>
-                </div>-->
                 <div id="carouselPager" class="carousel slide">
                   <div class="carousel-inner">
                     <div class="carousel-item active">                    
                     <?php
-
                         try {
                             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
                             // set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $query = $conn->prepare('SELECT heading,description,validationcode,picturepath,work_location,datetime_uploaded FROM WorkPosts WHERE isvalidated = ?'); 
+                            $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ?'); 
                             $query->execute(array(1));
                             $data = $query -> fetchAll();
+                            
                             $j = 0;
                             $max_per_page = 5;
                             $pages = 1;
                             $queue = false;
                             foreach($data as $row){
-                                //currently unused cols: name,email,phone,tasks,experience,work_type,other,logopath
+                                
                                 $heading = $row["heading"];
                                 $description = $row["description"];
+                                $tasks = $row["tasks"];
+                                $skills = $row["experience"];
+                                $logo = $row["logopath"];
+                                $work_name = $row["work_name"]
+                                $work_desc = $row["work_description"];
+                                $location = $row["work_location"];
+                                $other = $row["other"];
+                                $website = $row["work_website"];
+                                $email = $row["email"];
+                                $name = $row["name"];
+                                $phone = $row["phone"];
+                                
                                 $validationcode = $row["validationcode"];
                                 $picurl = "../userdata/pictures/".$row["picturepath"];
-
-                                $location = $row["work_location"];
                                 $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));;
+                                $reg_end = $row["end_date"];
+                                $views = $row["views"];
                                 
                                 if($queue){
                                     echo '</div><div class="carousel-item">';
@@ -67,7 +73,21 @@
                                     $pages++;
                                 }
 
-                                $bigstring = '<div class="col-lg-12">
+                                $bigstring = '<div class="col-lg-12 js-view-modal" 
+                                                data-pic="'.$picurl.'"
+                                                data-heading="'.$heading.'"
+                                                data-description="'.$description.'"
+                                                data-tasks="'.$tasks.'"
+                                                data-skills="'.$skills.'"
+                                                data-work_name="'.$work_name.'"
+                                                data-location="'.$location.'"
+                                                data-other="'.$other.'"
+                                                data-website="'.$website.'"
+                                                data-email="'.$email.'"
+                                                data-name="'.$name.'"
+                                                data-phone="'.$phone.'"
+                                                data-reg_end="'.$reg_end.'"
+                                                >
                                                 <div class="row">
                                                   <div class="col-lg-1 text-uppercase font-weight-bold">
                                                     <p>'.$uploaded.'</p>
@@ -76,19 +96,19 @@
                                                       <img src="'.$picurl.'" alt="Ettevõtte logo">
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <a href="../tootaja/kuulutus?c='.$validationcode.'">
+                                                        <a href="">
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
                                                         <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
                                                     </div>
                                                   <div class="col-lg-3">
-                                                    <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> PUUDU</p>
+                                                    <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> '.$work_name.'</p>
                                                     <p class="m-0 p-0 font-weight-light"><b>Asukoht:</b> '.$location.'</p>
-                                                    <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> PUUDU</p>
+                                                    <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> '.$reg_end.'</p>
                                                   </div>
                                                   <div class="col-lg-2 text-center apply">
-                                                    <a class="text-uppercase font-weight-bold" href="../tootaja/kuulutus?c='.$validationcode.'">Kandideeri</a>
-                                                    <p>Vaatamisi <span class="views font-weight-bold">PUUDU</span></p>
+                                                    <a class="text-uppercase font-weight-bold" href="">Kandideeri</a>
+                                                    <p>Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
                                                 </div>
                                                 <hr>
@@ -130,7 +150,6 @@
                     </li>
                   </ul>
                 </nav>
-
             </div>
 		</div>
 	</section>
@@ -140,48 +159,140 @@
     <div id="main">
     </div>
 
-    <!-- modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    	<div class="modal-dialog" role="document">
-	    	<div class="modal-content">
+    <!-- modals -->
+    <div id="regModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
 
-	    		<div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLongTitle">Tudengi info</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-		      	</div>
-			    <div class="modal-body">
-			    	<div class="row">
+                <div class="modal-body">
+                    <div class="container">
 
-			    		<div class="col-md-4">
-			    			<div class="modal-image-container">
-			    				<div class="modal-image"></div>
-			    			</div>
-			    		</div>
-			    		<div class="col-md-8">
-			    			<div class="modal-student-info">
-			    				
-			    			</div>
-			    		</div>
+                        <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_student">
 
-			    		<div class="col-md-12 modal-student-description">
-			    			<p>Soovitud praktika/töö valdkond:</p>
-			    			<p class="modal-work diff-text"></p>
-			    			<p>Tugevused/oskused:</p>
-			    			<p class="modal-skills diff-text"></p>
-			    			<p>Kogemused:</p>
-			    			<p class="modal-experience diff-text"></p>
-			    			<p>Soovitud asukoht:</p>
-			    			<p class="modal-location diff-text"></p>
-			    			<p>*Sotsmeedia link*</p>
-			    		</div>
-			    	</div>
-			    </div>
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label for="name">Kuulutuse pealkiri</label>
+                                    <input required type="text" class="form-control" id="heading" name="heading">
+                                    <div class='invalid-feedback'>Palun lisa pealkiri</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="organization">Organisatsioon</label>
+                                    <input required type="text" class="form-control" id="organization" name="organization">
+                                    <div class='invalid-feedback'>Palun lisage teie organisatsiooni nimi</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="work">Registreerimise lõpptähtaeg</label>
+                                    <input required type="text" class="form-control" id="datepicker" name="date">
+                                    <div class='invalid-feedback'>Palun sisestage registreerimise lõpptähtaeg</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="work">Teie nimi</label>
+                                    <input required type="text" class="form-control" id="name" name="name">
+                                    <div class='invalid-feedback'>Palun sisestage oma nimi</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Teie e-mail</label>
+                                    <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+                                    <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="work">Teie telefoninumber</label>
+                                    <input required type="text" class="form-control" id="phone" name="phone">
+                                    <div class='invalid-feedback'>Palun sisestage oma nimi</div>
+                                </div>
+                            </div>
 
-	    	</div>
-	    </div>
-	</div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="pilt" class="">Pilt</label>
+                                    <div id="preview">
+                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                    </div>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn">Lae ülesse oma organisatsiooni logo</button>
+                                        <input type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
+                                    </div>
+                                    <div class='invalid-feedback'>Sisesta logo!</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="work_desc">Organisatsiooni tutvustus</label>
+                                    <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
+                                    <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Veebiaadress</label>
+                                    <input required type="text" class="form-control" id="website" name="website">
+                                    <div class='invalid-feedback'>Ära unusta märkida, mis valdkonnas soovid töötada</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Asukoht</label>
+                                    <input required type="text" class="form-control" id="location" name="location">
+                                    <div class='invalid-feedback'>Ole hea ja anna teada, kus töökoht asub</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Töökoha tutvustus</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tasks">Tööülesanded</label>
+                                    <textarea class="form-control" id="tasks" name="tasks" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="skills">Vajalikud oskused ja kogemused</label>
+                                    <textarea class="form-control" id="skills" name="skills" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="other">Muu oluline info</label>
+                                    <textarea class="form-control" id="other" name="other" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
+                                        <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
+                                    </div>
+                                </div>
+                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax">Lisa pakkumine</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div id="viewModal" class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-8">
+
+                                
+                            </div>
+
+                            <div class="col-lg-4">
+                                
+                            </div>
+
+                            <div class="col-lg-12">
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
@@ -189,10 +300,19 @@
     <script type="text/javascript">
     	$(document).ready(function(){
 
-    		$('.js-modal').on('click', openModal);
+    		$('.toggleMenu').on('click', openRegModal);
+            $('.js-view-modal').on('click', openViewModal);
+            $('#submit-all').on('click', ajaxSubmit);
           
-            $('[data-toggle="tooltip"]').tooltip();
-
+            //$('[data-toggle="tooltip"]').tooltip();
+            $("#datepicker").datepicker({
+              showWeek: true,
+              firstDay: 1,
+              minDate: -30,
+              dateFormat: 'mm-dd-yy'
+            });
+            
+            //pagination
     		$("#category").change(function(){
 
     			if($("#category").val() == "date"){
@@ -203,7 +323,6 @@
     				$("#locations").show();
     			}
     		});
-            
             $('.pagination .page-item').on('click', paginatorClick);
             $('#carouselPager').carousel({
                 interval: false,
@@ -223,31 +342,59 @@
             var index = target.data('index');
             carousel.carousel(index);
         }
-
-    	function openModal(e){
-    		var target = $(e.currentTarget);
-    		var modal = $('.modal').first();
-
+        
+        function openViewModal(e){
+            var target = $(e.currentTarget);
+    		var modal = $('#viewModal');
+            
+            //get values here
     		var name = target.data('name');
-    		var pic = target.data('pic');
-    		var degree = target.data('degree');
-    		var skills = target.data('skills');
-    		var exp = target.data('experience');
-    		var work = target.data('work');
-    		var loc = target.data('loc');
     		var email = target.data('email');
 
-    		$('.modal-image').css('background-image', 'url('+pic+')');
-    		$('.modal-student-info').empty();
-    		$('.modal-student-info').append("<p>"+name+"</p><p>"+degree+"</p><a href=mailto:"+email+">"+email+"</a>");
-    		$('.modal-work').text(work);
-    		$('.modal-skills').text(skills);
-    		$('.modal-experience').text(exp);
-    		$('.modal-location').text(loc);
-
     		modal.modal('show');
-    		
+        }
+    	
+        function openRegModal(){
+    		var modal = $('#regModal');
+    		modal.modal('show');
     	}
+        function ajaxSubmit(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var form = $('#form_student');
+            var formData = new FormData(document.getElementById('form_student'));
+            formData.append("action", "addpost");
+            formData.delete("pilt_full");
+            if (blobImg != undefined)
+                formData.append("logo", blobImg, "profilepic.jpg");
+
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData
+            }).done(function(response) {
+                console.log(response);
+                form.after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink!</div>");
+                form.css('display', 'none');
+                form.trigger("reset");
+                setTimeout(function() {
+                    modal.modal("hide");
+                }, 3000);
+            }).fail(function(response) {
+                console.log(response);
+                form.addClass('was-validated');
+                form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
+                              <strong>Viga!</strong> ' + response + '\
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
+                                <span aria-hidden="true">&times;</span>\
+                              </button>\
+                            </div>');
+            });
+        }
+
     </script>
 
 </body>
