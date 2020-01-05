@@ -58,7 +58,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     //other
 	$checkpoint = ($_POST["checkpoint"] == null ? false : true);
 	$logo = $_FILES["logo"];
-    $end_date = $_POST[""];
+    $end_date = $_POST["date"];
 	
 	$passedValidation = true;
 	
@@ -76,7 +76,9 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     
     //parse end_date
     if(!empty($end_date)){
-        $end_date = date("Y-m-d h:i:s",strtotime($end_date));
+        $dt = explode('-',$end_date);
+        $converted = $dt[1].'-'.$dt[0].'-'.$dt[2];
+        $end_date = date("Y-m-d h:i:s",strtotime($converted));
     }else{
         $passedValidation = false;
         $response .= "Invalid end_date!";
@@ -127,12 +129,12 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
 			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,phone,heading,description,tasks,experience,work_name,work_location,work_description,work_website,other,logopath,validationcode,datetime_uploaded,end_date)
-			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
-			$query->execute(array($name, $email, $phone, $heading, $description, $tasks, $skills, $location, $work_desc, $website, $other, $logoPath, $validationcode, $end_date));
+			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
+			$query->execute(array($name, $email, $phone, $heading, $description, $tasks, $skills, $work_name, $location, $work_desc, $website, $other, $logoPath, $validationcode, $end_date));
 			$success = sendMail($validationcode, $email, $heading);
             if($success){
                 http_response_code(200);
-                echo response."OK!";
+                echo $response."OK!";
             }else{
                 http_response_code(403);
                 echo "Tekkis viga kirja saatmisel! Info:".print_r(error_get_last());   

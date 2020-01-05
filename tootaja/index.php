@@ -16,7 +16,7 @@
               <a href="#" class="text-uppercase font-weight-bold">Vaata rohkem siit!</a>
             </div> <!-- .col-->
             <div class="col-lg-2">
-              <a href="../editor" id="formToggler" class="toggleMenu text-uppercase">Lisa pakkumine<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span>--></a>
+              <a id="formToggler" class="toggleMenu text-uppercase">Lisa pakkumine<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span>--></a>
             </div>
             <div class="col-lg-12">
               <h5 class="text-uppercase text-center font-weight-bold mt-3">Aktiivsed pakkumised</h5>
@@ -29,7 +29,7 @@
 	<section id="profiles">
 		<div class="container">
 			<div class="row">
-                <div id="carouselPager" class="carousel slide">
+                <div id="carouselPager" class="carousel slide col-md-12">
                   <div class="carousel-inner">
                     <div class="carousel-item active">                    
                     <?php
@@ -51,8 +51,7 @@
                                 $description = $row["description"];
                                 $tasks = $row["tasks"];
                                 $skills = $row["experience"];
-                                $logo = $row["logopath"];
-                                $work_name = $row["work_name"]
+                                $work_name = $row["work_name"];
                                 $work_desc = $row["work_description"];
                                 $location = $row["work_location"];
                                 $other = $row["other"];
@@ -62,8 +61,8 @@
                                 $phone = $row["phone"];
                                 
                                 $validationcode = $row["validationcode"];
-                                $picurl = "../userdata/pictures/".$row["picturepath"];
-                                $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));;
+                                $picurl = "../userdata/pictures/".$row["logopath"];
+                                $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));
                                 $reg_end = $row["end_date"];
                                 $views = $row["views"];
                                 
@@ -96,7 +95,7 @@
                                                       <img src="'.$picurl.'" alt="Ettevõtte logo">
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <a href="">
+                                                        <a>
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
                                                         <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
@@ -107,7 +106,7 @@
                                                     <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> '.$reg_end.'</p>
                                                   </div>
                                                   <div class="col-lg-2 text-center apply">
-                                                    <a class="text-uppercase font-weight-bold" href="">Kandideeri</a>
+                                                    <a class="text-uppercase font-weight-bold">Kandideeri</a>
                                                     <p>Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
                                                 </div>
@@ -167,7 +166,7 @@
                 <div class="modal-body">
                     <div class="container">
 
-                        <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_student">
+                        <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
 
                             <div class="col-lg-8">
                                 <div class="form-group">
@@ -265,7 +264,7 @@
         </div>
     </div>
     
-    <div id="viewModal" class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div id="viewModal" class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
 
@@ -296,7 +295,7 @@
 
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
-
+    <script src="https://unpkg.com/cropperjs"></script>
     <script type="text/javascript">
     	$(document).ready(function(){
 
@@ -309,7 +308,7 @@
               showWeek: true,
               firstDay: 1,
               minDate: -30,
-              dateFormat: 'mm-dd-yy'
+              dateFormat: 'dd-mm-yy'
             });
             
             //pagination
@@ -361,8 +360,8 @@
         function ajaxSubmit(e) {
             e.preventDefault();
             e.stopPropagation();
-            var form = $('#form_student');
-            var formData = new FormData(document.getElementById('form_student'));
+            var form = $('#form_work');
+            var formData = new FormData(document.getElementById('form_work'));
             formData.append("action", "addpost");
             formData.delete("pilt_full");
             if (blobImg != undefined)
@@ -387,12 +386,71 @@
                 console.log(response);
                 form.addClass('was-validated');
                 form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
-                              <strong>Viga!</strong> ' + response + '\
+                              <strong>Viga!</strong> ' + response.responseText + '\
                               <button type="button" class="close" data-dismiss="alert" aria-label="Sulge">\
                                 <span aria-hidden="true">&times;</span>\
                               </button>\
                             </div>');
             });
+        }
+        function previewFile() {
+            var preview = document.querySelector('#preview');
+            var files = document.querySelector('input[type=file]').files[0];
+
+            function readAndPreview(file) {
+                // Make sure `file.name` matches our extensions criteria
+                if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    var reader = new FileReader();
+                    reader.addEventListener("load", function() {
+                        var image = document.getElementById('profileImg');
+                        image.height = 100;
+                        image.title = file.name;
+                        image.src = this.result;
+                        preview.appendChild(image);
+                    }, false);
+                    reader.readAsDataURL(file);
+                }
+            }
+            if (files) {
+                readAndPreview(files);
+                var editor = document.createElement('div');
+                editor.classList.add("cropper-overlay");
+                // Create the confirm button
+                var confirm = document.createElement('button');
+                confirm.textContent = 'Kärbi';
+                confirm.classList.add("btn");
+                confirm.classList.add("btn-primary");
+                confirm.classList.add("text-uppercase");
+                confirm.classList.add("btn-cropper-overlay");
+
+                confirm.addEventListener('click', function() {
+                    // Get the canvas with image data from Cropper.js
+                    var canvas = cropper.getCroppedCanvas({
+                        width: 256,
+                        height: 256
+                    });
+
+                    // Turn the canvas into a Blob (file object without a name)
+                    canvas.toBlob(function(blob) {
+                        // Set #profileImg src to blob and use blobImg global to use later in formData
+                        document.getElementById('profileImg').src = URL.createObjectURL(blob);
+                        blobImg = blob;
+                    });
+                    // Remove the editor from view
+                    editor.parentNode.removeChild(editor);
+                });
+                editor.appendChild(confirm);
+                // Load the image
+                var image = new Image();
+                image.src = URL.createObjectURL(files);
+                editor.appendChild(image);
+                // Append the editor to the page
+                document.body.appendChild(editor);
+                // Create Cropper.js and pass image
+                var cropper = new Cropper(image, {
+                    aspectRatio: 1
+                });
+            }
         }
 
     </script>
