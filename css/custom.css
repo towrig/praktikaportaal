@@ -41,6 +41,10 @@ img {
 .col-contact .post-img-container{
     margin-bottom: 16px;
 }
+.participants-container{
+    display: flex;
+    margin: 0 !important;
+}
 /* end modal stuff */
 
 .work .row {
