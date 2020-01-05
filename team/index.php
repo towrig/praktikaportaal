@@ -175,8 +175,9 @@
                                   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">                                <div class="form-group">
                                     <p class="mt-4">Antud aknas saad kiirelt tutvuda ning eelvaadelda projekti taotlusvormi, mille palume järgnevalt allalaadida ning ka ära täita. Seejärel palume liikuda järgmisele viigule "Esita projekt" ning täita sealne kontaktvorm, et saaksime teiega vajadusel ühendust võtta ning lõpetuseks ootame eeltäitud vormi PDF kujul."
     
-                                    </p><h4 class="text-center my-3"><!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a class="btn btn-lg btn-primary" href="../userdata/Projektipraktika_taotlusvorm.docx" download="">siia</a></label></h4>
-                                    <iframe src="../userdata/projekti-alus.pdf#toolbar=0" width="100%" height="500px"></iframe>
+                                    </p><h4 class="text-center my-3"><!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a class="btn btn-lg btn-primary" href="../userdata/projekti_taotlusvorm.docx" download="">siia</a></label></h4>
+                                    <iframe width="100%" height="500px"
+                                    src="https://docs.google.com/document/d/e/2PACX-1vQFHziWjHPO9fMbDZu7l7TaLq7PFA8COQRc_pz0CludNNmuONrd0NkUokj_QvJQTXEj7Jq5-IZrdrej/pub?embedded=true"></iframe>
                             
                                 </div>
                                   </div>
