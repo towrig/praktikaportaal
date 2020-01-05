@@ -26,11 +26,30 @@ img {
     height: auto;
 }
 
-/* quickfixes */
-.carousel-item.team-carousel.active{
-    /*display: flex;*/
+/* modal stuff */
+.col-contact span{
+    display:block;
+    width: 100%;
+    padding: 0 0 8px;
 }
-/* end quickfixes*/
+.col-contact h2{
+    margin-bottom: 36px;
+}
+.col-contact p{
+    padding: 4px 0 4px;
+}
+.col-contact .post-img-container{
+    max-height: 96px;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 16px;
+}
+.col-info p{
+    min-height: 80px;
+}
+/* end modal stuff */
 
 .work .row {
     margin: 20px 0px;

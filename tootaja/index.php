@@ -272,19 +272,19 @@
                     <div class="container">
                         <div class="row">
 
-                            <div class="col-lg-8">
+                            <div class="col-lg-8 col-info">
                                 <h2 class="post-heading"></h2>
-                                <h3>Tutvustus</h3>
+                                <h5>Tutvustus</h5>
                                 <p class="post-description"></p>
-                                <h3>Tööülesanded</h3>
+                                <h5>Tööülesanded</h5>
                                 <p class="post-tasks"></p>
-                                <h3>Vajalikud oskused ja kogemused</h3>
+                                <h5>Vajalikud oskused ja kogemused</h5>
                                 <p class="post-skills"></p>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-contact">
                                 <div class="post-img-container"></div>
-                                <h3>Kontakt</h3>
+                                <h5>Kontakt</h5>
                                 <span class="post-org-name"></span>
                                 <span class="post-org-loc"></span>
                                 <p class="post-org-description"></p>
@@ -376,7 +376,8 @@
             $(".post-description").html(description);
             $(".post-tasks").html(tasks);
             $(".post-skills").html(skills);
-            $(".post-img-container").css("background-image", pic);
+            console.log("pic: "+pic);
+            $(".post-img-container").css("background-image", "url("+pic+")");
             $(".post-org-name").html(work_name);
             $(".post-org-loc").html(work_loc);
             $(".post-org-description").html(work_desc);
