@@ -133,7 +133,7 @@
                                                         }
                                                         
                                                         $bigstring = '
-                                                        <div class="col-xs-12 col-sm-6 col-md-2">
+                                                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
                                                             <div class="flip-div">
                                                                 <div class="flip-main">
                                                                     <div class="front">
@@ -247,7 +247,44 @@
                                 <div class="form-group">
                                     <label for="work">Eriala</label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major">
-                                    <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
+                                    <div class='invalid-feedback'>Palun anna teada, mis eriala sa õpid</div>
+                                </div>
+                              <div class="form-group">
+                                    <label for="work">Instituut</label>
+                                    <select class="form-control" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
+                                      <option selected>...</option>
+                                      <option>ajaloo ja arheoloogia instituut</option>
+                                      <option>arvutiteaduse instituut</option>
+                                      <option>bio- ja siirdemeditsiini instituut</option>
+                                      <option>eesti ja üldkeeleteaduse instituut</option>
+                                      <option>Eesti mereinstituut</option>
+                                      <option>farmaatsia instituut</option>
+                                      <option>filosoofia ja semiootika instituut</option>
+                                      <option>füüsika instituut</option>
+                                      <option>hambaarstiteaduse instituut</option>
+                                      <option>haridusteaduste instituut</option>
+                                      <option>Johan Skytte poliitikauuringute instituut</option>
+                                      <option>keemia instituut</option>
+                                      <option>kliinilise meditsiini instituut</option>
+                                      <option>kultuuriteaduste instituut</option>
+                                      <option>maailma keelte ja kultuuride kolledž</option>
+                                      <option>majandusteaduskond</option>
+                                      <option>matemaatika ja statistika instituut</option>
+                                      <option>molekulaar- ja rakubioloogia instituut</option>
+                                      <option>Narva kolledž</option>
+                                      <option>õigusteaduskond</option>
+                                      <option>ökoloogia ja maateaduste instituut</option>
+                                      <option>Pärnu kolledž</option>
+                                      <option>peremeditsiini ja rahvatervishoiu instituut</option>
+                                      <option>psühholoogia instituut</option>
+                                      <option>sporditeaduste ja füsioteraapia instituut</option>
+                                      <option>Tartu observatoorium</option>
+                                      <option>tehnoloogiainstituut</option>
+                                      <option>ühiskonnateaduste instituut</option>
+                                      <option>usuteaduskond</option>
+                                      <option>Viljandi kultuuriakadeemia</option>
+                                    </select>
+                                    <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
                                 </div>
                             </div>
 
@@ -270,44 +307,6 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="work">Instituut</label>
-                                    <!--<input required type="text" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">-->
-                                  <select class="form-control" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
-                                    <option selected>...</option>
-                                    <option>ajaloo ja arheoloogia instituut</option>
-                                    <option>arvutiteaduse instituut</option>
-                                    <option>bio- ja siirdemeditsiini instituut</option>
-                                    <option>eesti ja üldkeeleteaduse instituut</option>
-                                    <option>Eesti mereinstituut</option>
-                                    <option>farmaatsia instituut</option>
-                                    <option>filosoofia ja semiootika instituut</option>
-                                    <option>füüsika instituut</option>
-                                    <option>hambaarstiteaduse instituut</option>
-                                    <option>haridusteaduste instituut</option>
-                                    <option>Johan Skytte poliitikauuringute instituut</option>
-                                    <option>keemia instituut</option>
-                                    <option>kliinilise meditsiini instituut</option>
-                                    <option>kultuuriteaduste instituut</option>
-                                    <option>maailma keelte ja kultuuride kolledž</option>
-                                    <option>majandusteaduskond</option>
-                                    <option>matemaatika ja statistika instituut</option>
-                                    <option>molekulaar- ja rakubioloogia instituut</option>
-                                    <option>Narva kolledž</option>
-                                    <option>õigusteaduskond</option>
-                                    <option>ökoloogia ja maateaduste instituut</option>
-                                    <option>Pärnu kolledž</option>
-                                    <option>peremeditsiini ja rahvatervishoiu instituut</option>
-                                    <option>psühholoogia instituut</option>
-                                    <option>sporditeaduste ja füsioteraapia instituut</option>
-                                    <option>Tartu observatoorium</option>
-                                    <option>tehnoloogiainstituut</option>
-                                    <option>ühiskonnateaduste instituut</option>
-                                    <option>usuteaduskond</option>
-                                    <option>Viljandi kultuuriakadeemia</option>
-                                  </select>
-                                    <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
-                                </div>
-                                <div class="form-group">
                                     <label for="work">Soovitav praktika/töö valdkond</label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="work" name="work">
                                     <div class='invalid-feedback'>Ära unusta märkida, mis valdkonnas soovid töötada</div>
@@ -315,7 +314,7 @@
                                 <div class="form-group">
                                     <label for="oskused">Tugevused/oskused</label>
                                     <textarea required class="form-control  <?php if(!empty($_POST)) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="oskused" rows="3" name="oskused"></textarea>
-                                    <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
+                                    <div class='invalid-feedback'>Palun kirjelda lühidalt oma oskusi</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="kogemused">Kogemused</label>
@@ -329,7 +328,7 @@
                                     <div class="upload-btn-wrapper">
                                         <button class="btn">Lae üles oma CV</button>
                                         <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="cv" name="cv" onchange="showFileName(this.files)">
-                                        <div class='invalid-feedback'>Lae ülesse oma CV</div>
+                                        <div class='invalid-feedback'>Lae üles oma CV</div>
                                     </div>
                                 </div>
                                 <div class="form-group">

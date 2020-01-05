@@ -9,7 +9,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
-               <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktikapakkumised</h1>
+               <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktika<wbr>pakkumised</h1>
             </div>
             <div class="col-lg-2">
               <p class="font-weight-light mb-5">Otsid praktikanti, töötajat või meeskonda? Lisa oma pakkumine või projektiidee juba täna!</p>
@@ -73,10 +73,10 @@
 
                                 $bigstring = '<div class="col-lg-12 practiceoffer">
                                                 <div class="row">
-                                                  <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-uppercase font-weight-bold">
+                                                  <div class="col-lg-1 col-md-1 col-sm-1 text-uppercase font-weight-bold work-date-added">
                                                     <p>'.$uploaded.'</p>
                                                   </div>
-                                                    <div class="col-lg-2 col-md-11 col-sm-11 col-11 work-banner-crop">
+                                                    <div class="col-lg-2 col-md-11 col-sm-11 work-banner-crop">
                                                       <img src="'.$picurl.'" alt="Ettevõtte logo">
                                                     </div>
                                                     <div class="col-lg-4">
@@ -99,14 +99,14 @@
                                                         </a>
                                                         <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
                                                     </div>
-                                                  <div class="col-lg-3">
+                                                  <div class="col-lg-3 col-7">
                                                     <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> '.$work_name.'</p>
                                                     <p class="m-0 p-0 font-weight-light"><b>Asukoht:</b> '.$location.'</p>
                                                     <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> '.$reg_end.'</p>
                                                   </div>
-                                                  <div class="col-lg-2 text-center apply">
+                                                  <div class="col-lg-2 text-center apply col-5">
                                                     <a class="text-uppercase font-weight-bold" href="mailto:'.$email.'">Kandideeri</a>
-                                                    <p>Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
+                                                    <p class="mt-1">Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
                                                 </div>
                                               </div>';

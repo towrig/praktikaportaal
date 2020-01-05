@@ -1394,6 +1394,7 @@ body.practice .card-body{
     padding-bottom: 1rem!important;
     color: #01499d!important;
     transition: .25s all ease-in-out;
+    max-width: 200px;
 }
 
 .toggleMenu:hover {
@@ -1521,11 +1522,6 @@ body.practiceoffers .apply a {
     border-bottom: 2px solid;
     width: 100%;
     display: block;
-}
-body.practiceoffers .apply p {
-  position: absolute;
-  bottom: 0;
-  left: calc(100% - 150px);
 }
 
 body.practiceoffers hr {
@@ -1989,4 +1985,39 @@ div#viewModal .post-img-container {
 
 div#viewModal .post-deadline {
     min-height: 40px!important;
+}
+
+@media (max-width: 1200px) and (min-width:992px) {
+  i.unique-arrow {
+      background-size: 151%!important;
+      background-position: 297px 103px!important;
+      height: 71px!important;
+  }
+}
+
+@media (max-width:992px) {
+    .work-date-added {
+        display: none;
+    }
+
+    .work-banner-crop {
+        display: none;
+    }
+
+    .practiceoffers .col-lg-12.practiceoffer {
+      border:none;
+    }
+}
+
+.practiceoffers .page-section {
+    padding-bottom: 0rem;
+}
+
+.navbar-collapse a.nav-link{
+  transition: 1s all ease-in-out;
+}
+
+.navbar-collapse.collapse.show a.nav-link {
+    width: 140px;
+    margin: auto!important;
 }
