@@ -1381,11 +1381,20 @@ body.practice .card-body{
     border-bottom: 2px solid;
     padding: 0!important;
     padding-bottom: 1rem!important;
-    color: #01499d;
+    color: #01499d!important;
+    transition: .25s all ease-in-out;
 }
 
-body.practice .page-section h5 {
+.toggleMenu:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+body.practice .page-section h5,
+body.practiceoffers .page-section h5,
+body.project .page-section h5{
   color: #01499d;
+  font-size:1.5rem;
 }
 
 section h1 {
@@ -1921,4 +1930,22 @@ a.nav-link.lang-switch {
 .practiceoffers .col-lg-12.js-view-modal {
     border-top: 2px solid #01499d;
     padding: 30px 0;
+}
+
+
+@media (max-width: 400px) {
+    div#ut-logo {
+        width: 230px;
+        background-size: 184% auto!important;
+    }
+}
+
+footer .socialmedia a{
+  color:#46454a!important;
+  transition: .25s all ease-in-out;
+}
+
+footer .socialmedia a:hover {
+  opacity: .7;
+  color: #e94700!important;
 }
