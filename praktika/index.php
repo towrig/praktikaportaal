@@ -140,7 +140,7 @@
                                                                         <div class="card">
                                                                             <p><img class="" src="'.$pic.'" alt="'.$name.'" title="'.$name.'"></p>
                                                                             <div class="card-body pb-2">
-                                                                                <p class="card-title font-weight-bold">'.$name_br.'</p>
+                                                                                <p class="card-title font-weight-bold mt-3">'.$name_br.'</p>
                                                                                 <p class="card-text font-weight-light">'.$degree.'</p>
                                                                                 <p class="card-text font-weight-light text-primary">'.$work.'</p>
                                                                             </div>
@@ -154,7 +154,7 @@
                                                                                 <p class="card-text font-weight-light">'.$degree.'</p>
                                                                                 <p class="card-text font-weight-light">'.$work.'</p>
                                                                                 <p class="font-weight-bold mb-0">Tugevused</p>
-                                                                                <p class="card-text font-weight-light">'.$tugevused.'</p>
+                                                                                <p class="card-text font-weight-light mt-3">'.$tugevused.'</p>
                                                                                 <p class="font-weight-bold mb-0">Kogemused</p>
                                                                                 <p class="card-text font-weight-light">'.$kogemused.'</p>
                                                                                 <!-- Leaving this in in case we still want this CV and e-mail button -->
@@ -260,12 +260,10 @@
                                         <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae ülesse oma profiili pilt</button>
+                                        <button class="btn">Lae üles oma profiilipilt</button>
                                         <input type="file" accept="image/*" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt_full" onchange="previewFile()">
                                         <div class='invalid-feedback'>Lae profiilipilt!</div>
                                     </div>
-
-                                    <!--<div class="dropzone" id="my-awesome-dropzone" name="pilt"></div>-->
                                     <div class='invalid-feedback'>Sisesta pilt!</div>
                                 </div>
                             </div>
@@ -273,7 +271,40 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="work">Instituut</label>
-                                    <input required type="text" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
+                                    <!--<input required type="text" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">-->
+                                  <select class="form-control" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
+                                    <option selected>...</option>
+                                    <option>ajaloo ja arheoloogia instituut</option>
+                                    <option>arvutiteaduse instituut</option>
+                                    <option>bio- ja siirdemeditsiini instituut</option>
+                                    <option>eesti ja üldkeeleteaduse instituut</option>
+                                    <option>Eesti mereinstituut</option>
+                                    <option>farmaatsia instituut</option>
+                                    <option>filosoofia ja semiootika instituut</option>
+                                    <option>füüsika instituut</option>
+                                    <option>hambaarstiteaduse instituut</option>
+                                    <option>haridusteaduste instituut</option>
+                                    <option>Johan Skytte poliitikauuringute instituut</option>
+                                    <option>keemia instituut</option>
+                                    <option>kliinilise meditsiini instituut</option>
+                                    <option>kultuuriteaduste instituut</option>
+                                    <option>maailma keelte ja kultuuride kolledž</option>
+                                    <option>majandusteaduskond</option>
+                                    <option>matemaatika ja statistika instituut</option>
+                                    <option>molekulaar- ja rakubioloogia instituut</option>
+                                    <option>Narva kolledž</option>
+                                    <option>õigusteaduskond</option>
+                                    <option>ökoloogia ja maateaduste instituut</option>
+                                    <option>Pärnu kolledž</option>
+                                    <option>peremeditsiini ja rahvatervishoiu instituut</option>
+                                    <option>psühholoogia instituut</option>
+                                    <option>sporditeaduste ja füsioteraapia instituut</option>
+                                    <option>Tartu observatoorium</option>
+                                    <option>tehnoloogiainstituut</option>
+                                    <option>ühiskonnateaduste instituut</option>
+                                    <option>usuteaduskond</option>
+                                    <option>Viljandi kultuuriakadeemia</option>
+                                  </select>
                                     <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
                                 </div>
                                 <div class="form-group">
@@ -296,7 +327,7 @@
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae ülesse oma CV</button>
+                                        <button class="btn">Lae üles oma CV</button>
                                         <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="cv" name="cv" onchange="showFileName(this.files)">
                                         <div class='invalid-feedback'>Lae ülesse oma CV</div>
                                     </div>
@@ -400,6 +431,7 @@
         function ajaxSubmit(e) {
             var action = $(e.currentTarget).data("value");
             var form = $('#form_student');
+            var modal = $('.modal').first();
             e.preventDefault();
             e.stopPropagation();
             var formData = new FormData(document.getElementById('form_student'));
