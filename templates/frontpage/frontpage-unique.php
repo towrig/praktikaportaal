@@ -12,29 +12,29 @@
       <div id="unique-kaedkulge" class="unique-box col-lg-3 col-md-6">
         <div class="col p-3">
           <h3>Käed külge</h3>
-          <i id="unique-arrow"></i>
-          <span class="">Sind ootavad põnevad kogemused, kus saad lahendada uusi väljakutseid ja kasutada enda teadmisi ning oskusi!</span>
+          <i class="unique-arrow"></i>
+          <span>Sind ootavad põnevad kogemused, kus saad lahendada uusi väljakutseid ja kasutada enda teadmisi ning oskusi!</span>
         </div>
       </div>
       <div id="unique-interditsiplinaarne" class="unique-box col-lg-3 col-md-6">
         <div class="col p-3">
           <h3>Interdistsi-plinaarne</h3>
           <i id="unique-arrow"></i>
-          <span class="">Sa tegutsed keskkonnas, kus väljakutsed ja meeskonnad ületavad eriala piire, saad uusi tutvusi ning õpid probleeme nägema ja mõistma eri tahkudelt</span>
+          <span>Sa tegutsed keskkonnas, kus väljakutsed ja meeskonnad ületavad eriala piire, saad uusi tutvusi ning õpid probleeme nägema ja mõistma eri tahkudelt</span>
         </div>
       </div>
       <div id="unique-tulevikuoskused" class="unique-box col-lg-3 col-md-6">
         <div class="col p-3">
           <h3>Tuleviku-oskused</h3>
-          <i id="unique-arrow"></i>
-          <span class="">Väljakutsed nõuavad tulevikuoskuste arendamist, mis on Sinu edu alus ka 10 aasta pärast nii tööturul kui ka ühiskonnas laiemalt.</span>
+          <i class="unique-arrow"></i>
+          <span>Väljakutsed nõuavad tulevikuoskuste arendamist, mis on Sinu edu alus ka 10 aasta pärast nii tööturul kui ka ühiskonnas laiemalt.</span>
         </div>
       </div>
         <div id="unique-paindlik" class="unique-box col-lg-3 col-md-6">
         <div class="col p-3">
           <h3>Paindlik</h3>
-          <i id="unique-arrow"></i>
-          <span class="">fUTulabis otsustad ise, millal, kus ja kuidas osaleda, sest nii piirid kui ka väljakutsed sead endale ise.</span>
+          <i class="unique-arrow"></i>
+          <span>Sina otsustad millal, kus ja kuidas osaled, sest nii piirid kui ka väljakutsed sead endale ise.</span>
         </div>
       </div>
     </div>

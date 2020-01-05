@@ -1,7 +1,7 @@
 <section id="why" class="d-flex flex-wrap align-content-center mb-5 pt-5">
   <div class="container">
     <h2 class="mt-5 pt-5 text-center">Miks <span>FUTULAB?</span></h2>
-    <small>fUTulab toetab Sinu tuleviku- ja karjäärivõimalusi ja lisaks veel ilusat ja kaunist teksti, mis aitab mõista, mida see plokk räägib</small>
+    <small>Futulab toetab Sinu tuleviku- ja karjäärivõimalusi ja lisaks veel ilusat ja kaunist teksti, mis aitab mõista, mida see plokk räägib</small>
     <div class="row text-white mb-5">
       <div id="why-vorgustik" class="why-box col-md-4">
         <div class="col p-3">

@@ -1360,7 +1360,7 @@ footer .socialmedia i {
   margin: 0px;
   display: block;
 }
-#unique i#unique-arrow {
+#unique i.unique-arrow {
   background-position: -24px -476px;
 }
 
@@ -1777,7 +1777,7 @@ body.practice .modal img#profileImg {
 }
 
 @media (max-width: 1200px) {
-    i#unique-arrow {
+    i.unique-arrow {
         background-size: 150%;
         background-position: 300px 100px!important;
         height: 60px;
@@ -1785,7 +1785,7 @@ body.practice .modal img#profileImg {
 }
 
 @media (max-width: 992px) {
-    i#unique-arrow {
+    i.unique-arrow {
         background-size: 484px;
         background-position: 452px 156px!important;
         height: 100px;
@@ -1804,7 +1804,7 @@ body.practice .modal img#profileImg {
 }
 
 @media (max-width: 768px) {
-    i#unique-arrow {
+    i.unique-arrow {
         background-size: 484px;
         background-position: 452px 156px!important;
         height: 100px;
