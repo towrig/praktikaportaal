@@ -43,7 +43,7 @@
                                 <div class="row">
                             <?php
                                 try {
-                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                                     // set the PDO error mode to exception
                                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                     $query = $conn->prepare('SELECT * FROM ProjectPosts WHERE isactivated = ?');
@@ -55,24 +55,27 @@
                                     $queue = false;
                                     foreach($data as $row){
 
-                                        $title = utf8_encode($row["title"]);
+                                        $title = $row["title"];
                                         $start_date = $row["start_date"];
                                         $end_date = getdate(strtotime($row["end_date"]));
                                         $end_date_string = $end_date["mday"].".".$end_date["mon"].".".$end_date["year"];
                                         $id = $row["id"];
 
-                                        $organisation = utf8_encode($row["organisation"]);
-                                        $org_name = utf8_encode($row["org_name"]);
+                                        $organisation = $row["organisation"];
+                                        $org_name = $row["org_name"];
                                         $org_email = $row["org_email"];
-
-                                        //get current registered users to show.
+                                        $pdf_path = $row["pdf_path"]
                                         $max_part = $row["max_part"];
-                                        $amount = "";
-                                        $query = $conn->prepare('SELECT COUNT(*) AS amount FROM ProjectParticipants WHERE project_id = ? AND is_accepted = 1');
+                                        
+                                        $query = $conn->prepare('SELECT * FROM ProjectParticipants WHERE project_id = ? AND is_accepted = 1');
                                         $query->execute(array($id));
                                         $data = $query -> fetchAll();
+                                        $participants = array();
+                                        $amount = 0;
                                         foreach($data as $row){
-                                            $amount = $row["amount"];
+                                            $p = array($row["name"], $row["email"], $row["degree"], $row["skills"], $row["degree"]);
+                                            array_push($participants, $p);
+                                            $amount++;
                                         }
                                         if($queue){
                                             echo '</div></div></div><div class="carousel-item"><div class="container"><div class="row">';
@@ -80,7 +83,17 @@
                                             $pages++;
                                         }
                                         $bigstring = '
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 js-modal"
+                                        data-pdf_path="'.$pdf_path.'"
+                                        data-org_name="'.$org_name.'"
+                                        data-org_email="'.$org_email.'"
+                                        data-organisation="'.$organisation.'"
+                                        data-title="'.$title.'"
+                                        data-start_date="'.$start_date.'"
+                                        data-end_date="'.$end_date_string.'"
+                                        data-max_part="'.$max_part.'"
+                                        data-amount="'.$amount.'"
+                                        >
                                             <div class="card">
                                 <div class="row">
                                   <div class="col-md-12">
@@ -98,7 +111,7 @@
                                       </div>
                                     </div>
                                     <div class="col-lg-12">
-                                      <a class="project-link font-weight-bold text-uppercase" href="viewproject?c='.$id.'">
+                                      <a class="project-link font-weight-bold text-uppercase">
                                         Vaata
                                       </a>
                                       <i class="front-arrow text-right"></i>
@@ -149,11 +162,6 @@
             </div>
         </section>
 
-    </div>
-
-    <div id="main">
-    </div>
-   <div id="main">
     </div>
 
     <!-- modal -->
@@ -246,14 +254,30 @@
                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
               </div>
           </div>
+        </div>
     </div>
-  </div>
+    
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                     
+                </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+              </div>
+          </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
 
     <script type="text/javascript">
         $(document).ready(function() {
+            console.log("json_encode result: <?php echo json_encode($participants)?>");
+            $('.js-modal').on('click', viewModal);
+            
             $('[data-toggle="tooltip"]').tooltip();
             
             $('.pagination .page-item').on('click', paginatorClick);
@@ -305,6 +329,12 @@
           var modal = $('#timeTableModal');
           modal.modal('show');
         }
+        
+        function viewModal(e) {
+          var modal = $('#viewModal');
+          modal.modal('show');
+        }
+
 
     </script>
 
