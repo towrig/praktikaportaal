@@ -1,10 +1,33 @@
+<?php
+  $stats = array();
+  try {
+    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Could not UNION together DISTINCT as type mismatch - so a new query later
+    $query = $conn->prepare('SELECT COUNT(*) AS stats FROM People WHERE isvalidated = 1 UNION SELECT COUNT(*) FROM ProjectPosts WHERE isactivated = 1 UNION SELECT COUNT(*) FROM WorkPosts WHERE isvalidated = 1');
+    $query->execute();
+    $data = $query -> fetchAll();
+
+    foreach($data as $row){
+        array_push($stats,$row["stats"]);
+    }
+    $query = $conn->prepare('SELECT COUNT(DISTINCT work_name) AS stats FROM WorkPosts WHERE isvalidated = 1');
+    $query->execute();
+    $data = $query -> fetchAll();
+
+    foreach($data as $row){
+        array_push($stats,$row["stats"]);
+    }
+    // Close PDO
+    $query = null;
+    $conn = null;
+
+  } catch (PDOException $e){
+    echo "Connection failed: " . $e->getMessage();
+  }
+?>
 <header id="masthead" class="masthead d-flex flex-wrap align-content-center">
-   <ul class="bg-rects">
-        <!--<?php for ($i = 0; $i < 10; $i++) {
-            // Generate 10 LI-s for animation
-            echo "<li></li>";
-        }?>-->
-    </ul>
   <div class="bg-container">
     <div class="img-cont"></div>
   </div>
@@ -27,7 +50,7 @@
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
-                        <span class="main-stats"><small>4</small> profiili</span>
+                        <span class="main-stats"><small><?php echo $stats[0]?></small> profiili</span>
                       </p>
                       
                     </div>
@@ -46,7 +69,7 @@
                         <span>projektiideele.</span>
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
-                        <span class="main-stats"><small>2</small> projekti</span>
+                        <span class="main-stats"><small><?php echo $stats[1]?></small> projekti</span>
                       </p>
                       
                     </div>
@@ -64,7 +87,7 @@
                         <span>ja tulevased</span>
                         <span>töötajad.</span>
                         <span>&nbsp;</span>
-                        <span class="main-stats"><small>7</small> pakkumist</span>
+                        <span class="main-stats"><small><?php echo $stats[2]?></small> pakkumist</span>
                       </p>
                       
                     </div>

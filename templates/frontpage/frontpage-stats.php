@@ -5,15 +5,14 @@
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // Could not UNION together DISTINCT as type mismatch - so a new query later
-    $query = $conn->prepare('SELECT COUNT(*) AS stats FROM ProjectPosts WHERE isactivated = 1 UNION SELECT COUNT(*) FROM People WHERE isvalidated = 1 UNION SELECT COUNT(*) FROM WorkPosts WHERE isvalidated = 1');
+    $query = $conn->prepare('SELECT COUNT(*) AS stats FROM People WHERE isvalidated = 1 UNION SELECT COUNT(*) FROM ProjectPosts WHERE isactivated = 1 UNION SELECT COUNT(*) FROM WorkPosts WHERE isvalidated = 1');
     $query->execute();
     $data = $query -> fetchAll();
 
     foreach($data as $row){
         array_push($stats,$row["stats"]);
     }
-    // TODO: Later when right column will be created then change work_location
-    $query = $conn->prepare('SELECT COUNT(DISTINCT work_location) AS stats FROM WorkPosts WHERE isvalidated = 1');
+    $query = $conn->prepare('SELECT COUNT(DISTINCT work_name) AS stats FROM WorkPosts WHERE isvalidated = 1');
     $query->execute();
     $data = $query -> fetchAll();
 
