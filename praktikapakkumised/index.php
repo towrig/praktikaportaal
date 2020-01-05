@@ -316,8 +316,6 @@
             //$('[data-toggle="tooltip"]').tooltip();
             $("#datepicker").datepicker({
               showWeek: true,
-              firstDay: 1,
-              minDate: -30,
               dateFormat: 'dd-mm-yy'
             });
             

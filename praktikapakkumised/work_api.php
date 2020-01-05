@@ -76,9 +76,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     
     //parse end_date
     if(!empty($end_date)){
-        $dt = explode('-',$end_date);
-        $converted = $dt[1].'-'.$dt[0].'-'.$dt[2];
-        $end_date = date("Y-m-d h:i:s",strtotime($converted));
+        $end_date = date("Y-m-d h:i:s",strtotime($end_date));
     }else{
         $passedValidation = false;
         $response .= "Invalid end_date!";
