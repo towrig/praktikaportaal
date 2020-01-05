@@ -18,7 +18,7 @@
                         Projektitaotluste esitamise viimane tähtaeg on <b>02.03!</b>
                         <br>Üliõpilased saavad projektidega liituda <b>09.-15.03.</b>
                     </p>
-                    <a href="#" class="text-uppercase font-weight-bold">Vaata ajakava siit!</a>
+                    <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal()">Vaata ajakava siit!</a>
                   </div> <!-- .col-->
                   
                   <div class="col-lg-2">
@@ -160,8 +160,6 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
-
-                
                 <div class="modal-body">
                  
                     <div class="row">
@@ -234,10 +232,22 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="timeTableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                     <iframe width="100%" height="500px" src="https://docs.google.com/document/d/e/2PACX-1vT7B16RNai2EJQrSf8PDTHWFiGHwrQB_MF1jhhZwo61Ox9HWJDBlL_IEFBOkHnNzvczU7R1jAy1xOc4/pub?embedded=true"></iframe>
+                </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+              </div>
+          </div>
+    </div>
+  </div>
 
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
@@ -289,6 +299,11 @@
         function openModal() {
             var modal = $('.modal').first();
             modal.modal('show');
+        }
+
+        function timeTableModal() {
+          var modal = $('#timeTableModal');
+          modal.modal('show');
         }
 
     </script>
