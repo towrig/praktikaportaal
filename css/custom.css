@@ -1,5 +1,6 @@
 body {
   overflow-x: hidden;
+  color: #46454a;
 }
 
 section {
@@ -235,7 +236,7 @@ li.list-group-item:hover {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Track */
@@ -403,6 +404,7 @@ body {
 .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: static;
 }
+
 }
 .dropdown-menu {
     border: none;
@@ -871,6 +873,8 @@ p.align-self-center {
 .masthead .card {
   transform:rotate(30deg);
   overflow: hidden;
+  max-width: 165px;
+  min-width: 165px;
 }
 
 .masthead .card .card-body{
@@ -884,6 +888,15 @@ p.align-self-center {
     text-align: center;
     height: 146px;
     margin: 8px 0px -50px 0px;
+}
+
+#masthead .card-footer a {
+    display: block;
+    padding: 0;
+    height: 100%;
+    width: 113%;
+    margin: -13px 0px 0px -18px;
+    padding-top: 11px;
 }
 
 .masthead .card .card-body span {
@@ -931,6 +944,9 @@ p.align-self-center {
   .masthead .card-footer{ 
     width: 100%!important;
     height: unset;
+  }
+  nav#mainNav {
+    background: #f1f1f1;
   }
 }
 
@@ -1152,6 +1168,7 @@ div#why {
 /* activities */
 #activities h3, #stats h3 {
   color: #01499d;
+  font-weight: bold;
 }
 #activities h5, #stats h5 {
   color: #1b1c21;
@@ -1233,7 +1250,7 @@ footer .socialmedia i {
   margin-left:.5rem;
 }
 
-a.scrollUp.text-uppercase:before {
+#scrollTop a.scrollDown.text-uppercase:before {
   content: "<";
   margin-right: 1rem;
   font-size: 29px;
@@ -1242,19 +1259,43 @@ a.scrollUp.text-uppercase:before {
   font-weight: 100;
 }
 
-a.scrollUp.text-uppercase {
+#scrollTop a.text-uppercase {
   font-weight:600;
   color:#3d3d3d;
   text-decoration: none;
   transform: rotate(270deg);
+  transition: 1s all ease-in-out;
+}
+
+#scrollTop a.scrollBack.text-uppercase:after {
+    content: ">";
+    margin-left: 1rem;
+    font-size: 29px;
+    position: relative;
+    top: 5px;
+    font-weight: 100;
+}
+#scrollTop .scrollBack {
+  opacity: 0;
+}
+#scrollTop.navbar-scrolled {
+  bottom: 5px;
+}
+#scrollTop.navbar-scrolled .scrollBack {
+  opacity:1;
+
+}
+#scrollTop.navbar-scrolled .scrollDown {
+  opacity: 0;
 }
 
 #scrollTop {
     position: fixed;
-    bottom: 82px;
-    right: -35px;
+    bottom: 125px;
+    right: -110px;
     z-index: 40000;
     transform: rotate(270deg);
+   transition: 1s all ease-in-out;
 }
 
 #stats i , #masthead i, #why i, #unique i {
@@ -1281,9 +1322,12 @@ a.scrollUp.text-uppercase {
     background-position: -314px -360px;
 }
 #masthead i {
-  margin-left: 2rem;
+    margin: 2rem 0 1rem 3rem;
 }
 
+#masthead .card {
+    cursor: default;
+}
 
 #masthead i#masthead-yliopilane {
     background-position: 0px -100px;
@@ -1367,7 +1411,7 @@ i.arrow-front {
 
 .practice section .card i {
     background: url(../img/icons.png);
-    height: 50px;
+    height: 32px;
     width: 120px;
     display: block;
     margin: auto;
@@ -1389,15 +1433,21 @@ i.arrow-front {
 }
 
 .back .links a {
-    color: #00489d;
+    color: #01499d;
     text-decoration: none !important;
     font-weight: 600;
     display: block;
+    transition: .25s all ease-in-out;
+}
+
+.back .links a:hover {
+    opacity: 0.7;
+    color: white;
 }
 
 .front .card-body {
   overflow: auto;
-  max-height: 165px;
+  max-height: 150px;
 }
 
 .back .card {
@@ -1410,7 +1460,7 @@ i.arrow-front {
 }
 
 .back .card-body {
-    max-height: 270px!important;
+    max-height: 250px!important;
     overflow: auto;
 }
 
@@ -1598,7 +1648,20 @@ body.practice .modal img#profileImg {
     text-align: center!important;
   }
   #masthead i {
-    margin-left: auto;
+    margin: 1rem auto;
+  }
+
+  #masthead h5.card-title.text-uppercase {
+    margin: 1rem auto;
+  }
+
+  #masthead .third h5.card-title.text-uppercase {
+    margin: auto;
+    text-indent: 0;
+  }
+  #masthead .card-footer a {
+    width: 132%;
+    margin: -13px 0px 0px -20px;
   }
   #masthead .main-stats {
     display: block!important;
@@ -1824,4 +1887,38 @@ a.page-link[aria-label=Next]:hover:after {
 
 .carousel-item {
     margin-top: 2rem;
+}
+
+
+#validated .bg-container {
+    top: -488px;
+    left: 48%;
+}
+
+#validated section.page-section {
+    padding: 3rem 0;
+}
+#validated header {
+    height: 62vh;
+}
+
+a.nav-link.lang-switch {
+  display: none;
+}
+
+.navbar-light .navbar-toggler {
+  border: none;
+}
+
+.practice .front p, .practice .back p {
+    margin: 0;
+}
+
+.practiceoffers .col-lg-12.js-view-modal:first-child {
+    border: none;
+}
+
+.practiceoffers .col-lg-12.js-view-modal {
+    border-top: 2px solid #01499d;
+    padding: 30px 0;
 }
