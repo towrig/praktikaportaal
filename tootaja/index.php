@@ -110,7 +110,6 @@
                                                     <p>Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
                                                 </div>
-                                                <hr>
                                               </div>';
 
                                 echo $bigstring;
@@ -128,7 +127,7 @@
                     </div>
                   </div>
                 </div>
-                <nav aria-label="Pager">
+                <nav aria-label="Pager" class="col-md-12 mt-5">
                   <ul class="pagination justify-content-center">
                     <li class="page-item" data-index="prev">
                       <a class="page-link" aria-label="Previous">

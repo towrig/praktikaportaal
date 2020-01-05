@@ -87,7 +87,7 @@
                                     <h6 class="text-uppercase">'.$title.'</h6>
                                   </div>
                                 </div>
-                                  <div class="card-footer">
+                                  <div class="card-footer pb-3">
                                     <div class="col-md-12">
                                       <div class="row">
                                         <div class="col-lg-12">
@@ -124,7 +124,7 @@
                           </div>
                         </div>
                     </div>
-                    <nav aria-label="Pager" class="col-md-12">
+                    <nav aria-label="Pager" class="col-md-12 mt-5">
                       <ul class="pagination justify-content-center">
                         <li class="page-item" data-index="prev">
                           <a class="page-link" aria-label="Previous">
