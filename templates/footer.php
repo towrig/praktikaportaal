@@ -2,15 +2,17 @@
       <div class="container mb-5">
         <div class="row">
           <div class="col-md-12 col-lg-8">
-            <div class="col-md-4">
-              <h3 class="contact-us">VÕTA<br>MEIEGA<br>ÜHENDUST!</h3>
-            </div>
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-12 contact-us-info">
-                  <p>Kui sul on tekkinud küsimusi või vajad lihtsalt mõnele teemale vastust, siis ära kõhkle ja võta meiega ühendust.</p>
+            <div class="row">
+              <div class="col-md-4">
+                <h3 class="contact-us">VÕTA<br>MEIEGA<br>ÜHENDUST!</h3>
+              </div>
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-12 contact-us-info">
+                    <p>Kui sul on tekkinud küsimusi või vajad lihtsalt mõnele teemale vastust, siis ära kõhkle ja võta meiega ühendust.</p>
+                  </div>
+                  <div class="col-md-12"><a href="mailto:praktika@ut.ee">praktika@ut.ee</a></div>
                 </div>
-                <div class="col-md-12"><a href="mailto:praktika@ut.ee">praktika@ut.ee</a></div>
               </div>
             </div>
           </div>
@@ -42,4 +44,7 @@
     <!-- Custom scripts for this template -->
     <script src="<?php echo $wwwroot; ?>js/creative.min.js"></script>
 
-    <div id="scrollTop"><a href="#" class="scrollUp text-uppercase" onclick="document.documentElement.scrollTop = 0; document.body.scrollTop = 0;">Scroll down</a></div>
+    <div id="scrollTop">
+      <a href="#why" class="scrollDown text-uppercase">Loe edasi</a>
+      <a href="#" class="scrollBack text-uppercase" onclick="document.documentElement.scrollTop = 0; document.body.scrollTop = 0;">Tagasi üles</a>
+    </div>
