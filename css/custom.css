@@ -1934,11 +1934,11 @@ a.nav-link.lang-switch {
     margin: 0;
 }
 
-.practiceoffers .col-lg-12.js-view-modal:first-child {
+.practiceoffers .col-lg-12.practiceoffer:first-child {
     border: none;
 }
 
-.practiceoffers .col-lg-12.js-view-modal {
+.practiceoffers .col-lg-12.practiceoffer {
     border-top: 2px solid #01499d;
     padding: 30px 0;
 }
@@ -1985,4 +1985,8 @@ div#viewModal .row div[class*="post-"] {
 
 div#viewModal .post-img-container {
     width: 100%;
+}
+
+div#viewModal .post-deadline {
+    min-height: 40px!important;
 }
