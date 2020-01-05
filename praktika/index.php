@@ -153,9 +153,9 @@
                                                                                 <p class="card-title font-weight-bold">'.$name_br.'</p>
                                                                                 <p class="card-text font-weight-light">'.$degree.'</p>
                                                                                 <p class="card-text font-weight-light">'.$work.'</p>
-                                                                                <p class="font-weight-bold mb-0">Tugevused</p>
-                                                                                <p class="card-text font-weight-light mt-3">'.$tugevused.'</p>
-                                                                                <p class="font-weight-bold mb-0">Kogemused</p>
+                                                                                <p class="font-weight-bold mt-3">Tugevused</p>
+                                                                                <p class="card-text font-weight-light ">'.$tugevused.'</p>
+                                                                                <p class="font-weight-bold">Kogemused</p>
                                                                                 <p class="card-text font-weight-light">'.$kogemused.'</p>
                                                                                 <!-- Leaving this in in case we still want this CV and e-mail button -->
                                                                                  <!--<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">----
