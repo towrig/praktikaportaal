@@ -165,8 +165,8 @@
 
                                                                             </div>
                                                                             <div class="links">
-                                                                              <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>
-                                                                              <a href="#" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>
+                                                                              <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>'.
+                                                                                (!empty($row["cvpath"]) ? '<a href="#" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>':'' ).'
                                                                             </div>
                                                                             <i class="arrow-front"></i>
                                                                         </div>
