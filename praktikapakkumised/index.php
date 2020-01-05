@@ -62,7 +62,7 @@
                                 $validationcode = $row["validationcode"];
                                 $picurl = "../userdata/pictures/".$row["logopath"];
                                 $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));
-                                $reg_end = $row["end_date"];
+                                $reg_end = ($row["end_date"]!="0000-00-00 00:00:00")?date('d.m.Y',strtotime($row["end_date"])):"-";
                                 $views = $row["views"];
                                 
                                 if($queue){
@@ -71,22 +71,7 @@
                                     $pages++;
                                 }
 
-                                $bigstring = '<div class="col-lg-12 js-view-modal" 
-                                                data-pic="'.$picurl.'"
-                                                data-heading="'.$heading.'"
-                                                data-description="'.$description.'"
-                                                data-tasks="'.$tasks.'"
-                                                data-skills="'.$skills.'"
-                                                data-work_name="'.$work_name.'"
-                                                data-work_desc="'.$work_desc.'"
-                                                data-location="'.$location.'"
-                                                data-other="'.$other.'"
-                                                data-website="'.$website.'"
-                                                data-email="'.$email.'"
-                                                data-name="'.$name.'"
-                                                data-phone="'.$phone.'"
-                                                data-reg_end="'.$reg_end.'"
-                                                >
+                                $bigstring = '<div class="col-lg-12 practiceoffer">
                                                 <div class="row">
                                                   <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-uppercase font-weight-bold">
                                                     <p>'.$uploaded.'</p>
@@ -95,7 +80,21 @@
                                                       <img src="'.$picurl.'" alt="Ettevõtte logo">
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <a>
+                                                        <a class="js-view-modal" href="javascript:void(0);"
+                                                          data-pic="'.$picurl.'"
+                                                          data-heading="'.$heading.'"
+                                                          data-description="'.$description.'"
+                                                          data-tasks="'.$tasks.'"
+                                                          data-skills="'.$skills.'"
+                                                          data-work_name="'.$work_name.'"
+                                                          data-work_desc="'.$work_desc.'"
+                                                          data-location="'.$location.'"
+                                                          data-other="'.$other.'"
+                                                          data-website="'.$website.'"
+                                                          data-email="'.$email.'"
+                                                          data-name="'.$name.'"
+                                                          data-phone="'.$phone.'"
+                                                          data-reg_end="'.$reg_end.'">
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
                                                         <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
@@ -106,7 +105,7 @@
                                                     <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> '.$reg_end.'</p>
                                                   </div>
                                                   <div class="col-lg-2 text-center apply">
-                                                    <a class="text-uppercase font-weight-bold">Kandideeri</a>
+                                                    <a class="text-uppercase font-weight-bold" href="mailto:'.$email.'">Kandideeri</a>
                                                     <p>Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
                                                 </div>
@@ -207,7 +206,7 @@
                                         <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae ülesse oma organisatsiooni logo</button>
+                                        <button class="btn">Lae üles oma organisatsiooni logo</button>
                                         <input type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
                                     </div>
                                     <div class='invalid-feedback'>Sisesta logo!</div>
@@ -279,7 +278,9 @@
                                 <div class="post-tasks"></div>
                                 <h5>Vajalikud oskused ja kogemused</h5>
                                 <div class="post-skills"></div>
-                            </div>
+                                <h5>Tähtaeg</h5>
+                                <div class="post-deadline"></div>
+                              </div>
 
                             <div class="col-lg-4 col-contact">
                                 <div class="post-img-container"></div>
@@ -295,12 +296,12 @@
                                   <span class="post-other"></span>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
              <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+               <a class="btn btn-primary post-apply">Kandideeri</a>
             </div>
             </div>
         </div>
@@ -369,9 +370,10 @@
             var work_desc = target.data('work_desc');
             var work_loc = target.data('location');
             var website = target.data('website');
-    		var name = target.data('name');
-    		var email = target.data('email');
+    		    var name = target.data('name');
+    		    var email = target.data('email');
             var phone = target.data('phone');
+            var deadline = target.data('reg_end');
             
             //attach values
             $(".post-heading").html(heading);
@@ -387,9 +389,10 @@
             $(".post-contact-email").html(email);
             $(".post-contact-phone").html(phone);
             $(".post-other").html(other);
-            
+            $(".post-deadline").html(deadline);
+            $(".post-apply").attr("href","mailto:"+email);
             handleCookies(email);
-    		modal.modal('show');
+    		    modal.modal('show');
         }
     	
         function openRegModal(){
