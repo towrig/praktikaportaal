@@ -39,15 +39,7 @@ img {
     padding: 4px 0 4px;
 }
 .col-contact .post-img-container{
-    max-height: 96px;
-    height: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
     margin-bottom: 16px;
-}
-.col-info p{
-    min-height: 80px;
 }
 /* end modal stuff */
 
@@ -1967,4 +1959,30 @@ footer .socialmedia a{
 footer .socialmedia a:hover {
   opacity: .7;
   color: #e94700!important;
+}
+
+
+div#viewModal h5, div#viewModal h2 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 6px 12px;
+    margin-left: -12px;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+div#viewModal h2 {
+ font-weight:600!important;
+ font-size: 1.25rem!important;
+}
+
+div#viewModal .row div[class*="post-"] {
+    background: #f1f1f1;
+    padding: 12px 12px;
+    border-bottom: 1px solid #ddd;
+    min-height: 80px;
+}
+
+div#viewModal .post-img-container {
+    width: 100%;
 }

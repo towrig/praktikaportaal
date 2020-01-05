@@ -11,15 +11,14 @@
             <div class="col-lg-12">
                <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktikapakkumised</h1>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <p class="font-weight-light mb-5">Otsid praktikanti, töötajat või meeskonda? Lisa oma pakkumine või projektiidee juba täna!</p>
-              <a href="#" class="text-uppercase font-weight-bold">Vaata rohkem siit!</a>
             </div> <!-- .col-->
             <div class="col-lg-2">
               <a id="formToggler" class="toggleMenu text-uppercase">Lisa pakkumine<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span>--></a>
             </div>
             <div class="col-lg-12">
-              <h5 class="text-uppercase text-center font-weight-bold mt-3">Aktiivsed pakkumised</h5>
+              <h5 class="text-uppercase text-center font-weight-bold mt-5">Aktiivsed pakkumised</h5>
             </div>
           </div> <!-- .row -->
         </div> <!-- .container -->
@@ -89,10 +88,10 @@
                                                 data-reg_end="'.$reg_end.'"
                                                 >
                                                 <div class="row">
-                                                  <div class="col-lg-1 text-uppercase font-weight-bold">
+                                                  <div class="col-lg-1 col-md-1 col-sm-1 col-1 text-uppercase font-weight-bold">
                                                     <p>'.$uploaded.'</p>
                                                   </div>
-                                                    <div class="col-lg-2 work-banner-crop">
+                                                    <div class="col-lg-2 col-md-11 col-sm-11 col-11 work-banner-crop">
                                                       <img src="'.$picurl.'" alt="Ettevõtte logo">
                                                     </div>
                                                     <div class="col-lg-4">
@@ -275,29 +274,34 @@
                             <div class="col-lg-8 col-info">
                                 <h2 class="post-heading"></h2>
                                 <h5>Tutvustus</h5>
-                                <p class="post-description"></p>
+                                <div class="post-description"></div>
                                 <h5>Tööülesanded</h5>
-                                <p class="post-tasks"></p>
+                                <div class="post-tasks"></div>
                                 <h5>Vajalikud oskused ja kogemused</h5>
-                                <p class="post-skills"></p>
+                                <div class="post-skills"></div>
                             </div>
 
                             <div class="col-lg-4 col-contact">
                                 <div class="post-img-container"></div>
                                 <h5>Kontakt</h5>
-                                <span class="post-org-name"></span>
-                                <span class="post-org-loc"></span>
-                                <p class="post-org-description"></p>
-                                <span class="post-org-website"></span>
-                                <span class="post-contact-name"></span>
-                                <span class="post-contact-email"></span>
-                                <span class="post-contact-phone"></span>
-                                <span class="post-other"></span>
+                                <div class="post-contact-container">
+                                  <span class="post-org-name"></span>
+                                  <span class="post-org-loc"></span>
+                                  <span class="post-org-description"></span>
+                                  <span class="post-org-website"></span>
+                                  <span class="post-contact-name"></span>
+                                  <span class="post-contact-email"></span>
+                                  <span class="post-contact-phone"></span>
+                                  <span class="post-other"></span>
+                                </div>
                             </div>
                             
                         </div>
                     </div>
                 </div>
+             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+            </div>
             </div>
         </div>
     </div>
@@ -374,8 +378,7 @@
             $(".post-description").html(description);
             $(".post-tasks").html(tasks);
             $(".post-skills").html(skills);
-            console.log("pic: "+pic);
-            $(".post-img-container").css("background-image", "url("+pic+")");
+            $(".post-img-container").html("<img src='"+pic+"'>");
             $(".post-org-name").html(work_name);
             $(".post-org-loc").html(work_loc);
             $(".post-org-description").html(work_desc);
