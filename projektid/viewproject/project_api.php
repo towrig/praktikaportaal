@@ -78,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
         $project_title = '';
         $project_edit_key = '';
         
-		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $conn->prepare('INSERT INTO ProjectParticipants(project_id, name, email, degree, skills, has_profile, is_accepted) VALUES (?,?,?,?,?,0,0)'); 
@@ -150,7 +150,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 	}
 
 	try {
-		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $conn->prepare('INSERT INTO ProjectPosts(start_date, pdf_path, title, organisation, org_email, org_name, isactivated, edit_key, max_part) VALUES (NOW(),?,?,?,?,?,?,?,?)'); 
@@ -178,7 +178,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["edit_key"]){
 	try {
 		$project_id = "";
 		$project_name = '';
-		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$query = $conn->prepare('SELECT * FROM ProjectPosts WHERE edit_key = ?'); 
@@ -191,7 +191,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["edit_key"]){
 		$conn = null;
 		$response .= "ID:".$project_id;
 		if(isset($project_id)){
-			$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+			$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			if($_POST["action"] == "approve"){
