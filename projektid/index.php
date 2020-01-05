@@ -288,6 +288,28 @@
                         <p>Hetkel registreerinud: <span class="field-participants"></span></p>
                         <div class="join-container"></div>
                     </div>
+                    <div class="col-lg-12">
+                        <form id="project-apply" method="post" action="project_api.php">
+                        <div class="form-group">
+                            <label>Ees- ja perekonnanimi*:</label>
+                            <input class="form-control" type="text" name="fullname" id="project_fullname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Eriala*:</label>
+                            <input class="form-control" type="text" name="degree" id="project_degree" required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail*:</label>
+                            <input class="form-control" type="text" name="email" id="project_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tugevused ja oskused:</label>
+                            <textarea class="form-control" name="skills" id="skills" rows="2"></textarea>
+                        </div>
+                        <input type="hidden" name="hash" id="project_hash" value=<?php echo '"'.$_GET["c"].'"';?>>
+                        </form>
+                    </div>
+                    <div class="col-lg-12">Liitunud üliõpilased:</div>
                     <div class="col-lg-12 participants-container"></div>
                     
                 </div>
@@ -382,6 +404,7 @@
             modal.find('.field-org_email').html(org_email);
             modal.find('.field-end_date').html(end_date);
             modal.find('.field-participants').html(amount+"/"+max_part);
+            modal.find('.join-container').empty();
             if(amount < max_part){
                 modal.find('.join-container').after('<a class="btn btn-info btn-xl" onclick="join()">Liitu</a>');
             }
@@ -400,7 +423,6 @@
             if(post_participants.length != 0){
                 for(var i = 0; i < post_participants.length; i++){
                     p_c.append(createParticipant(post_participants[i]));
-                    p_c.append(createParticipant(post_participants[i]));
                 }
             }
             modal.modal('show');
@@ -414,8 +436,27 @@
             return $('<div>').addClass("col-lg-3").addClass("participant").html("<p>"+name+"</p>"+"<p>"+email+"</p>"+"<p>"+degree+"</p>"+"<p>"+skills+"</p>");
         }
         
-        function join(){
-            
+        function join() {
+            var form = $('#project-apply');
+            if (areasVisible) {
+                var formData = form.serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: formData
+                }).done(function(response) {
+                    console.log(response);
+                    form.after('<div class="alert alert-success alert-dismissible fade show">Projektiga liitumise kinnitus tuleb Teile emaili peale mõne päeva jooksul. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                    form.css('display', 'none');
+                }).fail(function(response) {
+                    console.log(response);
+                    form.after('<div class="alert alert-danger alert-dismissible fade show">Ups! Midagi läks valesti registreerimisel.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                });
+
+            } else {
+                areasVisible = true;
+                form.css('display', 'block');
+            }
         }
         
     </script>
