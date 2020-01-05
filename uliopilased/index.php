@@ -111,7 +111,7 @@
                                                         if($row["picturepath"]==""){
                                                            $pic ="../userdata/blank_profile_pic.png";
                                                         }
-                                                        $cv = "../userdata/cvs/".$row["cvpath"];
+                                                        $cv = "/userdata/cvs/".$row["cvpath"];
                                                         $email = $row["email"];
                                                         $tugevused = $row["skills"];
                                                         $kogemused = $row["experience"];
@@ -408,12 +408,12 @@
         function openCV(e) {
             var modal = $('.modal-cv').first();
             var target = $(e.currentTarget);
-            var cvpath = $(target).data('cv');
+            var cvpath = 'https://docs.google.com/viewer?url=http://praktika.ut.ee'+$(target).data('cv');
 
-            var cvembed = $('<embed>').attr({
-                'src': cvpath + '#toolbar=0',
+            var cvembed = $('<iframe>').attr({
+                'src': cvpath + '&embedded=true',
                 'type': 'application/pdf'
-            }).css('width', '100%').css('min-height', '512px').html('<div class="alert alert-warning">Antud veebilehtiseja ei toeta PDFi avamist aknas. Palun lae PDF alla <a href="' + cvpath + '" target="_blank"><strong>siit</strong>.</a></div>');
+            }).css('width', '100%').css('min-height', '512px');
             modal.find('.modal-body').empty();
             modal.find('.modal-body').html(cvembed);
 

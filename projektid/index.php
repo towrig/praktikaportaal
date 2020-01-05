@@ -390,7 +390,7 @@
             var title = target.data("title");
             var start_date = target.data("start_date");
             var end_date = target.data("end_date");
-            var pdf_path = '../userdata/projects/'+target.data("pdf_path");
+            var pdf_path = 'https://docs.google.com/viewer?url=http://praktika.ut.ee/userdata/projects/'+target.data("pdf_path");
             var org_name = target.data("org_name");
             var org_email = target.data("org_email");
             var organisation = target.data("organisation");
@@ -410,10 +410,10 @@
             }
             
             //attach pdf
-            var pdf_embed = $('<embed>').attr({
-                'src': pdf_path + '#toolbar=0',
+            var pdf_embed = $('<iframe>').attr({
+                'src': pdf_path + '&embedded=true',
                 'type': 'application/pdf'
-            }).css('width', '100%').css('min-height', '512px').html('<div class="alert alert-warning">Antud veebilehtiseja ei toeta PDFi avamist aknas. Palun lae PDF alla <a href="' + pdf_path + '" target="_blank"><strong>siit</strong>.</a></div>');
+            }).css('width', '100%').css('min-height', '512px');
             modal.find('.pdf-container').empty();
             modal.find('.pdf-container').html(pdf_embed);
             
