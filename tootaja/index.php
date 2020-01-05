@@ -79,6 +79,7 @@
                                                 data-tasks="'.$tasks.'"
                                                 data-skills="'.$skills.'"
                                                 data-work_name="'.$work_name.'"
+                                                data-work_desc="'.$work_desc.'"
                                                 data-location="'.$location.'"
                                                 data-other="'.$other.'"
                                                 data-website="'.$website.'"
@@ -272,16 +273,26 @@
                         <div class="row">
 
                             <div class="col-lg-8">
-
-                                
+                                <h2 class="post-heading"></h2>
+                                <h3>Tutvustus</h3>
+                                <p class="post-description"></p>
+                                <h3>Tööülesanded</h3>
+                                <p class="post-tasks"></p>
+                                <h3>Vajalikud oskused ja kogemused</h3>
+                                <p class="post-skills"></p>
                             </div>
 
                             <div class="col-lg-4">
-                                
-                            </div>
-
-                            <div class="col-lg-12">
-                                
+                                <div class="post-img-container"></div>
+                                <h3>Kontakt</h3>
+                                <span class="post-org-name"></span>
+                                <span class="post-org-loc"></span>
+                                <p class="post-org-description"></p>
+                                <span class="post-org-website"></span>
+                                <span class="post-contact-name"></span>
+                                <span class="post-contact-email"></span>
+                                <span class="post-contact-phone"></span>
+                                <span class="post-other"></span>
                             </div>
                             
                         </div>
@@ -344,12 +355,38 @@
         function openViewModal(e){
             var target = $(e.currentTarget);
     		var modal = $('#viewModal');
-            
+
             //get values here
+            var pic = target.data('pic');
+            var heading = target.data('heading');
+            var description = target.data('description');
+            var tasks = target.data('tasks');
+            var skills = target.data('skills');
+            var other = target.data('other');
+            var work_name = target.data('work_name');
+            var work_desc = target.data('work_desc');
+            var work_loc = target.data('location');
+            var website = target.data('website');
     		var name = target.data('name');
     		var email = target.data('email');
+            var phone = target.data('phone');
             
-            handleCookies(email); //emails are unique in the database
+            //attach values
+            $(".post-heading").html(heading);
+            $(".post-description").html(description);
+            $(".post-tasks").html(tasks);
+            $(".post-skills").html(skills);
+            $(".post-img-container").css("background-image", pic);
+            $(".post-org-name").html(work_name);
+            $(".post-org-loc").html(work_loc);
+            $(".post-org-description").html(work_desc);
+            $(".post-org-website").html(website);
+            $(".post-contact-name").html(name);
+            $(".post-contact-email").html(email);
+            $(".post-contact-phone").html(phone);
+            $(".post-other").html(other);
+            
+            handleCookies(email);
     		modal.modal('show');
         }
     	
