@@ -22,9 +22,9 @@
                 &copy; 2019 - Tartu Ülikool majandusteaduskond
               </div>
               <div class="socialmedia col-md-3 text-right">
-                <i class="fab fa-2x fa-twitter"></i>
-                <i class="fab fa-2x fa-facebook"></i>
-                <i class="fab fa-2x fa-instagram"></i>
+                <a href="https://twitter.com/unitartu" target="_blank"><i class="fab fa-2x fa-twitter"></i></a>
+                <a href="https://www.facebook.com/tartuylikool" target="_blank"><i class="fab fa-2x fa-facebook"></i></a>
+                <a href="https://www.instagram.com/unitartu" target="_blank"><i class="fab fa-2x fa-instagram"></i></a>
               </div>
             </div>
           </div>

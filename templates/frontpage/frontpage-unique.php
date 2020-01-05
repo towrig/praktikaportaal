@@ -19,7 +19,7 @@
       <div id="unique-interditsiplinaarne" class="unique-box col-lg-3 col-md-6">
         <div class="col p-3">
           <h3>Interdistsi-plinaarne</h3>
-          <i id="unique-arrow"></i>
+          <i class="unique-arrow"></i>
           <span>Sa tegutsed keskkonnas, kus väljakutsed ja meeskonnad ületavad eriala piire, saad uusi tutvusi ning õpid probleeme nägema ja mõistma eri tahkudelt</span>
         </div>
       </div>
