@@ -55,7 +55,7 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./praktika"><button class="btn btn-sm btn-primary">LISA</button></a>
+                      <a class="" href="./uliopilased"><button class="btn btn-sm btn-primary">LISA</button></a>
                     </div>
                   </div>
                   <div class="card m-5 second">
@@ -74,7 +74,7 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./team"><button class="btn btn-sm btn-primary">LISA</button></a>
+                      <a class="" href="./projektid"><button class="btn btn-sm btn-primary">LISA</button></a>
                     </div>
                   </div>
                   <div class="card m-5 third">
@@ -92,7 +92,7 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./tootaja"><button class="btn btn-sm btn-primary">LISA</button></a>
+                      <a class="" href="./praktikapakkumised"><button class="btn btn-sm btn-primary">LISA</button></a>
                     </div>
                   </div>
                 </div>
