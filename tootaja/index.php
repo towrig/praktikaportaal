@@ -349,7 +349,8 @@
             //get values here
     		var name = target.data('name');
     		var email = target.data('email');
-
+            
+            handleCookies(email); //emails are unique in the database
     		modal.modal('show');
         }
     	
@@ -393,6 +394,14 @@
                             </div>');
             });
         }
+        
+        function handleCookies(email){
+            var val = getCookie(email);
+            console.log(email+";"+val);
+            if (val == "" || val == "first")
+                setCookie(email, "first");
+        }
+        
         function previewFile() {
             var preview = document.querySelector('#preview');
             var files = document.querySelector('input[type=file]').files[0];
@@ -452,7 +461,41 @@
                 });
             }
         }
-
+        
+        function setCookie(cname, cvalue) {
+            document.cookie = cname + "=" + cvalue + ";path=/";
+            var formData = new FormData();
+            formData.append("action", "addview");
+            formData.append("email", cname);
+            $.ajax({
+                type: 'POST',
+                url: './work_api.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData
+            }).done(function(response) {
+                console.log("added view!");
+            }).fail(function(response) {
+                console.log(response);
+            });
+        }
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        
     </script>
 
 </body>

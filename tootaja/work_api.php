@@ -160,9 +160,33 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     }
 	
 }
-else if(!empty($_POST) && $_POST["action"] == "viewadd"){ //increase the amount of views a post has
+else if(!empty($_POST) && $_POST["action"] == "addview"){ //increase the amount of views a post has
+    $email = $_POST["email"];
+    $val = $_COOKIE[str_replace('.','_',$email)];
+    
+    if($val == "first"){
+        setcookie($email, "done");
+        try {
+            $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo "Connected to PDO successfully"; 
+            $query = $conn->prepare('UPDATE WorkPosts SET views = views + 1 WHERE email = ?');
+            $query->execute(array($email));
+            http_response_code(200);
+            echo "OK!";
+        }
+        catch(PDOException $e){
+            http_response_code(403);
+            echo "Failed: " . $e->getMessage();
+        }
+    }else{
+        http_response_code(403);
+        echo "View exists! values:".json_encode($_COOKIE); 
+    }
+}else{
     http_response_code(403);
-    echo "Pole implementeeritud!";
+    echo "Faulty request!";
 }
 
 ?>
