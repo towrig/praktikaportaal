@@ -419,7 +419,7 @@
             modal.find('.field-participants').html(amount + "/" + max_part);
             modal.find('.join-container').empty();
             if (amount < max_part) {
-                modal.find('.join-container').after('<button class="btn btn-primary" onclick="join()">Liitu</button>');
+                modal.find('.join-container').append('<button class="btn btn-primary" onclick="join()">Liitu</button>');
             }
 
             //attach pdf
