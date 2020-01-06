@@ -283,11 +283,8 @@
                                       <option>ühiskonnateaduste instituut</option>
                                       <option>usuteaduskond</option>
                                       <option>Viljandi kultuuriakadeemia</option>
-                                      <option value="muu">muu</option>
+                                      <option>muu</option>
                                     </select>
-                                    <label id="specifyOther" for="muu">Täpsusta instituudi nimi
-                                      <input id="other" class="form-control" type="text" name="muu" />
-                                    </label>
                                     <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
                                 </div>
                             </div>
@@ -429,18 +426,6 @@
                 return;
             var modal = $('.modal').first();
             modal.modal('show');
-            $("#institute").on("change", function() {
-                if ($(this).val() === "muu") {
-                    $("#specifyOther").show();
-                }
-                else {
-                    $("#specifyOther").hide();
-                }
-            });
-
-            $("#other").on("keyup", function() {
-              $("#institute").find("option:selected").text($(this).val()).val($(this).val());
-            });
         }
 
         function ajaxSubmit(e) {
