@@ -1531,9 +1531,9 @@ body.project .card .card-footer {
 }
 
 body.practiceoffers .col-lg-2.work-banner-crop {
-    padding-bottom: 80px!important;
+    /*padding-bottom: 80px!important;
     overflow: hidden;
-    height: 0;
+    height: 0;*/
 }
 
 p {
