@@ -111,7 +111,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 		}
         else{
             $passedValidation = false;
-            $response .= "No logo!";
+            $response .= "No logo specified!";
         }
 	}
 	

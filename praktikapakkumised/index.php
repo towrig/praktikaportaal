@@ -34,7 +34,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                     <div class="carousel-item active">                    
                     <?php
                         try {
-                            $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+                            $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                             // set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                             $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ?'); 
@@ -196,7 +196,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 <div class="form-group">
                                     <label for="work">Teie telefoninumber</label>
                                     <input required type="text" class="form-control" id="phone" name="phone">
-                                    <div class='invalid-feedback'>Palun sisestage oma nimi</div>
                                 </div>
                             </div>
 
@@ -218,12 +217,11 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 <div class="form-group">
                                     <label for="work_desc">Organisatsiooni tutvustus</label>
                                     <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
-                                    <div class='invalid-feedback'>Palun anna ettevõttele teada, mis eriala sa õpid</div>
+                                    <div class='invalid-feedback'>Palun anna teada, mis organisatsioon te olete</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="website">Veebiaadress</label>
                                     <input required type="text" class="form-control" id="website" name="website">
-                                    <div class='invalid-feedback'>Ära unusta märkida, mis valdkonnas soovid töötada</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="location">Asukoht</label>
@@ -232,15 +230,15 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Töökoha tutvustus</label>
-                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                    <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="tasks">Tööülesanded</label>
-                                    <textarea class="form-control" id="tasks" name="tasks" rows="3"></textarea>
+                                    <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="skills">Vajalikud oskused ja kogemused</label>
-                                    <textarea class="form-control" id="skills" name="skills" rows="3"></textarea>
+                                    <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="other">Muu oluline info</label>
@@ -313,6 +311,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
     <?php include_once './../templates/footer.php';?>
     <script src="https://unpkg.com/cropperjs"></script>
     <script type="text/javascript">
+        var blobImg;
     	$(document).ready(function(){
 
     		$('.toggleMenu').on('click', openRegModal);

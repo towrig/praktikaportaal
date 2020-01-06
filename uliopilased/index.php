@@ -68,7 +68,7 @@
                                                 return $output;
                                                 }
                                                 try {
-                                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+                                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                                                     // set the PDO error mode to exception
                                                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                     if(!empty($_POST)){
