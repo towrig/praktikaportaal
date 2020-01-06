@@ -41,7 +41,7 @@
                     <div id="carouselPager" class="carousel slide col-md-12">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <div class="container">
+                                <div class="">
                                     <div class="row">
                                         <?php
                                 try {
@@ -99,7 +99,7 @@
                                         data-max_part="'.$max_part.'"
                                         data-amount="'.$amount.'"
                                         >
-                                            <div class="card">
+                                            <div class="card mb-3 p-4">
                                 <div class="row">
                                   <div class="col-md-12">
                                     <h6 class="text-uppercase">'.$title.'</h6>

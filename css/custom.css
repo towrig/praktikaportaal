@@ -1,5 +1,6 @@
 body {
-  overflow-x: hidden;
+  /* FF cannot understand this */
+  //overflow-x: hidden;
   color: #46454a;
 }
 
@@ -1491,8 +1492,8 @@ i.arrow-front {
 
 body.project .card {
     background: white;
-  min-height: 250px;
-  outline: 1rem solid white;
+  min-height: 350px;
+  //outline: 1rem solid white;
 }
 
 body.project .card h6 {
@@ -1506,6 +1507,7 @@ body.project .card .card-footer {
     margin: 0 -15px;
     position: absolute;
     bottom: 0;
+    width:96%;
 }
 
 body.practiceoffers .col-lg-2.work-banner-crop {
@@ -2024,4 +2026,18 @@ div#viewModal .post-deadline {
 .navbar-collapse.collapse.show a.nav-link {
     width: 140px;
     margin: auto!important;
+}
+
+i.front-arrow.text-right {
+    background: url(../img/icons-extra.png);
+    height: 23px;
+    width: 100px;
+    display: block;
+    background-position: -35px -1411px;
+    background-size: 454px;
+    float: right;
+}
+
+a:not([href]):not([tabindex]) {
+  color: #FF5722;
 }
