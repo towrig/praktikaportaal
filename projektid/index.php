@@ -267,8 +267,8 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <nav class="nav nav-pills flex-column flex-sm-row " id="pills-tab" role="tablist">
-                        <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="post-home-tab" data-toggle="pill" href="#post-home" role="tab" aria-controls="post-home" aria-selected="true"><span>Andmed</span></a>
-                        <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="post-participants-tab" data-toggle="pill" href="#post-participants" role="tab" aria-controls="post-participants" aria-selected="false"><span>Osalejad</span></a>
+                        <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="post-home-tab" data-toggle="pill" href="#post-home" role="tab" aria-controls="post-home" aria-selected="true"><span>Projekt</span></a>
+                        <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="post-participants-tab" data-toggle="pill" href="#post-participants" role="tab" aria-controls="post-participants" aria-selected="false"><span>Liitu</span></a>
                     </nav>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active row" id="post-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -277,25 +277,26 @@
                                 <h2 class="post-heading"></h2>
                             </div>
 
-                            <div class="col-lg-12 pdf-container">
-                            </div>
-
                             <!-- join and contact-->
-                            <div class="col-lg-4 contact-container">
-                                <h5>Kontakt</h5>
+                            <div class="col-lg-4">
                                 <p class="field-organiser"></p>
                                 <p class="field-org_name"></p>
                                 <p class="field-org_email"></p>
                             </div>
 
+                            <div class="col-lg-12 pdf-container">
+                            </div>
+
+
+
                         </div>
                         <div class="tab-pane fade show row" id="post-participants" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="col-lg-12 my-3">
-                                <p>Registreerimise lõpptähtaeg: <span class="field-end_date"></span></p>
-                                <div class="join-container"></div>
+                                <h5 class="text-muted float-right font-itallic">Registreerimise lõpptähtaeg: <span class="field-end_date"></span></h5>
+
                             </div>
                             <div class="col-lg-12 my-3">
-                                <form id="project-apply" method="post" action="project_api.php">
+                                <form id="project-join" method="post" action="project_api.php">
                                     <div class="form-group">
                                         <label>Ees- ja perekonnanimi*:</label>
                                         <input class="form-control" type="text" name="fullname" id="project_fullname" required>
@@ -314,9 +315,10 @@
                                     </div>
                                     <input type="hidden" name="hash" id="project_hash">
                                 </form>
+                              <div class="join-container"></div>
                             </div>
-                            <div class="col-lg-12">Liitunud üliõpilased: (<span class="field-participants"></span>)</div>
-                            <div class="col-lg-12 participants-container"></div>
+                            <div class="col-lg-12"><h5>Liitunud üliõpilased: (<span class="field-participants"></span>)</h5></div>
+                            <div class="col-lg-12 participants-container"><div class="container"><div class="row"></div></div></div>
                         </div>
                     </div>
 
@@ -417,7 +419,7 @@
             modal.find('.field-participants').html(amount + "/" + max_part);
             modal.find('.join-container').empty();
             if (amount < max_part) {
-                modal.find('.join-container').after('<a class="btn btn-info btn-xl" onclick="join()">Liitu</a>');
+                modal.find('.join-container').after('<button class="btn btn-primary" onclick="join()">Liitu</button>');
             }
 
             //attach pdf
@@ -429,7 +431,7 @@
             modal.find('.pdf-container').html(pdf_embed);
 
             //add participants
-            var p_c = modal.find('.participants-container');
+            var p_c = modal.find('.participants-container .container .row');
             p_c.empty();
             if (post_participants.length != 0) {
                 for (var i = 0; i < post_participants.length; i++) {
@@ -444,11 +446,11 @@
             var email = arr[1];
             var degree = arr[2];
             var skills = arr[3];
-            return $('<div>').addClass("col-lg-3").addClass("participant").html("<p>" + name + "</p>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>");
+            return $('<div>').addClass("col-lg-3 participant m-2").html("<p>" + name + "</p>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>");
         }
 
         function join() {
-            var form = $('#project-apply');
+            var form = $('#project-join');
             if (areasVisible) {
                 var formData = form.serialize();
                 $.ajax({
