@@ -292,7 +292,7 @@
                         </div>
                         <div class="tab-pane fade show row" id="post-participants" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="col-lg-12 my-3">
-                                <h5 class="text-muted float-right font-itallic">Registreerimise lõpptähtaeg: <span class="field-end_date"></span></h5>
+                                <h5 class="text-muted float-right font-italic">Registreerimise lõpptähtaeg: <span class="field-end_date"></span></h5>
 
                             </div>
                             <div class="col-lg-12 my-3">
@@ -446,7 +446,7 @@
             var email = arr[1];
             var degree = arr[2];
             var skills = arr[3];
-            return $('<div>').addClass("col-lg-3 participant m-2").html("<p>" + name + "</p>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>");
+            return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>");
         }
 
         function join() {
