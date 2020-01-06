@@ -2059,3 +2059,17 @@ i.front-arrow.text-right {
 a:not([href]):not([tabindex]) {
   color: #FF5722;
 }
+
+.practice section .back .card i.arrow-front {
+    background: url(../img/icons-extra.png);
+    background-position: 39px -1498px;
+    background-size: 422px;
+    height: 21px;
+}
+.form-control:focus {
+    background-color: #cedcec;
+    border: 1px solid #cedcec;
+}
+.form-control {
+    transition: .25s all ease-in-out;
+}
