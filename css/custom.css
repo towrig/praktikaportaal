@@ -1404,7 +1404,8 @@ body.practice .card-body{
 }
 
 #about img {
-    filter: saturate(0);
+  filter: saturate(0);
+  max-width: 200px;
 }
 
 .toggleMenu {
@@ -2116,4 +2117,12 @@ button.btn {
 
 #specifyOther {
   display:none;
+}
+
+#project_submission a.btn.btn-lg.btn-primary {
+    color: white;
+    margin-top: -5px;
+    font-family: "Rubik";
+    font-size: 1.5rem;
+    font-weight: 100;
 }
