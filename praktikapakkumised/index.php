@@ -12,7 +12,8 @@
                <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktika<wbr>pakkumised</h1>
             </div>
             <div class="col-lg-2">
-              <p class="font-weight-light mb-5">Otsid praktikanti, töötajat või meeskonda? Lisa oma pakkumine või projektiidee juba täna!</p>
+              <p class="font-weight-light mb-5">Otsid praktikanti või tulevast töötajat? 
+Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.</p>
             </div> <!-- .col-->
             <div class="col-lg-2">
               <a id="formToggler" class="toggleMenu text-uppercase">Lisa pakkumine<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span>--></a>
