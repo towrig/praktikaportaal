@@ -283,7 +283,11 @@
                                       <option>ühiskonnateaduste instituut</option>
                                       <option>usuteaduskond</option>
                                       <option>Viljandi kultuuriakadeemia</option>
+                                      <option value="muu">muu</option>
                                     </select>
+                                    <label id="specifyOther" for="muu">Täpsusta instituudi nimi
+                                      <input id="other" class="form-control" type="text" name="muu" />
+                                    </label>
                                     <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
                                 </div>
                             </div>
@@ -379,7 +383,7 @@
             $('.js-modal').on('click', openModal);
             $('.js-open-cv').on('click', openCV);
             $('.js-ajax').on('click', function(e) {
-                ajaxSubmit(e);
+                 ajaxSubmit(e);
             });
             $(".flip-div").click(function() {
                 $(this).toggleClass("hover");
@@ -425,6 +429,18 @@
                 return;
             var modal = $('.modal').first();
             modal.modal('show');
+            $("#institute").on("change", function() {
+                if ($(this).val() === "muu") {
+                    $("#specifyOther").show();
+                }
+                else {
+                    $("#specifyOther").hide();
+                }
+            });
+
+            $("#other").on("keyup", function() {
+              $("#institute").find("option:selected").text($(this).val()).val($(this).val());
+            });
         }
 
         function ajaxSubmit(e) {
@@ -435,14 +451,6 @@
             e.stopPropagation();
             var formData = new FormData(document.getElementById('form_student'));
             formData.append("action", action);
-            /*var data = $('#form_student').serializeArray();
-            $.each(data, function(key, el) {
-              if (el.value == "") {
-                // If value empty then do not append
-              } else {
-                formData.append(el.name, el.value);
-              }
-            });*/
             formData.delete("pilt_full");
             if (blobImg != undefined)
                 formData.append("pilt", blobImg, "profilepic.jpg");
