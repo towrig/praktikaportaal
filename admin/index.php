@@ -16,9 +16,9 @@
     $dbpassword = $CFG->dbpasswd;
 
 	$projects = array();
-
+    $participants = array();
 	try {
-		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
+		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
 		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $query = $conn->prepare('SELECT * FROM ProjectPosts'); 
@@ -28,16 +28,34 @@
 	    foreach($data as $row){
 	    	$entity = array();
 	    	$entity["start_date"] = $row["start_date"];
-	    	$entity["end_date"] = $row["end_date"];
 	    	$entity["id"] = $row["id"];
 	    	$entity["title"] = $row["title"];
+            $entity["organisation"] = $row["organisation"];
+            $entity["org_name"] = $row["org_email"];
             $entity["org_email"] = $row["org_email"];
 	    	$entity["edit_key"] = $row["edit_key"];
             $entity["isactivated"] = $row["isactivated"];
-	        $projects[$i] = $entity;
-	        $entity = null; 
+            $entity["max_part"] = $row["max_part"]; 
 	        $i+= 1;
+            
+            $query = $conn->prepare('SELECT * FROM ProjectParticipants WHERE project_id = ?');
+            $query->execute(array($row["id"]));
+            $data = $query -> fetchAll();
+            $post_participants = array();
+            $amount = 0;
+            foreach($data as $row){
+                $p = array($row["name"], $row["email"], $row["degree"], $row["skills"], $row["is_accepted"]);
+                array_push($post_participants, $p);
+                $amount++;
+            }
+            $entity["amount"] = $amount;
+            
+            $participants[$row["id"]] = $post_participants;
+            $projects[$i] = $entity;
+	        $entity = null; 
+            $i+= 1;
 	    }
+        
 	    $conn = null;
 	}catch (PDOException $e){
 		echo "Connection failed: " . $e->getMessage();
@@ -85,7 +103,7 @@
                                             <h6 class="card-title text-uppercase font-weight-bold mt-0">'.$p["title"].'</h6>
                                             <p class="card-text">Loodud: '.$p["start_date"].'<br> Reg. lõpp: '.$p["end_date"].'<br></p>
                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
-                                                <a class="btn btn-sm btn-success" href="../team/viewproject?c='.$p["id"].'&e='.$p["edit_key"].'">Mine muutma</a>
+                                                <a class="btn btn-sm btn-success proj-modal" data-id= "'.$p["id"].'" data-ekey="'.$p["edit_key"].'">Vaata osalejaid</a>
                                                 '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
                                             </div>
                                         </div>
@@ -100,6 +118,23 @@
 
         </div>
     </div>
+    
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    
+                    <div class="col-lg-12 participants-container">
+                        <div class="container">
+                            <div class="row"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -111,7 +146,63 @@
     <script src="../js/creative.min.js"></script>-->
     <script src="../js/trumbowyg/trumbowyg.min.js"></script>
     <script type="text/javascript">
-
+        
+        var participants = <?php echo json_encode($participants);?>;
+        
+        $(document).ready(function() {
+            $('.proj-modal').on('click', partModal);
+        });
+        
+        function partModal(e){
+            var target = $(e.currentTarget);
+            var modal = $(".modal").first();
+            var id = target.data("id");
+            var post_part = participants[id];
+            var p_c = modal.find('.participants-container .container .row');
+            p_c.empty();
+            if (post_part.length != 0) {
+                for (var i = 0; i < post_participants.length; i++) {
+                    p_c.append(createParticipant(post_participants[i], id));
+                }
+            }
+            $('.part-btn').on('click', handleParticipant);
+            modal.show();
+        }
+        
+        function handleParticipant(e){
+            var target = $(e.currentTarget);
+            var formData = new FormData(document.getElementById('project-join'));
+            formData.append("email", target.data("email"));
+            formData.append("edit_key", target.data("ekey"));
+            $.ajax({
+                type: 'POST',
+                url: '../projektid/project_api.php',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(response) {
+                target.remove();
+                console.log(response);
+            }).fail(function(response) {
+                console.log(response);
+            });
+            
+        }
+        
+        function createParticipant(arr, ekey) {
+            var name = arr[0];
+            var email = arr[1];
+            var degree = arr[2];
+            var skills = arr[3];
+            var is_accepted = arr[4];
+            console.log(is_accepted);
+            var acceptButton = "";
+            if (!is_accepted) acceptButton = '<a class="btn btn-sm btn-success part-btn" data-email="'.email.'" data-ekey="'.ekey.'">Kinnita</a>';
+            //var refuseButton = '<a class="btn btn-sm btn-danger part-btn" data-id="'.id.'" data-action="refuse">Keeldu</a>';
+            return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>"+acceptButton);
+        }
+        
         function activateEditmode() {
             let formData = new FormData();
             formData.append("edit_key", $('.admin-key-input').val());
