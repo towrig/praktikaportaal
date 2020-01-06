@@ -23,7 +23,7 @@
                         </p>
                     </div>
                     <div class="col-lg-2">
-                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Lisa profiil</span>
+                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Üliõpilased','event_label':'Ava lisa profiil'});">Lisa profiil</span>
                     </div>
                     <div class="col-lg-12">
                         <h5 class="text-uppercase text-center font-weight-bold mt-5">Liitunud</h5>
@@ -338,7 +338,7 @@
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
                                 </div>
-                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add">Lisa profiil</button>
+                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add" onclick="gtag('event', 'Salvesta',{'event_category': 'Üliõpilased','event_label':'Lisa profiil'});">Lisa profiil</button>
                             </div>
 
                         </form>

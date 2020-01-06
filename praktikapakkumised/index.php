@@ -16,7 +16,7 @@
 Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.</p>
             </div> <!-- .col-->
             <div class="col-lg-2">
-              <a id="formToggler" class="toggleMenu text-uppercase">Lisa pakkumine<!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Esitatud pakkumised aeguvad lõpptähtaja möödumisel">?</span>--></a>
+              <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});">Lisa pakkumine</a>
             </div>
             <div class="col-lg-12">
               <h5 class="text-uppercase text-center font-weight-bold mt-5">Aktiivsed pakkumised</h5>
@@ -106,7 +106,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                                     <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> '.$reg_end.'</p>
                                                   </div>
                                                   <div class="col-lg-2 text-center apply col-5">
-                                                    <a class="text-uppercase font-weight-bold" href="mailto:'.$email.'">Kandideeri</a>
+                                                    <a class="text-uppercase font-weight-bold" onclick="gtag(\'event\', \'Kandideeri\',{\'event_category\': \'Praktikapakkumised\',\'event_label\':\'Kandideeri lehelt\'});" href="mailto:'.$email.'">Kandideeri</a>
                                                     <p class="mt-1">Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
                                                 </div>
@@ -250,7 +250,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                         <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
                                     </div>
                                 </div>
-                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax">Lisa pakkumine</button>
+                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
                             </div>
 
                         </form>
@@ -300,7 +300,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                 </div>
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
-               <button class="btn btn-primary"><a class="post-apply" href="#">Kandideeri</a></button>
+               <button class="btn btn-primary"><a class="post-apply" href="#" onclick="gtag('event', 'Kandideeri',{'event_category': 'Praktikapakkumised','event_label':'Kandideeri modalis'});">Kandideeri</a></button>
             </div>
             </div>
         </div>
