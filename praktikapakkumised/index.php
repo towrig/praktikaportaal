@@ -301,7 +301,7 @@
                 </div>
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
-               <a class="btn btn-primary post-apply">Kandideeri</a>
+               <button class="btn btn-primary"><a class="post-apply" href="#">Kandideeri</a></button>
             </div>
             </div>
         </div>

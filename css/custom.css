@@ -370,7 +370,7 @@ section.page-section.bg-primary {
 }
 .main-icons-container a:hover i,
 .main-icons-container a:focus i{
-  color: #f4623a !important;
+  color: #e94700 !important;
 }
 .main-icons-container a:hover,
 .main-icons-container a:focus{
@@ -399,7 +399,7 @@ section.page-section.bg-primary {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f4623a;
+  background-color: #e94700;
   font-weight: bold;
   color: #fff;
 }
@@ -530,7 +530,7 @@ section#why {
 }
 
 #purpose .card-group {
-    color: #f4623a;
+    color: #e94700;
     text-shadow: -9px -7px 8px rgba(0,0,0,.05);
 }
 
@@ -1010,8 +1010,9 @@ i.fa-4x.mb-4 {
     background: transparent;
     font-weight: 600;
     font-size: 1rem;
-    border-bottom: 1px solid white;
+    border-bottom: 2px solid white;
     width: 60%;
+    color: white;
 }
 /* Title */
 h2.mb-5 {
@@ -1124,7 +1125,7 @@ i.fas.fa-city.fa-4x.mb-4 {
 }
 
 a.nav-link {
-    border-bottom: 2px solid #f4623a;
+    border-bottom: 2px solid #e94700;
     text-align: center!important;
     padding: 10px 14px!important;
     color: #000!important;
@@ -1169,7 +1170,7 @@ div#why-konkurents .col{
 }
 
 div#why-areng .col{
-    background: #46444a;
+    background: #46454a;
 }
 
 #why h4 {
@@ -1190,7 +1191,7 @@ div#why-areng .col{
     margin: auto;
     text-align: center;
     font-weight: 100;
-    color: #46444a;
+    color: #46454a;
     margin-bottom: 3rem;
     line-height: 2rem;
 }
@@ -1205,14 +1206,14 @@ div#why {
   font-weight: bold;
 }
 #activities h5, #stats h5 {
-  color: #1b1c21;
+  color: #46454a;
   font-weight: 600;
 }
 
 hr.divider.my-5 {
     max-width: 30rem;
     border-width: 0.1rem;
-    border-color: #f4623a;
+    border-color: #e94700;
 }
 .unique-box {
   height: min-content;
@@ -1250,7 +1251,7 @@ hr.divider.my-5 {
 }
 #unique-paindlik .col {
   margin-top: 9rem;
-  background: #46444a;
+  background: #46454a;
 }
 .unique-box .col {
     position: relative;
@@ -1272,7 +1273,7 @@ footer .contact-us-info {
   font-weight: 100;
 }
 footer a {
-  color: #f4623a;
+  color: #e94700;
   font-weight: 600;
 }
 
@@ -1434,12 +1435,12 @@ body.project .page-section h5{
 
 section h1 {
     font-size: 4.5rem;
-    color: #f4623a;
+    color: #e94700;
 }
 
 .back {
-    outline: 1.8rem solid #f4623a;
-    background: #f4623a;
+    outline: 1.8rem solid #e94700;
+    background: #e94700;
     color: white;
     max-height: 350px;
     //overflow: auto;
@@ -1564,14 +1565,14 @@ body.project .modal .nav-pills .nav-link.active, body.project .modal .nav-pills 
 }
 
 body.project .modal a.nav-link {
-    border-bottom: 2px solid #f4623a!important;
+    border-bottom: 2px solid #e94700!important;
     text-align: center!important;
     padding: 10px 14px!important;
     color: #666565!important;
     margin: 0!important;
     font-family: "Rubik"!important;
     font-weight: 400!important;
-    color: #f4623a!important;
+    color: #e94700!important;
     font-weight: 600!important;
   border-radius: 0!important;
 }
@@ -1592,9 +1593,10 @@ input#project_pdf {
 }
 
 input[type=button] {
-    color: #fff;
-    background-color: #f4623a;
-    border-color: #ffffff;
+    color: #e94700;
+    background-color: none;
+    border: none;
+    border-bottom: #e94700 2px solid;
     font-weight: 600;
     font-family: "Rubik"!important;
 }
@@ -1649,7 +1651,7 @@ body.practice .modal img#profileImg {
   color: #00489d;
   background-color: white;
   padding: 8px 20px;
-  font-size: 20px;
+  font-size: 0.9rem;
   font-weight: bold;
 }
 
@@ -1964,7 +1966,7 @@ a.nav-link.lang-switch {
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 410px) {
     div#ut-logo {
         width: 230px;
         background-size: 184% auto!important;
@@ -2094,4 +2096,19 @@ a:not([href]):not([tabindex]) {
     top: 374px;
     left: -264px;
   }
+}
+
+button.btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid;
+    text-transform: uppercase;
+    font-weight: 600!important;
+}
+
+.btn-secondary {
+    color: #46454a;
+}
+.btn-primary {
+    color: #e94700;
 }

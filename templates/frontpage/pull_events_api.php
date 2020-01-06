@@ -43,7 +43,7 @@ foreach ($eventdata as $event => $data) {
       echo "<div class='event-modal'>
               <a class='font-weight-bold text-uppercase' target='_blank' href='" . $data["public_url"] . "'>" 
               . $data["title"] . 
-              "<div class='mt-1 font-weight-light'>
+              "<div class='mt-1 font-weight-light text-muted'>
                 <span class='event-date'>" 
                   . $event_date_formatted . 
                 "</span>"
