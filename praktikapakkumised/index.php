@@ -176,17 +176,14 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 <div class="form-group">
                                     <label for="organization">Organisatsioon</label>
                                     <input required type="text" class="form-control" id="organization" name="organization">
-                                    <div class='invalid-feedback'>Palun lisage teie organisatsiooni nimi</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="work">Registreerimise lõpptähtaeg</label>
                                     <input required type="text" class="form-control" id="datepicker" name="date">
-                                    <div class='invalid-feedback'>Palun sisestage registreerimise lõpptähtaeg</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="work">Teie nimi</label>
                                     <input required type="text" class="form-control" id="name" name="name">
-                                    <div class='invalid-feedback'>Palun sisestage oma nimi</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Teie e-mail</label>
@@ -207,7 +204,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                     </div>
                                     <div class="upload-btn-wrapper">
                                         <button class="btn">Lae üles oma organisatsiooni logo</button>
-                                        <input type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
+                                        <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
                                     </div>
                                     <div class='invalid-feedback'>Sisesta logo!</div>
                                 </div>
@@ -217,7 +214,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 <div class="form-group">
                                     <label for="work_desc">Organisatsiooni tutvustus</label>
                                     <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
-                                    <div class='invalid-feedback'>Palun anna teada, mis organisatsioon te olete</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="website">Veebiaadress</label>
@@ -226,7 +222,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 <div class="form-group">
                                     <label for="location">Asukoht</label>
                                     <input required type="text" class="form-control" id="location" name="location">
-                                    <div class='invalid-feedback'>Ole hea ja anna teada, kus töökoht asub</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Töökoha tutvustus</label>
@@ -498,7 +493,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                 document.body.appendChild(editor);
                 // Create Cropper.js and pass image
                 var cropper = new Cropper(image, {
-                    aspectRatio: 1
+                    aspectRatio: 1.77
                 });
             }
         }

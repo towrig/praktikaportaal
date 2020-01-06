@@ -63,7 +63,7 @@ function sendPostNotificationMail($org_email, $title){
 
 //runs when participant registers to project
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
-	$response = "";
+	$response = "Adding participant...";
 	$name = $_POST["fullname"];
 	$email = $_POST["email"];
 	$degree = $_POST["degree"];
@@ -79,15 +79,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
         $project_edit_key = '';
         
 		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
-		// set the PDO error mode to exception
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$query = $conn->prepare('INSERT INTO ProjectParticipants(project_id, name, email, degree, skills, has_profile, is_accepted) VALUES (?,?,?,?,?,0,0)'); 
-		$query->execute(array($hash, $name, $email, $degree, $skills));
-		$conn = null;
 		
-        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
-		// set the PDO error mode to exception
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $conn->prepare('INSERT INTO ProjectParticipants(project_id, name, email, degree, skills, has_profile, is_accepted) VALUES (?,?,?,?,?,0,0)'); 
+		$query->execute(array($hash, $name, $email, $degree, $skills));
+		
 		$query = $conn->prepare('SELECT * FROM ProjectPosts WHERE id = ?'); 
 		$query->execute(array($hash));
         $data = $query -> fetchAll();
@@ -114,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 }
 //runs when a project is posted
 else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){ 
-	$response = "";
+	$response = "Adding project...";
 	$title = $_POST["project_title"];
     $max_part = intval($_POST["max_part"]);
     $organisation = $_POST["project_org_name"];

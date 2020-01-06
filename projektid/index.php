@@ -172,7 +172,7 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <form method="POST" action="viewproject/project_api.php" enctype="multipart/form-data" id="project_submission">
+                            <form method="POST" action="./project_api.php" enctype="multipart/form-data" id="project_submission">
                                 <nav class="nav nav-pills flex-column flex-sm-row " id="pills-tab" role="tablist">
                                     <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span>Projektivorm</span></a>
                                     <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span>Esita projekt</span></a>
@@ -234,7 +234,7 @@
 
                                         </div>
                                         <div class="form-group mt-3 text-center">
-                                            <input type="button" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="ajaxSubmit()" value="Esita projekt">
+                                            <input type="submit" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="ajaxSubmit()" value="Esita projekt">
                                         </div>
                                     </div>
                                 </div>
@@ -289,7 +289,7 @@
                         </div>
                         <div class="tab-pane fade show row" id="post-participants" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="col-lg-12 my-3">
-                                <form id="project-join" method="post" action="project_api.php">
+                                <form class="needs-validation" id="project-join" method="POST" action="./project_api.php">
                                     <div class="form-group">
                                         <label>Ees- ja perekonnanimi*:</label>
                                         <input class="form-control" type="text" name="fullname" id="project_fullname" required>
@@ -307,8 +307,10 @@
                                         <textarea class="form-control" name="skills" id="skills" rows="2"></textarea>
                                     </div>
                                     <input type="hidden" name="hash" id="project_hash">
+                                    <div class="join-container">
+                                        <button type="submit" class="btn btn-primary" id="joinButton">Liitu</button>
+                                    </div>
                                 </form>
-                              <div class="join-container"></div>
                             </div>
                             <div class="col-lg-12"><h5>Liitunud üliõpilased: (<span class="field-participants"></span>)</h5></div>
                             <div class="col-lg-12 participants-container"><div class="container"><div class="row"></div></div></div>
@@ -327,11 +329,16 @@
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
 
-    <script type="text/javascript">
-        var areasVisible = false;
-        var participants = <?php echo json_encode($participants);?>;
+    <script type="text/javascript">        
         $(document).ready(function() {
-            console.log(participants["15"]);
+            $("#project_submission").submit(function(e){
+                e.preventDefault();
+                ajaxSubmit(e);
+            });
+            $("#project-join").submit(function(e){
+                e.preventDefault();
+                joinProject(e);
+            });
             $('.js-modal').on('click', viewModal);
 
             $('[data-toggle="tooltip"]').tooltip();
@@ -346,6 +353,8 @@
                 $('.pagination .page-item').eq(e.to + 1).toggleClass('active');
             })
         });
+        
+        var participants = <?php echo json_encode($participants);?>;
 
         function paginatorClick(e) {
             console.log('moving');
@@ -358,7 +367,7 @@
         function ajaxSubmit() {
             var form = $('#project_submission');
             let formData = new FormData(document.getElementById('project_submission'));
-
+            /*
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
@@ -372,7 +381,30 @@
                 form.css('display', 'none');
             }).fail(function(response) {
                 console.log(response);
+                form.addClass('was-validated');
                 form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel. Proovige uuesti.</div>");
+            });*/
+        }
+        
+        function joinProject() {
+            var form = $('#project-join');
+            var formData = new FormData(document.getElementById('project-join'));
+            console.log("target: "+form.attr('action'));
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData
+            }).done(function(response) {
+                console.log(response);
+                form.after('<div class="alert alert-success alert-dismissible fade show">Projektiga liitumise kinnitus tuleb Teile emaili peale mõne päeva jooksul. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                form.css('display', 'none');
+            }).fail(function(response) {
+                console.log(response);
+                form.addClass('was-validated');
+                form.after('<div class="alert alert-danger alert-dismissible fade show">Ups! Midagi läks valesti registreerimisel.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
             });
         }
 
@@ -408,9 +440,10 @@
             modal.find('.field-org_name').html(org_name);
             modal.find('.field-org_email').html(org_email);
             modal.find('.field-participants').html(amount + "/" + max_part);
-            modal.find('.join-container').empty();
             if (amount < max_part) {
-                modal.find('.join-container').append('<button class="btn btn-primary" onclick="join()">Liitu</button>');
+                modal.find('#project-join').show();
+            }else{
+                modal.find('#project-join').hide();
             }
 
             //attach pdf
@@ -438,29 +471,6 @@
             var degree = arr[2];
             var skills = arr[3];
             return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>");
-        }
-
-        function join() {
-            var form = $('#project-join');
-            if (areasVisible) {
-                var formData = form.serialize();
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData
-                }).done(function(response) {
-                    console.log(response);
-                    form.after('<div class="alert alert-success alert-dismissible fade show">Projektiga liitumise kinnitus tuleb Teile emaili peale mõne päeva jooksul. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-                    form.css('display', 'none');
-                }).fail(function(response) {
-                    console.log(response);
-                    form.after('<div class="alert alert-danger alert-dismissible fade show">Ups! Midagi läks valesti registreerimisel.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-                });
-
-            } else {
-                areasVisible = true;
-                form.css('display', 'block');
-            }
         }
 
     </script>
