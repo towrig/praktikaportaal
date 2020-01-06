@@ -306,6 +306,12 @@
                                         <label>Tugevused ja oskused:</label>
                                         <textarea class="form-control" name="skills" id="skills" rows="2"></textarea>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
+                                            <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
+                                        </div>
+                                    </div>
                                     <input type="hidden" name="hash" id="project_hash">
                                     <div class="join-container">
                                         <button type="submit" class="btn btn-primary" id="joinButton">Liitu</button>
