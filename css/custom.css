@@ -1828,7 +1828,7 @@ body.practice .modal img#profileImg {
     i.unique-arrow {
         background-size: 484px;
         background-position: 452px 156px!important;
-        height: 100px;
+        height: 100px!important;
     }
     .unique-box .col.p-3 {
         min-height: 350px;
@@ -1846,7 +1846,7 @@ body.practice .modal img#profileImg {
 @media (max-width: 768px) {
     i.unique-arrow {
         background-size: 484px;
-        background-position: 452px 156px!important;
+        background-position: 420px 156px!important;
         height: 100px;
     }
     .unique-box .col.p-3 {
@@ -2072,4 +2072,26 @@ a:not([href]):not([tabindex]) {
 }
 .form-control {
     transition: .25s all ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .bg-container {
+    top: 298px;
+    left: -45px;
+  }
+}
+
+@media (max-width: 580px) {
+  .bg-container {
+    top: 374px;
+    left: -264px;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .bg-container {
+    top: 374px;
+    left: -264px;
+  }
 }
