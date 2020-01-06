@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktika<wbr>pakkumised</h1>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <p class="font-weight-light mb-5">Otsid praktikanti või tulevast töötajat? 
 Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.</p>
             </div> <!-- .col-->
