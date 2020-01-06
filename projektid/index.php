@@ -58,8 +58,6 @@
 
                                         $title = $row["title"];
                                         $start_date = $row["start_date"];
-                                        $end_date = getdate(strtotime($row["end_date"]));
-                                        $end_date_string = $end_date["mday"].".".$end_date["mon"].".".$end_date["year"];
                                         $id = $row["id"];
 
                                         $organisation = $row["organisation"];
@@ -93,7 +91,6 @@
                                         data-organisation="'.$organisation.'"
                                         data-title="'.$title.'"
                                         data-start_date="'.$start_date.'"
-                                        data-end_date="'.$end_date_string.'"
                                         data-max_part="'.$max_part.'"
                                         data-amount="'.$amount.'"
                                         >
@@ -292,10 +289,6 @@
                         </div>
                         <div class="tab-pane fade show row" id="post-participants" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="col-lg-12 my-3">
-                                <h5 class="text-muted float-right font-italic">Registreerimise lõpptähtaeg: <span class="field-end_date"></span></h5>
-
-                            </div>
-                            <div class="col-lg-12 my-3">
                                 <form id="project-join" method="post" action="project_api.php">
                                     <div class="form-group">
                                         <label>Ees- ja perekonnanimi*:</label>
@@ -402,7 +395,6 @@
             //get vars
             var title = target.data("title");
             var start_date = target.data("start_date");
-            var end_date = target.data("end_date");
             var pdf_path = 'https://docs.google.com/viewer?url=http://praktika.ut.ee/userdata/projects/' + target.data("pdf_path");
             var org_name = target.data("org_name");
             var org_email = target.data("org_email");
@@ -415,7 +407,6 @@
             modal.find('.field-organiser').html(organisation);
             modal.find('.field-org_name').html(org_name);
             modal.find('.field-org_email').html(org_email);
-            modal.find('.field-end_date').html(end_date);
             modal.find('.field-participants').html(amount + "/" + max_part);
             modal.find('.join-container').empty();
             if (amount < max_part) {
