@@ -192,27 +192,27 @@
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <div class="form-group mt-3">
                                             <label>Projekti pealkiri</label>
-                                            <input type="text" name="project_title" class="form-control" maxlength="85">
+                                            <input required type="text" name="project_title" class="form-control" maxlength="85">
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Teie nimi</label>
                                                 <!--<input type="text" name="project_org_name" class="form-control">-->
-                                                <input type="text" name="project_org_personal_name" class="form-control">
+                                                <input required type="text" name="project_org_personal_name" class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Teie email</label>
-                                                <input type="text" name="project_org_personal_email" class="form-control">
+                                                <input required type="text" name="project_org_personal_email" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-8">
                                                 <label>Organisatsiooni nimi</label>
-                                                <input type="text" name="project_org_name" class="form-control">
+                                                <input required type="text" name="project_org_name" class="form-control">
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label>Meeskonna suurus (max 10)</label>
-                                                <select name="max_part" class="form-control">
+                                                <select required name="max_part" class="form-control">
                                                     <option selected>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -229,12 +229,12 @@
                                         <div class="form-group text-center">
                                             <div class="upload-btn-wrapper">
                                                 <button class="btn">Lae ülesse täidetud projektivorm PDF formaadis</button>
-                                                <input type="file" name="project_pdf" id="project_pdf">
+                                                <input required type="file" name="project_pdf" id="project_pdf">
                                             </div>
 
                                         </div>
                                         <div class="form-group mt-3 text-center">
-                                            <input type="button" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="ajaxSubmit(); gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt">
+                                            <input type="submit" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt" id="regButton">
                                         </div>
                                     </div>
                                 </div>
@@ -331,14 +331,9 @@
 
     <script type="text/javascript">        
         $(document).ready(function() {
-            $("#project_submission").submit(function(e){
-                e.preventDefault();
-                ajaxSubmit(e);
-            });
-            $("#project-join").submit(function(e){
-                e.preventDefault();
-                joinProject(e);
-            });
+            $('#joinButton').on('click', joinProject);
+            $('#regButton').on('click', ajaxSubmit);
+            
             $('.js-modal').on('click', viewModal);
 
             $('[data-toggle="tooltip"]').tooltip();
@@ -364,10 +359,11 @@
             carousel.carousel(index);
         }
 
-        function ajaxSubmit() {
+        function ajaxSubmit(e) {
+            e.preventDefault();
+            e.stopPropagation();
             var form = $('#project_submission');
             let formData = new FormData(document.getElementById('project_submission'));
-            /*
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
@@ -377,16 +373,19 @@
                 data: formData
             }).done(function(response) {
                 console.log(response);
+                form.trigger("reset");
                 form.after("<div class='alert alert-success'>Aitäh! Teie projekt kiidetakse heaks hiljemalt nädala jooksul.</div>");
                 form.css('display', 'none');
             }).fail(function(response) {
                 console.log(response);
                 form.addClass('was-validated');
-                form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel. Proovige uuesti.</div>");
-            });*/
+                form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel:"+response.responseText+"</div>");
+            });
         }
         
-        function joinProject() {
+        function joinProject(e) {
+            e.preventDefault();
+            e.stopPropagation();
             var form = $('#project-join');
             var formData = new FormData(document.getElementById('project-join'));
             console.log("target: "+form.attr('action'));
@@ -399,6 +398,7 @@
                 data: formData
             }).done(function(response) {
                 console.log(response);
+                form.trigger("reset");
                 form.after('<div class="alert alert-success alert-dismissible fade show">Projektiga liitumise kinnitus tuleb Teile emaili peale mõne päeva jooksul. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
                 form.css('display', 'none');
             }).fail(function(response) {

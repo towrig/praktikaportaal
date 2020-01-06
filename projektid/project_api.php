@@ -2,7 +2,7 @@
 // Load config.php
 $CFG = new stdClass();
 // Two level deep
-$CFG->docroot = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR;
+$CFG->docroot = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
 if (!is_readable($CFG->docroot . 'config.php')) {
     // If it is not readable then exit.
     exit;
@@ -63,7 +63,7 @@ function sendPostNotificationMail($org_email, $title){
 
 //runs when participant registers to project
 if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
-	$response = "Adding participant...";
+	$response = "";
 	$name = $_POST["fullname"];
 	$email = $_POST["email"];
 	$degree = $_POST["degree"];
@@ -97,7 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		$success = sendNotificationMail($name, $hash, $project_title, $project_edit_key, $email);
         if($success){
             http_response_code(200);
-            echo response.";hash:".$hash;
+            echo $response.";hash:".$hash;
         }else{
             http_response_code(403);
             echo "Tekkis viga kirja saatmisel!";   
@@ -110,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 }
 //runs when a project is posted
 else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){ 
-	$response = "Adding project...";
+	$response = "";
 	$title = $_POST["project_title"];
     $max_part = intval($_POST["max_part"]);
     $organisation = $_POST["project_org_name"];
@@ -141,7 +141,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 	}
     else{
 		http_response_code(403);
-		echo "Faili üleslaadimisel tekkis viga!";
+		echo "Faili üleslaadimisel tekkis viga või fail puudub!";
 		return 0;
 	}
 
