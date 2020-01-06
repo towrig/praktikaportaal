@@ -267,51 +267,62 @@
     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-body row">
-                    
-                    <div class="col-lg-12">
-                        <h2 class="post-heading"></h2>
-                    </div>
-                    
-                    <div class="col-lg-12 pdf-container">
-                    </div>
-                    
-                    <!-- join and contact-->
-                    <div class="col-lg-4">
-                        <h5>Kontakt</h5>
-                        <p class="field-organiser"></p>
-                        <p class="field-org_name"></p>
-                        <p class="field-org_email"></p>
-                    </div>
-                    <div class="col-lg-8">
-                        <p>Registreerimise lõpptähtaeg: <span class="field-end_date"></span></p>
-                        <p>Hetkel registreerinud: <span class="field-participants"></span></p>
-                        <div class="join-container"></div>
-                    </div>
-                    <div class="col-lg-12">
-                        <form id="project-apply" method="post" action="project_api.php">
-                        <div class="form-group">
-                            <label>Ees- ja perekonnanimi*:</label>
-                            <input class="form-control" type="text" name="fullname" id="project_fullname" required>
+                <div class="modal-body">
+                    <nav class="nav nav-pills flex-column flex-sm-row " id="pills-tab" role="tablist">
+                        <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="post-home-tab" data-toggle="pill" href="#post-home" role="tab" aria-controls="post-home" aria-selected="true"><span>Andmed</span></a>
+                        <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="post-participants-tab" data-toggle="pill" href="#post-participants" role="tab" aria-controls="post-participants" aria-selected="false"><span>Osalejad</span></a>
+                    </nav>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active row" id="post-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                            <div class="col-lg-12">
+                                <h2 class="post-heading"></h2>
+                            </div>
+
+                            <div class="col-lg-12 pdf-container">
+                            </div>
+
+                            <!-- join and contact-->
+                            <div class="col-lg-4 contact-container">
+                                <h5>Kontakt</h5>
+                                <p class="field-organiser"></p>
+                                <p class="field-org_name"></p>
+                                <p class="field-org_email"></p>
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <label>Eriala*:</label>
-                            <input class="form-control" type="text" name="degree" id="project_degree" required>
+                        <div class="tab-pane fade show row" id="post-participants" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="col-lg-12 my-3">
+                                <p>Registreerimise lõpptähtaeg: <span class="field-end_date"></span></p>
+                                <div class="join-container"></div>
+                            </div>
+                            <div class="col-lg-12 my-3">
+                                <form id="project-apply" method="post" action="project_api.php">
+                                    <div class="form-group">
+                                        <label>Ees- ja perekonnanimi*:</label>
+                                        <input class="form-control" type="text" name="fullname" id="project_fullname" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Eriala*:</label>
+                                        <input class="form-control" type="text" name="degree" id="project_degree" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>E-mail*:</label>
+                                        <input class="form-control" type="text" name="email" id="project_email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tugevused ja oskused:</label>
+                                        <textarea class="form-control" name="skills" id="skills" rows="2"></textarea>
+                                    </div>
+                                    <input type="hidden" name="hash" id="project_hash">
+                                </form>
+                            </div>
+                            <div class="col-lg-12">Liitunud üliõpilased: (<span class="field-participants"></span>)</div>
+                            <div class="col-lg-12 participants-container"></div>
                         </div>
-                        <div class="form-group">
-                            <label>E-mail*:</label>
-                            <input class="form-control" type="text" name="email" id="project_email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Tugevused ja oskused:</label>
-                            <textarea class="form-control" name="skills" id="skills" rows="2"></textarea>
-                        </div>
-                        <input type="hidden" name="hash" id="project_hash" value=<?php echo '"'.$_GET["c"].'"';?>>
-                        </form>
                     </div>
-                    <div class="col-lg-12">Liitunud üliõpilased:</div>
-                    <div class="col-lg-12 participants-container"></div>
-                    
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
@@ -324,6 +335,7 @@
     <?php include_once './../templates/footer.php';?>
 
     <script type="text/javascript">
+        var areasVisible = false;
         var participants = <?php echo json_encode($participants);?>;
         $(document).ready(function() {
             console.log(participants["15"]);
@@ -385,57 +397,58 @@
             var target = $(e.currentTarget);
             var modal = $('#viewModal');
             var post_participants = participants[target.data("id")];
-            
+            modal.find('#project_hash').val(target.data("id"));
+
             //get vars
             var title = target.data("title");
             var start_date = target.data("start_date");
             var end_date = target.data("end_date");
-            var pdf_path = '../userdata/projects/'+target.data("pdf_path");
+            var pdf_path = 'https://docs.google.com/viewer?url=http://praktika.ut.ee/userdata/projects/' + target.data("pdf_path");
             var org_name = target.data("org_name");
             var org_email = target.data("org_email");
             var organisation = target.data("organisation");
             var max_part = target.data("max_part");
             var amount = target.data("amount");
-            
+
             //attach vars
             modal.find('.post-heading').html(title);
             modal.find('.field-organiser').html(organisation);
             modal.find('.field-org_name').html(org_name);
             modal.find('.field-org_email').html(org_email);
             modal.find('.field-end_date').html(end_date);
-            modal.find('.field-participants').html(amount+"/"+max_part);
+            modal.find('.field-participants').html(amount + "/" + max_part);
             modal.find('.join-container').empty();
-            if(amount < max_part){
+            if (amount < max_part) {
                 modal.find('.join-container').after('<a class="btn btn-info btn-xl" onclick="join()">Liitu</a>');
             }
-            
+
             //attach pdf
-            var pdf_embed = $('<embed>').attr({
-                'src': pdf_path + '#toolbar=0',
+            var pdf_embed = $('<iframe>').attr({
+                'src': pdf_path + '&embedded=true',
                 'type': 'application/pdf'
-            }).css('width', '100%').css('min-height', '512px').html('<div class="alert alert-warning">Antud veebilehtiseja ei toeta PDFi avamist aknas. Palun lae PDF alla <a href="' + pdf_path + '" target="_blank"><strong>siit</strong>.</a></div>');
+            }).css('width', '100%').css('min-height', '512px');
             modal.find('.pdf-container').empty();
             modal.find('.pdf-container').html(pdf_embed);
-            
+
             //add participants
             var p_c = modal.find('.participants-container');
             p_c.empty();
-            if(post_participants.length != 0){
-                for(var i = 0; i < post_participants.length; i++){
+            if (post_participants.length != 0) {
+                for (var i = 0; i < post_participants.length; i++) {
                     p_c.append(createParticipant(post_participants[i]));
                 }
             }
             modal.modal('show');
         }
-        
-        function createParticipant(arr){
+
+        function createParticipant(arr) {
             var name = arr[0];
             var email = arr[1];
             var degree = arr[2];
             var skills = arr[3];
-            return $('<div>').addClass("col-lg-3").addClass("participant").html("<p>"+name+"</p>"+"<p>"+email+"</p>"+"<p>"+degree+"</p>"+"<p>"+skills+"</p>");
+            return $('<div>').addClass("col-lg-3").addClass("participant").html("<p>" + name + "</p>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>");
         }
-        
+
         function join() {
             var form = $('#project-apply');
             if (areasVisible) {
@@ -458,7 +471,7 @@
                 form.css('display', 'block');
             }
         }
-        
+
     </script>
 
 </body>

@@ -42,9 +42,27 @@ img {
 .col-contact .post-img-container{
     margin-bottom: 16px;
 }
+.post-heading{
+    padding: 0;
+    margin: 20px 0 10px;
+}
 .participants-container{
     display: flex;
     margin: 0 !important;
+    padding-top: 14px
+}
+.contact-container{
+    margin-left:15px;
+}
+#project-apply,
+.contact-container,
+.participant{
+    background: #f1f1f1;
+    padding: 12px 12px;
+    border-bottom: 1px solid #ddd;
+}
+.participant{
+    
 }
 /* end modal stuff */
 
