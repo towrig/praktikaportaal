@@ -2112,3 +2112,8 @@ button.btn {
 .btn-primary {
     color: #e94700;
 }
+
+
+#specifyOther {
+  display:none;
+}
