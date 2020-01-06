@@ -1,32 +1,3 @@
-<?php
-  $stats = array();
-  try {
-    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname, $dbuser , $dbpassword);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // Could not UNION together DISTINCT as type mismatch - so a new query later
-    $query = $conn->prepare('SELECT COUNT(*) AS stats FROM People WHERE isvalidated = 1 UNION SELECT COUNT(*) FROM ProjectPosts WHERE isactivated = 1 UNION SELECT COUNT(*) FROM WorkPosts WHERE isvalidated = 1');
-    $query->execute();
-    $data = $query -> fetchAll();
-
-    foreach($data as $row){
-        array_push($stats,$row["stats"]);
-    }
-    $query = $conn->prepare('SELECT COUNT(DISTINCT work_name) AS stats FROM WorkPosts WHERE isvalidated = 1');
-    $query->execute();
-    $data = $query -> fetchAll();
-
-    foreach($data as $row){
-        array_push($stats,$row["stats"]);
-    }
-    // Close PDO
-    $query = null;
-    $conn = null;
-
-  } catch (PDOException $e){
-    echo "Connection failed: " . $e->getMessage();
-  }
-?>
 <section id="stats" class="section main-row">
     <div class="section-container container text-center">
         <div class="row">
