@@ -24,6 +24,15 @@
     <meta name="author" content="">
 
     <title>Praktikavahenduste keskkond | <?php echo $title; ?></title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155263552-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155263552-1');
+    </script>
 
     <!-- Font Awesome Icons -->
     <link href="<?php echo $wwwroot; ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,6 +51,6 @@
     <!-- Theme CSS - Includes Bootstrap -->
     <link href="<?php echo $wwwroot; ?>css/custom.css" rel="stylesheet">
     
-     <link rel="stylesheet" href="<?php echo $wwwroot; ?>vendor/ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="<?php echo $wwwroot; ?>vendor/ui/jquery-ui.min.css">
 
 </head>

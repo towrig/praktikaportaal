@@ -17,11 +17,11 @@
                             Lisa oma projektiidee, et üliõpilased aitaksid leida loovaid lahendusi.
                             Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.
                         </p>
-                        <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal()">Vaata ajakava siit!</a>
+                        <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});">Vaata ajakava siit!</a>
                     </div> <!-- .col-->
 
                     <div class="col-lg-2">
-                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal()">Esita projekt
+                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});">Esita projekt
                             <!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span>--></span>
                     </div>
                     <div class="col-lg-12">
@@ -184,7 +184,7 @@
 
                                             </p>
                                             <h4 class="text-center my-3">
-                                                <!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a class="btn btn-lg btn-primary" href="../userdata/projekti_taotlusvorm.docx" download="">siia</a></label></h4>
+                                                <!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a class="btn btn-lg btn-primary" href="../userdata/projekti_taotlusvorm.docx" download="" onclick="gtag('event', 'Lae alla',{'event_category': 'Projektid','event_label':'Lae alla projekti taotlusvorm'});">siia</a></label></h4>
                                             <iframe width="100%" height="500px" src="https://docs.google.com/document/d/e/2PACX-1vQFHziWjHPO9fMbDZu7l7TaLq7PFA8COQRc_pz0CludNNmuONrd0NkUokj_QvJQTXEj7Jq5-IZrdrej/pub?embedded=true"></iframe>
 
                                         </div>
@@ -234,7 +234,7 @@
 
                                         </div>
                                         <div class="form-group mt-3 text-center">
-                                            <input type="submit" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="ajaxSubmit()" value="Esita projekt">
+                                            <input type="button" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="ajaxSubmit(); gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt">
                                         </div>
                                     </div>
                                 </div>
