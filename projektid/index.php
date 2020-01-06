@@ -14,10 +14,8 @@
                     </div>
                     <div class="col-lg-4">
                         <p class="font-weight-light">
-                            Lisa oma projektiidee ja erinevate erialade üliõpilased töötavad koos, et viia ellu Sinu jaoks oluline ja üliõpilastele väljakutset pakkuv projekt. </p>
-                        <p class="font-weight-light">
-                            Projektitaotluste esitamise viimane tähtaeg on <b>02.03!</b>
-                            <br>Üliõpilased saavad projektidega liituda <b>09.-15.03.</b>
+                            Lisa oma projektiidee, et üliõpilased aitaksid leida loovaid lahendusi.
+                            Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.
                         </p>
                         <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal()">Vaata ajakava siit!</a>
                     </div> <!-- .col-->

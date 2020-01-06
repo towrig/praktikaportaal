@@ -4,20 +4,20 @@
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="mt-5">
-                    <h5 class="h6 mb-2 text-uppercase">Praktikad</h5>
+                    <h5 class="h6 mb-2 text-uppercase"><a target="_blank"  href="./praktikapakkumised">Praktikad</a></h5>
                     <p class="text-muted mb-0">Üliõpilase arengule suunatud erinevad praktikavõimalused.<br>
                         Tutvu ja kandideeri!</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 ">
                 <div class="mt-5">
-                    <h5 class="h6 mb-2 text-uppercase">Projektid</h5>
+                    <h5 class="h6 mb-2 text-uppercase"><a target="_blank"  href="./projektid">Projektid</a></h5>
                     <p class="text-muted mb-0">Interdistsiplinaarsed projektid, et koos meeskonnaga lahendada olulisi probleeme ja leida loovaid lahendusi.</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="mt-5">
-                    <h5 class="h6 mb-2 text-uppercase">Liidriprogramm</h5>
+                    <h5 class="h6 mb-2 text-uppercase"><a target="_blank" href="https://majandus.ut.ee/et/liider">Liidriprogramm</a></h5>
                     <p class="text-muted mb-0">Tunnustame üliõpilase ülikooliväliseid tegevusi, mida saab jagada oma tööandjaga!
                         Tule Liidriks!</p>
                 </div>
@@ -36,7 +36,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">sTARTUp Labi üritused/seminarid</h5>
+        <h5 class="modal-title">Üritused ja seminarid</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Sulge aken</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Sule</button>
       </div>
     </div>
   </div>

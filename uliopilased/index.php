@@ -18,8 +18,8 @@
                     </div>
                     <div class="col-lg-4">
                         <p class="font-weight-light">
-                            Lisa profiil ning leia endale sobiv praktikakoht!<br>
-                            Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist, võib olla Sinu järgmiseks töökohaks ning saada aimu, milliseid oskusi ja teadmisi tööandjad väärtustavad.
+                            Otsid praktikakohta? Lisa profiil ja ole nähtav tööandjatele!
+                            Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist ning praktikakoht võib olla Sinu järgmiseks töökohaks.
                         </p>
                     </div>
                     <div class="col-lg-2">

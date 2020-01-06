@@ -38,10 +38,10 @@
                       <i id="masthead-yliopilane"></i>
                       <h5 class="card-title text-uppercase">Üliõpilased</h5>
                       <p class="card-text text-muted">
-                        <span>Uued tutvused</span>
-                        <span>ja huvitavad</span>
-                        <span>praktikakohad.</span>
-                        <span>&nbsp;</span>
+                        <span>Motiveeritud</span>
+                        <span>üliõpilased</span>
+                        <span>ja tulevased</span>
+                        <span>praktikandid</span>
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
                         <span class="main-stats"><small><?php echo $stats[0]?></small> profiili</span>
@@ -59,8 +59,8 @@
                       <p class="card-text text-muted">
                         <span>Koostöös</span>
                         <span>sündinud</span>
-                        <span>lahendused Sinu</span>
-                        <span>projektiideele.</span>
+                        <span>lahendused</span>
+                        <span>projektiideele</span>
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
                         <span class="main-stats"><small><?php echo $stats[1]?></small> projekti</span>
@@ -76,10 +76,10 @@
                       <i id="masthead-praktikapakkumine"></i>
                       <h5 class="card-title text-uppercase">Praktika<wbr>pakkumised</h5>
                       <p class="card-text text-muted">
-                        <span>Motiveeritud</span>
-                        <span>praktikandid</span>
-                        <span>ja tulevased</span>
-                        <span>töötajad.</span>
+                        <span>Uued</span>
+                        <span>võimalused</span>
+                        <span>ja huvitavad</span>
+                        <span>praktikakohad</span>
                         <span>&nbsp;</span>
                         <span class="main-stats"><small><?php echo $stats[2]?></small> pakkumist</span>
                       </p>

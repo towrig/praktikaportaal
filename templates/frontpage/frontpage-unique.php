@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Mis teeb FUTULABi <span>unikaalseks?</span></h2>
-                <small>Ülikoolist kogemused, mis aitavad eriala teadmisi rakendada ning toetavad sinu arengut mitmekülgselt.</small>                
+                <h2>Mis teeb Futulabi <span>unikaalseks?</span></h2>
+                <small>Koostöö mis vaatab tulevikku, keskendub osapoolte arengule ning loob uusi võimalusi.</small>
             </div>
         </div>
     </div>

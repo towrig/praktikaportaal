@@ -9,7 +9,7 @@
               <div class="col-md-4">
                 <div class="row">
                   <div class="col-md-12 contact-us-info">
-                    <p>Kui sul on tekkinud küsimusi või vajad lihtsalt mõnele teemale vastust, siis ära kõhkle ja võta meiega ühendust.</p>
+                    <p>Kui Sul on tekkinud küsimusi või vajad mõnele teemale vastust, siis ära kõhkle ja võta meiega ühendust.</p>
                   </div>
                   <div class="col-md-12"><a href="mailto:praktika@ut.ee">praktika@ut.ee</a></div>
                 </div>
