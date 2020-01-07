@@ -1443,7 +1443,7 @@ section h1 {
     outline: 1.8rem solid #e94700;
     background: #e94700;
     color: white;
-    max-height: 350px;
+    //max-height: 350px;
     //overflow: auto;
 }
 
