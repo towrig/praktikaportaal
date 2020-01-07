@@ -50,7 +50,7 @@
             }
             $entity["amount"] = $amount;
             
-            $participants[$row["id"]] = $post_participants;
+            $participants[$entity["id"]] = $post_participants;
             $projects[$i] = $entity;
 	        $entity = null; 
             $i+= 1;
@@ -150,30 +150,33 @@
         var participants = <?php echo json_encode($participants);?>;
         
         $(document).ready(function() {
+            console.log(participants);
             $('.proj-modal').on('click', partModal);
         });
         
         function partModal(e){
             var target = $(e.currentTarget);
             var modal = $(".modal").first();
-            var id = target.data("id");
-            var post_part = participants[id];
+            var ekey = target.data("ekey");
+            var post_part = participants[target.data("id")];
             var p_c = modal.find('.participants-container .container .row');
             p_c.empty();
             if (post_part.length != 0) {
-                for (var i = 0; i < post_participants.length; i++) {
-                    p_c.append(createParticipant(post_participants[i], id));
+                for (var i = 0; i < post_part.length; i++) {
+                    p_c.append(createParticipant(post_part[i], ekey));
                 }
             }
             $('.part-btn').on('click', handleParticipant);
-            modal.show();
+            console.log("showing");
+            modal.modal("show");
         }
         
         function handleParticipant(e){
             var target = $(e.currentTarget);
-            var formData = new FormData(document.getElementById('project-join'));
+            var formData = new FormData();
             formData.append("email", target.data("email"));
             formData.append("edit_key", target.data("ekey"));
+            formData.append("action", "approve");
             $.ajax({
                 type: 'POST',
                 url: '../projektid/project_api.php',
@@ -198,7 +201,7 @@
             var is_accepted = arr[4];
             console.log(is_accepted);
             var acceptButton = "";
-            if (!is_accepted) acceptButton = '<a class="btn btn-sm btn-success part-btn" data-email="'.email.'" data-ekey="'.ekey.'">Kinnita</a>';
+            if (is_accepted == 0) acceptButton = '<a class="btn btn-sm btn-success part-btn" data-email="'+email+'" data-ekey="'+ekey+'">Kinnita</a>';
             //var refuseButton = '<a class="btn btn-sm btn-danger part-btn" data-id="'.id.'" data-action="refuse">Keeldu</a>';
             return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>"+acceptButton);
         }
