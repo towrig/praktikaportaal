@@ -159,18 +159,18 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 	
 }
 else if(!empty($_POST) && $_POST["action"] == "addview"){ //increase the amount of views a post has
-    $email = $_POST["email"];
-    $val = $_COOKIE[str_replace('.','_',$email)];
+    $pid = $_POST["id"];
+    $val = $_COOKIE[str_replace('.','_',$pid)];
     
     if($val == "first"){
-        setcookie($email, "done");
+        setcookie($pid, "done");
         try {
             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             //echo "Connected to PDO successfully"; 
-            $query = $conn->prepare('UPDATE WorkPosts SET views = views + 1 WHERE email = ?');
-            $query->execute(array($email));
+            $query = $conn->prepare('UPDATE WorkPosts SET views = views + 1 WHERE id = ?');
+            $query->execute(array($pid));
             http_response_code(200);
             echo "OK!";
         }
@@ -180,7 +180,7 @@ else if(!empty($_POST) && $_POST["action"] == "addview"){ //increase the amount 
         }
     }else{
         http_response_code(403);
-        echo "View exists! values:".json_encode($_COOKIE); 
+        echo "View exists! values:".$_COOKIE[str_replace('.','_',$pid)]; 
     }
 }else{
     http_response_code(403);

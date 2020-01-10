@@ -64,6 +64,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 $name = $row["name"];
                                 $phone = $row["phone"];
                                 
+                                $id = $row["id"];
                                 $validationcode = $row["validationcode"];
                                 $picurl = "../userdata/pictures/".$row["logopath"];
                                 $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));
@@ -86,6 +87,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <a class="js-view-modal" href="javascript:void(0);"
+                                                          data-id="'.$id.'"
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
                                                           data-description="'.$description.'"
@@ -359,6 +361,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
     		var modal = $('#viewModal');
 
             //get values here
+            var id = target.data('id');
             var pic = target.data('pic');
             var heading = target.data('heading');
             var description = target.data('description');
@@ -390,7 +393,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
             $(".post-other").html(other);
             $(".post-deadline").html(deadline);
             $(".post-apply").attr("href","mailto:"+email);
-            handleCookies(email);
+            handleCookies(id);
     		    modal.modal('show');
         }
     	
@@ -435,11 +438,11 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
             });
         }
         
-        function handleCookies(email){
-            var val = getCookie(email);
-            console.log(email+";"+val);
+        function handleCookies(id){
+            var val = getCookie(id);
+            console.log(id+";"+val);
             if (val == "" || val == "first")
-                setCookie(email, "first");
+                setCookie(id, "first");
         }
         
         function previewFile() {
@@ -506,7 +509,8 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
             document.cookie = cname + "=" + cvalue + ";path=/";
             var formData = new FormData();
             formData.append("action", "addview");
-            formData.append("email", cname);
+            formData.append("id", cname);
+            
             $.ajax({
                 type: 'POST',
                 url: './work_api.php',
@@ -524,7 +528,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
             var name = cname + "=";
             var decodedCookie = decodeURIComponent(document.cookie);
             var ca = decodedCookie.split(';');
-            for(var i = 0; i <ca.length; i++) {
+            for(var i = 0; i < ca.length; i++) {
                 var c = ca[i];
                 while (c.charAt(0) == ' ') {
                   c = c.substring(1);
