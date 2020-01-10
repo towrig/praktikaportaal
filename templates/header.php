@@ -23,8 +23,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Futulab <?php echo $title; ?></title>
-    <meta property="og:title" content="Futulab <?php echo $title; ?>" />
+    <title><?php echo $title; ?> Futulab</title>
+    <meta property="og:title" content="<?php echo $title; ?> Futulab" />
     <meta property="og:type" content="website" />
     <?php
       $url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";

@@ -101,44 +101,41 @@
                 </tr>
               </thead>
               <tr>
-                <td scope="row">futulab_gid</td>
+                <th scope="row">futulab_gid</th>
                 <td>Google Analytics küpsis, millega määratakse kasutaja liikumine.</td>
                 <td>1 päev / 24 tundi</td>
               </tr>
               <tr>
-                <td scope="row">futulab_ga</td>
+                <th scope="row">futulab_ga</th>
                 <td>Google Analytics küpsis, millega määratakse kasutaja sessioon.</td>
                 <td>2 aastat</td>
               </tr>
               <tr>
-                <td>_gat_gtag_*</td>
+                <th scope="row">_gat_gtag_*</th>
                 <td>Google Analytics küpsis, millega kontrollitakse päringute saatmist.</td>
                 <td>10 minutit</td>
               </tr>
               <tr>
-                <td>cookieControl
-                </td>
+                <th scope="row">cookieControl</th>
                 <td>Kohustulik püsiv küpsis, millega kontrollime kas olete küpsiste kasutamise lubanud.
                 </td>
                 <td>1 kuu / 30 päeva
                 </td>
               </tr>
               <tr>
-                <td scope="row">cookieControlPrefs
-                </td>
+                <th scope="row">cookieControlPrefs</th>
                 <td>Kohustulik püsiv küpsis, millega kontrollime kas olete lubanud Google Analytics'i kasutamise.
                 </td>
                 <td>1 aasta
                 </td>
               </tr>
-              <!--<tr>
-                <td scope="row">ulang
+              <tr>
+                <th scope="row">[postituse_id]</th>
+                <td>Kohustulik sessiooni küpsis, millega loeme postituse vaatamisi.
                 </td>
-                <td>Keelevahetuse määramine
+                <td>sessioon
                 </td>
-                <td>1 kuu / 30 päeva
-                </td>
-              </tr>-->
+              </tr>
             </tbody>
           </table>
         </div>

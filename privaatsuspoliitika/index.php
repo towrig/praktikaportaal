@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <?php
-      $title="- Tulevik algab Sinust!";
-      $description = "Futulab toob kokku üliõpilase, ülikooli ja organisatsiooni kogemused ja oskused, et olla parim tulevikutegija!";
+      $title="Privaatsuspoliitika |";
+      $description = "Tartu Ülikooli Futulabi veebilehe privaatsuspoliitika";
       include_once '../templates/header.php';
     ?>
     <body>

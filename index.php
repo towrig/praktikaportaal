@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <?php
-      $title="- Tulevik algab Sinust!";
+      $title="Tulevik algab Sinust! |";
       $description = "Futulab toob kokku üliõpilase, ülikooli ja organisatsiooni kogemused ja oskused, et olla parim tulevikutegija!";
       include_once './templates/header.php';
     ?>
