@@ -2173,8 +2173,8 @@ button#ihavecookiesBtn {
     border-bottom: 1px dotted rgba(255,255,255,0.75);
     transition: all 0.3s ease-in;
     font-weight: 600;
-    text-align: right;
-    float: right;
+    //text-align: right;
+    //float: right;
 }
 #gdpr-cookie-message a:hover {
     color: white;
@@ -2218,7 +2218,8 @@ button#gdpr-cookie-advanced {
 
 #gdpr-cookie-message p:nth-of-type(1) {
     margin-top: 8px;
-    width: calc(100% - 251px);
+    margin-bottom: 8px;
+    //width: calc(100% - 251px);
 }
 
 footer div.container {
