@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title="Üliõpilased"; include_once './../templates/header.php';?>
+<?php
+  $title="Üliõpilased |";
+  $description = "Otsid praktikakohta? Lisa profiil ja ole nähtav tööandjatele! Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist ning praktikakoht võib olla Sinu järgmiseks töökohaks.";
+  include_once './../templates/header.php';
+?>
 
 <body id="page-top" class="practice">
 
@@ -18,8 +22,7 @@
                     </div>
                     <div class="col-lg-4">
                         <p class="font-weight-light">
-                            Otsid praktikakohta? Lisa profiil ja ole nähtav tööandjatele!
-                            Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist ning praktikakoht võib olla Sinu järgmiseks töökohaks.
+                            <?php echo $description; ?>
                         </p>
                     </div>
                     <div class="col-lg-2">
@@ -144,7 +147,7 @@
                                                                                 <p class="card-text font-weight-light">'.$degree.'</p>
                                                                                 <p class="card-text font-weight-light text-primary">'.$work.'</p>
                                                                             </div>
-                                                                            <a href="#" class=""><i class="arrow-front"></i></a>
+                                                                            <i class="arrow-front"></i>
                                                                         </div>
                                                                     </div>
                                                                     <div class="back">

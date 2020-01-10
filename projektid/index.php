@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title="Projektid"; include_once './../templates/header.php';?>
+<?php
+  $title="Projektid |";
+  $description = "Lisa oma projektiidee, et üliõpilased aitaksid leida loovaid lahendusi. Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.";
+  include_once './../templates/header.php';
+?>
 
 <body id="page-top" class="project">
     <?php include_once './../templates/top-navbar.php';?>
@@ -14,8 +18,7 @@
                     </div>
                     <div class="col-lg-4">
                         <p class="font-weight-light">
-                            Lisa oma projektiidee, et üliõpilased aitaksid leida loovaid lahendusi.
-                            Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.
+                           <?php echo $description; ?>
                         </p>
                         <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});">Vaata ajakava siit!</a>
                     </div> <!-- .col-->

@@ -4,6 +4,7 @@
 <?php
 
 $title="Kuulutus"; 
+$description ="";
     // Two levels deep
 include_once './../../templates/header.php';
     

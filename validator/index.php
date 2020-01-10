@@ -67,7 +67,7 @@ $dbpassword = $CFG->dbpasswd;
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php $title="Postitus aktiveeritud!"; include_once './../templates/header.php';?>
+<?php $title="Postitus aktiveeritud!"; $description=""; include_once './../templates/header.php';?>
 <body id="validated" class="validated">
     <?php include_once './../templates/top-navbar.php';?>
     <div id="main"></div>

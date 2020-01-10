@@ -19,7 +19,7 @@
           <div class="col-md-12 footer-bottom mt-5">
             <div class="row">
               <div class="copyright col-md-9">
-                &copy; 2019 - Tartu Ülikool majandusteaduskond
+                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light"> | </span><a href="/privaatsuspoliitika/" class="font-weight-light text-muted">Privaatsuspoliitika</a>
               </div>
               <div class="socialmedia col-md-3 text-right">
                 <a href="https://twitter.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Twitter'});"><i class="fab fa-2x fa-twitter"></i></a>
@@ -44,7 +44,35 @@
     <!-- Custom scripts for this template -->
     <script src="<?php echo $wwwroot; ?>js/creative.min.js"></script>
 
+    <!-- Cookie consent -->
+    <script src="<?php echo $wwwroot; ?>js/jquery.ihavecookies.min.js"></script>
+    <script>
+      $(function(){
+        $('body').ihavecookies({
+          title: "Küpsised ja privaatsuspoliitika",
+          message: "Kasutame oma veebilehel küpsiseid ning Google Analytics teenust veebilehe külastatavuse statistika analüüsiks.",
+          link: "<?php echo $wwwroot; ?>privaatsuspoliitika/",
+          advancedBtnLabel: "Vali küpsised",
+          acceptBtnLabel: "Luba küpsised",
+          moreInfoLabel: "Privaatsuspoliitika",
+          uncheckBoxes: false,
+          fixedCookieTypeLabel: 'Kohustuslikud',
+          fixedCookieTypeDesc: 'Need küpsised on vajalikud, et tagada võrgulehe toimimine.',
+          delay: 10,
+
+          cookieTypes: [
+            {
+              type: 'Analüütika',
+              value: 'analytics',
+              description: 'Kasutame Google Analytics teenust, et teostada analüütikat veebilehe külastatavuse analüüsiks.'
+            }
+          ]
+        });
+      });
+    </script>
+
     <div id="scrollTop">
       <a href="#why" class="scrollDown text-uppercase" onclick="gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Alla'});">Loe edasi</a>
       <a href="#" class="scrollBack text-uppercase" onclick="document.documentElement.scrollTop = 0; document.body.scrollTop = 0; gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Üles'});" >Tagasi üles</a>
     </div>
+

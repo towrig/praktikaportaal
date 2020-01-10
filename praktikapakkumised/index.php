@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $title="Praktikapakkumised"; include_once './../templates/header.php';?>
+<?php
+  $title="Praktikapakkumised |";
+  $description = "Otsid praktikanti või tulevast töötajat?
+Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.";
+  include_once './../templates/header.php';
+?>
 <body id="page-top" class="practiceoffers">
     <?php include_once './../templates/top-navbar.php';?>
     <div id="main"></div>
@@ -12,8 +17,7 @@
                <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktika<wbr>pakkumised</h1>
             </div>
             <div class="col-lg-3">
-              <p class="font-weight-light mb-5">Otsid praktikanti või tulevast töötajat? 
-Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.</p>
+              <p class="font-weight-light mb-5"><?php echo $description; ?></p>
             </div> <!-- .col-->
             <div class="col-lg-2">
               <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});">Lisa pakkumine</a>

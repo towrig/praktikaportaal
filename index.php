@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <?php $title="Praktikavahenduste keskkond"; include_once './templates/header.php';?>
+    <?php
+      $title="- Tulevik algab Sinust!";
+      $description = "Futulab toob kokku üliõpilase, ülikooli ja organisatsiooni kogemused ja oskused, et olla parim tulevikutegija!";
+      include_once './templates/header.php';
+    ?>
     <body>
         <?php include_once './templates/top-navbar.php';?>
         <!-- Masthead -->

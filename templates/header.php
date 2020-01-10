@@ -23,7 +23,31 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Praktikavahenduste keskkond | <?php echo $title; ?></title>
+    <title>Futulab <?php echo $title; ?></title>
+    <meta property="og:title" content="Futulab <?php echo $title; ?>" />
+    <meta property="og:type" content="website" />
+    <?php
+      $url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+      $escaped_url = htmlspecialchars( $url, ENT_QUOTES, 'UTF-8' );
+    ?>
+    <meta property="og:url" content="http:<?php echo htmlspecialchars( $escaped_url, ENT_QUOTES, 'UTF-8' );?>" />
+    <meta property="og:description" content="<?php echo $description; ?>">
+
+    <meta property="og:image" content="<?php echo $wwwroot; ?>img/fb.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="930" />
+    <meta property="og:image:height" content="452" />
+    <meta property="og:image:alt" content="Futulab - Tulevik algab Sinust!" />
+
+
+    <?php
+      $isanalytics = '["analytics"]';
+      if(isset($_COOKIE['cookieControlPrefs']) && $_COOKIE['cookieControlPrefs'] == $isanalytics) {
+         echo "<script>window['ga-disable-UA-155263552-1'] = false;</script>";
+      } else {
+        echo "<script>window['ga-disable-UA-155263552-1'] = true;</script>";
+      }
+    ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155263552-1"></script>
     <script>
@@ -31,7 +55,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-155263552-1');
+    gtag('config', 'UA-155263552-1', { 'anonymize_ip': true, 'cookie_prefix': 'futulab' });
     </script>
 
     <!-- Font Awesome Icons -->
