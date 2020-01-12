@@ -68,6 +68,8 @@
     <!--<link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">-->
     <!-- For profile img crop -->
     <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+    <!-- AOS library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
     <link href="<?php echo $wwwroot; ?>css/creative.min.css" rel="stylesheet">
