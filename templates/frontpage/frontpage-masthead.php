@@ -29,10 +29,10 @@
         <div class="row">
             
             <div class="col-lg-3 col-md-12">
-                <h2 class="mb-5"><span>TULEVIK</span> ALGAB SINUST</h2>
+                <h2 class="mb-5" data-aos="fade-right"><span>TULEVIK</span> ALGAB SINUST</h2>
             </div>
             <div class="col-lg-9 col-md-12">
-                <div class="d-flex flex-lg-nowrap justify-content-center flex-wrap">
+                <div class="d-flex flex-lg-nowrap justify-content-center flex-wrap"  data-aos="fade-left">
                   <div class="card m-5 first">
                     <div class="card-body">
                       <i id="masthead-yliopilane"></i>

@@ -16,27 +16,27 @@
 
         <section class="page-section">
             <div class="container">
-                <div class="row">
+                <div class="row" >
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Üliõpilased</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Üliõpilased</h1>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" data-aos="fade-right">
                         <p class="font-weight-light">
                             <?php echo $description; ?>
                         </p>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2" data-aos="zoom-in-left">
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Üliõpilased','event_label':'Ava lisa profiil'});">Lisa profiil</span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5">Liitunud</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Liitunud</h5>
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
         </section>
         <!-- Portfolio Section -->
-        <section class="" id="about">
-            <div class="container">
+        <section class="mb-5" id="about">
+            <div class="container" data-aos="fade-down">
                 <div class="row">
                     <div class="col-lg-12"></div>
                     <div class="col-lg-12">

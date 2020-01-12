@@ -14,24 +14,24 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
-               <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Praktika<wbr>pakkumised</h1>
+               <h1 class="text-uppercase font-weight-bold mt-5 mb-3"  data-aos="fade-right">Praktika<wbr>pakkumised</h1>
             </div>
             <div class="col-lg-3">
-              <p class="font-weight-light mb-5"><?php echo $description; ?></p>
+              <p class="font-weight-light mb-5"  data-aos="fade-right"><?php echo $description; ?></p>
             </div> <!-- .col-->
-            <div class="col-lg-2">
+            <div class="col-lg-2"  data-aos="fade-in-right">
               <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});">Lisa pakkumine</a>
             </div>
-            <div class="col-lg-12">
-              <h5 class="text-uppercase text-center font-weight-bold mt-5">Aktiivsed pakkumised</h5>
+            <div class="col-lg-12" >
+              <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Aktiivsed pakkumised</h5>
             </div>
           </div> <!-- .row -->
         </div> <!-- .container -->
       </section>
 
 	
-	<section id="profiles">
-		<div class="container">
+	<section class="mb-5" id="profiles">
+		<div class="container"  data-aos="fade-down">
 			<div class="row">
                 <div id="carouselPager" class="carousel slide col-md-12">
                   <div class="carousel-inner">
@@ -77,7 +77,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                     $pages++;
                                 }
 
-                                $bigstring = '<div class="col-lg-12 practiceoffer">
+                                $bigstring = '<div class="col-lg-12 practiceoffer" data-aos="fade-down">
                                                 <div class="row">
                                                   <div class="col-lg-1 col-md-1 col-sm-1 text-uppercase font-weight-bold work-date-added">
                                                     <p>'.$uploaded.'</p>

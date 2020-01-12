@@ -4,14 +4,14 @@
           <div class="col-md-12 col-lg-8">
             <div class="row">
               <div class="col-md-4">
-                <h3 class="contact-us">VÕTA<br>MEIEGA<br>ÜHENDUST!</h3>
+                <h3 class="contact-us" data-aos="fade-right">VÕTA<br>MEIEGA<br>ÜHENDUST!</h3>
               </div>
               <div class="col-md-4">
                 <div class="row">
-                  <div class="col-md-12 contact-us-info">
+                  <div class="col-md-12 contact-us-info" data-aos="fade-right">
                     <p>Kui Sul on tekkinud küsimusi või vajad mõnele teemale vastust, siis ära kõhkle ja võta meiega ühendust.</p>
                   </div>
-                  <div class="col-md-12"><a href="mailto:praktika@ut.ee"  onclick="gtag('event', 'Võta ühendust',{'event_category': 'Jalus','event_label':'Võta ühendust!'});">praktika@ut.ee</a></div>
+                  <div class="col-md-12" data-aos="fade-right"><a href="mailto:praktika@ut.ee"  onclick="gtag('event', 'Võta ühendust',{'event_category': 'Jalus','event_label':'Võta ühendust!'});">praktika@ut.ee</a></div>
                 </div>
               </div>
             </div>
@@ -19,9 +19,9 @@
           <div class="col-md-12 footer-bottom mt-5">
             <div class="row">
               <div class="copyright col-md-9">
-                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light"> | </span><a href="/privaatsuspoliitika/" class="font-weight-light text-muted">Privaatsuspoliitika</a>
+                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light"> | </span><a href="<?php echo $wwwroot; ?>/privaatsuspoliitika/" class="font-weight-light text-muted">Privaatsuspoliitika</a>
               </div>
-              <div class="socialmedia col-md-3 text-right">
+              <div class="socialmedia col-md-3 text-right" >
                 <a href="https://twitter.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Twitter'});"><i class="fab fa-2x fa-twitter"></i></a>
                 <a href="https://www.facebook.com/tartuylikool" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Facebook'});"><i class="fab fa-2x fa-facebook"></i></a>
                 <a href="https://www.instagram.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Instagram'});"><i class="fab fa-2x fa-instagram"></i></a>
@@ -70,6 +70,10 @@
         });
       });
     </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 
     <div id="scrollTop">
       <a href="#why" class="scrollDown text-uppercase" onclick="gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Alla'});">Loe edasi</a>

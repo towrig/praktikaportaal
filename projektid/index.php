@@ -14,21 +14,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3">Projektid</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projektid</h1>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4"  data-aos="fade-right">
                         <p class="font-weight-light">
                            <?php echo $description; ?>
                         </p>
                         <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});">Vaata ajakava siit!</a>
                     </div> <!-- .col-->
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-2"  data-aos="zoom-in-right">
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});">Esita projekt
                             <!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span>--></span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-3">Esitatud projektid</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-3"  data-aos="fade-down">Esitatud projektid</h5>
                     </div>
 
                 </div> <!-- .row -->
@@ -36,8 +36,8 @@
         </section>
 
 
-        <section id="profiles">
-            <div class="container">
+        <section class="mb-5" id="profiles">
+            <div class="container"  data-aos="fade-down">
                 <div class="row">
                     <div id="carouselPager" class="carousel slide col-md-12">
                         <div class="carousel-inner">
@@ -321,8 +321,8 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-lg-12"><h5>Liitunud üliõpilased: (<span class="field-participants"></span>)</h5></div>
-                            <div class="col-lg-12 participants-container"><div class="container"><div class="row"></div></div></div>
+                            <div class="col-lg-12"><h5 class="text-center">Liitunud üliõpilased: (<span class="field-participants"></span>)</h5></div>
+                            <div class="col-lg-12 participants-container"><div class="container"><div class="row justify-content-center"></div></div></div>
                         </div>
                     </div>
 
