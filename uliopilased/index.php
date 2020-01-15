@@ -160,16 +160,10 @@
                                                                                 <p class="card-text font-weight-light ">'.$tugevused.'</p>
                                                                                 <p class="font-weight-bold">Kogemused</p>
                                                                                 <p class="card-text font-weight-light">'.$kogemused.'</p>
-                                                                                <!-- Leaving this in in case we still want this CV and e-mail button -->
-                                                                                 <!--<div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">----
-                                                                                    <a class="btn btn-sm btn-info js-open-cv" data-cv="'.$cv.'"><i class="far fa-file-pdf"></i></a>
-                                                                                    <a class="btn btn-sm btn-success" href="mailto:'.$email.'"><i class="far fa-envelope"></i></a>
-                                                                                </div>	-->
-
                                                                             </div>
                                                                             <div class="links">
                                                                               <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>'.
-                                                                                (!empty($row["cvpath"]) ? '<a href="#" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>':'' ).'
+                                                                                (!empty($row["cvpath"]) ? '<a href="#" onclick="return false;" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>':'' ).'
                                                                             </div>
                                                                             <i class="arrow-front"></i>
                                                                         </div>
@@ -347,7 +341,11 @@
                         </form>
                     </div>
                 </div>
+               <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+              </div>
             </div>
+
         </div>
     </div>
 
@@ -363,7 +361,8 @@
                 <div class="modal-body">
 
                 </div>
-                <div class="modal-footer">
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
                 </div>
             </div>
         </div>
@@ -402,7 +401,6 @@
         });
 
         function paginatorClick(e) {
-            console.log('moving');
             var carousel = $('#carouselPager');
             var target = $(e.currentTarget);
             var index = target.data('index');
@@ -461,7 +459,6 @@
                 processData: false,
                 data: formData
             }).done(function(response) {
-                console.log(response);
                 form.after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink!</div>");
                 form.css('display', 'none');
                 form.trigger("reset");
@@ -469,7 +466,6 @@
                     modal.modal("hide");
                 }, 3000);
             }).fail(function(response) {
-                console.log(response);
                 form.addClass('was-validated');
                 form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
                               <strong>Viga!</strong> ' + response + '\

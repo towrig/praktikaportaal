@@ -245,6 +245,9 @@
                         </div>
                     </div>
                 </div>
+                 <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                            </div>
             </div>
         </div>
     </div>
@@ -316,7 +319,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="hash" id="project_hash">
-                                    <div class="join-container">
+                                    <div class="join-container text-center">
                                         <button type="submit" class="btn btn-primary" id="joinButton">Liitu</button>
                                     </div>
                                 </form>
@@ -325,8 +328,6 @@
                             <div class="col-lg-12 participants-container"><div class="container"><div class="row justify-content-center"></div></div></div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
@@ -361,7 +362,6 @@
         var participants = <?php echo json_encode($participants);?>;
 
         function paginatorClick(e) {
-            console.log('moving');
             var carousel = $('#carouselPager');
             var target = $(e.currentTarget);
             var index = target.data('index');
@@ -381,12 +381,10 @@
                 processData: false,
                 data: formData
             }).done(function(response) {
-                console.log(response);
                 form.trigger("reset");
                 form.after("<div class='alert alert-success'>Aitäh! Teie projekt kiidetakse heaks hiljemalt nädala jooksul.</div>");
                 form.css('display', 'none');
             }).fail(function(response) {
-                console.log(response);
                 form.addClass('was-validated');
                 form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel:"+response.responseText+"</div>");
             });
@@ -397,7 +395,6 @@
             e.stopPropagation();
             var form = $('#project-join');
             var formData = new FormData(document.getElementById('project-join'));
-            console.log("target: "+form.attr('action'));
             $.ajax({
                 type: 'POST',
                 url: form.attr('action'),
@@ -406,12 +403,10 @@
                 processData: false,
                 data: formData
             }).done(function(response) {
-                console.log(response);
                 form.trigger("reset");
                 form.after('<div class="alert alert-success alert-dismissible fade show">Projektiga liitumise kinnitus tuleb Teile emaili peale mõne päeva jooksul. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
                 form.css('display', 'none');
             }).fail(function(response) {
-                console.log(response);
                 form.addClass('was-validated');
                 form.after('<div class="alert alert-danger alert-dismissible fade show">Ups! Midagi läks valesti registreerimisel.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
             });
