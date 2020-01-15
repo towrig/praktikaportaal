@@ -253,11 +253,12 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 </div>
                                 <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
                             </div>
-
                         </form>
                     </div>
                 </div>
-                
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                </div>
             </div>
         </div>
     </div>
@@ -349,7 +350,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
     	});
         
         function paginatorClick(e){
-            console.log('moving');
             var carousel = $('#carouselPager');
             var target = $(e.currentTarget);
             var index = target.data('index');
@@ -419,7 +419,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                 processData: false,
                 data: formData
             }).done(function(response) {
-                console.log(response);
                 form.after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink!</div>");
                 form.css('display', 'none');
                 form.trigger("reset");
@@ -427,7 +426,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                     modal.modal("hide");
                 }, 3000);
             }).fail(function(response) {
-                console.log(response);
                 form.addClass('was-validated');
                 form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
                               <strong>Viga!</strong> ' + response.responseText + '\
@@ -440,7 +438,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
         
         function handleCookies(id){
             var val = getCookie(id);
-            console.log(id+";"+val);
             if (val == "" || val == "first")
                 setCookie(id, "first");
         }
