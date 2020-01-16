@@ -165,8 +165,8 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
-			$query = $conn->prepare('INSERT INTO People(name, email, skills, experience, institute, major, work, location, picturepath, cvpath, validationcode, datetime_uploaded) VALUES(?,?,?,?,?,?,?,?,?,?,?,NOW())');
-			$query->execute(array($name, $email, $oskused, $kogemused, $institute, $major, $work , $location, $picPath, $cvPath, $validationcode));
+			$query = $conn->prepare('INSERT INTO People(name, email, skills, experience, institute, major, work, location, picturepath, cvpath, validationcode, consent, datetime_uploaded) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,NOW())');
+			$query->execute(array($name, $email, $oskused, $kogemused, $institute, $major, $work , $location, $picPath, $cvPath, $validationcode, $checkpoint));
 			
 			//echo "sending validation email...";
 			sendMail($validationcode, $email, "add");

@@ -22,6 +22,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
+    <!-- Robots tag for blocking searcg engine web crawlers -->
+    <meta name="robots" content="noindex">
 
     <title><?php echo $title; ?> Futulab</title>
     <meta property="og:title" content="<?php echo $title; ?> Futulab" />
