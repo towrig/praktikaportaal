@@ -49,7 +49,7 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./uliopilased" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Üliopilased'});"><button class="btn btn-sm btn-primary">LISA</button></a>
+                      <a class="" href="./uliopilased" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Üliopilased'});"><button class="btn btn-sm btn-primary">VAATA</button></a>
                     </div>
                   </div>
                   <div class="card m-5 second">
@@ -68,7 +68,7 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./projektid" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});"><button class="btn btn-sm btn-primary">LISA</button></a>
+                      <a class="" href="./projektid" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});"><button class="btn btn-sm btn-primary">VAATA</button></a>
                     </div>
                   </div>
                   <div class="card m-5 third">
@@ -86,7 +86,7 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./praktikapakkumised" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Praktikapakkumised'});"><button class="btn btn-sm btn-primary">LISA</button></a>
+                      <a class="" href="./praktikapakkumised" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Praktikapakkumised'});"><button class="btn btn-sm btn-primary">VAATA</button></a>
                     </div>
                   </div>
                 </div>

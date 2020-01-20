@@ -66,17 +66,16 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 	//start validating the form (name, oppekava, pilt, cv, töö, asukoht, email, checked) and filesizes
 	$passedValidation = true;
 	
-	$response .= "Testing for validation...";
+	$response .= "Kontrollin... ";
 	//basic ones
 	if((!isset($checkpoint) && $checkpoint) || empty($name) || empty($major) || empty($institute) || empty($work) || empty($oskused)){
 		$passedValidation = false;
-		$response .= "Failed!";
 	}
 	
 	//email
 	if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$passedValidation = false;
-        $response .= "Email check failed!";
+        $response .= "Email pole valiidne!";
 	}else{
 		$email_valid = true;
 	}
@@ -85,19 +84,19 @@ if(!empty($_POST) && $_POST["action"] == "add"){
         if(isset($_FILES['cv'])){
             if($_FILES['cv']['size'] > 8192000){ //8MB (size in bytes)
                 $passedValidation = false;
-                $response .= "Failed! CV file too big! (File needs to be smaller then 8MB)\n";
+                $response .= "Viga! CV fail on liiga suur! (Fail peab olema väiksem kui 8MB)\n";
             }
         }
         if(isset($_FILES['pilt'])){
             if($_FILES['pilt']['size'] > 8192000){ //8MB (size in bytes)
                 $passedValidation = false;
-                $response .= "Failed! Picture file too big! (File needs to be smaller then 8MB)\n";
+                $response .= "Viga! Pildifail on liiga suur! (Fail peab olema väiksem kui 8MB)\n";
             }
         }
     }
     
-	$response .= "Passed: ";
-	$response .= $passedValidation ? 'true' : 'false';
+	$response .= "Kontroll ";
+	$response .= $passedValidation ? 'edukas!' : 'mitteedukas!';
 	
 	//paths to be used later
 	$picPath = null;
@@ -217,12 +216,12 @@ if(!empty($_POST) && $_POST["action"] == "add"){
 			if($validationcode != ""){
 				sendMail($validationcode, $email, "remove");
 			}else{
-				echo "No such entry.";
+				echo "Sellist isikut ei ole.";
 			}
 		}
 		catch(PDOException $e){
 			$error_code = $e->getCode();
-			echo "Connection failed (code: $error_code): " . $e->getMessage();
+			echo "Ühendus ebaõnnestus (kood: $error_code): " . $e->getMessage();
 		}
 	}
 	

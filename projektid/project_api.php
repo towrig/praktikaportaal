@@ -97,7 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["hash"]){
 		$success = sendNotificationMail($name, $hash, $project_title, $project_edit_key, $email);
         if($success){
             http_response_code(200);
-            echo $response.";hash:".$hash;
+            echo $response;
         }else{
             http_response_code(403);
             echo "Tekkis viga kirja saatmisel!";   
@@ -132,16 +132,16 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 			$dest_path = '../../userdata/projects/'.$newFileName;
 			if(move_uploaded_file($pdf['tmp_name'], $dest_path)){
 			  $pdf_path = $newFileName;
-			  $response .= "pdf-uploaded: true;";
+			  $response .= "pdf: korras;";
 			}else{
-			  $response .= "pdf-uploaded: false;";
+			  $response .= "pdf: vigane;";
 			}
 			
 		}
 	}
     else{
 		http_response_code(403);
-		echo "Faili üleslaadimisel tekkis viga või fail puudub!";
+		echo "PDF-i üleslaadimisel tekkis viga või fail puudub!";
 		return 0;
 	}
 
@@ -170,7 +170,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 }
 //runs when participant approved or not approved
 else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["edit_key"]){ 
-	$response="Edit_key:".$_POST["edit_key"].";";
+	$response="";
 	try {
 		$project_id = "";
 		$project_name = '';
@@ -196,14 +196,14 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["edit_key"]){
 				$conn = null;
                 sendMail($_POST["email"], $project_name, true);
 				http_response_code(200);
-				echo "OK! Reponse:".$response;
+				echo "OK! Vastus:".$response;
 			}else{
 				$query = $conn->prepare('DELETE FROM ProjectParticipants WHERE email = ? AND project_id = ?'); 
 				$query->execute(array($_POST["email"], $project_id));
 				$conn = null;
                 sendMail($_POST["email"], $project_name, false);
 				http_response_code(200);
-				echo "OK! Reponse:".$response;
+				echo "OK! Vastus:".$response;
 			}
 		}
 	}catch (PDOException $e){
