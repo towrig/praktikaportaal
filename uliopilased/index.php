@@ -232,6 +232,7 @@
                             <div class="col-lg-8">
 
                                 <div class="form-group">
+                                    <p class="alert alert-info font-weight-normal text-muted">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel.</p>
                                     <label for="name">Ees- ja perekonnanimi</label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($name == "") { echo "is-invalid"; } else {echo "is-valid";} } ?>" id="name" name="name">
                                     <div class='invalid-feedback'>Palun lisa oma nimi</div>
@@ -332,7 +333,7 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input <?php if(!empty($_POST)) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint" required="required">
-                                        <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
+                                        <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
                                     </div>
                                 </div>
                                 <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add" onclick="gtag('event', 'Salvesta',{'event_category': 'Üliõpilased','event_label':'Lisa profiil'});">Lisa profiil</button>

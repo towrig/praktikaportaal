@@ -24,8 +24,7 @@
                     </div> <!-- .col-->
 
                     <div class="col-lg-2"  data-aos="zoom-in-right">
-                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});">Esita projekt
-                            <!--<span class="tooltip_mark" data-toggle="tooltip" data-placement="right" title="Profiili lisamisel jääb see süsteemi kuueks kuuks.´Sinu profiil on nähtav organisatsiooni alamlehel">?</span>--></span>
+                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});">Esita projekt</span>
                     </div>
                     <div class="col-lg-12">
                         <h5 class="text-uppercase text-center font-weight-bold mt-3"  data-aos="fade-down">Esitatud projektid</h5>
@@ -194,6 +193,7 @@
                                     </div>
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <div class="form-group mt-3">
+                                            <p class="alert alert-info font-weight-normal text-muted">Kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel</p>
                                             <label>Projekti pealkiri</label>
                                             <input required type="text" name="project_title" class="form-control" maxlength="85">
                                         </div>
@@ -236,6 +236,12 @@
                                             </div>
 
                                         </div>
+                                      <div class="form-group">
+                                          <div class="custom-control custom-checkbox">
+                                              <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
+                                              <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
+                                          </div>
+                                      </div>
                                         <div class="form-group mt-3 text-center">
                                             <input type="submit" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt" id="regButton">
                                         </div>
@@ -275,28 +281,23 @@
                     </nav>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active row" id="post-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
                             <div class="col-lg-12">
                                 <h2 class="post-heading"></h2>
                             </div>
-
                             <!-- join and contact-->
                             <div class="col-lg-4">
                                 <p class="field-organiser"></p>
                                 <p class="field-org_name"></p>
                                 <p class="field-org_email"></p>
                             </div>
-
                             <div class="col-lg-12 pdf-container">
                             </div>
-
-
-
                         </div>
                         <div class="tab-pane fade show row" id="post-participants" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="col-lg-12 my-3">
                                 <form class="needs-validation" id="project-join" method="POST" action="./project_api.php">
                                     <div class="form-group">
+                                        <p class="alert alert-info font-weight-normal text-muted">Kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel</p>
                                         <label>Ees- ja perekonnanimi*:</label>
                                         <input class="form-control" type="text" name="fullname" id="project_fullname" required>
                                     </div>
@@ -315,7 +316,7 @@
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                            <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
+                                            <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
                                         </div>
                                     </div>
                                     <input type="hidden" name="hash" id="project_hash">

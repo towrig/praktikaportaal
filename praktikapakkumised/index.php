@@ -173,8 +173,9 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
 
                         <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
 
-                            <div class="col-lg-8">
+                            <div class="col-lg-7">
                                 <div class="form-group">
+                                  <p class="alert alert-info font-weight-normal text-muted">Kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel</p>
                                     <label for="name">Kuulutuse pealkiri</label>
                                     <input required type="text" class="form-control" id="heading" name="heading">
                                     <div class='invalid-feedback'>Palun lisa pealkiri</div>
@@ -187,6 +188,24 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                     <label for="work">Registreerimise lõpptähtaeg</label>
                                     <input required type="text" class="form-control" id="datepicker" name="date">
                                 </div>
+
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="pilt" class="">Logo</label>
+                                    <div id="preview">
+                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                    </div>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn">Lae üles oma organisatsiooni logo</button>
+                                        <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
+                                    </div>
+                                    <div class='invalid-feedback'>Sisesta logo!</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="work">Teie nimi</label>
                                     <input required type="text" class="form-control" id="name" name="name">
@@ -200,23 +219,6 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                     <label for="work">Teie telefoninumber</label>
                                     <input required type="text" class="form-control" id="phone" name="phone">
                                 </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="pilt" class="">Pilt</label>
-                                    <div id="preview">
-                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
-                                    </div>
-                                    <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles oma organisatsiooni logo</button>
-                                        <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
-                                    </div>
-                                    <div class='invalid-feedback'>Sisesta logo!</div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="work_desc">Organisatsiooni tutvustus</label>
                                     <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
@@ -248,7 +250,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                        <label class="custom-control-label" for="checkpoint">Olen teadlik, et andmeid näidatakse avalikult…*</label>
+                                        <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
                                     </div>
                                 </div>
                                 <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
@@ -271,7 +273,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                     <div class="container">
                         <div class="row">
 
-                            <div class="col-lg-8 col-info">
+                            <div class="col-lg-7 col-info">
                                 <h2 class="post-heading"></h2>
                                 <h5>Tutvustus</h5>
                                 <div class="post-description"></div>
@@ -279,12 +281,12 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 <div class="post-tasks"></div>
                                 <h5>Vajalikud oskused ja kogemused</h5>
                                 <div class="post-skills"></div>
-                                <h5>Tähtaeg</h5>
-                                <div class="post-deadline"></div>
                               </div>
 
-                            <div class="col-lg-4 col-contact">
+                            <div class="col-lg-5 col-contact">
                                 <div class="post-img-container"></div>
+                                <h5>Tähtaeg</h5>
+                                <div class="post-deadline"></div>
                                 <h5>Kontakt</h5>
                                 <div class="post-contact-container">
                                   <span class="post-org-name"></span>
