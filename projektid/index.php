@@ -475,7 +475,7 @@
             var email = arr[1];
             var degree = arr[2];
             var skills = arr[3];
-            return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>");
+            return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + degree + "</p>");
         }
 
     </script>
