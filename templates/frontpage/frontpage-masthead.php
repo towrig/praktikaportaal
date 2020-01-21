@@ -32,8 +32,8 @@
                 <h2 class="mb-5" data-aos="fade-right"><span>TULEVIK</span> ALGAB SINUST</h2>
             </div>
             <div class="col-lg-9 col-md-12">
-                <div class="d-flex flex-lg-nowrap justify-content-center flex-wrap"  data-aos="fade-left">
-                  <div class="card m-5 first">
+                <div class="d-flex flex-lg-nowrap justify-content-center flex-wrap link-cards"  data-aos="fade-left">
+                  <a class="card m-5 first" href="./uliopilased" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Üliopilased'});">
                     <div class="card-body">
                       <i id="masthead-yliopilane"></i>
                       <h5 class="card-title text-uppercase">Üliõpilased</h5>
@@ -49,10 +49,10 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./uliopilased" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Üliopilased'});"><button class="btn btn-sm btn-primary">VAATA</button></a>
+                      <button class="btn btn-sm btn-primary">VAATA</button>
                     </div>
-                  </div>
-                  <div class="card m-5 second">
+                  </a>
+                  <a class="card m-5 second" href="./projektid" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});">
                     <div class="card-body">
                       <i id="masthead-projekt"></i>
                       <h5 class="card-title text-uppercase">Projektid</h5>
@@ -68,10 +68,10 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./projektid" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});"><button class="btn btn-sm btn-primary">VAATA</button></a>
+                      <button class="btn btn-sm btn-primary">VAATA</button>
                     </div>
-                  </div>
-                  <div class="card m-5 third">
+                  </a>
+                  <a class="card m-5 third" href="./praktikapakkumised" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Praktikapakkumised'});">
                     <div class="card-body">
                       <i id="masthead-praktikapakkumine"></i>
                       <h5 class="card-title text-uppercase">Praktika<wbr>pakkumised</h5>
@@ -86,9 +86,9 @@
                       
                     </div>
                     <div class="card-footer">
-                      <a class="" href="./praktikapakkumised" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Praktikapakkumised'});"><button class="btn btn-sm btn-primary">VAATA</button></a>
+                      <button class="btn btn-sm btn-primary">VAATA</button>
                     </div>
-                  </div>
+                  </a>
                 </div>
             </div>    
         </div>

@@ -215,6 +215,13 @@ li.list-group-item:hover {
     transition: all .21s ease-in-out;
 }
 
+/* linked cards */
+.link-cards .card:hover,
+.link-cards .card:focus{
+    text-decoration: none;
+    cursor: pointer !important;
+}
+
 /* custom-forms.css */
 .sidenav {
   height: 100%;
