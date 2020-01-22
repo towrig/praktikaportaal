@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
   $title="Projektid |";
-  $description = "Lisa oma projektiidee, et üliõpilased aitaksid leida loovaid lahendusi. Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.";
+  $description = "Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.";
   include_once './../templates/header.php';
 ?>
 

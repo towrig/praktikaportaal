@@ -52,7 +52,7 @@
                       <button class="btn btn-sm btn-primary">VAATA</button>
                     </div>
                   </a>
-                  <a class="card m-5 second" href="./projektid" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});">
+                  <a class="card m-5 second" href="./projektipraktika" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});">
                     <div class="card-body">
                       <i id="masthead-projekt"></i>
                       <h5 class="card-title text-uppercase">Projektid</h5>

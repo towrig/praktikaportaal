@@ -92,7 +92,7 @@
                 </div>
             </div>
             <div class="col-md-12 my-5">
-                <h2>Üleslaetud projektid koos nende muutmiseks vajalike linkidega</h2>
+                <h2>Üleslaetud projektid</h2>
                 <div class="container">
                     <div class="row">
                         <?php 
@@ -119,6 +119,23 @@
         </div>
     </div>
     
+    <!-- participant modal -->
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    
+                    <div class="col-lg-12 participants-container">
+                        <div class="container">
+                            <div class="row"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- archive modal -->
     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -179,7 +196,7 @@
             formData.append("action", "approve");
             $.ajax({
                 type: 'POST',
-                url: '../projektid/project_api.php',
+                url: '../projektipraktika/project_api.php',
                 data: formData,
                 cache: false,
                 contentType: false,
