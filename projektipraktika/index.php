@@ -14,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projektipraktika</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projekti<wbr>praktika</h1>
                     </div>
                     <div class="col-lg-4"  data-aos="fade-right">
                         <p class="font-weight-light">
@@ -27,7 +27,7 @@
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});">Esita projekt</span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-3"  data-aos="fade-down">Esitatud projektid</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Esitatud projektid</h5>
                     </div>
 
                 </div> <!-- .row -->
