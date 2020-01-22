@@ -943,16 +943,27 @@ p.align-self-center {
 .masthead .card .card-body span {
   display: block;
 }
-.masthead .card .card-body span:nth-child(1) {margin-left: 0;}
-.masthead .card .card-body span:nth-child(2) {margin-left: -1rem;}
-.masthead .card .card-body span:nth-child(3) {margin-left: -2rem;}
-.masthead .card .card-body span:nth-child(4) {margin-left: -3rem;}
-.masthead .card .card-body span:nth-child(5) {margin-left: -4rem;}
-.masthead .card .card-body span:nth-child(6) {margin-left: -5rem;}
-.masthead .card .card-body span:nth-child(7) {margin-left: -6rem;}
-.masthead .card .card-body span:nth-child(8) {margin-left: -7rem;}
-.masthead .card .card-body span:nth-child(9) {margin-left: -8rem;}
-.masthead .card .card-body span:nth-child(10) {margin-left: -9rem;}
+.masthead .card .card-body span:nth-child(1) {margin-left: -1rem;}
+.masthead .card .card-body span:nth-child(2) {margin-left: -2rem;}
+.masthead .card .card-body span:nth-child(3) {margin-left: -3rem;}
+.masthead .card .card-body span:nth-child(4) {margin-left: -4rem;}
+.masthead .card .card-body span:nth-child(5) {margin-left: -5rem;}
+.masthead .card .card-body span:nth-child(6) {margin-left: -6rem;}
+.masthead .card .card-body span:nth-child(7) {margin-left: -7rem;}
+.masthead .card .card-body span:nth-child(8) {margin-left: -8rem;}
+.masthead .card .card-body span:nth-child(9) {margin-left: -9rem;}
+.masthead .card .card-body span:nth-child(10) {margin-left: -10rem;}
+
+.masthead .first.card .card-body span:nth-child(1) {margin-left: 0;}
+.masthead .first.card .card-body span:nth-child(2) {margin-left: -1rem;}
+.masthead .first.card .card-body span:nth-child(3) {margin-left: -2rem;}
+.masthead .first.card .card-body span:nth-child(4) {margin-left: -3rem;}
+.masthead .first.card .card-body span:nth-child(5) {margin-left: -4rem;}
+.masthead .first.card .card-body span:nth-child(6) {margin-left: -5rem;}
+.masthead .first.card .card-body span:nth-child(7) {margin-left: -6rem;}
+.masthead .first.card .card-body span:nth-child(8) {margin-left: -7rem;}
+.masthead .first.card .card-body span:nth-child(9) {margin-left: -8rem;}
+.masthead .first.card .card-body span:nth-child(10) {margin-left: -9rem;}
 
 .masthead .card {
     background: #01499d;
@@ -992,12 +1003,14 @@ p.align-self-center {
 }
 
 h5.card-title.text-uppercase {
-    color: #e94700;
-    font-weight:600;
+    //color: #e94700;
+    color: #fff;
+    font-weight: 500;
     font-size: 1rem;
     line-height: 1.5rem;
     margin-left: 1rem;  
 }
+.second h5.card-title.text-uppercase,
 .third h5.card-title.text-uppercase {
     margin-left: 1rem;
     text-indent: 1rem;
@@ -1705,6 +1718,7 @@ body.practice .modal img#profileImg {
     margin: 1rem auto;
   }
 
+  #masthead .second h5.card-title.text-uppercase,
   #masthead .third h5.card-title.text-uppercase {
     margin: auto;
     text-indent: 0;
