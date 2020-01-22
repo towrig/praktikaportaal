@@ -55,7 +55,7 @@
                   <a class="card m-5 second" href="./projektipraktika" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});">
                     <div class="card-body">
                       <i id="masthead-projekt"></i>
-                      <h5 class="card-title text-uppercase">Projektid</h5>
+                      <h5 class="card-title text-uppercase">Projekti<wbr>praktika</h5>
                       <p class="card-text text-muted">
                         <span>Koostöös</span>
                         <span>sündinud</span>
