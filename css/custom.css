@@ -1100,8 +1100,7 @@ div#ut-logo {
 
 @media (min-width: 992px) {
   header.masthead {
-      padding-top: 12rem;
-
+      //padding-top: 12rem;
   }
   
   #mainNav.navbar-scrolled {
@@ -1513,7 +1512,7 @@ i.arrow-front {
 
 .front .card-body {
   overflow: auto;
-  max-height: 150px;
+  max-height: 200px;
 }
 
 .back .card {
@@ -2163,6 +2162,7 @@ button#ihavecookiesBtn {
     font-family: "Rubik"!important;
     z-index: 9999;
     color: white;
+    filter: grayscale(1);
 }
 #gdpr-cookie-message h4 {
     display: none;
