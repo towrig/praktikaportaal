@@ -232,7 +232,7 @@
                             <div class="col-lg-8">
 
                                 <div class="form-group">
-                                    <p class="alert alert-info font-weight-normal text-muted">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel.</p>
+                                    <p class="alert alert-info font-weight-normal text-muted">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
                                     <label for="name">Ees- ja perekonnanimi</label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($name == "") { echo "is-invalid"; } else {echo "is-valid";} } ?>" id="name" name="name">
                                     <div class='invalid-feedback'>Palun lisa oma nimi</div>

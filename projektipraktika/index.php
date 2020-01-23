@@ -193,7 +193,7 @@
                                     </div>
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <div class="form-group mt-3">
-                                            <p class="alert alert-info font-weight-normal text-muted">Kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel</p>
+                                            <p class="alert alert-info font-weight-normal text-muted">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
                                             <label>Projekti pealkiri</label>
                                             <input required type="text" name="project_title" class="form-control" maxlength="85">
                                         </div>
@@ -297,7 +297,7 @@
                             <div class="col-lg-12 my-3">
                                 <form class="needs-validation" id="project-join" method="POST" action="./project_api.php">
                                     <div class="form-group">
-                                        <p class="alert alert-info font-weight-normal text-muted">Kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel</p>
+                                        <p class="alert alert-info font-weight-normal text-muted">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
                                         <label>Ees- ja perekonnanimi*:</label>
                                         <input class="form-control" type="text" name="fullname" id="project_fullname" required>
                                     </div>

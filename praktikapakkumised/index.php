@@ -175,7 +175,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
 
                             <div class="col-lg-7">
                                 <div class="form-group">
-                                  <p class="alert alert-info font-weight-normal text-muted">Kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel</p>
+                                  <p class="alert alert-info font-weight-normal text-muted">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
                                     <label for="name">Kuulutuse pealkiri</label>
                                     <input required type="text" class="form-control" id="heading" name="heading">
                                     <div class='invalid-feedback'>Palun lisa pealkiri</div>
