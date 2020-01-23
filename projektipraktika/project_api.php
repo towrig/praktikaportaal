@@ -129,7 +129,7 @@ else if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["project_title"]){
 		$allowedfileExtensions = array('pdf');
 		if (in_array($fileExtension, $allowedfileExtensions)){ //later mby $_FILES['uploadedFile']['size'] < 4000 or sth...
 			
-			$dest_path = '../../userdata/projects/'.$newFileName;
+			$dest_path = '../userdata/projects/'.$newFileName;
 			if(move_uploaded_file($pdf['tmp_name'], $dest_path)){
 			  $pdf_path = $newFileName;
 			  $response .= "pdf: korras;";

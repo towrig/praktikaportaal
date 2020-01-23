@@ -62,7 +62,6 @@
                         <span>lahendused</span>
                         <span>projektiideele</span>
                         <span>&nbsp;</span>
-                        <span>&nbsp;</span>
                         <span class="main-stats"><small><?php echo $stats[1]?></small> projekti</span>
                       </p>
                       

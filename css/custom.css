@@ -1100,7 +1100,7 @@ div#ut-logo {
 
 @media (min-width: 992px) {
   header.masthead {
-      //padding-top: 12rem;
+      padding-top: 12rem;
   }
   
   #mainNav.navbar-scrolled {
@@ -2058,6 +2058,15 @@ div#viewModal .post-deadline {
 
 .practiceoffers .page-section {
     padding-bottom: 0rem;
+}
+
+/* temp hiding */
+.navbar-expand-lg .navbar-collapse{
+    display: none !important;
+}
+
+.navbar-expand-lg .navbar-toggler{
+    display: none !important;
 }
 
 .navbar-collapse a.nav-link{

@@ -105,6 +105,7 @@
                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
                                                 <a class="btn btn-sm btn-success proj-modal" data-id= "'.$p["id"].'" data-ekey="'.$p["edit_key"].'">Vaata osalejaid</a>
                                                 '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
+                                                <a class="btn btn-sm btn-danger archive-modal" data-id= "'.$p["id"].'">Arhiveeri</a>
                                             </div>
                                         </div>
                                     </div>
@@ -136,15 +137,13 @@
         </div>
     </div>
     <!-- archive modal -->
-    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade arc-modal" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     
-                    <div class="col-lg-12 participants-container">
-                        <div class="container">
-                            <div class="row"></div>
-                        </div>
+                    <div class="col-lg-12">
+                        <h1>Arhiveerimine</h1>
                     </div>
                     
                 </div>
@@ -169,7 +168,15 @@
         $(document).ready(function() {
             console.log(participants);
             $('.proj-modal').on('click', partModal);
+            $('.archive-modal').on('click', archiveModal);
         });
+        
+        function archiveModal(e){
+            var target = $(e.currentTarget);
+            var modal = $(".arc-modal").first();
+            var id = target.data("id");
+            
+        }
         
         function partModal(e){
             var target = $(e.currentTarget);
