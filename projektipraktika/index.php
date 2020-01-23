@@ -432,7 +432,7 @@
             //get vars
             var title = target.data("title");
             var start_date = target.data("start_date");
-            var pdf_path = 'https://docs.google.com/viewer?url=http://praktika.ut.ee/userdata/projects/' + target.data("pdf_path");
+            var pdf_path = 'https://docs.google.com/viewer?url=https://praktika.ut.ee/userdata/projects/' + target.data("pdf_path");
             var org_name = target.data("org_name");
             var org_email = target.data("org_email");
             var organisation = target.data("organisation");

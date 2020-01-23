@@ -411,7 +411,7 @@
         function openCV(e) {
             var modal = $('.modal-cv').first();
             var target = $(e.currentTarget);
-            var cvpath = 'https://docs.google.com/viewer?url=http://praktika.ut.ee'+$(target).data('cv');
+            var cvpath = 'https://docs.google.com/viewer?url=https://praktika.ut.ee'+$(target).data('cv');
 
             var cvembed = $('<iframe>').attr({
                 'src': cvpath + '&embedded=true',
