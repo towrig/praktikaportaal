@@ -26,7 +26,7 @@ function sendMail($key, $target, $heading){ //add $target
 	$form_success = true;
 	$from = 'admin@praktika.ut.ee';
 
-	$subject = 'Valideerimislink: '.$heading;
+	$subject = 'Valideerimislink';
     $message = 'Tere!<br><br>Olete lisanud TÜ praktika keskkonda pakkumise “'.$heading.'”. Palun kinnitage pakkumise lisamine vajutades <a href="http://praktika.ut.ee/validator?key='.$key.'&action=add&t=1">kliki siia!</a>. Pärast kinnitamist läheb pakkumine kodulehele üles.<br><br>Heade soovidega<br>praktika.ut.ee';
 
 	//add additional headers if required (X-Mailer etc.)
