@@ -207,16 +207,16 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="work">Teie nimi</label>
+                                    <label for="work">Kontaktisiku nimi</label>
                                     <input required type="text" class="form-control" id="name" name="name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Teie e-mail</label>
+                                    <label for="email">Kontaktisiku e-mail</label>
                                     <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
                                     <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Teie telefoninumber</label>
+                                    <label for="work">Kontaktisiku telefoninumber</label>
                                     <input required type="text" class="form-control" id="phone" name="phone">
                                 </div>
                                 <div class="form-group">
@@ -275,29 +275,33 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
 
                             <div class="col-lg-7 col-info">
                                 <h2 class="post-heading"></h2>
+                                <h6><span class="post-org-name"></span></h6>
                                 <h5>Tutvustus</h5>
                                 <div class="post-description"></div>
                                 <h5>Tööülesanded</h5>
                                 <div class="post-tasks"></div>
                                 <h5>Vajalikud oskused ja kogemused</h5>
                                 <div class="post-skills"></div>
+                                <h5>Muu oluline info</h5>
+                                <div class="post-other"></div>
                               </div>
 
                             <div class="col-lg-5 col-contact">
                                 <div class="post-img-container"></div>
                                 <h5>Tähtaeg</h5>
                                 <div class="post-deadline"></div>
+                                <h5>Asukoht</h5>
+                                <div class="post-org-loc"></div>
+                                <!--<h5 class="post-org-name"></h5>-->
                                 <h5>Kontakt</h5>
                                 <div class="post-contact-container">
-                                  <span class="post-org-name"></span>
-                                  <span class="post-org-loc"></span>
-                                  <span class="post-org-description"></span>
-                                  <span class="post-org-website"></span>
                                   <span class="post-contact-name"></span>
                                   <span class="post-contact-email"></span>
                                   <span class="post-contact-phone"></span>
-                                  <span class="post-other"></span>
+                                  <span class="post-org-website"></span>
                                 </div>
+                              <h5>Ettevõtte kirjeldus</h5>
+                              <div class="post-org-description"></div>
                             </div>
                         </div>
                     </div>
@@ -381,18 +385,18 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
             
             //attach values
             $(".post-heading").html(heading);
-            $(".post-description").html(description);
-            $(".post-tasks").html(tasks);
-            $(".post-skills").html(skills);
+            $(".post-description").html("<pre>"+description+"</pre>");
+            $(".post-tasks").html("<pre>"+tasks+"</pre>");
+            $(".post-skills").html("<pre>"+skills+"</pre>");
             $(".post-img-container").html("<img src='"+pic+"'>");
             $(".post-org-name").html(work_name);
             $(".post-org-loc").html(work_loc);
-            $(".post-org-description").html(work_desc);
-            $(".post-org-website").html(website);
+            $(".post-org-description").html("<pre>"+work_desc+"</pre>");
+            $(".post-org-website").html("<a target='_blank' href='"+website+"'>"+website+"</a>");
             $(".post-contact-name").html(name);
             $(".post-contact-email").html(email);
             $(".post-contact-phone").html(phone);
-            $(".post-other").html(other);
+            $(".post-other").html("<pre>"+other+"</pre>");
             $(".post-deadline").html(deadline);
             $(".post-apply").attr("href","mailto:"+email);
             handleCookies(id);
@@ -421,7 +425,7 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                 processData: false,
                 data: formData
             }).done(function(response) {
-                form.after("<div class='alert alert-success'>Aitäh! Teie emailile tuleb postituse aktiveerimislink!</div>");
+                form.after("<div class='alert alert-success'>Aitäh! Kontaktisiku emailile tuleb postituse aktiveerimislink!</div>");
                 form.css('display', 'none');
                 form.trigger("reset");
                 setTimeout(function() {
