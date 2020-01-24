@@ -46,6 +46,8 @@
 
     <!-- Cookie consent -->
     <script src="<?php echo $wwwroot; ?>js/jquery.ihavecookies.min.js"></script>
+    <!-- PDF viewer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>
     <script>
       $(function(){
         $('body').ihavecookies({
