@@ -20,6 +20,9 @@
                         <p class="font-weight-light">
                            <?php echo $description; ?>
                         </p>
+                        <p class="font-weight-light">
+                          Projektipraktika ideede esitamise tähtaeg on kevadsemestril <b>2.03</b>. Üliõpilased saavad projektidega liituda <b>09.-15.03</b>.
+                        </p>
                         <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});">Vaata ajakava siit!</a>
                     </div> <!-- .col-->
 
@@ -243,7 +246,7 @@
                                           </div>
                                       </div>
                                         <div class="form-group mt-3 text-center">
-                                            <input type="submit" name="submit-form" class="text-center text-uppercase btn btn-lg" onclick="gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt" id="regButton">
+                                          <button type="submit" name="submit-form" class="text-center text-uppercase btn btn-primary btn-lg" onclick="gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt" id="regButton">Esita projekt</button>
                                         </div>
                                     </div>
                                 </div>
@@ -387,7 +390,7 @@
                 form.css('display', 'none');
             }).fail(function(response) {
                 form.addClass('was-validated');
-                form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel:"+response.responseText+"</div>");
+                form.after("<div class='alert alert-danger'>Ups! Midagi läks valesti registreerimisel: "+response.responseText+"</div>");
             });
         }
         
@@ -452,12 +455,17 @@
             }
 
             //attach pdf
-            var pdf_embed = $('<iframe>').attr({
+            /*var pdf_embed = $('<iframe>').attr({
                 'src': pdf_path + '&embedded=true',
                 'type': 'application/pdf'
-            }).css('width', '100%').css('min-height', '512px');
+            }).css('width', '100%').css('min-height', '512px');*/
             modal.find('.pdf-container').empty();
-            modal.find('.pdf-container').html(pdf_embed);
+            var options = {
+              pdfOpenParams: { view: 'FitH', scrollbar: '1', toolbar: '0', statusbar: '1', messages: '0', navpanes: '0' },
+              fallbackLink: '<p>Antud veebilehitseja ei toeta PDFi vaatamist otse lehe sees. Palun laadige PDF alla ning avage eraldi. <a href="[url]">Lae alla PDF</a></p>'
+            };
+            PDFObject.embed('./../userdata/projects/' + target.data("pdf_path"), ".pdf-container", options);
+            //modal.find('.pdf-container').html(pdf_embed);
 
             //add participants
             var p_c = modal.find('.participants-container .container .row');
