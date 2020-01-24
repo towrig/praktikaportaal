@@ -33,7 +33,7 @@
             </div>
             <div class="col-lg-9 col-md-12">
                 <div class="d-flex flex-lg-nowrap justify-content-center flex-wrap link-cards"  data-aos="fade-left">
-                  <a class="card m-5 first" href="./uliopilased" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Üliopilased'});">
+                  <a class="card m-5 m-md-4 m-xl-5 first" href="./uliopilased" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Üliopilased'});">
                     <div class="card-body">
                       <i id="masthead-yliopilane"></i>
                       <h5 class="card-title text-uppercase">Üliõpilased</h5>
@@ -52,7 +52,7 @@
                       <button class="btn btn-sm btn-primary">VAATA</button>
                     </div>
                   </a>
-                  <a class="card m-5 second" href="./projektipraktika" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});">
+                  <a class="card m-5 m-md-4 m-xl-5 second" href="./projektipraktika" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});">
                     <div class="card-body">
                       <i id="masthead-projekt"></i>
                       <h5 class="card-title text-uppercase">Projekti<wbr>praktika</h5>
@@ -70,7 +70,7 @@
                       <button class="btn btn-sm btn-primary">VAATA</button>
                     </div>
                   </a>
-                  <a class="card m-5 third" href="./praktikapakkumised" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Praktikapakkumised'});">
+                  <a class="card m-5 m-md-4 m-xl-5 third" href="./praktikapakkumised" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Praktikapakkumised'});">
                     <div class="card-body">
                       <i id="masthead-praktikapakkumine"></i>
                       <h5 class="card-title text-uppercase">Praktika<wbr>pakkumised</h5>
