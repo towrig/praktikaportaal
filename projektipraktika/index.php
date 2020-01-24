@@ -180,7 +180,7 @@
                             <form method="POST" action="./project_api.php" enctype="multipart/form-data" id="project_submission">
                                 <nav class="nav nav-pills flex-column flex-sm-row " id="pills-tab" role="tablist">
                                     <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span>Projektivorm</span></a>
-                                    <<a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span>Esita projekt</span></a>
+                                    <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span>Esita projekt</span></a>
                                 </nav>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
