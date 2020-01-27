@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
   $title="Projektipraktika |";
-  $description = "Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.";
+  $description = "Otsid oma ideele lahendust? Lisa projekt ja meie moodustame meeskonna, kus erinevate õppekavade üliõpilased aitavad koostöös leida parimaid lahendusi.";
   include_once './../templates/header.php';
 ?>
 
@@ -14,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projekti<wbr>praktika</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projekti&shy;praktika</h1>
                     </div>
                     <div class="col-lg-4"  data-aos="fade-right">
                         <p class="font-weight-light">

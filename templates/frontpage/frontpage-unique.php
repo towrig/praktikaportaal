@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 data-aos="fade-down">Mis teeb Futulabi <span>unikaalseks?</span></h2>
-                <small data-aos="fade-down">Koostöö mis vaatab tulevikku, keskendub osapoolte arengule ning loob uusi võimalusi.</small>
+                <h2 data-aos="fade-down">Mis teeb Futulabi <span>ainulaadseks?</span></h2>
+                <small data-aos="fade-down">Pakume tulevikku vaatavaid ja osaliste arengut soodustavaid koostöövõimalusi.</small>
             </div>
         </div>
     </div>
@@ -11,30 +11,30 @@
     <div class="row text-white mb-5">
       <div id="unique-kaedkulge" class="unique-box col-lg-3 col-md-6"  data-aos="flip-down" data-aos-anchor-placement="bottom-bottom">
         <div class="col p-3">
-          <h3>Käed külge</h3>
+          <h3>Kaasatus</h3>
           <i class="unique-arrow"></i>
-          <span>Sind ootavad põnevad kogemused, kus saad lahendada uusi väljakutseid ja kasutada enda teadmisi ning oskusi!</span>
+          <span>Tule pane käed külge! Sul on võimalus panna ennast proovile ning saada oma teadmisi ja oskusi rakendades palju põnevaid kogemusi</span>
         </div>
       </div>
       <div id="unique-interditsiplinaarne" class="unique-box col-lg-3 col-md-6"  data-aos="flip-down" data-aos-anchor-placement="bottom-bottom">
         <div class="col p-3">
-          <h3>Interdistsi-plinaarne</h3>
+          <h3>Erialade&shy;vahelisus</h3>
           <i class="unique-arrow"></i>
-          <span>Sa tegutsed keskkonnas, kus väljakutsed ja meeskonnad ületavad eriala piire, saad uusi tutvusi ning õpid probleeme nägema ja mõistma eri tahkudelt</span>
+          <span>Sa saad tegutseda keskkonnas, kus nii ülesanded kui ka meeskonnad ületavad eriala piire, leida uusi tuttavaid ning õppida nägema ja mõistma probleemide eri tahke</span>
         </div>
       </div>
       <div id="unique-tulevikuoskused" class="unique-box col-lg-3 col-md-6"  data-aos="flip-down" data-aos-anchor-placement="bottom-bottom">
         <div class="col p-3">
-          <h3>Tuleviku-oskused</h3>
+          <h3>Tuleviku&shy;oskused</h3>
           <i class="unique-arrow"></i>
-          <span>Väljakutsed nõuavad tulevikuoskuste arendamist, mis on Sinu edu alus ka 10 aasta pärast nii tööturul kui ka ühiskonnas laiemalt.</span>
+          <span>Tulevikuülesanded nõuavad tulevikuoskuste arendamist. Need on Sinu edu alus ka kümne aasta pärast.</span>
         </div>
       </div>
         <div id="unique-paindlik" class="unique-box col-lg-3 col-md-6"  data-aos="flip-down" data-aos-anchor-placement="bottom-bottom">
         <div class="col p-3">
-          <h3>Paindlik</h3>
+          <h3>Paindlikkus</h3>
           <i class="unique-arrow"></i>
-          <span>Sina otsustad millal, kus ja kuidas osaled, sest nii piirid kui ka väljakutsed sead endale ise.</span>
+          <span>Sa võid ise otsustada, millal, kus ja kuidas osaled, sest nii piirid kui ka võimalused sead endale ise.</span>
         </div>
       </div>
     </div>

@@ -39,8 +39,7 @@
                       <h5 class="card-title text-uppercase">Üliõpilased</h5>
                       <p class="card-text text-muted">
                         <span>Motiveeritud</span>
-                        <span>üliõpilased</span>
-                        <span>ja tulevased</span>
+                        <span>tulevased</span>
                         <span>praktikandid</span>
                         <span>&nbsp;</span>
                         <span>&nbsp;</span>
@@ -55,12 +54,11 @@
                   <a class="card m-5 m-md-4 m-xl-5 second" href="./projektipraktika" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Projektid'});">
                     <div class="card-body">
                       <i id="masthead-projekt"></i>
-                      <h5 class="card-title text-uppercase">Projekti<wbr>praktika</h5>
+                      <h5 class="card-title text-uppercase">Projekti-praktika</h5>
                       <p class="card-text text-muted">
                         <span>Koostöös</span>
                         <span>sündinud</span>
                         <span>lahendused</span>
-                        <span>projektiideele</span>
                         <span>&nbsp;</span>
                         <span class="main-stats"><small><?php echo $stats[1]?></small> projekti</span>
                       </p>
@@ -73,10 +71,9 @@
                   <a class="card m-5 m-md-4 m-xl-5 third" href="./praktikapakkumised" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Praktikapakkumised'});">
                     <div class="card-body">
                       <i id="masthead-praktikapakkumine"></i>
-                      <h5 class="card-title text-uppercase">Praktika<wbr>pakkumised</h5>
+                      <h5 class="card-title text-uppercase">Praktika-pakkumised</h5>
                       <p class="card-text text-muted">
-                        <span>Uued</span>
-                        <span>võimalused</span>
+                        <span>Põnevad</span>
                         <span>ja huvitavad</span>
                         <span>praktikakohad</span>
                         <span>&nbsp;</span>

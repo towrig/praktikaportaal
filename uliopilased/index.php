@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
   $title="Üliõpilased |";
-  $description = "Otsid praktikakohta? Lisa profiil ja ole nähtav tööandjatele! Praktika kogemus suurendab üliõpilaste edukat tööle kandideerimist ning praktikakoht võib olla Sinu järgmiseks töökohaks.";
+  $description = "Otsid praktikakohta? Lisa oma profiil ja ole tööandjatele nähtav! Praktikakogemus suurendab edu edaspidisel töölekandideerimisel ja ka praktikakohast võib saada Sinu järgmine töökoht.";
   include_once './../templates/header.php';
 ?>
 
