@@ -411,21 +411,28 @@
         function openCV(e) {
             var modal = $('.modal-cv').first();
             var target = $(e.currentTarget);
-            var cvpath = 'https://docs.google.com/viewer?url=https://praktika.ut.ee'+$(target).data('cv');
+            //var cvpath = 'https://docs.google.com/viewer?url=https://praktika.ut.ee'+$(target).data('cv');
+            var cvpath = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>" + $(target).data('cv');
 
-           /* var cvembed = $('<iframe>').attr({
+           var cvembed = $('<iframe>').attr({
                 'src': cvpath + '&embedded=true',
                 'type': 'application/pdf'
-            }).css('width', '100%').css('min-height', '512px');*/
-            //modal.find('.modal-body').empty();
-            //modal.find('.modal-body').html(cvembed);
+            }).css('width', '100%').css('min-height', '512px');
+            modal.find('.modal-body').empty();
+            modal.find('.modal-body').html(cvembed);
 
-            modal.find('.pdf-container').empty();
+          /*var ex = '<a href="../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>'+ $(target).data('cv')+'">Open yourpdf.pdf with PDF.js</a>';
+          var ex = '<iframe style="width: 100%; min-height: 512px;" src="../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>'+ $(target).data('cv')+'">Open yourpdf.pdf with PDF.js</iframe>';*/
+
+
+            /*modal.find('.pdf-container').empty();
             var options = {
               pdfOpenParams: { view: 'FitH', scrollbar: '1', toolbar: '0', statusbar: '1', messages: '0', navpanes: '0' },
               fallbackLink: '<p>Antud veebilehitseja ei toeta PDFi vaatamist otse lehe sees. Palun laadige PDF alla ning avage eraldi. <a href="[url]">Lae alla PDF</a></p>'
             };
             PDFObject.embed('..' + $(target).data('cv'), ".pdf-container", options);
+
+            modal.find('.modal-body').append(ex);*/
 
             modal.modal('show');
         }
