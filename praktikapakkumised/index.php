@@ -67,7 +67,9 @@ Lisa praktikapakkumine ning näita ennast motiveeritud tööandjana. Praktika on
                                 $id = $row["id"];
                                 $validationcode = $row["validationcode"];
                                 $picurl = "../userdata/pictures/".$row["logopath"];
-                                $uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));
+                                //$uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));
+                                setlocale(LC_TIME, "et_EE");
+                                $uploaded = strftime('%d<br>%b<br>%Y', strtotime($row["datetime_uploaded"]));
                                 $reg_end = ($row["end_date"]!="0000-00-00 00:00:00")?date('d.m.Y',strtotime($row["end_date"])):"-";
                                 $views = $row["views"];
                                 
