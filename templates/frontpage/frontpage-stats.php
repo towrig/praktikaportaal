@@ -5,7 +5,7 @@
                 <div class="column-wrapper">
                     <div id="divider" class="divider">
                         <div class="divider-content">
-                              <h3 class="text-uppercase my-5">Meiega on liitunud</h3>
+                              <h3 class="text-uppercase my-5">Futulabis on</h3>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <h2 class=" my-4"><?php echo $stats[2]?></h2>
                     </div>
                     <div>
-                      <h5 class="h6 text-uppercase mb-2">praktika<wbr>pakkumist</h5>
+                      <h5 class="h6 text-uppercase mb-2">praktika&shy;pakkumist</h5>
                     </div>
                 </div>
             </div>

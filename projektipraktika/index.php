@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
   $title="Projektipraktika |";
-  $description = "Otsid oma ideele lahendust? Lisa projekt ning meie moodustame tiimi, kus erinevate õppekavade üliõpilased koostöös aitavad leida parimaid lahendusi.";
+  $description = "Otsid oma ideele lahendust? Lisa projekt ja meie moodustame meeskonna, kus erinevate õppekavade üliõpilased aitavad koostöös leida parimaid lahendusi.";
   include_once './../templates/header.php';
 ?>
 
@@ -14,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projekti<wbr>praktika</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projekti&shy;praktika</h1>
                     </div>
                     <div class="col-lg-4"  data-aos="fade-right">
                         <p class="font-weight-light">
@@ -241,8 +241,8 @@
                                         </div>
                                       <div class="form-group">
                                           <div class="custom-control custom-checkbox">
-                                              <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                              <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
+                                              <input type="checkbox" class="custom-control-input" id="checkpoint_projekt" name="checkpoint_projekt" required="required">
+                                              <label class="custom-control-label text-left" for="checkpoint_projekt">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
                                           </div>
                                       </div>
                                         <div class="form-group mt-3 text-center">
@@ -441,7 +441,8 @@
             //get vars
             var title = target.data("title");
             var start_date = target.data("start_date");
-            var pdf_path = 'https://docs.google.com/viewer?url=https://praktika.ut.ee/userdata/projects/' + target.data("pdf_path");
+            //var pdf_path = 'https://docs.google.com/viewer?url=https://praktika.ut.ee/userdata/projects/' + target.data("pdf_path");
+            var pdf_path = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>userdata/projects/" + target.data("pdf_path");
             var org_name = target.data("org_name");
             var org_email = target.data("org_email");
             var organisation = target.data("organisation");
@@ -461,17 +462,17 @@
             }
 
             //attach pdf
-            /*var pdf_embed = $('<iframe>').attr({
+            var pdf_embed = $('<iframe>').attr({
                 'src': pdf_path + '&embedded=true',
                 'type': 'application/pdf'
-            }).css('width', '100%').css('min-height', '512px');*/
-            modal.find('.pdf-container').empty();
+            }).css('width', '100%').css('min-height', '512px');
+            /*modal.find('.pdf-container').empty();
             var options = {
               pdfOpenParams: { view: 'FitH', scrollbar: '1', toolbar: '0', statusbar: '1', messages: '0', navpanes: '0' },
               fallbackLink: '<p>Antud veebilehitseja ei toeta PDFi vaatamist otse lehe sees. Palun laadige PDF alla ning avage eraldi. <a href="[url]">Lae alla PDF</a></p>'
             };
-            PDFObject.embed('./../userdata/projects/' + target.data("pdf_path"), ".pdf-container", options);
-            //modal.find('.pdf-container').html(pdf_embed);
+            PDFObject.embed('./../userdata/projects/' + target.data("pdf_path"), ".pdf-container", options);*/
+            modal.find('.pdf-container').html(pdf_embed);
 
             //add participants
             var p_c = modal.find('.participants-container .container .row');

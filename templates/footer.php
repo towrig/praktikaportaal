@@ -9,7 +9,7 @@
               <div class="col-md-4">
                 <div class="row">
                   <div class="col-md-12 contact-us-info" data-aos="fade-right">
-                    <p>Kui Sul on tekkinud küsimusi või vajad mõnele teemale vastust, siis ära kõhkle ja võta meiega ühendust.</p>
+                    <p>Kui Sul on küsimusi või mõni teema pakub huvi, siis võta meiega ühendust aadressil</p>
                   </div>
                   <div class="col-md-12" data-aos="fade-right"><a href="mailto:praktika@ut.ee"  onclick="gtag('event', 'Võta ühendust',{'event_category': 'Jalus','event_label':'Võta ühendust!'});">praktika@ut.ee</a></div>
                 </div>
@@ -47,12 +47,12 @@
     <!-- Cookie consent -->
     <script src="<?php echo $wwwroot; ?>js/jquery.ihavecookies.min.js"></script>
     <!-- PDF viewer -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>-->
     <script>
       $(function(){
         $('body').ihavecookies({
           title: "Küpsised ja privaatsuspoliitika",
-          message: "Kasutame oma veebilehel küpsiseid ning Google Analytics teenust veebilehe külastatavuse statistika analüüsiks.",
+          message: "Kasutame oma veebilehel küpsiseid ning Google Analyticsi teenust veebilehe külastatavuse statistika analüüsiks.",
           link: "<?php echo $wwwroot; ?>privaatsuspoliitika/",
           advancedBtnLabel: "Vali küpsised",
           acceptBtnLabel: "Luba küpsised",

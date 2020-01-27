@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="text-uppercase font-weight-bold mb-3 mt-5 mb-3" data-aos="fade-right">Privaatsus<wbr>poliitika</h1>
+        <h1 class="text-uppercase font-weight-bold mb-3 mt-5 mb-3" data-aos="fade-right">Privaatsus&shy;poliitika</h1>
       </div>
       <div class="col-lg-12" data-aos="fade-right">
         <div data-aos="fade-down">

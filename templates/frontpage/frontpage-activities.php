@@ -1,31 +1,29 @@
 <section id="activities" class="d-flex flex-wrap align-content-center text-center mb-5">
     <div class="container mb-5">
-        <h3 class="mt-0 text-uppercase" data-aos="fade-down">Üliõpilasel on võimalus osaleda</h3>
+        <h3 class="mt-0 text-uppercase" data-aos="fade-down">Üliõpilast ootavad</h3>
         <div class="row">
             <div class="col-lg-3 col-md-6" data-aos="flip-down" data-aos-duration="2000">
                 <div class="mt-5">
-                    <h5 class="h6 mb-2 text-uppercase"><a target="_blank" onclick="gtag('event', 'Osalemine',{'event_category': 'Avaleht','event_label':'Praktikad'});" href="./praktikapakkumised">Praktikad</a></h5>
-                    <p class="text-muted mb-0">Üliõpilase arengule suunatud erinevad praktikavõimalused.<br>
-                        Tutvu ja kandideeri!</p>
+                    <h5 class="h6 mb-2 text-uppercase"><a target="_blank" onclick="gtag('event', 'Osalemine',{'event_category': 'Avaleht','event_label':'Praktikad'});" href="./praktikapakkumised">Praktika</a></h5>
+                    <p class="text-muted mb-0">Tutvu mitmesuguste arendavate praktikavõimalustega ja kandideeri!</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 " data-aos="flip-down" data-aos-duration="1500">
                 <div class="mt-5">
                     <h5 class="h6 mb-2 text-uppercase"><a target="_blank" onclick="gtag('event', 'Osalemine',{'event_category': 'Avaleht','event_label':'Projektid'});" href="./projektid">Projektid</a></h5>
-                    <p class="text-muted mb-0">Interdistsiplinaarsed projektid, et koos meeskonnaga lahendada olulisi probleeme ja leida loovaid lahendusi.</p>
+                    <p class="text-muted mb-0">Ühine erialadevaheliste projektidega, mille käigus saab koos meeskonnaga leida erinevatele probleemidele loovaid lahendusi!</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6" data-aos="flip-down" data-aos-duration="1000">
                 <div class="mt-5">
                     <h5 class="h6 mb-2 text-uppercase"><a target="_blank" onclick="gtag('event', 'Osalemine',{'event_category': 'Avaleht','event_label':'Liidriprogramm'});" href="https://majandus.ut.ee/et/liider">Liidriprogramm</a></h5>
-                    <p class="text-muted mb-0">Tunnustame üliõpilase ülikooliväliseid tegevusi, mida saab jagada oma tööandjaga!
-                        Tule Liidriks!</p>
+                    <p class="text-muted mb-0">Tutvusta oma ülikoolivälist tegevust tööandjale ja tule liidriks!</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6" data-aos="flip-down" data-aos-duration="500">
                 <div class="mt-5">
                     <h5 class="h6 mb-2 text-uppercase"><a href="#" onclick="gtag('event', 'Osalemine',{'event_category': 'Avaleht','event_label':'Seminarid'});" id="seminars" data-toggle="modal" data-target="#seminar-modal">Seminarid</a></h5>
-                    <p class="text-muted mb-0">Ideede elluviimist ja probleemide lahendamist toetavad teemaseminarid. Vali huvipakkuv ja osale!</p>
+                    <p class="text-muted mb-0">Vali oma ideede elluviimiseks ja probleemide lahendamiseks huvipakkuv teemaseminar ja osale!</p>
                 </div>
             </div>
         </div>
@@ -51,7 +49,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Sule</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Sulge</button>
       </div>
     </div>
   </div>
