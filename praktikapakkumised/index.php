@@ -105,7 +105,7 @@
                                                           data-reg_end="'.$reg_end.'">
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
-                                                        <p class="m-0 p-0 card-text font-weight-light">'.$description.'</p>                                                          
+                                                        <pre class="m-0 p-0 card-text font-weight-light">'.$description.'</pre>
                                                     </div>
                                                   <div class="col-lg-3 col-7">
                                                     <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> '.$work_name.'</p>
