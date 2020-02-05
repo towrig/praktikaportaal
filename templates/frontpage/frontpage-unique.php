@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 data-aos="fade-down">Mis teeb Futulabi <span>ainulaadseks?</span></h2>
-                <small data-aos="fade-down">Pakume tulevikku vaatavaid ja osaliste arengut soodustavaid koostöövõimalusi.</small>
+                <small data-aos="fade-down">Pakume tulevikku vaatavaid ja osaliste arengut soodustavaid koostöövõimalusi</small>
             </div>
         </div>
     </div>
@@ -27,14 +27,14 @@
         <div class="col p-3">
           <h3>Tuleviku&shy;oskused</h3>
           <i class="unique-arrow"></i>
-          <span>Tulevikuülesanded nõuavad tulevikuoskuste arendamist. Need on Sinu edu alus ka kümne aasta pärast.</span>
+          <span>Tulevikuülesanded nõuavad tulevikuoskuste arendamist. Need on Sinu edu alus ka kümne aasta pärast</span>
         </div>
       </div>
         <div id="unique-paindlik" class="unique-box col-lg-3 col-md-6"  data-aos="flip-down" data-aos-anchor-placement="bottom-bottom">
         <div class="col p-3">
           <h3>Paindlikkus</h3>
           <i class="unique-arrow"></i>
-          <span>Sa võid ise otsustada, millal, kus ja kuidas osaled, sest nii piirid kui ka võimalused sead endale ise.</span>
+          <span>Sa võid ise otsustada, millal, kus ja kuidas osaled, sest nii piirid kui ka võimalused sead endale ise</span>
         </div>
       </div>
     </div>
