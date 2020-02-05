@@ -196,28 +196,28 @@
                                     </div>
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <div class="form-group mt-3">
-                                            <p class="alert alert-info font-weight-normal text-muted">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                            <label>Projekti pealkiri</label>
+                                            <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
+                                            <label>Projekti pealkiri *</label>
                                             <input required type="text" name="project_title" class="form-control" maxlength="85">
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label>Teie nimi</label>
+                                                <label>Teie nimi *</label>
                                                 <!--<input type="text" name="project_org_name" class="form-control">-->
                                                 <input required type="text" name="project_org_personal_name" class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label>Teie email</label>
+                                                <label>Teie email *</label>
                                                 <input required type="text" name="project_org_personal_email" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-8">
-                                                <label>Organisatsiooni nimi</label>
+                                                <label>Organisatsiooni nimi *</label>
                                                 <input required type="text" name="project_org_name" class="form-control">
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label>Meeskonna suurus (max 10)</label>
+                                                <label>Meeskonna suurus (max 10) *</label>
                                                 <select required name="max_part" class="form-control">
                                                     <option selected>1</option>
                                                     <option>2</option>
@@ -234,15 +234,15 @@
                                         </div>
                                         <div class="form-group text-center">
                                             <div class="upload-btn-wrapper">
-                                                <button class="btn">Lae ülesse täidetud projektivorm PDF formaadis</button>
-                                                <input required type="file" name="project_pdf" id="project_pdf">
+                                                <button class="btn">Lae ülesse täidetud projektivorm PDF formaadis *</button>
+                                                <input required type="file" name="project_pdf" id="project_pdf" onchange="showFileName(this.files)">
                                             </div>
 
                                         </div>
                                       <div class="form-group">
                                           <div class="custom-control custom-checkbox">
                                               <input type="checkbox" class="custom-control-input" id="checkpoint_projekt" name="checkpoint_projekt" required="required">
-                                              <label class="custom-control-label text-left" for="checkpoint_projekt">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
+                                              <label class="custom-control-label text-left" for="checkpoint_projekt">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
                                           </div>
                                       </div>
                                         <div class="form-group mt-3 text-center">
@@ -300,26 +300,26 @@
                             <div class="col-lg-12 my-3">
                                 <form class="needs-validation" id="project-join" method="POST" action="./project_api.php">
                                     <div class="form-group">
-                                        <p class="alert alert-info font-weight-normal text-muted">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                        <label>Ees- ja perekonnanimi*:</label>
+                                        <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
+                                        <label>Ees- ja perekonnanimi *</label>
                                         <input class="form-control" type="text" name="fullname" id="project_fullname" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Eriala*:</label>
+                                        <label>Eriala *</label>
                                         <input class="form-control" type="text" name="degree" id="project_degree" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>E-mail*:</label>
+                                        <label>E-mail *</label>
                                         <input class="form-control" type="text" name="email" id="project_email" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tugevused ja oskused:</label>
+                                        <label>Tugevused ja oskused</label>
                                         <textarea class="form-control" name="skills" id="skills" rows="2"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                            <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
+                                            <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
                                         </div>
                                     </div>
                                     <input type="hidden" name="hash" id="project_hash">
@@ -486,6 +486,20 @@
             var skills = arr[3];
             return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + degree + "</p>");
         }
+
+        function showFileName(files) {
+              try {
+                  var fname = document.getElementById("upload-data");
+                  fname.innerHTML = files[0].name + " (" + (files[0].size / 1024).toFixed(2) + "KB)";
+                  document.getElementById("project_pdf").parentElement.appendChild(fname);
+              } catch (err) {
+                  var fname = document.createElement("div");
+                  fname.classList.add("pt-3");
+                  fname.id = "upload-data";
+                  fname.innerHTML = files[0].name + " (" + (files[0].size / 1024).toFixed(2) + "KB)";
+                  document.getElementById("project_pdf").parentElement.appendChild(fname);
+              }
+          }
 
     </script>
 
