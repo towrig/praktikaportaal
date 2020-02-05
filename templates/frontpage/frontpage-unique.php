@@ -18,14 +18,14 @@
       </div>
       <div id="unique-interditsiplinaarne" class="unique-box col-lg-3 col-md-6"  data-aos="flip-down" data-aos-anchor-placement="bottom-bottom">
         <div class="col p-3">
-          <h3>Erialade&shy;vahelisus</h3>
+          <h3>Erialade-<br>vahelisus</h3>
           <i class="unique-arrow"></i>
           <span>Sa saad tegutseda keskkonnas, kus nii ülesanded kui ka meeskonnad ületavad eriala piire, leida uusi tuttavaid ning õppida nägema ja mõistma probleemide eri tahke</span>
         </div>
       </div>
       <div id="unique-tulevikuoskused" class="unique-box col-lg-3 col-md-6"  data-aos="flip-down" data-aos-anchor-placement="bottom-bottom">
         <div class="col p-3">
-          <h3>Tuleviku&shy;oskused</h3>
+          <h3>Tuleviku-<br>oskused</h3>
           <i class="unique-arrow"></i>
           <span>Tulevikuülesanded nõuavad tulevikuoskuste arendamist. Need on Sinu edu alus ka kümne aasta pärast</span>
         </div>
