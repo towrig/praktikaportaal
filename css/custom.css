@@ -2063,13 +2063,13 @@ div#viewModal .post-deadline {
 }
 
 /* temp hiding */
-.navbar-expand-lg .navbar-collapse{
+/*.navbar-expand-lg .navbar-collapse{
     display: none !important;
 }
 
 .navbar-expand-lg .navbar-toggler{
     display: none !important;
-}
+}*/
 
 .navbar-collapse a.nav-link{
   transition: 1s all ease-in-out;

@@ -8,10 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="https://sisu.ut.ee/praktikamajanduses" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Üliõpilasele'});">Üliõpilasele</a>
+                    <a class="nav-link" href="<?php echo $wwwroot; ?>tutvustus" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Tutvustus'});">Tutvustus</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" target="_blank" href="https://sisu.ut.ee/praktikamajanduses/juhendajale" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Üliõpilasele'});">Juhendajale</a>
+                    <a class="nav-link" href="<?php echo $wwwroot; ?>tutvustus#praktikakorraldus" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Praktikakorraldus'});">Praktikakorraldus</a>
+                </li>
+              <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $wwwroot; ?>juhendajale" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Juhendajale'});">Juhendajale</a>
                 </li>
               <li class="nav-item">
                 <a class="nav-link lang-switch" target="_blank" href="#">EST</a>
