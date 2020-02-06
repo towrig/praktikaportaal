@@ -318,7 +318,7 @@ div#ut-logo {
     background-size: 100%;
     background-position: center;
     opacity: 0;
-    background: url(http://192.168.56.101/praktikaveeb/img/futulab-logo.svg) no-repeat!important;
+    background: url(../img/futulab-logo.svg) no-repeat!important;
 }
 
 .navbar-scrolled div#ut-logo {
