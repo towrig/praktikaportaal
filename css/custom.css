@@ -311,15 +311,14 @@ li.list-group-item:hover {
 }
 
 div#ut-logo {
-    background: url(../img/icons.png)!important;
     background-position: -28px -15px!important;
-    height: 40px;
+    background-size: 100%;
+    opacity: 0;
+    height: 80px!important;
     background-size: 100%;
     background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 265px;
     opacity: 0;
+    background: url(http://192.168.56.101/praktikaveeb/img/futulab-logo.svg) no-repeat!important;
 }
 
 .navbar-scrolled div#ut-logo {
@@ -1990,8 +1989,8 @@ a.nav-link.lang-switch {
 
 @media (max-width: 410px) {
     div#ut-logo {
-        width: 230px;
-        background-size: 184% auto!important;
+      /*width: 230px;
+        background-size: 184% auto!important;*/
     }
 }
 
