@@ -2286,6 +2286,6 @@ pre {
   font-size: 100%;
 }
 
-input[required], select[required], textarea[required] {
+input[required], select[required], textarea[required], .custom-checkbox .custom-control-label[for*=checkpoint]::before {
     border: #ca939b 2px solid!important;
 }
