@@ -6,7 +6,6 @@
       </div>
       <div class="col-lg-12" data-aos="fade-right">
         <div data-aos="fade-down">
-          <h5 class="text-uppercase font-weight-bold my-3">Futulabi veebilehe andmekaitsetingimused</h5>
           <p>Siinsetes andmekaitsetingimustes antakse kasulikku infot selle kohta, kuidas ja milleks Futulabi keskkond isikuandmeid töötleb. Andmekaitsetingimuste koostamisel on lähtutud isikuandmete kaitse üldmäärusest <a href="https://eur-lex.europa.eu/legal-content/ET/TXT/HTML/?uri=CELEX:32016R0679&from=ET" target="_blank">(EL) 2016/679</a>.</p>
           <p>Andmekaitsetingimustega reguleeritakse isikuandmete töötlemist ja küpsiste kasutamist <a target="_blank" href="https://praktika.ut.ee">Tartu Ülikooli Futulabi</a> (edaspidi Futulab) veebilehel <a target="_blank" href="https://praktika.ut.ee">https://praktika.ut.ee</a>. Futulab on vabatahtlik praktikavahenduskeskkond. Isikuandmed, mida kasutaja veebilehele sisestab, avalikustatakse Futulabis (<a target="_blank" href="https://praktika.ut.ee/uliopilased">https://praktika.ut.ee/uliopilased</a> ja/või <a target="_blank" href="https://praktika.ut.ee/projektipraktika">https://praktika.ut.ee/projektipraktika</a>).</p>
           <p>Futulabi oma profiili lisades, projektipraktika ideed esitades ja projektiga liitudes annab kasutaja õiguse andmete töötlemiseks kooskõlas siinsete andmekaitsetingimustega.
