@@ -2,10 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="text-uppercase font-weight-bold mb-3 mt-5 mb-3" data-aos="fade-right">Futulabi kasutusjuhend</h1>
+        <h1 class="text-uppercase font-weight-bold mb-3 mt-5 mb-3" data-aos="fade-right">Kasutusjuhend</h1>
       </div>
       <div class="col-lg-12" data-aos="fade-right">
-
         <div data-aos="fade-down">
           <h5 class="text-uppercase font-weight-bold my-3">1. Üldist</h5>
             <p>1.1. Futulab on Tartu Ülikooli praktikakeskkond, mis asub aadressil <a href="https://praktika.ut.ee/" target="_blank">https://praktika.ut.ee</a>.</p>

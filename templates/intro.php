@@ -2,12 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="text-uppercase font-weight-bold mb-3 mt-5 mb-3" data-aos="fade-right">Tutvustus
-        </h1>
+        <h1 class="text-uppercase font-weight-bold mb-3 mt-5 mb-3" data-aos="fade-right">Tutvustus</h1>
       </div>
       <div class="col-lg-12" data-aos="fade-right">
         <div data-aos="fade-down">
-          <h5 class="text-uppercase font-weight-bold my-3">Futulabi praktikakeskkonna tutvustus</h5>
           <p>Tartu Ülikooli Futulab on praktika vahendamise keskkond, mille eesmärk on võimaldada tulevikku vaatavat ja arengut soodustavat koostööd üliõpilase, ülikooli ja tööandja/ettevõtte vahel. Futulab toetab üliõpilasi tööturuks vajalike oskuste ja kogemuste saamisel ning sellega liitumine on vabatahtlik. Allpool saab lähemalt lugeda, milliseid võimalusi Futulabi keskkond pakub.</p>
         </div>
         <div data-aos="fade-down">
@@ -58,11 +56,11 @@
           </ul>
 
           <div data-aos="fade-down">
-            <h5 class="text-uppercase font-weight-bold mb-3 mt-5" id="praktikakorraldus">Praktikakorraldus ülikoolis</h5>
+            <h5 class="text-uppercase font-weight-bold mb-3 mt-5" id="praktikakorraldus">3.1 Praktikakorraldus ülikoolis</h5>
             <p>Enne praktikale minekut peab üliõpilane tutvuma enda instituudi praktikakorraldusega või pöörduma praktika koordinaatori poole.</p>
             <div class="row">
               <div class="col-md-6 col-lg-3">
-                <h6><a target="_blank" href="https://humanitaarteadused.ut.ee/et/oppimine/praktika-1">Humanitaarteaduste ja<br>kunstide valdkond</a></h6>
+                <h6>Humanitaarteaduste ja<br>kunstide valdkond</h6>
                 <ul>
                   <li>
                     <p><a target="_blank" href="https://www.flaj.ut.ee/et/oppimine/praktika-4">ajaloo ja arheoloogia instituut</a></p>
