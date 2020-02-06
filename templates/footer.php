@@ -19,7 +19,8 @@
           <div class="col-md-12 footer-bottom mt-5">
             <div class="row">
               <div class="copyright col-md-9">
-                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light"> | </span><a href="<?php echo $wwwroot; ?>/privaatsuspoliitika/" class="font-weight-light text-muted">Privaatsuspoliitika</a>
+                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light">  </span><a href="<?php echo $wwwroot; ?>andmekaitsetingimused/" class="font-weight-light text-muted">Andmekaitsetingimused</a>
+                <span class="text-muted font-weight-light"> | </span><a href="<?php echo $wwwroot; ?>kasutusjuhend/" class="font-weight-light text-muted">Kasutusjuhend</a>
               </div>
               <div class="socialmedia col-md-3 text-right" >
                 <a href="https://twitter.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Twitter'});"><i class="fab fa-2x fa-twitter"></i></a>
@@ -53,10 +54,10 @@
         $('body').ihavecookies({
           title: "Küpsised ja privaatsuspoliitika",
           message: "Kasutame oma veebilehel küpsiseid ning Google Analyticsi teenust veebilehe külastatavuse statistika analüüsiks.",
-          link: "<?php echo $wwwroot; ?>privaatsuspoliitika/",
+          link: "<?php echo $wwwroot; ?>andmekaitsetingimused/",
           advancedBtnLabel: "Vali küpsised",
           acceptBtnLabel: "Luba küpsised",
-          moreInfoLabel: "Privaatsuspoliitika",
+          moreInfoLabel: "Andmekaitsetingimused",
           uncheckBoxes: false,
           fixedCookieTypeLabel: 'Kohustuslikud',
           fixedCookieTypeDesc: 'Need küpsised on vajalikud, et tagada võrgulehe toimimine.',

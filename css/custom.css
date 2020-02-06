@@ -311,15 +311,14 @@ li.list-group-item:hover {
 }
 
 div#ut-logo {
-    background: url(../img/icons.png)!important;
     background-position: -28px -15px!important;
-    height: 40px;
+    background-size: 100%;
+    opacity: 0;
+    height: 80px!important;
     background-size: 100%;
     background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 265px;
     opacity: 0;
+    background: url(../img/futulab-logo.svg) no-repeat!important;
 }
 
 .navbar-scrolled div#ut-logo {
@@ -1556,7 +1555,7 @@ body.practiceoffers .col-lg-2.work-banner-crop {
 }
 
 p {
-    font-size: .9rem;
+    font-size: 1rem;
 }
 
 b,strong {
@@ -1820,7 +1819,8 @@ body.practice .modal img#profileImg {
 }
 
 .modal #submit-all {
-  width: 100%;
+    width: 220px;
+    margin-left: calc(50% - 110px);
 }
 .cropper-overlay {
   position : fixed;
@@ -1989,8 +1989,8 @@ a.nav-link.lang-switch {
 
 @media (max-width: 410px) {
     div#ut-logo {
-        width: 230px;
-        background-size: 184% auto!important;
+      /*width: 230px;
+        background-size: 184% auto!important;*/
     }
 }
 
@@ -2284,4 +2284,8 @@ pre {
   line-height: 1.3;
   white-space: pre-line;
   font-size: 100%;
+}
+
+input[required], select[required], textarea[required], .custom-checkbox .custom-control-label[for*=checkpoint]::before {
+    border: #ca939b 2px solid!important;
 }

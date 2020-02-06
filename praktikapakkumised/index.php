@@ -176,17 +176,17 @@
 
                             <div class="col-lg-7">
                                 <div class="form-group">
-                                  <p class="alert alert-info font-weight-normal text-muted">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                    <label for="name">Kuulutuse pealkiri</label>
+                                  <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
+                                    <label for="name">Kuulutuse pealkiri *</label>
                                     <input required type="text" class="form-control" id="heading" name="heading">
                                     <div class='invalid-feedback'>Palun lisa pealkiri</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="organization">Organisatsioon</label>
+                                    <label for="organization">Organisatsioon *</label>
                                     <input required type="text" class="form-control" id="organization" name="organization">
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Registreerimise lõpptähtaeg</label>
+                                    <label for="work">Registreerimise lõpptähtaeg *</label>
                                     <input required type="text" class="form-control" id="datepicker" name="date">
                                 </div>
 
@@ -199,7 +199,7 @@
                                         <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles oma organisatsiooni logo</button>
+                                        <button class="btn">Lae üles oma organisatsiooni logo *</button>
                                         <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
                                     </div>
                                     <div class='invalid-feedback'>Sisesta logo!</div>
@@ -208,40 +208,40 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="work">Kontaktisiku nimi</label>
+                                    <label for="work">Kontaktisiku nimi *</label>
                                     <input required type="text" class="form-control" id="name" name="name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Kontaktisiku e-mail</label>
+                                    <label for="email">Kontaktisiku e-mail *</label>
                                     <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
                                     <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Kontaktisiku telefoninumber</label>
+                                    <label for="work">Kontaktisiku telefoninumber *</label>
                                     <input required type="text" class="form-control" id="phone" name="phone">
                                 </div>
                                 <div class="form-group">
-                                    <label for="work_desc">Organisatsiooni tutvustus</label>
+                                    <label for="work_desc">Organisatsiooni tutvustus *</label>
                                     <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="website">Veebiaadress</label>
+                                    <label for="website">Veebiaadress *</label>
                                     <input required type="text" class="form-control" id="website" name="website">
                                 </div>
                                 <div class="form-group">
-                                    <label for="location">Asukoht</label>
+                                    <label for="location">Asukoht *</label>
                                     <input required type="text" class="form-control" id="location" name="location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Töökoha tutvustus</label>
+                                    <label for="description">Töökoha tutvustus *</label>
                                     <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tasks">Tööülesanded</label>
+                                    <label for="tasks">Tööülesanded *</label>
                                     <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="skills">Vajalikud oskused ja kogemused</label>
+                                    <label for="skills">Vajalikud oskused ja kogemused *</label>
                                     <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -251,7 +251,7 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                        <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu privaatsuspoliitikaga <a href="<?php echo $wwwroot;?>privaatsuspoliitika" target="_blank">siit</a>.</label>
+                                        <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
                                     </div>
                                 </div>
                                 <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
@@ -309,7 +309,7 @@
                 </div>
              <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
-               <button class="btn btn-primary"><a class="post-apply" href="#" onclick="gtag('event', 'Kandideeri',{'event_category': 'Praktikapakkumised','event_label':'Kandideeri modalis'});">Kandideeri</a></button>
+               <a class="post-apply" href="#" onclick="gtag('event', 'Kandideeri',{'event_category': 'Praktikapakkumised','event_label':'Kandideeri modalis'});"><button class="btn btn-primary">Kandideeri</button></a>
             </div>
             </div>
         </div>
