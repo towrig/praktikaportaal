@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-3 col-md-6" data-aos="flip-down" data-aos-duration="500">
                 <div class="mt-5">
-                    <h5 class="h6 mb-2 text-uppercase"><a target="_blank" href="https://startuplab.ut.ee/kalender" onclick="gtag('event', 'Osalemine',{'event_category': 'Avaleht','event_label':'Seminarid'});" id="seminars" data-toggle="modal" data-target="#seminar-modal">Seminarid</a></h5>
+                    <h5 class="h6 mb-2 text-uppercase"><a target="_blank" href="https://startuplab.ut.ee/kalender" onclick="gtag('event', 'Osalemine',{'event_category': 'Avaleht','event_label':'Seminarid'});">Seminarid</a></h5>
                     <p class="text-muted mb-0">Vali oma ideede elluviimiseks ja probleemide lahendamiseks huvipakkuv teemaseminar ja osale!</p>
                 </div>
             </div>
@@ -30,6 +30,7 @@
     </div>
 </section>
 <hr class="divider my-5">
+<!--
 <div class="modal" id="seminar-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -53,7 +54,7 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 <script>
 //$('#seminars').modal();
 /*setTimeout(function(){ 
