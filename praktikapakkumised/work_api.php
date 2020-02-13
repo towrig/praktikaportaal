@@ -81,7 +81,12 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
         $passedValidation = false;
         $response .= "Invalid end_date!";
     }
-	
+    
+    //parse website
+    preg_match("@^https?://@", $website, $web_matches);
+    if(empty($web_matches)){
+        $website = 'http://'.$website;
+    }
 	//paths to be used later
 	$logoPath = null;
     $logo_success = true;
