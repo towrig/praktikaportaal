@@ -35,7 +35,8 @@ if(!empty($_POST) && $_POST["edit_key"] && $_POST["activateProject"]){
     
     http_response_code(200);
     echo $response;
-}else if(!empty($_POST) && $_POST["edit_key"]){
+}
+else if(!empty($_POST) && $_POST["edit_key"]){
     $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $query = $conn->prepare('SELECT * FROM editkeys WHERE keyname = ?');
@@ -48,9 +49,34 @@ if(!empty($_POST) && $_POST["edit_key"] && $_POST["activateProject"]){
     
     http_response_code(200);
     echo $response;
-}else if(!empty($_POST) && $_POST["edit_text_id"]){
+}
+else if(!empty($_POST) && $_POST["edit_text_id"]){
     
-}else{
+}
+else if(!empty($_POST) && $_POST["archiving"] == 1){
+    
+    $name = $_POST["project-name"];
+    $goal = $_POST["project-goal"];
+    $actions = $_POST["project-actions"];
+    $results = $_POST["project-results"];
+    $postId = $_POST["project-id"];
+    
+    try {
+        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $conn->prepare('INSERT INTO ArchivedProjects(name,goal,actions,results,postId) VALUES(?,?,?,?,?);');
+        $query->execute(array($name, $goal, $actions, $results, $postId));
+        http_response_code(200);
+        echo $response."OK!";
+        
+    }
+    catch(PDOException $e){
+        http_response_code(403);
+        echo "Connection failed: " . $e->getMessage();
+    }
+    
+}
+else{
     http_response_code(403);
     echo "Vigane päring!";
 }

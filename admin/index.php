@@ -105,7 +105,7 @@
                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
                                                 <a class="btn btn-sm btn-success proj-modal" data-id= "'.$p["id"].'" data-ekey="'.$p["edit_key"].'">Vaata osalejaid</a>
                                                 '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
-                                                <a class="btn btn-sm btn-danger archive-modal" data-id= "'.$p["id"].'">Arhiveeri</a>
+                                                <a class="btn btn-sm btn-danger archive-modal" data-id="'.$p["id"].'" data-title="'.$p["title"].'">Arhiveeri</a>
                                             </div>
                                         </div>
                                     </div>
@@ -136,15 +136,39 @@
             </div>
         </div>
     </div>
+    
     <!-- archive modal -->
-    <div class="modal fade arc-modal" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade arc-modal" id="viewModal" tabindex="-1" role="dialog">
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 px-0 mb-2">
                         <h1>Arhiveerimine</h1>
                     </div>
+                    
+                    <form method="POST" enctype="multipart/form-data" id="project_archiving">
+                        
+                        <div class="form-group mt-3">
+                            <label>Projekti pealkiri:</label>
+                            <h4 id="modal-project_name"></h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Eesmärk</label>
+                            <textarea required class="form-control" id="project-goal" name="project-goal" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Tegevused</label>
+                            <textarea required class="form-control" id="project-actions" name="project-actions" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Tulemused</label>
+                            <textarea required class="form-control" id="project-results" name="project-results" rows="3"></textarea>
+                        </div>
+                        
+                        <button id="archive-submit" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light">Arhiveeri!</button>
+                        
+                    </form>
                     
                 </div>
             </div>
@@ -169,13 +193,41 @@
             console.log(participants);
             $('.proj-modal').on('click', partModal);
             $('.archive-modal').on('click', archiveModal);
+            $('#archive-submit').on('click', archivePost);
         });
         
         function archiveModal(e){
             var target = $(e.currentTarget);
             var modal = $(".arc-modal").first();
             var id = target.data("id");
+            var title = target.data("title");
             
+            $('#archive-submit').data("id",id);
+            $('#modal-project_name').html(title);
+            console.log("I ran on:");
+            console.log(target);
+            modal.modal("show");
+        }
+        
+        function archivePost(e){
+            var target = $(e.currentTarget);
+            let formData = new FormData(document.getElementById('project_submission'));
+            formData.append("project-name", $("#modal-project_name").html());
+            formData.append("project-id", target.data("id"));
+            formData.append("archiving", 1);
+            
+            $.ajax({
+                type: 'POST',
+                url: './admin_api.php',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(response) {
+                console.log(response);
+            }).fail(function(response) {
+                console.log(response);
+            });
         }
         
         function partModal(e){
