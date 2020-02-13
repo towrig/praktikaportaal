@@ -40,7 +40,7 @@
                             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                             // set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ?'); 
+                            $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ? ORDER BY id DESC'); 
                             $query->execute(array(1));
                             $data = $query -> fetchAll();
                             
