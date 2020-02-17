@@ -66,6 +66,7 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $query = $conn->prepare('INSERT INTO ArchivedProjects(name,goal,actions,results,postId) VALUES(?,?,?,?,?);');
         $query->execute(array($name, $goal, $actions, $results, $postId));
+        //add query to projectposts
         http_response_code(200);
         echo $response."OK!";
         

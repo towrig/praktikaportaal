@@ -33,6 +33,7 @@
             $entity["organisation"] = $row["organisation"];
             $entity["org_name"] = $row["org_email"];
             $entity["org_email"] = $row["org_email"];
+            $entity["pdf_path"] = $row["pdf_path"];
 	    	$entity["edit_key"] = $row["edit_key"];
             $entity["isactivated"] = $row["isactivated"];
             $entity["max_part"] = $row["max_part"]; 
@@ -70,6 +71,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="../css/creative.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../js/trumbowyg/ui/trumbowyg.min.css">
+    <link rel="stylesheet" href="../vendor/ui/jquery-ui.min.css">
     <style>
         .trumbowyg-editor,
         .trumbowyg-box {
@@ -93,18 +95,36 @@
             </div>
             <div class="col-md-12 my-5">
                 <h2>Üleslaetud projektid</h2>
-                <div class="container">
+                <div class="container px-0">
                     <div class="row">
                         <?php 
                             foreach ($projects as $p) {
-                                $bigString = '<div class="col-md-12">
+                                $bigString = '<div class="col-md-12 mb-3">
                                     <div class="card">
                                         <div class="card-body text-left">
                                             <h6 class="card-title text-uppercase font-weight-bold mt-0">'.$p["title"].'</h6>
-                                            <p class="card-text">Loodud: '.$p["start_date"].'<br> Reg. lõpp: '.$p["end_date"].'<br></p>
+                                            <p class="card-text">Loodud: '.$p["start_date"].'</p>
+                                            <hr class="solid">
+                                            <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>Registreerimise avamine:</p>
+                                                </div>
+                                                <div class="col-md-1 pr-0">
+                                                    <label class="pt-1">Reg algus:</label><br>
+                                                    <label class="pt-1">Reg lõpp:</label>
+                                                </div>
+                                                <div class="col-md-4 px-2">
+                                                    <input required type="text" class="form-control datepicker mb-1" name="reg_start">
+                                                    <input required type="text" class="form-control datepicker" name="reg_end">
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <hr class="solid">
                                             <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
                                                 <a class="btn btn-sm btn-success proj-modal" data-id= "'.$p["id"].'" data-ekey="'.$p["edit_key"].'">Vaata osalejaid</a>
                                                 '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
+                                                <a class="btn btn-sm btn-warning" href="../userdata/projects/'.$p["pdf_path"].'" download>Laadi alla taotlus</a>
                                                 <a class="btn btn-sm btn-danger archive-modal" data-id="'.$p["id"].'" data-title="'.$p["title"].'">Arhiveeri</a>
                                             </div>
                                         </div>
@@ -177,6 +197,7 @@
     
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/ui/jquery-ui.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -194,6 +215,11 @@
             $('.proj-modal').on('click', partModal);
             $('.archive-modal').on('click', archiveModal);
             $('#archive-submit').on('click', archivePost);
+            
+            $(".datepicker").datepicker({
+              showWeek: true,
+              dateFormat: 'dd-mm-yy'
+            });
         });
         
         function archiveModal(e){

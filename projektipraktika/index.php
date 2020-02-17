@@ -51,7 +51,7 @@
                                     $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                                     // set the PDO error mode to exception
                                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                    $query = $conn->prepare('SELECT * FROM ProjectPosts WHERE isactivated = ?');
+                                    $query = $conn->prepare('SELECT * FROM ProjectPosts WHERE isactivated = ? ORDER BY id DESC');
                                     $query->execute(array(1));
                                     $data = $query -> fetchAll();
                                     $j = 0;
