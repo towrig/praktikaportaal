@@ -107,6 +107,7 @@
                                             <hr class="solid">
                                             <div class="container">
                                             <div class="row">
+                                            <form class="time-form">
                                                 <div class="col-md-12">
                                                     <p>Registreerimise avamine:</p>
                                                 </div>
@@ -118,6 +119,10 @@
                                                     <input required type="text" class="form-control datepicker mb-1" name="reg_start">
                                                     <input required type="text" class="form-control datepicker" name="reg_end">
                                                 </div>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-sm btn-success">Uuenda registratsiooni</a>
+                                                </div>
+                                            </form>
                                             </div>
                                             </div>
                                             <hr class="solid">
@@ -215,12 +220,23 @@
             $('.proj-modal').on('click', partModal);
             $('.archive-modal').on('click', archiveModal);
             $('#archive-submit').on('click', archivePost);
+            $('.time-form').submit(updateReg);
             
             $(".datepicker").datepicker({
               showWeek: true,
               dateFormat: 'dd-mm-yy'
             });
         });
+        
+        function updateReg(e){
+            e.preventDefault();
+            e.stopPropagation();
+            var target = $(e.currentTarget);
+            var reg_start = target.find('input[name="reg_start"]');
+            var reg_end = target.find('input[name="reg_end"]');
+            console.log(reg_start);
+            console.log(reg_end);
+        }
         
         function archiveModal(e){
             var target = $(e.currentTarget);

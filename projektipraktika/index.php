@@ -71,6 +71,17 @@
                                         $pdf_path = $row["pdf_path"];
                                         $max_part = $row["max_part"];
                                         
+                                        $reg_result = 0;
+                                        if($row["reg_start"] != null && $row["reg_end"] != null){
+                                            $today = strtotime(date("Y/m/d"));
+                                            $reg_opens = strtotime($row["reg_start"]);
+                                            $reg_closes = strtotime($row["reg_end"]);
+                                            echo "<!-- ".$reg_opens." < ".$today." > ".$reg_closes." -->";
+                                            if ($today >= $reg_opens && $today < $reg_closes){
+                                                $reg_result = 1;
+                                            }
+                                        }
+                                        
                                         $query = $conn->prepare('SELECT * FROM ProjectParticipants WHERE project_id = ? AND is_accepted = 1');
                                         $query->execute(array($id));
                                         $data = $query -> fetchAll();
@@ -98,6 +109,7 @@
                                         data-start_date="'.$start_date.'"
                                         data-max_part="'.$max_part.'"
                                         data-amount="'.$amount.'"
+                                        data-reg_open="'.$reg_result.'"
                                         >
                                             <div class="card mb-3 p-4">
                                 <div class="row">
@@ -280,13 +292,7 @@
                 <div class="modal-body">
                     <nav class="nav nav-pills flex-column flex-sm-row " id="pills-tab" role="tablist">
                         <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="post-home-tab" data-toggle="pill" href="#post-home" role="tab" aria-controls="post-home" aria-selected="true"><span>Projekt</span></a>
-                        <?php 
-                            $today = date("Y/m/d");
-                            $reg_opens = strtotime("2020-03-02");
-                            if ($today > $reg_opens){
-                                echo '<a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="post-participants-tab" data-toggle="pill" href="#post-participants" role="tab" aria-controls="post-participants" aria-selected="false"><span>Liitu</span></a>';
-                            }
-                        ?>
+                        <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="post-participants-tab" data-toggle="pill" href="#post-participants" role="tab" aria-controls="post-participants" aria-selected="false" style="display: none;"><span>Liitu</span></a>
                     </nav>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active row" id="post-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -366,7 +372,15 @@
             $('#carouselPager').on('slide.bs.carousel', function(e) {
                 $('.pagination .page-item').eq(e.from + 1).toggleClass('active');
                 $('.pagination .page-item').eq(e.to + 1).toggleClass('active');
+            });
+            
+            $('#viewModal').on('hide.bs.modal', function (e) {
+                $('#post-home').addClass('show').addClass('active');
+                $('#post-participants').removeClass('show').removeClass('active');
+                $('#post-home-tab').addClass('show').addClass('active');
+                $('#post-participants-tab').removeClass('show').removeClass('active');
             })
+            
         });
         
         var participants = <?php echo json_encode($participants);?>;
@@ -448,6 +462,14 @@
             var organisation = target.data("organisation");
             var max_part = target.data("max_part");
             var amount = target.data("amount");
+            var reg_open = target.data("reg_open");
+            var reg_tab = $('#post-participants-tab');
+            if(reg_open == 1){
+                reg_tab.show();
+            }else{
+                reg_tab.hide();
+            }
+            console.log("Registration: "+reg_open);
 
             //attach vars
             modal.find('.post-heading').html(title);
