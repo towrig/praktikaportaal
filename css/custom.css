@@ -1989,8 +1989,8 @@ a.nav-link.lang-switch {
 
 @media (max-width: 410px) {
     div#ut-logo {
-      /*width: 230px;
-        background-size: 184% auto!important;*/
+    	background-size: 324px !important;
+    	width: 250px;
     }
 }
 
