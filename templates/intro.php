@@ -18,9 +18,7 @@
 
         <div data-aos="fade-down">
           <h5 class="text-uppercase font-weight-bold mb-3 mt-5">2. Projektipraktika</h5>
-          <p>Kasutajale teenuse osutamiseks haldab Futulab veebilehe kaudu alljärgnevaid kasutaja avalikustatud isikuandmeid: </p>
           <ul>
-
             <li>Projektipraktika on üleülikooliline õppeaine (SVMJ.02.014), mida saavad valida kõik üliõpilased valik- või vabaainena. Tutvu <a href="https://www.is.ut.ee/rwservlet?oa_aine_info.rdf+1231563+PDF+64671946656914327937+application/pdf" target="_blank">ainekaartiga</a>.</li>
             <li>Üliõpilane saab projektipraktika läbimise eest 6 EAP-d.</li>
             <li>Ülikooli õppejõud saab projektipraktika juhendamise eest 4 EAP-d oma koormusearvestusele lisaks. Juhendamine pakub õppejõule teadmisi, kuidas juhtida valdkondadevahelisi protsesse, panna üliõpilasi tegema valdkondadevahelist koostööd ja arendada nende ettevõtlikkust.</li>
