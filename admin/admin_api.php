@@ -66,15 +66,39 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $query = $conn->prepare('INSERT INTO ArchivedProjects(name,goal,actions,results,postId) VALUES(?,?,?,?,?);');
         $query->execute(array($name, $goal, $actions, $results, $postId));
-        //add query to projectposts
+        $query = $conn->prepare('DELETE FROM ProjectPosts WHERE id = ?;');
+        $query->execute(array($postId));
         http_response_code(200);
         echo $response."OK!";
+        $conn = null;
         
     }
     catch(PDOException $e){
         http_response_code(403);
         echo "Connection failed: " . $e->getMessage();
     }
+    
+}
+else if (!empty($_POST) && $_POST["reg_update"] == 1){
+    
+    $reg_start = $_POST["reg_start"];
+    $reg_end = $_POST["reg_end"];
+    $postId = $_POST["post_id"];
+    
+    try {
+        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $conn->prepare('UPDATE ProjectPosts SET reg_start = ?, reg_end = ? WHERE id = ?');
+        $query->execute(array($reg_start, $reg_end, $postId));
+        http_response_code(200);
+        echo $response."OK!";
+        $conn = null;
+    }
+    catch(PDOException $e){
+        http_response_code(403);
+        echo "Connection failed: " . $e->getMessage();
+    }
+    
     
 }
 else{

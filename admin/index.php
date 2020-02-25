@@ -29,6 +29,8 @@
 	    	$entity = array();
 	    	$entity["start_date"] = $row["start_date"];
 	    	$entity["id"] = $row["id"];
+            $entity["reg_start"] = $row["reg_start"];
+            $entity["reg_end"] = $row["reg_end"];
 	    	$entity["title"] = $row["title"];
             $entity["organisation"] = $row["organisation"];
             $entity["org_name"] = $row["org_email"];
@@ -106,27 +108,26 @@
                                             <p class="card-text">Loodud: '.$p["start_date"].'</p>
                                             <hr class="solid">
                                             <div class="container">
-                                            <div class="row">
-                                            <form class="time-form">
+                                            <form class="time-form row align-items-center">
                                                 <div class="col-md-12">
                                                     <p>Registreerimise avamine:</p>
+                                                    <input type="hidden" name="post_id" value="'.$p["id"].'">
                                                 </div>
                                                 <div class="col-md-1 pr-0">
                                                     <label class="pt-1">Reg algus:</label><br>
                                                     <label class="pt-1">Reg lõpp:</label>
                                                 </div>
                                                 <div class="col-md-4 px-2">
-                                                    <input required type="text" class="form-control datepicker mb-1" name="reg_start">
-                                                    <input required type="text" class="form-control datepicker" name="reg_end">
+                                                    <input required type="text" class="form-control datepicker mb-1" name="reg_start" value="'.$p["reg_start"].'">
+                                                    <input required type="text" class="form-control datepicker" name="reg_end" value="'.$p["reg_end"].'">
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-4">
                                                     <button type="submit" class="btn btn-sm btn-success">Uuenda registratsiooni</a>
                                                 </div>
                                             </form>
                                             </div>
-                                            </div>
                                             <hr class="solid">
-                                            <div class="btn-group btn-group-md align-self-center" role="group" aria-label="Basic example">
+                                            <div class="btn-group btn-group-md float-right" role="group" aria-label="Basic example">
                                                 <a class="btn btn-sm btn-success proj-modal" data-id= "'.$p["id"].'" data-ekey="'.$p["edit_key"].'">Vaata osalejaid</a>
                                                 '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
                                                 <a class="btn btn-sm btn-warning" href="../userdata/projects/'.$p["pdf_path"].'" download>Laadi alla taotlus</a>
@@ -236,6 +237,24 @@
             var reg_end = target.find('input[name="reg_end"]');
             console.log(reg_start);
             console.log(reg_end);
+            
+            let formData = new FormData(document.getElementById('project_submission'));
+            formData.append("reg_start", reg_start);
+            formData.append("reg_end", reg_end);
+            formData.append("reg_update", 1);
+            
+            $.ajax({
+                type: 'POST',
+                url: './admin_api.php',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(response) {
+                console.log(response);
+            }).fail(function(response) {
+                console.log(response);
+            });
         }
         
         function archiveModal(e){

@@ -98,6 +98,13 @@
                                             $queue = false;
                                             $pages++;
                                         }
+                                        
+                                        //temp, delete soon
+                                        if($organisation == "Kogo galerii"){
+                                            $amount = 7;
+                                        }else if($id == 21){
+                                            $amount = 5;
+                                        }
                                         $bigstring = '
                                         <div class="col-md-4 js-modal"
                                         data-id="'.$id.'"
