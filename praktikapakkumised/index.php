@@ -40,7 +40,7 @@
                             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                             // set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ? ORDER BY id DESC'); 
+                            $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC');
                             $query->execute(array(1));
                             $data = $query -> fetchAll();
                             
@@ -170,8 +170,197 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <div class="container">
+                    <nav class="nav nav-pills flex-column flex-sm-row d-none" id="pills-tab" role="tablist">
+                        <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="post-home-tab" data-toggle="pill" href="#post-form" role="tab"><span>Vorm</span></a>
+                        <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="post-participants-tab" data-toggle="pill" href="#post-file" role="tab"><span>Fail</span></a>
+                    </nav>
+                    <!--
+                    <div class="tab-content d-none" id="pills-tabContent">
+                        <div class="tab-pane fade show active row" id="post-form" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="container">
+                                <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
 
+                                    <div class="col-lg-7">
+                                        <div class="form-group">
+                                          <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
+                                            <label for="name">Kuulutuse pealkiri *</label>
+                                            <input required type="text" class="form-control" id="heading" name="heading">
+                                            <div class='invalid-feedback'>Palun lisa pealkiri</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="organization">Organisatsioon *</label>
+                                            <input required type="text" class="form-control" id="organization" name="organization">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work">Registreerimise lõpptähtaeg *</label>
+                                            <input required type="text" class="form-control" id="datepicker" name="date">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label for="pilt" class="">Logo</label>
+                                            <div id="preview">
+                                                <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                            </div>
+                                            <div class="upload-btn-wrapper">
+                                                <button class="btn">Lae üles oma organisatsiooni logo *</button>
+                                                <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
+                                            </div>
+                                            <div class='invalid-feedback'>Sisesta logo!</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="work">Kontaktisiku nimi *</label>
+                                            <input required type="text" class="form-control" id="name" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Kontaktisiku e-mail *</label>
+                                            <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+                                            <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work">Kontaktisiku telefoninumber *</label>
+                                            <input required type="text" class="form-control" id="phone" name="phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work_desc">Organisatsiooni tutvustus *</label>
+                                            <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="website">Veebiaadress *</label>
+                                            <input required type="text" class="form-control" id="website" name="website">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="location">Asukoht *</label>
+                                            <input required type="text" class="form-control" id="location" name="location">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Töökoha tutvustus *</label>
+                                            <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tasks">Tööülesanded *</label>
+                                            <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="skills">Vajalikud oskused ja kogemused *</label>
+                                            <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="other">Muu oluline info</label>
+                                            <textarea class="form-control" id="other" name="other" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
+                                                <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
+                                            </div>
+                                        </div>
+                                        <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show row" id="post-file" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                            <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work_file">
+
+                                    <div class="col-lg-7">
+                                        <div class="form-group">
+                                          <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
+                                            <label for="name">Kuulutuse pealkiri *</label>
+                                            <input required type="text" class="form-control" id="heading" name="heading">
+                                            <div class='invalid-feedback'>Palun lisa pealkiri</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="organization">Organisatsioon *</label>
+                                            <input required type="text" class="form-control" id="organization" name="organization">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work">Registreerimise lõpptähtaeg *</label>
+                                            <input required type="text" class="form-control" id="datepicker" name="date">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <div class="form-group text-center">
+                                            <div class="upload-btn-wrapper">
+                                                <button class="btn">Lae ülesse kuulutuse info PDF formaadis *</button>
+                                                <input required type="file" name="project_pdf" id="project_pdf" onchange="showFileName(this.files)">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+
+                                        <div class="form-group my-1">
+                                            <label class="mr-sm-2">Valdkond *</label>
+                                            <select class="custom-select mr-sm-2" id="workfield" name="workfield">
+                                                <option value="Arvestusala" selected>Arvestusala</option>
+                                                <option value="Ehitus">Ehitus</option>
+                                                <option value="Energeetika ja kaevandamine">Energeetika ja kaevandamine</option>
+                                                <option value="Haridus ja teadus">Haridus ja teadus</option>
+                                                <option value="Info- ja kommunikatsioonitehnoloogia">Info- ja kommunikatsioonitehnoloogia</option>
+                                                <option value="Kaubandus, rentimine ja parandus">Kaubandus, rentimine ja parandus</option>
+                                                <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus">Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus</option>
+                                                <option value="Kultuur ja loometegevus">Kultuur ja loometegevus</option>
+                                                <option value="Majutus, toitlustus ja turism">Majutus, toitlustus ja turism</option>
+                                                <option value="Metalli- ja masinatööstus">Metalli- ja masinatööstus</option>
+                                                <option value="Metsandus ja puidutööstus">Metsandus ja puidutööstus</option>
+                                                <option value="Õigus">Õigus</option>
+                                                <option value="Personali- ja administratiivtöö ning ärinõustamine">Personali- ja administratiivtöö ning ärinõustamine</option>
+                                                <option value="Põllumajandus ja toiduainetööstus">Põllumajandus ja toiduainetööstus</option>
+                                                <option value="Rõiva-, tekstiili- ja nahatööstus">Rõiva-, tekstiili- ja nahatööstus</option>
+                                                <option value="Sotsiaaltöö">Sotsiaaltöö</option>
+                                                <option value="Tervishoid">Tervishoid</option>
+                                                <option value="Transport, logistika ning mootorsõidukid">Transport, logistika ning mootorsõidukid</option>
+                                                <option value="Vee- ja jäätmemajandus ning keskkond">Vee- ja jäätmemajandus ning keskkond</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work">Kontaktisiku nimi *</label>
+                                            <input required type="text" class="form-control" id="name" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Kontaktisiku e-mail *</label>
+                                            <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+                                            <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work">Kontaktisiku telefoninumber *</label>
+                                            <input required type="text" class="form-control" id="phone" name="phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="work_desc">Organisatsiooni tutvustus *</label>
+                                            <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="location">Asukoht *</label>
+                                            <input required type="text" class="form-control" id="location" name="location">
+                                        </div>
+                                        <div class="form-group">
+                                            <!--
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
+                                                <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
+                                            </div>
+                                        </div>
+                                        <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
+                                    </div>
+
+
+                                </form>
+
+                        </div>
+                    </div>
+
+                    -->
+                    <div class="container">
                         <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
 
                             <div class="col-lg-7">
@@ -256,6 +445,7 @@
                                 </div>
                                 <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
                             </div>
+
                         </form>
                     </div>
                 </div>

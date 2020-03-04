@@ -217,7 +217,6 @@
         var participants = <?php echo json_encode($participants);?>;
         
         $(document).ready(function() {
-            console.log(participants);
             $('.proj-modal').on('click', partModal);
             $('.archive-modal').on('click', archiveModal);
             $('#archive-submit').on('click', archivePost);
@@ -235,12 +234,12 @@
             var target = $(e.currentTarget);
             var reg_start = target.find('input[name="reg_start"]');
             var reg_end = target.find('input[name="reg_end"]');
-            console.log(reg_start);
-            console.log(reg_end);
+            var postId = target.find('input[name="post_id"]');
             
-            let formData = new FormData(document.getElementById('project_submission'));
-            formData.append("reg_start", reg_start);
-            formData.append("reg_end", reg_end);
+            let formData = new FormData();
+            formData.append("post_id", postId.val());
+            formData.append("reg_start", reg_start.val());
+            formData.append("reg_end", reg_end.val());
             formData.append("reg_update", 1);
             
             $.ajax({
@@ -265,14 +264,12 @@
             
             $('#archive-submit').data("id",id);
             $('#modal-project_name').html(title);
-            console.log("I ran on:");
-            console.log(target);
             modal.modal("show");
         }
         
         function archivePost(e){
             var target = $(e.currentTarget);
-            let formData = new FormData(document.getElementById('project_submission'));
+            let formData = new FormData(document.getElementById('project_archiving'));
             formData.append("project-name", $("#modal-project_name").html());
             formData.append("project-id", target.data("id"));
             formData.append("archiving", 1);
@@ -304,7 +301,6 @@
                 }
             }
             $('.part-btn').on('click', handleParticipant);
-            console.log("showing");
             modal.modal("show");
         }
         
@@ -336,7 +332,6 @@
             var degree = arr[2];
             var skills = arr[3];
             var is_accepted = arr[4];
-            console.log(is_accepted);
             var acceptButton = "";
             if (is_accepted == 0) acceptButton = '<a class="btn btn-sm btn-success part-btn" data-email="'+email+'" data-ekey="'+ekey+'">Kinnita</a>';
             //var refuseButton = '<a class="btn btn-sm btn-danger part-btn" data-id="'.id.'" data-action="refuse">Keeldu</a>';

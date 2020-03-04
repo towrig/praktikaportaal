@@ -81,8 +81,8 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
 }
 else if (!empty($_POST) && $_POST["reg_update"] == 1){
     
-    $reg_start = $_POST["reg_start"];
-    $reg_end = $_POST["reg_end"];
+    $reg_start = date("Y-m-d h:i:s",strtotime($_POST["reg_start"]));
+    $reg_end = date("Y-m-d h:i:s",strtotime($_POST["reg_end"]));
     $postId = $_POST["post_id"];
     
     try {

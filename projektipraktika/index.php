@@ -20,9 +20,11 @@
                         <p class="font-weight-light">
                            <?php echo $description; ?>
                         </p>
+                        <!--
                         <p class="font-weight-light">
                           Projektipraktika ideede esitamise tähtaeg on kevadsemestril <b>02.03</b>. Üliõpilased saavad projektidega liituda <b>09.-15.03</b>.
                         </p>
+                        -->
                         <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});">Vaata ajakava siit!</a>
                     </div> <!-- .col-->
 
@@ -476,7 +478,6 @@
             }else{
                 reg_tab.hide();
             }
-            console.log("Registration: "+reg_open);
 
             //attach vars
             modal.find('.post-heading').html(title);

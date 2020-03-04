@@ -21,7 +21,7 @@ function sendNotificationMail($name, $p_id, $project_title, $project_edit_key, $
 	$to = 'praktika@ut.ee'; //replace with praktika@ut.ee
 	$from = 'noreply@praktika.ut.ee';
 	$subject = 'Registreerimine projekti';
-	$message = 'Projektiga “'.$project_title.'” on liitunud '.$name.'.<br><a href="http://praktika.ut.ee/team/viewproject?c='.$p_id.'&e='.$project_edit_key.'">VAATA</a>';
+	$message = 'Projektiga “'.$project_title.'” on liitunud '.$name.'.<br><a href="http://praktika.ut.ee/admin?c='.$p_id.'&e='.$project_edit_key.'">VAATA</a>';
     $message_p = 'Tere!<br><br>Olete liitunud projektiga “Projekti pealkiri”. Teie liitumine kinnitatakse ühe nädala jooksul. <br><br>Heade soovidega<br>praktika.ut.ee';
 	//add additional headers if required (X-Mailer etc.)
 	$headers = "From: ".$from."\r\n";
