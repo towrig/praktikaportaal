@@ -489,7 +489,7 @@
                                   <span class="post-contact-name"></span>
                                   <span class="post-contact-email"></span>
                                   <span class="post-contact-phone"></span>
-                                  <span class="post-org-website"></span>
+                                  <span class="post-org-website" style="overflow:hidden"></span>
                                 </div>
                               <h5>Ettevõtte kirjeldus</h5>
                               <div class="post-org-description"></div>
@@ -523,6 +523,12 @@
               dateFormat: 'dd-mm-yy'
             });
             
+            //texteditors
+            /*
+            $('#other').trumbowyg({
+                autogrow: true
+            });
+            */
             //pagination
     		$("#category").change(function(){
 

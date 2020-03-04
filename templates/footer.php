@@ -41,6 +41,7 @@
     <!--<script src="<?php echo $wwwroot; ?>vendor/jquery-easing/jquery.easing.min.js"></script>-->
     <!--<script src="<?php echo $wwwroot; ?>vendor/magnific-popup/jquery.magnific-popup.min.js"></script>-->
     <script src="<?php echo $wwwroot; ?>vendor/ui/jquery-ui.min.js"></script>
+    <script src="<?php echo $wwwroot; ?>js/trumbowyg/trumbowyg.min.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="<?php echo $wwwroot; ?>js/creative.min.js"></script>

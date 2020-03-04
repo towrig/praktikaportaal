@@ -53,6 +53,7 @@ else if(!empty($_POST) && $_POST["edit_key"]){
 else if(!empty($_POST) && $_POST["edit_text_id"]){
     
 }
+//archiving posts logic
 else if(!empty($_POST) && $_POST["archiving"] == 1){
     
     $name = $_POST["project-name"];
@@ -79,6 +80,7 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
     }
     
 }
+//updating registration opening info
 else if (!empty($_POST) && $_POST["reg_update"] == 1){
     
     $reg_start = date("Y-m-d h:i:s",strtotime($_POST["reg_start"]));

@@ -88,7 +88,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-12 my-5">
+            <div class="col-md-12 my-5 d-none">
                 <h3>Sisesta võti ja vajuta nuppu muutmisreziimi aktiveerimiseks</h3>
                 <input type="text" name="key" class="admin-key-input">
                 <div class="btn-group btn-group-md align-self-center" id="editmodeActivator">
