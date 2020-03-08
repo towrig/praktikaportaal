@@ -405,10 +405,12 @@
                                     <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
                                     <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
                                 </div>
+                                <!--
                                 <div class="form-group">
                                     <label for="work">Kontaktisiku telefoninumber *</label>
                                     <input required type="text" class="form-control" id="phone" name="phone">
                                 </div>
+                                -->
                                 <div class="form-group">
                                     <label for="work_desc">Organisatsiooni tutvustus *</label>
                                     <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
@@ -417,14 +419,39 @@
                                     <label for="website">Veebiaadress *</label>
                                     <input required type="text" class="form-control" id="website" name="website">
                                 </div>
+                                <div class="form-group my-1">
+                                    <label class="mr-sm-2">Valdkond *</label>
+                                    <select class="custom-select mr-sm-2" id="workfield" name="workfield">
+                                        <option value="Arvestusala" selected>Arvestusala</option>
+                                        <option value="Ehitus">Ehitus</option>
+                                        <option value="Energeetika ja kaevandamine">Energeetika ja kaevandamine</option>
+                                        <option value="Haridus ja teadus">Haridus ja teadus</option>
+                                        <option value="Info- ja kommunikatsioonitehnoloogia">Info- ja kommunikatsioonitehnoloogia</option>
+                                        <option value="Kaubandus, rentimine ja parandus">Kaubandus, rentimine ja parandus</option>
+                                        <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus">Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus</option>
+                                        <option value="Kultuur ja loometegevus">Kultuur ja loometegevus</option>
+                                        <option value="Majutus, toitlustus ja turism">Majutus, toitlustus ja turism</option>
+                                        <option value="Metalli- ja masinatööstus">Metalli- ja masinatööstus</option>
+                                        <option value="Metsandus ja puidutööstus">Metsandus ja puidutööstus</option>
+                                        <option value="Õigus">Õigus</option>
+                                        <option value="Personali- ja administratiivtöö ning ärinõustamine">Personali- ja administratiivtöö ning ärinõustamine</option>
+                                        <option value="Põllumajandus ja toiduainetööstus">Põllumajandus ja toiduainetööstus</option>
+                                        <option value="Rõiva-, tekstiili- ja nahatööstus">Rõiva-, tekstiili- ja nahatööstus</option>
+                                        <option value="Sotsiaaltöö">Sotsiaaltöö</option>
+                                        <option value="Tervishoid">Tervishoid</option>
+                                        <option value="Transport, logistika ning mootorsõidukid">Transport, logistika ning mootorsõidukid</option>
+                                        <option value="Vee- ja jäätmemajandus ning keskkond">Vee- ja jäätmemajandus ning keskkond</option>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="location">Asukoht *</label>
                                     <input required type="text" class="form-control" id="location" name="location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Töökoha tutvustus *</label>
+                                    <label for="description">Tööülesanded ja ootused praktikandile *</label> <!-- Tööülesanded ja ootused praktikandile -->
                                     <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
+                                <!--
                                 <div class="form-group">
                                     <label for="tasks">Tööülesanded *</label>
                                     <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
@@ -433,6 +460,7 @@
                                     <label for="skills">Vajalikud oskused ja kogemused *</label>
                                     <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
                                 </div>
+                                -->
                                 <div class="form-group">
                                     <label for="other">Muu oluline info</label>
                                     <textarea class="form-control" id="other" name="other" rows="3"></textarea>
@@ -469,10 +497,10 @@
                                 <h6><span class="post-org-name"></span></h6>
                                 <h5>Tutvustus</h5>
                                 <div class="post-description"></div>
-                                <h5>Tööülesanded</h5>
-                                <div class="post-tasks"></div>
-                                <h5>Vajalikud oskused ja kogemused</h5>
-                                <div class="post-skills"></div>
+                                <h5 class="migrate">Tööülesanded</h5>
+                                <div class="post-tasks migrate"></div>
+                                <h5 class="migrate">Vajalikud oskused ja kogemused</h5>
+                                <div class="post-skills migrate"></div>
                                 <h5>Muu oluline info</h5>
                                 <div class="post-other"></div>
                               </div>
@@ -523,13 +551,22 @@
               dateFormat: 'dd-mm-yy'
             });
             
-            //texteditors
+            // Text Editors
             /*
             $('#other').trumbowyg({
                 autogrow: true
             });
+
+            $('.trumbowyg-button-pane').css('display', 'none');
+            $('.trumbowyg-box').focusout(function(event) {
+                $(this).find('.trumbowyg-button-pane').fadeOut(200);
+            });
+            $('.trumbowyg-box').focusin(function(event) {
+                $(this).find('.trumbowyg-button-pane').fadeIn(200);
+            });
             */
-            //pagination
+
+            // Pagination
     		$("#category").change(function(){
 
     			if($("#category").val() == "date"){
@@ -597,13 +634,21 @@
             $(".post-deadline").html(deadline);
             $(".post-apply").attr("href","mailto:"+email);
             handleCookies(id);
-    		    modal.modal('show');
+
+            if(tasks == "" && skills == ""){
+                $(".migrate").hide();
+            }else{
+                $(".migrate").show();
+            }
+
+            modal.modal('show');
         }
     	
         function openRegModal(){
     		var modal = $('#regModal');
     		modal.modal('show');
     	}
+
         function ajaxSubmit(e) {
             e.preventDefault();
             e.stopPropagation();

@@ -39,10 +39,9 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 	
 	//general
 	$heading = $_POST["heading"];
-	$description = $_POST["description"];
-	$tasks = $_POST["tasks"];
-	$skills = $_POST["skills"];
-	$other = $_POST["other"];
+	$post_description = $_POST["description"]; //new
+    $workfield = $_POST["workfield"]; //new
+    $other = $_POST["other"];
     
     //org specific
     $work_name = $_POST["organization"];
@@ -53,18 +52,18 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     //poster specific
 	$email = $_POST["email"];
 	$name = $_POST["name"];
-	$phone = $_POST["phone"];
     
     //other
 	$checkpoint = ($_POST["checkpoint"] == null ? false : true);
 	$logo = $_FILES["logo"];
     $end_date = $_POST["date"];
+    //$post_file = $_POST["post_file"]; //new
 	
 	$passedValidation = true;
 	
 	//basic ones
-	if(!isset($checkpoint) || empty($heading) || empty($description) || empty($tasks) || empty($skills) || empty($work_name) || empty($work_desc)
-		|| empty($location) || empty($website) || empty($name) || empty($phone)){
+	if(!isset($checkpoint) || empty($heading) || empty($post_description) || empty($work_name) || empty($work_desc)
+		|| empty($location) || empty($website) || empty($name) || empty($workfield)){
 		$passedValidation = false;
 	}
 	
@@ -131,9 +130,9 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
-			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,phone,heading,description,tasks,experience,work_name,work_location,work_description,work_website,other,logopath,validationcode,datetime_uploaded,end_date)
-			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
-			$query->execute(array($name, $email, $phone, $heading, $description, $tasks, $skills, $work_name, $location, $work_desc, $website, $other, $logoPath, $validationcode, $end_date));
+			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,workfield,work_name,work_location,work_description,work_website,other,logopath,validationcode,datetime_uploaded,end_date)
+			VALUES(?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
+			$query->execute(array($name, $email, $heading, $post_description, $workfield, $work_name, $location, $work_desc, $website, $other, $logoPath, $validationcode, $end_date));
 			$success = sendMail($validationcode, $email, $heading);
             if($success){
                 http_response_code(200);
