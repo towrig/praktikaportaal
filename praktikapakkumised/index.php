@@ -113,7 +113,22 @@
                                                     <p class="m-0 p-0 font-weight-light"><b>Tähtaeg:</b> '.$reg_end.'</p>
                                                   </div>
                                                   <div class="col-lg-2 text-center apply col-5">
-                                                    <a class="text-uppercase font-weight-bold" onclick="gtag(\'event\', \'Kandideeri\',{\'event_category\': \'Praktikapakkumised\',\'event_label\':\'Kandideeri lehelt\'});" href="mailto:'.$email.'">Kandideeri</a>
+                                                    <a class="text-uppercase js-view-modal font-weight-bold" onclick="gtag(\'event\', \'Vaata\',{\'event_category\': \'Praktikapakkumised\',\'event_label\':\'Vaata modaali\'});"  href="javascript:void(0);"
+                                                          data-id="'.$id.'"
+                                                          data-pic="'.$picurl.'"
+                                                          data-heading="'.$heading.'"
+                                                          data-description="'.$description.'"
+                                                          data-tasks="'.$tasks.'"
+                                                          data-skills="'.$skills.'"
+                                                          data-work_name="'.$work_name.'"
+                                                          data-work_desc="'.$work_desc.'"
+                                                          data-location="'.$location.'"
+                                                          data-other="'.$other.'"
+                                                          data-website="'.$website.'"
+                                                          data-email="'.$email.'"
+                                                          data-name="'.$name.'"
+                                                          data-phone="'.$phone.'"
+                                                          data-reg_end="'.$reg_end.'">Vaata</a>
                                                     <p class="mt-1">Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
                                                 </div>
@@ -422,7 +437,8 @@
                                 <div class="form-group my-1">
                                     <label class="mr-sm-2">Valdkond *</label>
                                     <select class="custom-select mr-sm-2" id="workfield" name="workfield">
-                                        <option value="Arvestusala" selected>Arvestusala</option>
+                                        <option value="Määramata" selected>Määramata</option>
+                                        <option value="Arvestusala">Arvestusala</option>
                                         <option value="Ehitus">Ehitus</option>
                                         <option value="Energeetika ja kaevandamine">Energeetika ja kaevandamine</option>
                                         <option value="Haridus ja teadus">Haridus ja teadus</option>
@@ -552,8 +568,8 @@
             });
             
             // Text Editors
-            /*
-            $('#other').trumbowyg({
+
+            $('#description').trumbowyg({
                 autogrow: true
             });
 
@@ -564,7 +580,7 @@
             $('.trumbowyg-box').focusin(function(event) {
                 $(this).find('.trumbowyg-button-pane').fadeIn(200);
             });
-            */
+
 
             // Pagination
     		$("#category").change(function(){
@@ -785,6 +801,7 @@
             return "";
         }
         
+
     </script>
 
 </body>
