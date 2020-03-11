@@ -796,6 +796,7 @@ label {
     -o-transform: rotateY(0deg);
     -ms-transform: rotateY(0deg);
     transform: rotateY(0deg);
+    color: white;
 }
 /*.flip-div:hover .front,.flip-div.hover .front {*/
 .flip-div.hover .front {*/
@@ -839,6 +840,7 @@ label {
    /* -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
     -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
     box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);*/
+
 }
 .back ul li a{
 	font-size: 18px;
@@ -1460,7 +1462,7 @@ section h1 {
 .back {
     outline: 1.8rem solid #e94700;
     background: #e94700;
-    color: white;
+    color: transparent;
     //max-height: 350px;
     //overflow: auto;
 }
