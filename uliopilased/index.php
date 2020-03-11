@@ -29,7 +29,7 @@
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Üliõpilased','event_label':'Ava lisa profiil'});">Lisa profiil</span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Liitunud</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Praegu aktiivsed</h5>
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
