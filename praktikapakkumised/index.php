@@ -5,37 +5,50 @@
   $description = "Otsid praktikanti või tulevast töötajat? Lisa praktikapakkumine ja näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.";
   include_once './../templates/header.php';
 ?>
+
 <body id="page-top" class="practiceoffers">
     <?php include_once './../templates/top-navbar.php';?>
     <div id="main"></div>
     <div id="page-content">
-      <section class="page-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-               <h1 class="text-uppercase font-weight-bold mt-5 mb-3"  data-aos="fade-right">Praktika&shy;pakkumised</h1>
-            </div>
-            <div class="col-lg-3">
-              <p class="font-weight-light mb-5"  data-aos="fade-right"><?php echo $description; ?></p>
-            </div> <!-- .col-->
-            <div class="col-lg-2"  data-aos="fade-in-right">
-              <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});">Lisa pakkumine</a>
-            </div>
-            <div class="col-lg-12" >
-              <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Aktiivsed pakkumised</h5>
-            </div>
-          </div> <!-- .row -->
-        </div> <!-- .container -->
-      </section>
+        <section class="page-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Praktika&shy;pakkumised</h1>
+                    </div>
+                    <div class="col-lg-3">
+                        <p class="font-weight-light mb-5" data-aos="fade-right"><?php echo $description; ?></p>
+                    </div> <!-- .col-->
+                    <div class="col-lg-2" data-aos="fade-in-right">
+                        <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});">Lisa pakkumine</a>
+                    </div>
+                    <div class="col-lg-12">
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down">Aktiivsed pakkumised</h5>
+                    </div>
+                </div> <!-- .row -->
+            </div> <!-- .container -->
+        </section>
 
-	
-	<section class="mb-5" id="profiles">
-		<div class="container"  data-aos="fade-down">
-			<div class="row">
-                <div id="carouselPager" class="carousel slide col-md-12">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">                    
-                    <?php
+
+        <section class="mb-5" id="profiles">
+            <div class="container" data-aos="fade-down">
+                <div class="row">
+                    <div id="carouselPager" class="carousel slide col-md-12">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <?php
+
+                        function truncate($text, $chars = 25) {
+                            if (strlen($text) <= $chars) {
+                                return $text;
+                            }
+                            $text = $text." ";
+                            $text = substr($text,0,$chars);
+                            $text = substr($text,0,strrpos($text,' '));
+                            $text = $text."...";
+                            return $text;
+                        }
+
                         try {
                             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                             // set the PDO error mode to exception
@@ -91,7 +104,7 @@
                                                           data-id="'.$id.'"
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
-                                                          data-description="'.$description.'"
+                                                          data-description="'.htmlspecialchars($description).'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
@@ -105,7 +118,7 @@
                                                           data-reg_end="'.$reg_end.'">
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
-                                                        <pre class="m-0 p-0 card-text font-weight-light">'.$description.'</pre>
+                                                        <pre class="m-0 p-0 card-text font-weight-light">'.truncate(strip_tags($description), 128).'</pre>
                                                     </div>
                                                   <div class="col-lg-3 col-7">
                                                     <p class="m-0 p-0 font-weight-light"><b>Pakkuja:</b> '.$work_name.'</p>
@@ -117,7 +130,7 @@
                                                           data-id="'.$id.'"
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
-                                                          data-description="'.$description.'"
+                                                          data-description="'.htmlspecialchars($description).'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
@@ -146,35 +159,35 @@
                             echo "Connection failed: " . $e->getMessage();
                         }
                     ?>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <nav aria-label="Pager" class="col-md-12 mt-5">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item" data-index="prev">
-                      <a class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <?php
+                    <nav aria-label="Pager" class="col-md-12 mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" data-index="prev">
+                                <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <?php
                       for($i=0; $i < $pages; $i++){
                           echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
                       }
                     ?>
-                    <li class="page-item" data-index="next">
-                      <a class="page-link" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+                            <li class="page-item" data-index="next">
+                                <a class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-		</div>
-	</section>
-	
-	</div>
+        </section>
+
+    </div>
 
     <div id="main">
     </div>
@@ -185,202 +198,13 @@
             <div class="modal-content">
 
                 <div class="modal-body">
-                    <nav class="nav nav-pills flex-column flex-sm-row d-none" id="pills-tab" role="tablist">
-                        <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="post-home-tab" data-toggle="pill" href="#post-form" role="tab"><span>Vorm</span></a>
-                        <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="post-participants-tab" data-toggle="pill" href="#post-file" role="tab"><span>Fail</span></a>
-                    </nav>
-                    <!--
-                    <div class="tab-content d-none" id="pills-tabContent">
-                        <div class="tab-pane fade show active row" id="post-form" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <div class="container">
-                                <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
 
-                                    <div class="col-lg-7">
-                                        <div class="form-group">
-                                          <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                            <label for="name">Kuulutuse pealkiri *</label>
-                                            <input required type="text" class="form-control" id="heading" name="heading">
-                                            <div class='invalid-feedback'>Palun lisa pealkiri</div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="organization">Organisatsioon *</label>
-                                            <input required type="text" class="form-control" id="organization" name="organization">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="work">Registreerimise lõpptähtaeg *</label>
-                                            <input required type="text" class="form-control" id="datepicker" name="date">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-5">
-                                        <div class="form-group">
-                                            <label for="pilt" class="">Logo</label>
-                                            <div id="preview">
-                                                <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
-                                            </div>
-                                            <div class="upload-btn-wrapper">
-                                                <button class="btn">Lae üles oma organisatsiooni logo *</button>
-                                                <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
-                                            </div>
-                                            <div class='invalid-feedback'>Sisesta logo!</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="work">Kontaktisiku nimi *</label>
-                                            <input required type="text" class="form-control" id="name" name="name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Kontaktisiku e-mail *</label>
-                                            <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-                                            <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="work">Kontaktisiku telefoninumber *</label>
-                                            <input required type="text" class="form-control" id="phone" name="phone">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="work_desc">Organisatsiooni tutvustus *</label>
-                                            <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="website">Veebiaadress *</label>
-                                            <input required type="text" class="form-control" id="website" name="website">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="location">Asukoht *</label>
-                                            <input required type="text" class="form-control" id="location" name="location">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">Töökoha tutvustus *</label>
-                                            <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tasks">Tööülesanded *</label>
-                                            <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="skills">Vajalikud oskused ja kogemused *</label>
-                                            <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="other">Muu oluline info</label>
-                                            <textarea class="form-control" id="other" name="other" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                                <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
-                                            </div>
-                                        </div>
-                                        <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade show row" id="post-file" role="tabpanel" aria-labelledby="pills-home-tab">
-
-                            <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work_file">
-
-                                    <div class="col-lg-7">
-                                        <div class="form-group">
-                                          <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                            <label for="name">Kuulutuse pealkiri *</label>
-                                            <input required type="text" class="form-control" id="heading" name="heading">
-                                            <div class='invalid-feedback'>Palun lisa pealkiri</div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="organization">Organisatsioon *</label>
-                                            <input required type="text" class="form-control" id="organization" name="organization">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="work">Registreerimise lõpptähtaeg *</label>
-                                            <input required type="text" class="form-control" id="datepicker" name="date">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-5">
-                                        <div class="form-group text-center">
-                                            <div class="upload-btn-wrapper">
-                                                <button class="btn">Lae ülesse kuulutuse info PDF formaadis *</button>
-                                                <input required type="file" name="project_pdf" id="project_pdf" onchange="showFileName(this.files)">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-
-                                        <div class="form-group my-1">
-                                            <label class="mr-sm-2">Valdkond *</label>
-                                            <select class="custom-select mr-sm-2" id="workfield" name="workfield">
-                                                <option value="Arvestusala" selected>Arvestusala</option>
-                                                <option value="Ehitus">Ehitus</option>
-                                                <option value="Energeetika ja kaevandamine">Energeetika ja kaevandamine</option>
-                                                <option value="Haridus ja teadus">Haridus ja teadus</option>
-                                                <option value="Info- ja kommunikatsioonitehnoloogia">Info- ja kommunikatsioonitehnoloogia</option>
-                                                <option value="Kaubandus, rentimine ja parandus">Kaubandus, rentimine ja parandus</option>
-                                                <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus">Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus</option>
-                                                <option value="Kultuur ja loometegevus">Kultuur ja loometegevus</option>
-                                                <option value="Majutus, toitlustus ja turism">Majutus, toitlustus ja turism</option>
-                                                <option value="Metalli- ja masinatööstus">Metalli- ja masinatööstus</option>
-                                                <option value="Metsandus ja puidutööstus">Metsandus ja puidutööstus</option>
-                                                <option value="Õigus">Õigus</option>
-                                                <option value="Personali- ja administratiivtöö ning ärinõustamine">Personali- ja administratiivtöö ning ärinõustamine</option>
-                                                <option value="Põllumajandus ja toiduainetööstus">Põllumajandus ja toiduainetööstus</option>
-                                                <option value="Rõiva-, tekstiili- ja nahatööstus">Rõiva-, tekstiili- ja nahatööstus</option>
-                                                <option value="Sotsiaaltöö">Sotsiaaltöö</option>
-                                                <option value="Tervishoid">Tervishoid</option>
-                                                <option value="Transport, logistika ning mootorsõidukid">Transport, logistika ning mootorsõidukid</option>
-                                                <option value="Vee- ja jäätmemajandus ning keskkond">Vee- ja jäätmemajandus ning keskkond</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="work">Kontaktisiku nimi *</label>
-                                            <input required type="text" class="form-control" id="name" name="name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Kontaktisiku e-mail *</label>
-                                            <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-                                            <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="work">Kontaktisiku telefoninumber *</label>
-                                            <input required type="text" class="form-control" id="phone" name="phone">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="work_desc">Organisatsiooni tutvustus *</label>
-                                            <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="location">Asukoht *</label>
-                                            <input required type="text" class="form-control" id="location" name="location">
-                                        </div>
-                                        <div class="form-group">
-                                            <!--
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                                <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
-                                            </div>
-                                        </div>
-                                        <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
-                                    </div>
-
-
-                                </form>
-
-                        </div>
-                    </div>
-
-                    -->
                     <div class="container">
                         <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
 
                             <div class="col-lg-7">
                                 <div class="form-group">
-                                  <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
+                                    <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
                                     <label for="name">Kuulutuse pealkiri *</label>
                                     <input required type="text" class="form-control" id="heading" name="heading">
                                     <div class='invalid-feedback'>Palun lisa pealkiri</div>
@@ -420,12 +244,6 @@
                                     <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
                                     <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
                                 </div>
-                                <!--
-                                <div class="form-group">
-                                    <label for="work">Kontaktisiku telefoninumber *</label>
-                                    <input required type="text" class="form-control" id="phone" name="phone">
-                                </div>
-                                -->
                                 <div class="form-group">
                                     <label for="work_desc">Organisatsiooni tutvustus *</label>
                                     <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
@@ -467,16 +285,6 @@
                                     <label for="description">Tööülesanded ja ootused praktikandile *</label> <!-- Tööülesanded ja ootused praktikandile -->
                                     <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
-                                <!--
-                                <div class="form-group">
-                                    <label for="tasks">Tööülesanded *</label>
-                                    <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="skills">Vajalikud oskused ja kogemused *</label>
-                                    <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
-                                </div>
-                                -->
                                 <div class="form-group">
                                     <label for="other">Muu oluline info</label>
                                     <textarea class="form-control" id="other" name="other" rows="3"></textarea>
@@ -493,13 +301,13 @@
                         </form>
                     </div>
                 </div>
-                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="viewModal" class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -511,7 +319,8 @@
                             <div class="col-lg-7 col-info">
                                 <h2 class="post-heading"></h2>
                                 <h6><span class="post-org-name"></span></h6>
-                                <h5>Tutvustus</h5>
+                                <h5 class="unmigrate">Tööülesanded ja ootused praktikandile *</h5>
+                                <h5 class="migrate">Tutvustus</h5>
                                 <div class="post-description"></div>
                                 <h5 class="migrate">Tööülesanded</h5>
                                 <div class="post-tasks migrate"></div>
@@ -519,7 +328,7 @@
                                 <div class="post-skills migrate"></div>
                                 <h5>Muu oluline info</h5>
                                 <div class="post-other"></div>
-                              </div>
+                            </div>
 
                             <div class="col-lg-5 col-contact">
                                 <div class="post-img-container"></div>
@@ -530,21 +339,21 @@
                                 <!--<h5 class="post-org-name"></h5>-->
                                 <h5>Kontakt</h5>
                                 <div class="post-contact-container">
-                                  <span class="post-contact-name"></span>
-                                  <span class="post-contact-email"></span>
-                                  <span class="post-contact-phone"></span>
-                                  <span class="post-org-website" style="overflow:hidden"></span>
+                                    <span class="post-contact-name"></span>
+                                    <span class="post-contact-email"></span>
+                                    <span class="post-contact-phone"></span>
+                                    <span class="post-org-website" style="overflow:hidden"></span>
                                 </div>
-                              <h5>Ettevõtte kirjeldus</h5>
-                              <div class="post-org-description"></div>
+                                <h5>Ettevõtte kirjeldus</h5>
+                                <div class="post-org-description"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
-               <a class="post-apply" href="#" onclick="gtag('event', 'Kandideeri',{'event_category': 'Praktikapakkumised','event_label':'Kandideeri modalis'});"><button class="btn btn-primary">Kandideeri</button></a>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                    <a class="post-apply" href="#" onclick="gtag('event', 'Kandideeri',{'event_category': 'Praktikapakkumised','event_label':'Kandideeri modalis'});"><button class="btn btn-primary">Kandideeri</button></a>
+                </div>
             </div>
         </div>
     </div>
@@ -555,18 +364,18 @@
     <script src="https://unpkg.com/cropperjs"></script>
     <script type="text/javascript">
         var blobImg;
-    	$(document).ready(function(){
+        $(document).ready(function() {
 
-    		$('.toggleMenu').on('click', openRegModal);
+            $('.toggleMenu').on('click', openRegModal);
             $('.js-view-modal').on('click', openViewModal);
             $('#submit-all').on('click', ajaxSubmit);
-          
+
             //$('[data-toggle="tooltip"]').tooltip();
             $("#datepicker").datepicker({
-              showWeek: true,
-              dateFormat: 'dd-mm-yy'
+                showWeek: true,
+                dateFormat: 'dd-mm-yy'
             });
-            
+
             // Text Editors
 
             $('#description').trumbowyg({
@@ -583,44 +392,44 @@
 
 
             // Pagination
-    		$("#category").change(function(){
+            $("#category").change(function() {
 
-    			if($("#category").val() == "date"){
-    				$("#date_order").show();
-    				$("#locations").hide();
-    			}else{
-    				$("#date_order").hide();
-    				$("#locations").show();
-    			}
-    		});
+                if ($("#category").val() == "date") {
+                    $("#date_order").show();
+                    $("#locations").hide();
+                } else {
+                    $("#date_order").hide();
+                    $("#locations").show();
+                }
+            });
             $('.pagination .page-item').on('click', paginatorClick);
             $('#carouselPager').carousel({
                 interval: false,
                 wrap: false
             });
-            $('#carouselPager').on('slide.bs.carousel', function(e){
-                $('.pagination .page-item').eq(e.from+1).toggleClass('active');
-                $('.pagination .page-item').eq(e.to+1).toggleClass('active');
+            $('#carouselPager').on('slide.bs.carousel', function(e) {
+                $('.pagination .page-item').eq(e.from + 1).toggleClass('active');
+                $('.pagination .page-item').eq(e.to + 1).toggleClass('active');
             })
 
-    	});
-        
-        function paginatorClick(e){
+        });
+
+        function paginatorClick(e) {
             var carousel = $('#carouselPager');
             var target = $(e.currentTarget);
             var index = target.data('index');
             carousel.carousel(index);
         }
-        
-        function openViewModal(e){
+
+        function openViewModal(e) {
             var target = $(e.currentTarget);
-    		var modal = $('#viewModal');
+            var modal = $('#viewModal');
 
             //get values here
             var id = target.data('id');
             var pic = target.data('pic');
             var heading = target.data('heading');
-            var description = target.data('description');
+            var description = $("<div/>").html(target.data('description')).text();
             var tasks = target.data('tasks');
             var skills = target.data('skills');
             var other = target.data('other');
@@ -628,42 +437,43 @@
             var work_desc = target.data('work_desc');
             var work_loc = target.data('location');
             var website = target.data('website');
-    		    var name = target.data('name');
-    		    var email = target.data('email');
+            var name = target.data('name');
+            var email = target.data('email');
             var phone = target.data('phone');
             var deadline = target.data('reg_end');
-            
+
             //attach values
             $(".post-heading").html(heading);
-            $(".post-description").html("<pre>"+description+"</pre>");
-            $(".post-tasks").html("<pre>"+tasks+"</pre>");
-            $(".post-skills").html("<pre>"+skills+"</pre>");
-            $(".post-img-container").html("<img src='"+pic+"'>");
+            $(".post-description").html("<pre>" + description + "</pre>");
+            $(".post-tasks").html("<pre>" + tasks + "</pre>");
+            $(".post-skills").html("<pre>" + skills + "</pre>");
+            $(".post-img-container").html("<img src='" + pic + "'>");
             $(".post-org-name").html(work_name);
             $(".post-org-loc").html(work_loc);
-            $(".post-org-description").html("<pre>"+work_desc+"</pre>");
-            $(".post-org-website").html("<a target='_blank' href='"+website+"'>"+website+"</a>");
+            $(".post-org-description").html("<pre>" + work_desc + "</pre>");
+            $(".post-org-website").html("<a target='_blank' href='" + website + "'>" + website + "</a>");
             $(".post-contact-name").html(name);
             $(".post-contact-email").html(email);
             $(".post-contact-phone").html(phone);
-            $(".post-other").html("<pre>"+other+"</pre>");
+            $(".post-other").html("<pre>" + other + "</pre>");
             $(".post-deadline").html(deadline);
-            $(".post-apply").attr("href","mailto:"+email);
+            $(".post-apply").attr("href", "mailto:" + email);
             handleCookies(id);
 
-            if(tasks == "" && skills == ""){
+            if (tasks == "" && skills == "") {
                 $(".migrate").hide();
-            }else{
+            } else {
                 $(".migrate").show();
+                $(".unmigrate").hide();
             }
 
             modal.modal('show');
         }
-    	
-        function openRegModal(){
-    		var modal = $('#regModal');
-    		modal.modal('show');
-    	}
+
+        function openRegModal() {
+            var modal = $('#regModal');
+            modal.modal('show');
+        }
 
         function ajaxSubmit(e) {
             e.preventDefault();
@@ -699,13 +509,13 @@
                             </div>');
             });
         }
-        
-        function handleCookies(id){
+
+        function handleCookies(id) {
             var val = getCookie(id);
             if (val == "" || val == "first")
                 setCookie(id, "first");
         }
-        
+
         function previewFile() {
             var preview = document.querySelector('#preview');
             var files = document.querySelector('input[type=file]').files[0];
@@ -765,13 +575,13 @@
                 });
             }
         }
-        
+
         function setCookie(cname, cvalue) {
             document.cookie = cname + "=" + cvalue + ";path=/";
             var formData = new FormData();
             formData.append("action", "addview");
             formData.append("id", cname);
-            
+
             $.ajax({
                 type: 'POST',
                 url: './work_api.php',
@@ -785,22 +595,22 @@
                 console.log(response);
             });
         }
+
         function getCookie(cname) {
             var name = cname + "=";
             var decodedCookie = decodeURIComponent(document.cookie);
             var ca = decodedCookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
+            for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
                 while (c.charAt(0) == ' ') {
-                  c = c.substring(1);
+                    c = c.substring(1);
                 }
                 if (c.indexOf(name) == 0) {
-                  return c.substring(name.length, c.length);
+                    return c.substring(name.length, c.length);
                 }
             }
             return "";
         }
-        
 
     </script>
 
