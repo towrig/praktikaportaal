@@ -38,7 +38,7 @@
                 <div class="column-wrapper">
                     <div>
                       <i id="stat-praktikapakkumine"></i>
-                        <h2 class=" my-4"><?php echo $stats[2]?></h2>
+                        <h2 class=" my-4"><?php echo $stats[4]?></h2>
                     </div>
                     <div>
                       <h5 class="h6 text-uppercase mb-2">praktika&shy;pakkumist</h5>

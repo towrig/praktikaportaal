@@ -5,7 +5,11 @@
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // Could not UNION together DISTINCT as type mismatch - so a new query later
-    $query = $conn->prepare('SELECT COUNT(id) AS stats FROM People WHERE isvalidated = 1 UNION ALL SELECT COUNT(*) FROM ProjectPosts WHERE isactivated = 1 UNION ALL SELECT COUNT(*) FROM WorkPosts WHERE isvalidated = 1 AND end_date >= NOW() UNION ALL SELECT COUNT(DISTINCT work_name) AS stats FROM WorkPosts WHERE isvalidated = 1');
+    $query = $conn->prepare('SELECT COUNT(id) AS stats FROM People WHERE isvalidated = 1
+                            UNION ALL SELECT COUNT(*) FROM ProjectPosts WHERE isactivated = 1
+                            UNION ALL SELECT COUNT(*) FROM WorkPosts WHERE isvalidated = 1 AND end_date >= NOW()
+                            UNION ALL SELECT COUNT(DISTINCT work_name) AS stats FROM WorkPosts WHERE isvalidated = 1
+                            UNION ALL SELECT COUNT(*) FROM WorkPosts WHERE isvalidated = 1');
     $query->execute();
     $data = $query -> fetchAll();
 
