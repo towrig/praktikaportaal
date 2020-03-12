@@ -475,10 +475,6 @@ body {
 header.masthead {
     background: linear-gradient(to bottom,#4117b8 0,rgba(92, 66, 66, 0.8) 100%),url(../img/bg-masthead.jpg);
     background: linear-gradient(to bottom,#00000026 0,rgba(92, 66, 66, 0.8) 100%),url(../img/bg-masthead.jpg);
-    //background: #F7971E;
-    //background: -webkit-linear-gradient(to left, #FFD200, #F7971E);
-    //background: linear-gradient(to left, #ffd2004a, #f7971e00),url(../img/bg-masthead.jpg);
-    //background: #333;
 }
 
 .masthead i.fas.fa-4x {
@@ -796,6 +792,7 @@ label {
     -o-transform: rotateY(0deg);
     -ms-transform: rotateY(0deg);
     transform: rotateY(0deg);
+    color: white;
 }
 /*.flip-div:hover .front,.flip-div.hover .front {*/
 .flip-div.hover .front {*/
@@ -836,9 +833,6 @@ label {
     -o-transform: rotateY(-180deg);
     -ms-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
-   /* -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);*/
 }
 .back ul li a{
 	font-size: 18px;
@@ -868,12 +862,6 @@ label {
     height: calc(2.25rem + 2px);
     border-radius: 0;
 }
-/*
-.toggleMenu  {
-    min-width: 50%;
-    margin: auto;
-    max-width: 200px;
-}*/
 
 .card {
     background: transparent;
@@ -1460,7 +1448,7 @@ section h1 {
 .back {
     outline: 1.8rem solid #e94700;
     background: #e94700;
-    color: white;
+    color: transparent;
     //max-height: 350px;
     //overflow: auto;
 }
@@ -1530,12 +1518,11 @@ i.arrow-front {
 
 body.project .card {
     background: white;
-  min-height: 350px;
-  //outline: 1rem solid white;
+    min-height: 350px;
 }
 
 body.project .card h6 {
-  color: #00489d;
+    color: #00489d;
 }
 
 body.project .card .card-footer {
@@ -1546,12 +1533,6 @@ body.project .card .card-footer {
     position: absolute;
     bottom: 0;
     width:96%;
-}
-
-body.practiceoffers .col-lg-2.work-banner-crop {
-    /*padding-bottom: 80px!important;
-    overflow: hidden;
-    height: 0;*/
 }
 
 p {
@@ -2050,7 +2031,13 @@ div#viewModal .post-deadline {
     }
 
     .work-banner-crop {
-        display: none;
+        max-width: 250px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .work-banner-crop img {
+      border-radius: 8px;
     }
 
     .practiceoffers .col-lg-12.practiceoffer {
@@ -2061,15 +2048,6 @@ div#viewModal .post-deadline {
 .practiceoffers .page-section {
     padding-bottom: 0rem;
 }
-
-/* temp hiding */
-/*.navbar-expand-lg .navbar-collapse{
-    display: none !important;
-}
-
-.navbar-expand-lg .navbar-toggler{
-    display: none !important;
-}*/
 
 .navbar-collapse a.nav-link{
   transition: 1s all ease-in-out;

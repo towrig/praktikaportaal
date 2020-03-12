@@ -29,7 +29,7 @@
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Üliõpilased','event_label':'Ava lisa profiil'});">Lisa profiil</span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Liitunud</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Praegu aktiivsed</h5>
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
@@ -110,7 +110,7 @@
                                                         $name_br = str_replace(" ", "<br>", $name);
                                                         $degree = $row["major"]."<br>".$row["institute"];
 
-                                                        $pic = "../userdata/pictures/".$row["picturepath"]; //https://dummyimage.com/1000x1000/fff/aaa
+                                                        $pic = "../userdata/pictures/".$row["picturepath"];
                                                         if($row["picturepath"]==""){
                                                            $pic ="../userdata/blank_profile_pic.png";
                                                         }
@@ -163,7 +163,7 @@
                                                                             </div>
                                                                             <div class="links">
                                                                               <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>'.
-                                                                                (!empty($row["cvpath"]) ? '<a href="#" onclick="return false;" class="text-uppercase js-open-cv" data-cv="'.$cv.'">Vaata CV\'d</a>':'' ).'
+                                                                                (!empty($row["cvpath"]) ? '<a href="#" onclick="return false;" class="text-uppercase js-open-cv" data-uname="'.$name.'" data-cv="'.$cv.'">Vaata CV\'d</a>':'' ).'
                                                                             </div>
                                                                             <i class="arrow-front"></i>
                                                                         </div>
@@ -351,7 +351,7 @@
     </div>
 
     <div class="modal fade modal-cv" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">CV</h5>
@@ -388,6 +388,7 @@
             $(".flip-div").click(function() {
                 $(this).toggleClass("hover");
             });
+            $('.links a').on("click",function(e){$(this).parent().parent().parent().parent().parent().toggleClass("hover")});
 
             $('.pagination .page-item').on('click', paginatorClick);
             $('#carouselPager').carousel({
@@ -411,28 +412,15 @@
         function openCV(e) {
             var modal = $('.modal-cv').first();
             var target = $(e.currentTarget);
-            //var cvpath = 'https://docs.google.com/viewer?url=https://praktika.ut.ee'+$(target).data('cv');
+            $('.modal-cv .modal-title').text($(target).data('uname') + " CV");
             var cvpath = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>" + $(target).data('cv');
 
-           var cvembed = $('<iframe>').attr({
+            var cvembed = $('<iframe>').attr({
                 'src': cvpath + '&embedded=true',
                 'type': 'application/pdf'
             }).css('width', '100%').css('min-height', '512px');
             modal.find('.modal-body').empty();
             modal.find('.modal-body').html(cvembed);
-
-          /*var ex = '<a href="../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>'+ $(target).data('cv')+'">Open yourpdf.pdf with PDF.js</a>';
-          var ex = '<iframe style="width: 100%; min-height: 512px;" src="../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>'+ $(target).data('cv')+'">Open yourpdf.pdf with PDF.js</iframe>';*/
-
-
-            /*modal.find('.pdf-container').empty();
-            var options = {
-              pdfOpenParams: { view: 'FitH', scrollbar: '1', toolbar: '0', statusbar: '1', messages: '0', navpanes: '0' },
-              fallbackLink: '<p>Antud veebilehitseja ei toeta PDFi vaatamist otse lehe sees. Palun laadige PDF alla ning avage eraldi. <a href="[url]">Lae alla PDF</a></p>'
-            };
-            PDFObject.embed('..' + $(target).data('cv'), ".pdf-container", options);
-
-            modal.find('.modal-body').append(ex);*/
 
             modal.modal('show');
         }
