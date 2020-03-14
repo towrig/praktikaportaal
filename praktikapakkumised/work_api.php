@@ -39,31 +39,29 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 	
 	//general
 	$heading = $_POST["heading"];
-	$post_description = $_POST["description"]; //new
-    $workfield = $_POST["workfield"]; //new
-    $other = $_POST["other"];
+    $workfield = $_POST["workfield"];
+    $website = $_POST["website"];
+	$post_description = $_POST["description"];
+    $tasks = $_POST["tasks"];
+    $skills = $_POST["skills"];
+    $end_date = $_POST["date"];
+    $other = $_POST["other"]; //info for candidating
     
     //org specific
     $work_name = $_POST["organization"];
     $location = $_POST["location"];
-    $work_desc = $_POST["work_desc"];
-    $website = $_POST["website"];
-	
-    //poster specific
 	$email = $_POST["email"];
 	$name = $_POST["name"];
     
-    //other
+    //files and check
 	$checkpoint = ($_POST["checkpoint"] == null ? false : true);
 	$logo = $_FILES["logo"];
-    $end_date = $_POST["date"];
-    //$post_file = $_POST["post_file"]; //new
+    $post_file = $_FILES["post_pdf"];
 	
 	$passedValidation = true;
 	
 	//basic ones
-	if(!isset($checkpoint) || empty($heading) || empty($post_description) || empty($work_name) || empty($work_desc)
-		|| empty($location) || empty($website) || empty($name) || empty($workfield)){
+	if(!isset($checkpoint) || empty($heading) || empty($post_description) || empty($work_name) || empty($location) || empty($name) || empty($workfield)){
 		$passedValidation = false;
 	}
 	
@@ -89,6 +87,8 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 	//paths to be used later
 	$logoPath = null;
     $logo_success = true;
+    $pdfPath = null;
+    $pdf_success = true;
 	
 	//files
 	if($passedValidation){
@@ -117,6 +117,28 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
             $passedValidation = false;
             $response .= "No logo specified!";
         }
+
+        if(!empty($post_pdf)){
+
+			if (isset($_FILES['post_pdf']) && $_FILES['post_pdf']['error'] === UPLOAD_ERR_OK){
+				$fileName = $_FILES['post_pdf']['name'];
+				$fileNameCmps = explode(".", $fileName);
+				$fileExtension = strtolower(end($fileNameCmps));
+				$newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+				$allowedfileExtensions = array('jpg', 'png');
+				if (in_array($fileExtension, $allowedfileExtensions)){ //later mby $_FILES['uploadedFile']['size'] < 4000 or sth...
+
+					$dest_path = '../userdata/pictures/'.$newFileName;
+
+					if(move_uploaded_file($_FILES['post_pdf']['tmp_name'], $dest_path)){
+					  $pdfPath = $newFileName;
+					}else{
+                      $pdf_success = false;
+                    }
+
+				}
+			}
+		}
 	}
 	
 	//after validation, log into database and send data
@@ -130,9 +152,9 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
-			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,workfield,work_name,work_location,work_description,work_website,other,logopath,validationcode,datetime_uploaded,end_date)
-			VALUES(?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
-			$query->execute(array($name, $email, $heading, $post_description, $workfield, $work_name, $location, $work_desc, $website, $other, $logoPath, $validationcode, $end_date));
+			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,workfield,work_name,work_location,work_website,other,logopath,pdfpath,validationcode,datetime_uploaded,end_date)
+			VALUES(?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
+			$query->execute(array($name, $email, $heading, $post_description, $workfield, $work_name, $location, $website, $other, $logoPath, $pdfPath, $validationcode, $end_date));
 			$success = sendMail($validationcode, $email, $heading);
             if($success){
                 http_response_code(200);

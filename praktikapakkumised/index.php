@@ -209,49 +209,6 @@
                                     <input required type="text" class="form-control" id="heading" name="heading">
                                     <div class='invalid-feedback'>Palun lisa pealkiri</div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="organization">Organisatsioon *</label>
-                                    <input required type="text" class="form-control" id="organization" name="organization">
-                                </div>
-                                <div class="form-group">
-                                    <label for="work">Registreerimise lõpptähtaeg *</label>
-                                    <input required type="text" class="form-control" id="datepicker" name="date">
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-5">
-                                <div class="form-group">
-                                    <label for="pilt" class="">Logo</label>
-                                    <div id="preview">
-                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
-                                    </div>
-                                    <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles oma organisatsiooni logo *</button>
-                                        <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
-                                    </div>
-                                    <div class='invalid-feedback'>Sisesta logo!</div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="work">Kontaktisiku nimi *</label>
-                                    <input required type="text" class="form-control" id="name" name="name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Kontaktisiku e-mail *</label>
-                                    <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-                                    <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="work_desc">Organisatsiooni tutvustus *</label>
-                                    <textarea required class="form-control" id="work_desc" name="work_desc" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="website">Veebiaadress *</label>
-                                    <input required type="text" class="form-control" id="website" name="website">
-                                </div>
                                 <div class="form-group my-1">
                                     <label class="mr-sm-2">Valdkond *</label>
                                     <select class="custom-select mr-sm-2" id="workfield" name="workfield">
@@ -278,15 +235,67 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="website">Pakkumise link</label>
+                                    <input required type="text" class="form-control" id="website" name="website">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="pilt" class="">Logo</label>
+                                    <div id="preview">
+                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                    </div>
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn">Lae üles oma organisatsiooni logo *</button>
+                                        <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
+                                    </div>
+                                    <div class='invalid-feedback'>Sisesta logo!</div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group text-center">
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn">Lae ülesse täidetud projektivorm PDF formaadis *</button>
+                                        <input required type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Pakkumise tutvustus *</label>
+                                    <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tasks">Ülesanded</label>
+                                    <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="skills">Ootused</label>
+                                    <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="work">Tähtaeg *</label>
+                                    <input required type="text" class="form-control" id="datepicker" name="date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="organization">Ettevõte *</label>
+                                    <input required type="text" class="form-control" id="organization" name="organization">
+                                </div>
+                                <div class="form-group">
+                                    <label for="work">Kontaktisiku nimi *</label>
+                                    <input required type="text" class="form-control" id="name" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Kontaktemail *</label>
+                                    <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+                                    <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="location">Asukoht *</label>
                                     <input required type="text" class="form-control" id="location" name="location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description">Tööülesanded ja ootused praktikandile *</label> <!-- Tööülesanded ja ootused praktikandile -->
-                                    <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="other">Muu oluline info</label>
+                                    <label for="other">Info kandideerimiseks</label>
                                     <textarea class="form-control" id="other" name="other" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
