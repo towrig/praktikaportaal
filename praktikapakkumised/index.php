@@ -361,7 +361,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
-                    <a class="post-apply" href="#" onclick="gtag('event', 'Kandideeri',{'event_category': 'Praktikapakkumised','event_label':'Kandideeri modalis'});"><button class="btn btn-primary">Kandideeri</button></a>
                 </div>
             </div>
         </div>
@@ -466,7 +465,6 @@
             $(".post-contact-phone").html(phone);
             $(".post-other").html("<pre>" + other + "</pre>");
             $(".post-deadline").html(deadline);
-            $(".post-apply").attr("href", "mailto:" + email);
             handleCookies(id);
 
             if (tasks == "" && skills == "") {
