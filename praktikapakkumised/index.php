@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="website">Pakkumise link</label>
-                                    <input required type="text" class="form-control" id="website" name="website">
+                                    <input type="text" class="form-control" id="website" name="website">
                                 </div>
                             </div>
 
@@ -257,21 +257,21 @@
                             <div class="col-lg-12">
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae ülesse täidetud projektivorm PDF formaadis *</button>
-                                        <input required type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
+                                        <button class="btn">Lae üles töökuulutus PDF formaadis</button>
+                                        <input type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Pakkumise tutvustus *</label>
                                     <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group pdf-hide">
                                     <label for="tasks">Ülesanded</label>
-                                    <textarea required class="form-control" id="tasks" name="tasks" rows="3"></textarea>
+                                    <textarea class="form-control" id="tasks" name="tasks" rows="3"></textarea>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group pdf-hide">
                                     <label for="skills">Ootused</label>
-                                    <textarea required class="form-control" id="skills" name="skills" rows="3"></textarea>
+                                    <textarea class="form-control" id="skills" name="skills" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="work">Tähtaeg *</label>
@@ -385,11 +385,11 @@
             });
 
             // Text Editors
-
+            /*
             $('#description').trumbowyg({
                 autogrow: true
             });
-
+            */
             $('.trumbowyg-button-pane').css('display', 'none');
             $('.trumbowyg-box').focusout(function(event) {
                 $(this).find('.trumbowyg-button-pane').fadeOut(200);
@@ -618,6 +618,22 @@
             }
             return "";
         }
+
+        function showFileName(files) {
+              try {
+                  var fname = document.getElementById("upload-data");
+                  fname.innerHTML = files[0].name + " (" + (files[0].size / 1024).toFixed(2) + "KB)";
+                  document.getElementById("post_pdf").parentElement.appendChild(fname);
+                  $(".pdf-hide").hide();
+              } catch (err) {
+                  var fname = document.createElement("div");
+                  fname.classList.add("pt-3");
+                  fname.id = "upload-data";
+                  fname.innerHTML = files[0].name + " (" + (files[0].size / 1024).toFixed(2) + "KB)";
+                  document.getElementById("post_pdf").parentElement.appendChild(fname);
+                  $(".pdf-hide").hide();
+              }
+          }
 
     </script>
 
