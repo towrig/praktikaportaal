@@ -154,7 +154,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
 			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,workfield,work_name,work_location,work_website,other,logopath,pdfpath,validationcode,datetime_uploaded,end_date)
-			VALUES(?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
+			VALUES(?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
 			$query->execute(array($name, $email, $heading, $post_description, $workfield, $work_name, $location, $website, $other, $logoPath, $pdfPath, $validationcode, $end_date));
 			$success = sendMail($validationcode, $email, $heading);
             if($success){
