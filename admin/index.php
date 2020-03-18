@@ -33,7 +33,7 @@
             $entity["reg_end"] = $row["reg_end"];
 	    	$entity["title"] = $row["title"];
             $entity["organisation"] = $row["organisation"];
-            $entity["org_name"] = $row["org_email"];
+            $entity["org_name"] = $row["org_name"];
             $entity["org_email"] = $row["org_email"];
             $entity["pdf_path"] = $row["pdf_path"];
 	    	$entity["edit_key"] = $row["edit_key"];
@@ -131,7 +131,7 @@
                                                 <a class="btn btn-sm btn-success proj-modal" data-id= "'.$p["id"].'" data-ekey="'.$p["edit_key"].'">Vaata osalejaid</a>
                                                 '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
                                                 <a class="btn btn-sm btn-warning" href="../userdata/projects/'.$p["pdf_path"].'" download>Laadi alla taotlus</a>
-                                                <a class="btn btn-sm btn-danger archive-modal" data-id="'.$p["id"].'" data-title="'.$p["title"].'">Arhiveeri</a>
+                                                <a class="btn btn-sm btn-danger archive-modal" data-id="'.$p["id"].'" data-title="'.$p["title"].'" data-org_name="'.$p["org_name"].'" data-organisation="'.$p["organisation"].'">Arhiveeri</a>
                                             </div>
                                         </div>
                                     </div>
@@ -178,6 +178,14 @@
                         <div class="form-group mt-3">
                             <label>Projekti pealkiri:</label>
                             <h4 id="modal-project_name"></h4>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Projekti esitaja:</label>
+                            <h4 id="modal-project_contact"></h4>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Asutus:</label>
+                            <h4 id="modal-project_organisation"></h4>
                         </div>
                         <div class="form-group">
                             <label>Eesmärk</label>
@@ -261,9 +269,13 @@
             var modal = $(".arc-modal").first();
             var id = target.data("id");
             var title = target.data("title");
+            var org_name = target.data("org_name");
+            var organisation = target.data("organisation");
             
             $('#archive-submit').data("id",id);
             $('#modal-project_name').html(title);
+            $('#modal-project_contact').html(org_name);
+            $('#modal-project_organisation').html(organisation);
             modal.modal("show");
         }
         
@@ -271,6 +283,8 @@
             var target = $(e.currentTarget);
             let formData = new FormData(document.getElementById('project_archiving'));
             formData.append("project-name", $("#modal-project_name").html());
+            formData.append("project-org_name", $("#modal-project_contact").html());
+            formData.append("project-organisation", $("#modal-project_organisation").html());
             formData.append("project-id", target.data("id"));
             formData.append("archiving", 1);
             

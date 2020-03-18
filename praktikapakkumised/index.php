@@ -238,6 +238,12 @@
                                     <label for="website">Pakkumise link</label>
                                     <input type="text" class="form-control" id="website" name="website">
                                 </div>
+                                <div class="form-group text-center">
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn">Lae üles töökuulutus PDF formaadis</button>
+                                        <input type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-lg-5">
@@ -255,12 +261,6 @@
                             </div>
 
                             <div class="col-lg-12">
-                                <div class="form-group text-center">
-                                    <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles töökuulutus PDF formaadis</button>
-                                        <input type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
-                                    </div>
-                                </div>
                                 <div class="form-group">
                                     <label for="description">Pakkumise tutvustus *</label>
                                     <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
