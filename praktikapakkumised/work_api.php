@@ -125,15 +125,16 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 				$fileNameCmps = explode(".", $fileName);
 				$fileExtension = strtolower(end($fileNameCmps));
 				$newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-				$allowedfileExtensions = array('jpg', 'png');
+				$allowedfileExtensions = array('pdf');
 				if (in_array($fileExtension, $allowedfileExtensions)){ //later mby $_FILES['uploadedFile']['size'] < 4000 or sth...
 
-					$dest_path = '../userdata/pictures/'.$newFileName;
+					$dest_path = '../userdata/work_pdfs/'.$newFileName;
 
 					if(move_uploaded_file($_FILES['post_pdf']['tmp_name'], $dest_path)){
 					  $pdfPath = $newFileName;
 					}else{
                       $pdf_success = false;
+                      $response .= "PDF upload failed!";
                     }
 
 				}
@@ -142,7 +143,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 	}
 	
 	//after validation, log into database and send data
-	if($passedValidation && $logo_success){
+	if($passedValidation && $logo_success && $pdf_success){
 		
 		//cryptographically secure key
 		$validationcode = bin2hex(random_bytes(16));
