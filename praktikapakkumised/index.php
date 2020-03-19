@@ -238,7 +238,7 @@
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles töökuulutus PDF formaadis</button>
+                                        <button class="btn">Lae üles praktikapakkumine PDF formaadis</button>
                                         <input type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
                                     </div>
                                 </div>
@@ -350,11 +350,8 @@
                                 <div class="post-contact-container">
                                     <span class="post-contact-name"></span>
                                     <span class="post-contact-email"></span>
-                                    <span class="post-contact-phone"></span>
                                     <span class="post-org-website" style="overflow:hidden"></span>
                                 </div>
-                                <h5>Ettevõtte kirjeldus</h5>
-                                <div class="post-org-description"></div>
                             </div>
                         </div>
                     </div>
@@ -533,7 +530,7 @@
 
         function previewFile() {
             var preview = document.querySelector('#preview');
-            var files = document.querySelector('input[type=file]').files[0];
+            var files = document.querySelector('#pilt').files[0];
 
             function readAndPreview(file) {
                 // Make sure `file.name` matches our extensions criteria
