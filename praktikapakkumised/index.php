@@ -65,20 +65,20 @@
                                 
                                 $heading = $row["heading"];
                                 $description = $row["description"];
+                                $workfield = $row["workfield"];
                                 $tasks = $row["tasks"];
                                 $skills = $row["experience"];
                                 $work_name = $row["work_name"];
-                                $work_desc = $row["work_description"];
                                 $location = $row["work_location"];
                                 $other = $row["other"];
                                 $website = $row["work_website"];
                                 $email = $row["email"];
                                 $name = $row["name"];
-                                $phone = $row["phone"];
                                 
                                 $id = $row["id"];
                                 $validationcode = $row["validationcode"];
                                 $picurl = "../userdata/pictures/".$row["logopath"];
+                                $pdfpath = "../userdata/work_pdfs/".$row["pdfpath"];
                                 //$uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));
                                 setlocale(LC_TIME, "et_EE.utf8");
                                 $uploaded = strftime('%d<br>%b<br>%Y', strtotime($row["datetime_uploaded"]));
@@ -105,16 +105,15 @@
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
                                                           data-description="'.htmlspecialchars($description).'"
+                                                          data-workfield="'.$workfield.'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
-                                                          data-work_desc="'.$work_desc.'"
                                                           data-location="'.$location.'"
                                                           data-other="'.$other.'"
                                                           data-website="'.$website.'"
                                                           data-email="'.$email.'"
                                                           data-name="'.$name.'"
-                                                          data-phone="'.$phone.'"
                                                           data-reg_end="'.$reg_end.'">
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
@@ -131,16 +130,15 @@
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
                                                           data-description="'.htmlspecialchars($description).'"
+                                                          data-workfield="'.$workfield.'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
-                                                          data-work_desc="'.$work_desc.'"
                                                           data-location="'.$location.'"
                                                           data-other="'.$other.'"
                                                           data-website="'.$website.'"
                                                           data-email="'.$email.'"
                                                           data-name="'.$name.'"
-                                                          data-phone="'.$phone.'"
                                                           data-reg_end="'.$reg_end.'">Vaata</a>
                                                     <p class="mt-1">Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
@@ -317,6 +315,7 @@
         </div>
     </div>
 
+    <!--viewing modal-->
     <div id="viewModal" class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -328,14 +327,15 @@
                             <div class="col-lg-7 col-info">
                                 <h2 class="post-heading"></h2>
                                 <h6><span class="post-org-name"></span></h6>
-                                <h5 class="unmigrate">Tööülesanded ja ootused praktikandile *</h5>
-                                <h5 class="migrate">Tutvustus</h5>
+                                <h6>Valdkond: <span class="post-workfield"></span></h6>
+                                <h5>Praktika tutvustus</h5>
                                 <div class="post-description"></div>
-                                <h5 class="migrate">Tööülesanded</h5>
-                                <div class="post-tasks migrate"></div>
-                                <h5 class="migrate">Vajalikud oskused ja kogemused</h5>
-                                <div class="post-skills migrate"></div>
-                                <h5>Muu oluline info</h5>
+                                <h5 class="hide-pdf">Ootused</h5>
+                                <div class="post-skills hide-pdf"></div>
+                                <h5 class="hide-pdf">Ülesanded</h5>
+                                <div class="post-tasks hide-pdf"></div>
+                                <div class="pdf-container"></div>
+                                <h5>Info kandideerimiseks</h5>
                                 <div class="post-other"></div>
                             </div>
 
@@ -438,41 +438,49 @@
             var pic = target.data('pic');
             var heading = target.data('heading');
             var description = $("<div/>").html(target.data('description')).text();
+            var workfield = target.data('workfield');
             var tasks = target.data('tasks');
             var skills = target.data('skills');
             var other = target.data('other');
             var work_name = target.data('work_name');
-            var work_desc = target.data('work_desc');
             var work_loc = target.data('location');
             var website = target.data('website');
             var name = target.data('name');
             var email = target.data('email');
-            var phone = target.data('phone');
             var deadline = target.data('reg_end');
+
+            //pdf stuff
+            if(target.data("pdf_path") != ""){
+                var pdf_path = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>userdata/projects/" + target.data("pdf_path");
+                //attach pdf
+                var pdf_embed = $('<iframe>').attr({
+                    'src': pdf_path + '&embedded=true',
+                    'type': 'application/pdf'
+                }).css('width', '100%').css('min-height', '512px');
+                modal.find('.pdf-container').html(pdf_embed);
+                modal.find('.pdf-hide').hide();
+                modal.find('.pdf-container').show();
+            }else{
+                modal.find('.pdf-hide').show();
+                modal.find('.pdf-container').hide();
+            }
+
 
             //attach values
             $(".post-heading").html(heading);
             $(".post-description").html("<pre>" + description + "</pre>");
+            $(".post-workfield").html(workfield);
             $(".post-tasks").html("<pre>" + tasks + "</pre>");
             $(".post-skills").html("<pre>" + skills + "</pre>");
             $(".post-img-container").html("<img src='" + pic + "'>");
             $(".post-org-name").html(work_name);
             $(".post-org-loc").html(work_loc);
-            $(".post-org-description").html("<pre>" + work_desc + "</pre>");
             $(".post-org-website").html("<a target='_blank' href='" + website + "'>" + website + "</a>");
             $(".post-contact-name").html(name);
             $(".post-contact-email").html(email);
-            $(".post-contact-phone").html(phone);
             $(".post-other").html("<pre>" + other + "</pre>");
             $(".post-deadline").html(deadline);
             handleCookies(id);
-
-            if (tasks == "" && skills == "") {
-                $(".migrate").hide();
-            } else {
-                $(".migrate").show();
-                $(".unmigrate").hide();
-            }
 
             modal.modal('show');
         }
