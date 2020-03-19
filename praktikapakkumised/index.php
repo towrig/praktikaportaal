@@ -533,7 +533,7 @@
 
         function previewFile() {
             var preview = document.querySelector('#preview');
-            var files = document.querySelector('input[type=file]').files[0];
+            var files = document.querySelector('#pilt').files[0];
 
             function readAndPreview(file) {
                 // Make sure `file.name` matches our extensions criteria
