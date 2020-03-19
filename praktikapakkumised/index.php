@@ -78,7 +78,7 @@
                                 $id = $row["id"];
                                 $validationcode = $row["validationcode"];
                                 $picurl = "../userdata/pictures/".$row["logopath"];
-                                $pdfpath = "../userdata/work_pdfs/".$row["pdfpath"];
+                                $pdfpath = $row["pdfpath"];
                                 //$uploaded = date('d\<\b\r\>M\<\b\r\>Y', strtotime($row["datetime_uploaded"]));
                                 setlocale(LC_TIME, "et_EE.utf8");
                                 $uploaded = strftime('%d<br>%b<br>%Y', strtotime($row["datetime_uploaded"]));
@@ -458,10 +458,10 @@
                     'type': 'application/pdf'
                 }).css('width', '100%').css('min-height', '512px');
                 modal.find('.pdf-container').html(pdf_embed);
-                modal.find('.pdf-hide').hide();
+                modal.find('.hide-pdf').hide();
                 modal.find('.pdf-container').show();
             }else{
-                modal.find('.pdf-hide').show();
+                modal.find('.hide-pdf').show();
                 modal.find('.pdf-container').hide();
             }
 
