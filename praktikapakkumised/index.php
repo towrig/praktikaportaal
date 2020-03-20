@@ -114,6 +114,7 @@
                                                           data-website="'.$website.'"
                                                           data-email="'.$email.'"
                                                           data-name="'.$name.'"
+                                                          data-pdf_path="'.$pdfpath.'"
                                                           data-reg_end="'.$reg_end.'">
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
@@ -139,6 +140,7 @@
                                                           data-website="'.$website.'"
                                                           data-email="'.$email.'"
                                                           data-name="'.$name.'"
+                                                          data-pdf_path="'.$pdfpath.'"
                                                           data-reg_end="'.$reg_end.'">Vaata</a>
                                                     <p class="mt-1">Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
@@ -334,6 +336,8 @@
                                 <div class="post-skills hide-pdf"></div>
                                 <h5 class="hide-pdf">Ülesanded</h5>
                                 <div class="post-tasks hide-pdf"></div>
+                                <h5 class="hide-website">Pakkumise link</h5>
+                                <div class="post-website hide-website"></div>
                                 <div class="pdf-container"></div>
                                 <h5>Info kandideerimiseks</h5>
                                 <div class="post-other"></div>
@@ -350,7 +354,6 @@
                                 <div class="post-contact-container">
                                     <span class="post-contact-name"></span>
                                     <span class="post-contact-email"></span>
-                                    <span class="post-org-website" style="overflow:hidden"></span>
                                 </div>
                             </div>
                         </div>
@@ -447,8 +450,9 @@
             var deadline = target.data('reg_end');
 
             //pdf stuff
+            console.log(target.data("pdf_path")+";");
             if(target.data("pdf_path") != ""){
-                var pdf_path = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>userdata/projects/" + target.data("pdf_path");
+                var pdf_path = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>userdata/work_pdfs/" + target.data("pdf_path");
                 //attach pdf
                 var pdf_embed = $('<iframe>').attr({
                     'src': pdf_path + '&embedded=true',
@@ -462,6 +466,12 @@
                 modal.find('.pdf-container').hide();
             }
 
+            if(website != ""){
+                $(".hide-website").show();
+                $(".post-website").html("<a target='_blank' href='" + website + "'>" + website + "</a>");
+            }else{
+                $(".hide-website").hide();
+            }
 
             //attach values
             $(".post-heading").html(heading);
@@ -472,7 +482,6 @@
             $(".post-img-container").html("<img src='" + pic + "'>");
             $(".post-org-name").html(work_name);
             $(".post-org-loc").html(work_loc);
-            $(".post-org-website").html("<a target='_blank' href='" + website + "'>" + website + "</a>");
             $(".post-contact-name").html(name);
             $(".post-contact-email").html(email);
             $(".post-other").html("<pre>" + other + "</pre>");
