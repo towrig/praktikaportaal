@@ -238,7 +238,7 @@
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles praktikapakkumine PDF formaadis</button>
+                                        <button class="btn">Lisa praktikapakkumise pdf</button>
                                         <input type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
                                     </div>
                                 </div>
@@ -251,7 +251,7 @@
                                         <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles oma organisatsiooni logo *</button>
+                                        <button class="btn">Lisa organisatsiooni logo *</button>
                                         <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
                                     </div>
                                     <div class='invalid-feedback'>Sisesta logo!</div>
