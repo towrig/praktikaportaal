@@ -250,7 +250,7 @@
                                 <div class="form-group">
                                     <label for="pilt" class="">Logo</label>
                                     <div id="preview">
-                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                        <img id="profileImg" src="../userdata/logo_placeholder.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
                                         <button class="btn">Lisa organisatsiooni logo *</button>
@@ -337,10 +337,10 @@
                                 <h5 class="hide-pdf">Ülesanded</h5>
                                 <div class="post-tasks hide-pdf"></div>
                                 <h5 class="hide-website">Pakkumise link</h5>
-                                <div class="post-website hide-website"></div>
+                                <div class="post-website hide-website" style="overflow:hidden;"></div>
                                 <div class="pdf-container"></div>
-                                <h5>Info kandideerimiseks</h5>
-                                <div class="post-other"></div>
+                                <h5 class="hide-other">Info kandideerimiseks</h5>
+                                <div class="post-other hide-other"></div>
                             </div>
 
                             <div class="col-lg-5 col-contact">
@@ -461,16 +461,28 @@
                 modal.find('.pdf-container').html(pdf_embed);
                 modal.find('.hide-pdf').hide();
                 modal.find('.pdf-container').show();
-            }else{
+            }else if (tasks != "" || skills != ""){
                 modal.find('.hide-pdf').show();
+                modal.find('.pdf-container').hide();
+            }else{
+                modal.find('.hide-pdf').hide();
                 modal.find('.pdf-container').hide();
             }
 
+            //website hide logic
             if(website != ""){
                 $(".hide-website").show();
                 $(".post-website").html("<a target='_blank' href='" + website + "'>" + website + "</a>");
             }else{
                 $(".hide-website").hide();
+            }
+
+            //other hide logic
+            if(other != ""){
+                $(".post-other").html("<pre>" + other + "</pre>");
+                $(".hide-other").show();
+            }else{
+                $(".hide-other").hide();
             }
 
             //attach values
@@ -484,7 +496,6 @@
             $(".post-org-loc").html(work_loc);
             $(".post-contact-name").html(name);
             $(".post-contact-email").html(email);
-            $(".post-other").html("<pre>" + other + "</pre>");
             $(".post-deadline").html(deadline);
             handleCookies(id);
 
