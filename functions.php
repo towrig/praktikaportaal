@@ -1,11 +1,13 @@
 <?php
 
+    //language needs to be handled differently, this is temporary
     $_SESSION["lang"] = "ee";
 
+
     /*
-    *   Fetches the fields specified in $arr from the database
+    *   Fetches stuff based on $arr.
     */
-    function t($arr){
+    function t($arr,$dbhost,$dbname,$dbuser,$dbpassword){
         $q_string = "?";
         $return_arr = array();
         for($i = 1; $i < $arr.length; $i++){
@@ -20,7 +22,7 @@
             $data = $query -> fetchAll();
             foreach($data as $row){
                 $key = array_search($row["tag"], $arr);
-                $return_arr[$key] = $row["content"];
+                $return_arr[$arr[$key]] = $row["content"];
             }
         } catch (PDOException $e){
             echo "Connection failed: " . $e->getMessage();

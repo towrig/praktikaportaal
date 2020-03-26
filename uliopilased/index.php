@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-  $title="Üliõpilased |";
-  /*$description = "Otsid praktikakohta? Lisa oma profiil ja ole tööandjatele nähtav! Praktikakogemus suurendab edu edaspidisel töölekandideerimisel ja ka praktikakohast võib saada Sinu järgmine töökoht.";*/
-  include_once './../templates/header.php';
-  include_once './../functions.php';
-  $t_pieces = t(array("uliop_desc"));
-  $description = $t_pieces["uliop_desc"];
+    include_once './../templates/header.php';
+    include_once './../functions.php';
+    $t_pieces = t(array("uliop_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+
+    $title="Üliõpilased |";
+    $description = $t_pieces["uliop_desc"];
 ?>
 
 <body id="page-top" class="practice">
@@ -19,7 +19,7 @@
 
         <section class="page-section">
             <div class="container">
-                <div class="row" >
+                <div class="row">
                     <div class="col-lg-12">
                         <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Üliõpilased</h1>
                     </div>
@@ -32,7 +32,7 @@
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Üliõpilased','event_label':'Ava lisa profiil'});">Lisa profiil</span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Praegu aktiivsed</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down">Praegu aktiivsed</h5>
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
@@ -250,41 +250,41 @@
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major">
                                     <div class='invalid-feedback'>Palun anna teada, mis eriala sa õpid</div>
                                 </div>
-                              <div class="form-group">
+                                <div class="form-group">
                                     <label for="work">Instituut</label>
                                     <select class="form-control" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
-                                      <option selected>...</option>
-                                      <option>ajaloo ja arheoloogia instituut</option>
-                                      <option>arvutiteaduse instituut</option>
-                                      <option>bio- ja siirdemeditsiini instituut</option>
-                                      <option>eesti ja üldkeeleteaduse instituut</option>
-                                      <option>Eesti mereinstituut</option>
-                                      <option>farmaatsia instituut</option>
-                                      <option>filosoofia ja semiootika instituut</option>
-                                      <option>füüsika instituut</option>
-                                      <option>hambaarstiteaduse instituut</option>
-                                      <option>haridusteaduste instituut</option>
-                                      <option>Johan Skytte poliitikauuringute instituut</option>
-                                      <option>keemia instituut</option>
-                                      <option>kliinilise meditsiini instituut</option>
-                                      <option>kultuuriteaduste instituut</option>
-                                      <option>maailma keelte ja kultuuride kolledž</option>
-                                      <option>majandusteaduskond</option>
-                                      <option>matemaatika ja statistika instituut</option>
-                                      <option>molekulaar- ja rakubioloogia instituut</option>
-                                      <option>Narva kolledž</option>
-                                      <option>õigusteaduskond</option>
-                                      <option>ökoloogia ja maateaduste instituut</option>
-                                      <option>Pärnu kolledž</option>
-                                      <option>peremeditsiini ja rahvatervishoiu instituut</option>
-                                      <option>psühholoogia instituut</option>
-                                      <option>sporditeaduste ja füsioteraapia instituut</option>
-                                      <option>Tartu observatoorium</option>
-                                      <option>tehnoloogiainstituut</option>
-                                      <option>ühiskonnateaduste instituut</option>
-                                      <option>usuteaduskond</option>
-                                      <option>Viljandi kultuuriakadeemia</option>
-                                      <option>muu</option>
+                                        <option selected>...</option>
+                                        <option>ajaloo ja arheoloogia instituut</option>
+                                        <option>arvutiteaduse instituut</option>
+                                        <option>bio- ja siirdemeditsiini instituut</option>
+                                        <option>eesti ja üldkeeleteaduse instituut</option>
+                                        <option>Eesti mereinstituut</option>
+                                        <option>farmaatsia instituut</option>
+                                        <option>filosoofia ja semiootika instituut</option>
+                                        <option>füüsika instituut</option>
+                                        <option>hambaarstiteaduse instituut</option>
+                                        <option>haridusteaduste instituut</option>
+                                        <option>Johan Skytte poliitikauuringute instituut</option>
+                                        <option>keemia instituut</option>
+                                        <option>kliinilise meditsiini instituut</option>
+                                        <option>kultuuriteaduste instituut</option>
+                                        <option>maailma keelte ja kultuuride kolledž</option>
+                                        <option>majandusteaduskond</option>
+                                        <option>matemaatika ja statistika instituut</option>
+                                        <option>molekulaar- ja rakubioloogia instituut</option>
+                                        <option>Narva kolledž</option>
+                                        <option>õigusteaduskond</option>
+                                        <option>ökoloogia ja maateaduste instituut</option>
+                                        <option>Pärnu kolledž</option>
+                                        <option>peremeditsiini ja rahvatervishoiu instituut</option>
+                                        <option>psühholoogia instituut</option>
+                                        <option>sporditeaduste ja füsioteraapia instituut</option>
+                                        <option>Tartu observatoorium</option>
+                                        <option>tehnoloogiainstituut</option>
+                                        <option>ühiskonnateaduste instituut</option>
+                                        <option>usuteaduskond</option>
+                                        <option>Viljandi kultuuriakadeemia</option>
+                                        <option>muu</option>
                                     </select>
                                     <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
                                 </div>
@@ -345,9 +345,9 @@
                         </form>
                     </div>
                 </div>
-               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
-              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                </div>
             </div>
 
         </div>
@@ -363,10 +363,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <div class="col-lg-12 pdf-container"></div>
+                    <div class="col-lg-12 pdf-container"></div>
                 </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
                 </div>
             </div>
         </div>
@@ -386,12 +386,14 @@
             $('.js-modal').on('click', openModal);
             $('.js-open-cv').on('click', openCV);
             $('.js-ajax').on('click', function(e) {
-                 ajaxSubmit(e);
+                ajaxSubmit(e);
             });
             $(".flip-div").click(function() {
                 $(this).toggleClass("hover");
             });
-            $('.links a').on("click",function(e){$(this).parent().parent().parent().parent().parent().toggleClass("hover")});
+            $('.links a').on("click", function(e) {
+                $(this).parent().parent().parent().parent().parent().toggleClass("hover")
+            });
 
             $('.pagination .page-item').on('click', paginatorClick);
             $('#carouselPager').carousel({
@@ -446,7 +448,7 @@
             formData.delete("pilt_full");
             if (blobImg != undefined)
                 formData.append("pilt", blobImg, "profilepic.jpg");
-            
+
             if ($('#cv')[0].files.length != 0 && $('#cv')[0].files[0].size > 8192000) { // 8 MB (size in bytes)
                 form.before('<div class="alert alert-danger alert-dismissible fade show" role="alert">\
                               <strong>Viga!</strong> CV faili suurus on liiga suur!\

@@ -15,6 +15,7 @@
     $dbname = $CFG->dbname;
     $dbuser = $CFG->dbuser;
     $dbpassword = $CFG->dbpasswd;
+
 ?>
 <head>
 
