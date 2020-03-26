@@ -19,7 +19,7 @@
             $query->execute(array_merge(array($_SESSION["lang"]),$arr));
             $data = $query -> fetchAll();
             foreach($data as $row){
-                $key = array_search($row["tag"], $array);
+                $key = array_search($row["tag"], $arr);
                 $return_arr[$key] = $row["content"];
             }
         } catch (PDOException $e){

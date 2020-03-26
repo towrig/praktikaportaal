@@ -15,6 +15,8 @@
     $dbname = $CFG->dbname;
     $dbuser = $CFG->dbuser;
     $dbpassword = $CFG->dbpasswd;
+
+    include_once $wwwroot.'functions.php';
 ?>
 <head>
 
