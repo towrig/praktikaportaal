@@ -6,7 +6,7 @@
   /*$description = "Otsid praktikakohta? Lisa oma profiil ja ole tööandjatele nähtav! Praktikakogemus suurendab edu edaspidisel töölekandideerimisel ja ka praktikakohast võib saada Sinu järgmine töökoht.";*/
   $description = $t_pieces["uliop_desc"];
   include_once './../templates/header.php';
-  include_once './functions.php';
+  include_once './../functions.php';
 ?>
 
 <body id="page-top" class="practice">
