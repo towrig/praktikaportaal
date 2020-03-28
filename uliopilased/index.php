@@ -2,7 +2,6 @@
 <html lang="en">
 <?php
     include_once './../templates/header.php';
-    include_once './../functions.php';
     $t_pieces = t(array("uliop_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
 
     $title="Üliõpilased |";

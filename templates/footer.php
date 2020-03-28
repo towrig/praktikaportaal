@@ -51,7 +51,26 @@
     <!-- PDF viewer -->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>-->
     <script>
+
+    </script>
+    <script>
       $(function(){
+        $('.lang-switch').on('click', function(e){
+            var formData = new FormData();
+            formData.append("lang", <?php echo $_SESSION["lang"]; ?>);
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $wwwroot; ?>lang.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData
+            }).done(function(response) {
+                location.reload();
+            }).fail(function(response) {
+                console.log("Failed: "+response.reponseText)
+            });
+        });
         $('body').ihavecookies({
           title: "Küpsised ja privaatsuspoliitika",
           message: "Kasutame oma veebilehel küpsiseid ning Google Analyticsi teenust veebilehe külastatavuse statistika analüüsiks.",

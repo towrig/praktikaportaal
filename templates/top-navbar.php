@@ -17,7 +17,7 @@
                     <a class="nav-link" href="<?php echo $wwwroot; ?>juhendajale" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Juhendajale'});">Juhendajale</a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link lang-switch" target="_blank" href="#">EST</a>
+                <a class="nav-link lang-switch" target="_blank" href="#">ˇ<?php if($_SESSION["lang"] == "ee"){ echo "ET"; }else{ echo "EN";} ?></a>
               </li>
             </ul>
         </div>

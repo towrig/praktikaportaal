@@ -1,7 +1,9 @@
 <?php
 
     //language needs to be handled differently, this is temporary
-    $_SESSION["lang"] = "ee";
+    if(!isset($_SESSION["lang"])){
+        $_SESSION["lang"] = "ee";
+    }
 
 
     /*
