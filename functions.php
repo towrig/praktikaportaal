@@ -10,7 +10,7 @@
     function t($arr,$dbhost,$dbname,$dbuser,$dbpassword){
         $q_string = "?";
         $return_arr = array();
-        for($i = 1; $i < $arr.length; $i++){
+        for($i = 1; $i < count($arr); $i++){
             $q_string .= ",?";
         }
         try {
