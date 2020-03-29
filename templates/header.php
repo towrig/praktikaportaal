@@ -43,6 +43,7 @@
     <meta property="og:image:height" content="452" />
     <meta property="og:image:alt" content="Futulab - Tulevik algab Sinust!" />
 
+    <?php include './../functions.php'; ?>
 
     <?php
       $isanalytics = '["analytics"]';

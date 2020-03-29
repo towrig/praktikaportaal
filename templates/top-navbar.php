@@ -22,7 +22,7 @@ $t_pieces = t(array("top-navb1","top-navb2","top-navb3"),$dbhost,$dbname,$dbuser
                     <a class="nav-link" href="<?php echo $wwwroot; ?>juhendajale" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Juhendajale'});"><?php echo $t_pieces["top-navb3"];?></a>
                 </li>
               <li class="nav-item">
-                <a class="nav-link lang-switch" target="_blank" href="#">EST</a>
+                <a class="nav-link lang-switch" target="_blank" href="#">ˇ<?php if($_SESSION["lang"] == "ee"){ echo "ET"; }else{ echo "EN";} ?></a>
               </li>
             </ul>
         </div>
