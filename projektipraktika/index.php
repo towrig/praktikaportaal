@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
 <?php
-  $title="Projektipraktika |";
-  $description = "Otsid oma ideele lahendust? Lisa projekt ja meie moodustame meeskonna, kus erinevate õppekavade üliõpilased aitavad koostöös leida parimaid lahendusi.";
-  include_once './../templates/header.php';
+include_once './functions.php';
+include_once './../templates/header.php';
+$t_pieces = t(array("projektipak_title","projektipak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+$title = $t_pieces["projektipak_title"];
+$description = $t_pieces["projektipak_desc"];
 ?>
 
 <body id="page-top" class="project">
@@ -14,7 +15,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Projekti&shy;praktika</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right"><?php echo $title;?></h1>
                     </div>
                     <div class="col-lg-4"  data-aos="fade-right">
                         <p class="font-weight-light">

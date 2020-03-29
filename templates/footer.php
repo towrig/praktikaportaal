@@ -1,15 +1,20 @@
+<!DOCTYPE html>
+<?php
+$t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5"),$dbhost,$dbname,$dbuser,$dbpassword);
+?>
+
     <footer>
       <div class="container mb-5">
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="row">
               <div class="col-md-4">
-                <h3 class="contact-us" data-aos="fade-right">VÕTA<br>MEIEGA<br>ÜHENDUST!</h3>
+                <h3 class="contact-us" data-aos="fade-right"><?php echo $t_pieces["footer_h1"];?></h3>
               </div>
               <div class="col-md-4">
                 <div class="row">
                   <div class="col-md-12 contact-us-info" data-aos="fade-right">
-                    <p>Kui Sul on küsimusi või mõni teema pakub huvi, siis võta meiega ühendust aadressil</p>
+                    <p><?php echo $t_pieces["footer1"];?></p>
                   </div>
                   <div class="col-md-12" data-aos="fade-right"><a href="mailto:praktika@ut.ee"  onclick="gtag('event', 'Võta ühendust',{'event_category': 'Jalus','event_label':'Võta ühendust!'});">praktika@ut.ee</a></div>
                 </div>
@@ -19,8 +24,8 @@
           <div class="col-md-12 footer-bottom mt-5">
             <div class="row">
               <div class="copyright col-md-9">
-                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light">  </span><a href="<?php echo $wwwroot; ?>andmekaitsetingimused/" class="font-weight-light text-muted">Andmekaitsetingimused</a>
-                <span class="text-muted font-weight-light"> | </span><a href="<?php echo $wwwroot; ?>kasutusjuhend/" class="font-weight-light text-muted">Kasutusjuhend</a>
+                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light">  </span><a href="<?php echo $wwwroot; ?>andmekaitsetingimused/" class="font-weight-light text-muted"><?php echo $t_pieces["footer2"];?></a>
+                <span class="text-muted font-weight-light"> | </span><a href="<?php echo $wwwroot; ?>kasutusjuhend/" class="font-weight-light text-muted"><?php echo $t_pieces["footer3"];?></a>
               </div>
               <div class="socialmedia col-md-3 text-right" >
                 <a href="https://twitter.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Twitter'});"><i class="fab fa-2x fa-twitter"></i></a>
@@ -80,7 +85,7 @@
 </script>
 
     <div id="scrollTop">
-      <a href="#why" class="scrollDown text-uppercase" onclick="gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Alla'});">Loe edasi</a>
-      <a href="#" class="scrollBack text-uppercase" onclick="document.documentElement.scrollTop = 0; document.body.scrollTop = 0; gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Üles'});" >Tagasi üles</a>
+      <a href="#why" class="scrollDown text-uppercase" onclick="gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Alla'});"><?php echo $t_pieces["footer4"];?></a>
+      <a href="#" class="scrollBack text-uppercase" onclick="document.documentElement.scrollTop = 0; document.body.scrollTop = 0; gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Üles'});" ><?php echo $t_pieces["footer5"];?></a>
     </div>
 

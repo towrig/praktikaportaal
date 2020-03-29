@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
 <?php
-  $title="Praktikapakkumised |";
-  $description = "Otsid praktikanti või tulevast töötajat? Lisa praktikapakkumine ja näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.";
-  include_once './../templates/header.php';
+include_once './functions.php';
+include_once './../templates/header.php';
+$t_pieces = t(array("praktikapak_title","praktikapak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+$title = $t_pieces["praktikapak_title"];
+$description = $t_pieces["praktikapak_desc"];
 ?>
 
 <body id="page-top" class="practiceoffers">
@@ -14,7 +15,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Praktika&shy;pakkumised</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right"><?php echo $title;?></h1>
                     </div>
                     <div class="col-lg-3">
                         <p class="font-weight-light mb-5" data-aos="fade-right"><?php echo $description; ?></p>

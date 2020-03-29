@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<?php
+$t_pieces = t(array("top-navb1","top-navb2","top-navb3"),$dbhost,$dbname,$dbuser,$dbpassword);
+?>
+
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
@@ -8,13 +13,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $wwwroot; ?>tutvustus" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Tutvustus'});">Tutvustus</a>
+                    <a class="nav-link" href="<?php echo $wwwroot; ?>tutvustus" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Tutvustus'});"><?php echo $t_pieces["top-navb1"];?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $wwwroot; ?>tutvustus#praktikakorraldus" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Praktikakorraldus'});">Praktikakorraldus</a>
+                    <a class="nav-link" href="<?php echo $wwwroot; ?>tutvustus#praktikakorraldus" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Praktikakorraldus'});"><?php echo $t_pieces["top-navb2"];?></a>
                 </li>
               <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $wwwroot; ?>juhendajale" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Juhendajale'});">Juhendajale</a>
+                    <a class="nav-link" href="<?php echo $wwwroot; ?>juhendajale" onclick="gtag('event', 'Sisu@UT',{'event_category': 'Pealdis','event_label':'Juhendajale'});"><?php echo $t_pieces["top-navb3"];?></a>
                 </li>
               <li class="nav-item">
                 <a class="nav-link lang-switch" target="_blank" href="#">EST</a>

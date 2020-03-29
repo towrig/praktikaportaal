@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<?php
+$t_pieces = t(array("fp-stats_title","fp-stats_h1","fp-stats_h2","fp-stats_h3", "fp-stats_h4"),$dbhost,$dbname,$dbuser,$dbpassword);
+?>
+
 <section id="stats" class="section main-row">
     <div class="section-container container text-center">
         <div class="row"  data-aos="fade-down" data-aos-anchor-placement="bottom-bottom">
@@ -5,7 +10,7 @@
                 <div class="column-wrapper">
                     <div id="divider" class="divider">
                         <div class="divider-content">
-                              <h3 class="text-uppercase my-5">Futulabis on</h3>
+                              <h3 class="text-uppercase my-5"><?php echo $t_pieces["fp-stats_title"];?></h3>
                         </div>
                     </div>
                 </div>
@@ -19,7 +24,7 @@
                         <h2 class=" my-4"><?php echo $stats[0]?></h2>
                     </div>
                     <div>
-                      <h5 class="h6 text-uppercase mb-2">üliõpilast</h5>
+                      <h5 class="h6 text-uppercase mb-2"><?php echo $t_pieces["fp-stats_h1"];?></h5>
                     </div>
                 </div>
             </div>
@@ -30,7 +35,7 @@
                         <h2 class=" my-4"><?php echo $stats[1]?></h2>
                     </div>
                     <div>
-                      <h5 class="h6 text-uppercase mb-2">projekti</h5>
+                      <h5 class="h6 text-uppercase mb-2"><?php echo $t_pieces["fp-stats_h2"];?></h5>
                   </div>
                 </div>
             </div>
@@ -41,7 +46,7 @@
                         <h2 class=" my-4"><?php echo $stats[4]?></h2>
                     </div>
                     <div>
-                      <h5 class="h6 text-uppercase mb-2">praktika&shy;pakkumist</h5>
+                      <h5 class="h6 text-uppercase mb-2"><?php echo $t_pieces["fp-stats_h3"];?></h5>
                     </div>
                 </div>
             </div>
@@ -52,7 +57,7 @@
                         <h2 class="my-4"><?php echo $stats[3]?></h2>
                     </div>
                     <div>
-                      <h5 class="h6 text-uppercase mb-2">organisatsiooni</h5>
+                      <h5 class="h6 text-uppercase mb-2"><?php echo $t_pieces["fp-stats_h4"];?></h5>
                     </div>
                 </div>
             </div>

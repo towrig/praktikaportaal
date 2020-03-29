@@ -2,10 +2,9 @@
 <html lang="en">
 <?php
     include_once './../templates/header.php';
-    include_once './../functions.php';
-    $t_pieces = t(array("uliop_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+    $t_pieces = t(array("uliop_title","uliop_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
 
-    $title="Üliõpilased |";
+    $title=$t_pieces["uliop_title"];
     $description = $t_pieces["uliop_desc"];
 ?>
 
