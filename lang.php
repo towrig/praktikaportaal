@@ -2,7 +2,7 @@
 
     if(!empty($_POST) && !empty($_POST["lang"])){
         if($_POST["lang"] == "ee"){
-            $_SESSION["lang"] = "en";
+            $_SESSION["lang"] = "eng";
         }else{
             $_SESSION["lang"] = "ee";
         }
