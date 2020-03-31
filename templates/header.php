@@ -16,6 +16,8 @@
     $dbuser = $CFG->dbuser;
     $dbpassword = $CFG->dbpasswd;
 
+    session_start();
+
 ?>
 <head>
 
@@ -43,7 +45,7 @@
     <meta property="og:image:height" content="452" />
     <meta property="og:image:alt" content="Futulab - Tulevik algab Sinust!" />
 
-    <?php include './../functions.php'; ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"].'/functions.php'; ?>
 
     <?php
       $isanalytics = '["analytics"]';

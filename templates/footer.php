@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
-$t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5"),$dbhost,$dbname,$dbuser,$dbpassword);
+//c_title, c_message, c_accept, c_more, c_fixed_1, c_fixed_2
+$t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5", "cookie_title", "cookie_message", "cookie_advanced", "cookie_accept", "cookie_more", "cookie_fixed_1", "cookie_fixed_2", "cookie_fixed_3", "cookie_fixed_4"),$dbhost,$dbname,$dbuser,$dbpassword);
 ?>
 
     <footer>
@@ -59,10 +60,11 @@ $t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5
 
     </script>
     <script>
+    console.log("lang: <?php echo $_SESSION["lang"]; ?>");
       $(function(){
         $('.lang-switch').on('click', function(e){
             var formData = new FormData();
-            formData.append("lang", <?php echo $_SESSION["lang"]; ?>);
+            formData.append("lang", "<?php echo $_SESSION["lang"]; ?>");
             $.ajax({
                 type: 'POST',
                 url: '<?php echo $wwwroot; ?>lang.php',
@@ -77,22 +79,22 @@ $t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5
             });
         });
         $('body').ihavecookies({
-          title: "Küpsised ja privaatsuspoliitika",
-          message: "Kasutame oma veebilehel küpsiseid ning Google Analyticsi teenust veebilehe külastatavuse statistika analüüsiks.",
+          title: "<?php echo $t_pieces["cookie_title"]; ?>",
+          message: "<?php echo $t_pieces["cookie_message"]; ?>",
           link: "<?php echo $wwwroot; ?>andmekaitsetingimused/",
-          advancedBtnLabel: "Vali küpsised",
-          acceptBtnLabel: "Luba küpsised",
-          moreInfoLabel: "Andmekaitsetingimused",
+          advancedBtnLabel: "<?php echo $t_pieces["cookie_advanced"]; ?>",
+          acceptBtnLabel: "<?php echo $t_pieces["cookie_accept"]; ?>",
+          moreInfoLabel: "<?php echo $t_pieces["cookie_more"]; ?>",
           uncheckBoxes: false,
-          fixedCookieTypeLabel: 'Kohustuslikud',
-          fixedCookieTypeDesc: 'Need küpsised on vajalikud, et tagada võrgulehe toimimine.',
+          fixedCookieTypeLabel: '<?php echo $t_pieces["cookie_fixed_1"]; ?>',
+          fixedCookieTypeDesc: '<?php echo $t_pieces["cookie_fixed_2"]; ?>',
           delay: 10,
 
           cookieTypes: [
             {
-              type: 'Analüütika',
+              type: '<?php echo $t_pieces["cookie_fixed_3"];?>',
               value: 'analytics',
-              description: 'Kasutame Google Analytics teenust, et teostada analüütikat veebilehe külastatavuse analüüsiks.'
+              description: '<?php echo $t_pieces["cookie_fixed_4"];?>'
             }
           ]
         });

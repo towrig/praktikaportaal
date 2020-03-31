@@ -42,7 +42,6 @@
                   <a class="card m-5 m-md-4 m-xl-5 first" href="./uliopilased" onclick="gtag('event', 'Lisa',{'event_category': 'Avaleht','event_label':'Üliopilased'});">
                     <div class="card-body">
                       <i id="masthead-yliopilane"></i>
-                      <h5 class="card-title text-uppercase">Üliõpilased</h5>
                         <h5 class="card-title text-uppercase"><?php echo $t_pieces["fp-mh_h1"];?></h5>
                         <p class="card-text text-muted">
                             <span><?php echo $t_pieces["fp-mh1.0"];?></span>

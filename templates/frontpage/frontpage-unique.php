@@ -1,3 +1,7 @@
+<?php
+$t_pieces = t(array("fp-unique_title", "fp-unique1", "fp-unique_h1", "fp-unique2", "fp-unique_h2",
+    "fp-unique3", "fp-unique_h3", "fp-unique4", "fp-unique_h4", "fp-unique5"),$dbhost,$dbname,$dbuser,$dbpassword);
+?>
 <section id="unique" class="my-5 page-section">
     <div class="container">
         <div class="row">
