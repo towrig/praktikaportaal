@@ -2,11 +2,6 @@
 <html lang="en">
 <?php
     include_once './../templates/header.php';
-    include_once './../functions.php';
-    $t_pieces = t(array("uliop_title","uliop_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
-
-    $title=$t_pieces["uliop_title"];
-    $description = $t_pieces["uliop_desc"];
 ?>
 
 <body id="page-top" class="practice">
@@ -16,23 +11,36 @@
     <div id="main"></div>
 
     <div id="page-content">
+        <?php
+
+            $t_pieces = t(array("fp-mh_h1","uliop_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+
+            //for smaller buttons, unworthy of the database
+            if($_SESSION["lang"] == "ee"){
+                $arc_active = "Praegu aktiivsed";
+                $add_profile = "Lisa profiil";
+            }else{
+                $arc_active = "Currently active";
+                $add_profile = "Add profile";
+            }
+        ?>
 
         <section class="page-section">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Üliõpilased</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right"><?php echo $t_pieces["fp-mh_h1"]; ?></h1>
                     </div>
                     <div class="col-lg-4" data-aos="fade-right">
                         <p class="font-weight-light">
-                            <?php echo $description; ?>
+                            <?php echo $t_pieces["uliop_desc"]; ?>
                         </p>
                     </div>
                     <div class="col-lg-2" data-aos="zoom-in-left">
-                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Üliõpilased','event_label':'Ava lisa profiil'});">Lisa profiil</span>
+                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Üliõpilased','event_label':'Ava lisa profiil'});"><?php echo $add_profile; ?></span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down">Praegu aktiivsed</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down"><?php echo $arc_active; ?></h5>
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->

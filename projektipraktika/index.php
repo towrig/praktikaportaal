@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <?php
-include_once './functions.php';
-include_once './../templates/header.php';
-$t_pieces = t(array("projektipak_title","projektipak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
-$title = $t_pieces["projektipak_title"];
-$description = $t_pieces["projektipak_desc"];
+    include_once './../templates/header.php';
+    $t_pieces = t(array("projektipak_title","projektipak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+    $title = $t_pieces["projektipak_title"];
+    $description = $t_pieces["projektipak_desc"];
+    //for smaller buttons, unworthy of the database
+    if($_SESSION["lang"] == "ee"){
+        $arc_active = "Esitatud projektid";
+        $add_project = "Esita projekt";
+        $check_timetable = "Vaata ajakava siit!";
+    }else{
+        $arc_active = "Submitted projects";
+        $add_project = "Submit project";
+        $check_timetable = "Check timetable here!";
+    }
 ?>
 
 <body id="page-top" class="project">
@@ -26,14 +35,14 @@ $description = $t_pieces["projektipak_desc"];
                           Projektipraktika ideede esitamise tähtaeg on kevadsemestril <b>02.03</b>. Üliõpilased saavad projektidega liituda <b>09.-15.03</b>.
                         </p>
                         -->
-                        <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});">Vaata ajakava siit!</a>
+                        <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});"><?php echo $check_timetable; ?></a>
                     </div> <!-- .col-->
 
                     <div class="col-lg-2"  data-aos="zoom-in-right">
-                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});">Esita projekt</span>
+                        <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});"><?php echo $add_project; ?></span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down">Esitatud projektid</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down"><?php echo $arc_active; ?></h5>
                     </div>
 
                 </div> <!-- .row -->

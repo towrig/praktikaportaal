@@ -1,10 +1,9 @@
 <?php
 
-    //language needs to be handled differently, this is temporary
+    //sets language if unset
     if(!isset($_SESSION["lang"])){
         $_SESSION["lang"] = "ee";
     }
-
 
     /*
     *   Fetches stuff based on $arr.

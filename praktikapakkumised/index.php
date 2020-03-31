@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <?php
-include_once './functions.php';
-include_once './../templates/header.php';
-$t_pieces = t(array("praktikapak_title","praktikapak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
-$title = $t_pieces["praktikapak_title"];
-$description = $t_pieces["praktikapak_desc"];
+    include_once './functions.php';
+    include_once './../templates/header.php';
+    $t_pieces = t(array("praktikapak_title","praktikapak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+    $title = $t_pieces["praktikapak_title"];
+    $description = $t_pieces["praktikapak_desc"];
+    if($_SESSION["lang"] == "ee"){
+        $active_offers = "Aktiivsed pakkumised";
+        $add_offer = "Lisa pakkumine";
+    }else{
+        $active_offers = "Active offers";
+        $add_offer = "Add offer";
+    }
 ?>
 
 <body id="page-top" class="practiceoffers">
@@ -21,10 +28,10 @@ $description = $t_pieces["praktikapak_desc"];
                         <p class="font-weight-light mb-5" data-aos="fade-right"><?php echo $description; ?></p>
                     </div> <!-- .col-->
                     <div class="col-lg-2" data-aos="fade-in-right">
-                        <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});">Lisa pakkumine</a>
+                        <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});"><?php echo $add_offer; ?></a>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down">Aktiivsed pakkumised</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down"><?php echo $active_offers; ?></h5>
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
