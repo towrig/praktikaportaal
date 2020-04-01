@@ -13,7 +13,7 @@
     <div id="page-content">
         <?php
 
-            $t_pieces = t(array("fp-mh_h1","uliop_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+            $t_pieces = t(array("fp-mh_h1","uliop_desc","forms_consent"),$dbhost,$dbname,$dbuser,$dbpassword);
 
             //for smaller buttons, unworthy of the database
             if($_SESSION["lang"] == "ee"){
@@ -21,7 +21,7 @@
                 $add_profile = "Lisa profiil";
             }else{
                 $arc_active = "Currently active";
-                $add_profile = "Add profile";
+                $add_profile = "Upload profile";
             }
         ?>
 
@@ -237,29 +237,73 @@
 
                 <div class="modal-body">
                     <div class="container">
+                        <?php
+                        //form text translations
+                        if($_SESSION["lang"] == "ee"){
+                            $name_form_area = "Ees- ja perekonnanimi *";
+                            $name_form_area_warning = "Palun lisa oma nimi";
+                            $email_form_area_warning = "Vajame sinu meiliaadressi, et sulle kinnituslink saata";
+                            $work_form_area = "Eriala *";
+                            $work_form_area_warning = "Palun anna teada, mis eriala sa õpid";
+                            $institute_form_area = "Instituut";
+                            $institute_form_area_warning = "Ole hea ja anna teada, mis instituudist sa oled";
+                            $photo_form_area = "Lae üles oma profiilipilt";
+                            $photo_form_area_warning = "Lae profiilipilt!";
+                            $area_form_area = "Soovitav praktika/töö valdkond *";
+                            $area_form_area_warning = "Ära unusta märkida, mis valdkonnas soovid töötada";
+                            $strengths_form_area = "Tugevused/oskused *";
+                            $strengths_form_area_warning = "Palun kirjelda lühidalt oma oskusi";
+                            $experience_form_area = "Kogemused";
+                            $location_form_area = "Soovitud asukoht";
+                            $cv_form_area = "Lae üles oma CV";
+                            $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
+                            $consent_link_text = "siit";
+                            $close_text = "Sulge";
+                        }
+                        else{
+                            $name_form_area = "First and last name *";
+                            $name_form_area_warning = "Please insert your name";
+                            $email_form_area_warning = "Your e-mail is required for the e-mail confirmation link";
+                            $work_form_area = "Curriculum *";
+                            $work_form_area_warning = "Please tell us your curriculum";
+                            $institute_form_area = "Institute";
+                            $institute_form_area_warning = "Please tell us which institute you are from";
+                            $photo_form_area = "PHOTO - upload your profile picture";
+                            $photo_form_area_warning = "Upload your profile picture!";
+                            $area_form_area = "Preferred internship field *";
+                            $area_form_area_warning = "Don't forget to specify your preferred internship field";
+                            $strengths_form_area = "Character strengths *";
+                            $strengths_form_area_warning = "Please shortly describe your strenghts";
+                            $experience_form_area = "Experience";
+                            $location_form_area = "Preferred location";
+                            $cv_form_area = "Upload your CV";
+                            $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
+                            $consent_link_text = "here";
+                            $close_text = "Close";
+                        }
+                        ?>
 
                         <form class="needs-validation row <?php if ($form_success){ echo "hidden"; }?>" action="./prax_api.php" method="post" enctype="multipart/form-data" id="form_student">
 
                             <div class="col-lg-8">
-
                                 <div class="form-group">
-                                    <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                    <label for="name">Ees- ja perekonnanimi *</label>
+                                    <p class="alert alert-warning font-weight-normal"><?php echo $t_pieces["forms_consent"];?></p>
+                                    <label for="name"><?php echo $name_form_area; ?></label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($name == "") { echo "is-invalid"; } else {echo "is-valid";} } ?>" id="name" name="name">
-                                    <div class='invalid-feedback'>Palun lisa oma nimi</div>
+                                    <div class='invalid-feedback'><?php echo $name_form_area_warning; ?></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-mail *</label>
                                     <input required type="email" class="form-control <?php if(!empty($_POST)) { if($email_valid) { echo "is-valid"; }else{ echo "is-invalid"; } }?>" id="email" aria-describedby="emailHelp" name="email">
-                                    <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                    <div class='invalid-feedback'><?php echo $email_form_area_warning; ?></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Eriala *</label>
+                                    <label for="work"><?php echo $work_form_area; ?></label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($major != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="major" name="major">
-                                    <div class='invalid-feedback'>Palun anna teada, mis eriala sa õpid</div>
+                                    <div class='invalid-feedback'><?php echo $work_form_area_warning; ?></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Instituut</label>
+                                    <label for="work"><?php echo $institute_form_area; ?></label>
                                     <select class="form-control" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
                                         <option selected>...</option>
                                         <option>ajaloo ja arheoloogia instituut</option>
@@ -294,67 +338,64 @@
                                         <option>Viljandi kultuuriakadeemia</option>
                                         <option>muu</option>
                                     </select>
-                                    <div class='invalid-feedback'>Ole hea ja anna teada, mis instituudist sa oled</div>
+                                    <div class='invalid-feedback'><?php echo $institute_form_area_warning; ?></div>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <!--<img src="../userdata/blank_profile_pic.png" id="profileImg">-->
                                     <label for="pilt" class="<?php if(!empty($_POST)) { if(!$pic_success) { echo "is-invalid"; } } ?>">Pilt</label>
-                                    <!--<input type="file" onchange="previewFile()"><br>-->
                                     <div id="preview">
                                         <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles oma profiilipilt</button>
+                                        <button class="btn"><?php echo $photo_form_area; ?></button>
                                         <input type="file" accept="image/*" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="pilt" name="pilt_full" onchange="previewFile()">
-                                        <div class='invalid-feedback'>Lae profiilipilt!</div>
+                                        <div class='invalid-feedback'><?php echo $photo_form_area_warning; ?></div>
                                     </div>
-                                    <div class='invalid-feedback'>Sisesta pilt!</div>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="work">Soovitav praktika/töö valdkond *</label>
+                                    <label for="work"><?php echo $area_form_area; ?></label>
                                     <input required type="text" class="form-control <?php if(!empty($_POST)) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="work" name="work">
-                                    <div class='invalid-feedback'>Ära unusta märkida, mis valdkonnas soovid töötada</div>
+                                    <div class='invalid-feedback'><?php echo $area_form_area_warning; ?></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="oskused">Tugevused/oskused *</label>
+                                    <label for="oskused"><?php echo $strengths_form_area; ?></label>
                                     <textarea required class="form-control  <?php if(!empty($_POST)) { if($work != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="oskused" rows="3" name="oskused"></textarea>
-                                    <div class='invalid-feedback'>Palun kirjelda lühidalt oma oskusi</div>
+                                    <div class='invalid-feedback'><?php echo $strengths_form_area_warning; ?></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="kogemused">Kogemused</label>
+                                    <label for="kogemused"><?php echo $experience_form_area; ?></label>
                                     <textarea class="form-control" id="kogemused" rows="3" name="kogemused"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="location">Soovitud asukoht</label>
+                                    <label for="location"><?php echo $location_form_area; ?></label>
                                     <input type="text" class="form-control <?php if(!empty($_POST)) { if($location != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="location" name="location">
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles oma CV</button>
+                                        <button class="btn"><?php echo $cv_form_area;?></button>
                                         <input type="file" class="form-control-file <?php if(!empty($_POST)) { if(!$cv_success) { echo "is-invalid"; } } ?>" id="cv" name="cv" onchange="showFileName(this.files)">
-                                        <div class='invalid-feedback'>Lae üles oma CV</div>
+                                        <div class='invalid-feedback'><?php echo $cv_form_area;?></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input <?php if(!empty($_POST)) { if($checkpoint) { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="checkpoint" name="checkpoint" required="required">
-                                        <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
+                                        <label class="custom-control-label text-left" for="checkpoint"><?php echo $consent_form_area; ?><a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank"><?php echo $consent_link_text; ?></a>.</label>
                                     </div>
                                 </div>
-                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add" onclick="gtag('event', 'Salvesta',{'event_category': 'Üliõpilased','event_label':'Lisa profiil'});">Lisa profiil</button>
+                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" data-value="add" onclick="gtag('event', 'Salvesta',{'event_category': 'Üliõpilased','event_label':'Lisa profiil'});"><?php echo $add_profile; ?></button>
                             </div>
 
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
                 </div>
             </div>
 
