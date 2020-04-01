@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <?php
     include_once './../templates/header.php';
-    $t_pieces = t(array("projektipak_title","projektipak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+    $t_pieces = t(array("projektipak_title","projektipak_desc","forms_consent"),$dbhost,$dbname,$dbuser,$dbpassword);
     $title = $t_pieces["projektipak_title"];
     $description = $t_pieces["projektipak_desc"];
+    $forms_consent = $t_pieces["forms_consent"];
     //for smaller buttons, unworthy of the database
     if($_SESSION["lang"] == "ee"){
         $arc_active = "Esitatud projektid";
@@ -59,6 +60,19 @@
                                 <div class="">
                                     <div class="row">
                                         <?php
+
+                                        if($_SESSION["lang"] == "ee"){
+                                            $sub_display_text = "Esitaja:";
+                                            $org_display_text = "Asutus:";
+                                            $team_display_text = "Meeskond:";
+                                            $view_display_text = "Vaata";
+                                        }else{
+                                            $sub_display_text = "Submitter:";
+                                            $org_display_text = "Organisation:";
+                                            $team_display_text = "Team:";
+                                            $view_display_text = "View";
+                                        }
+
                                 try {
                                     $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                                     // set the PDO error mode to exception
@@ -140,15 +154,15 @@
                                     <div class="col-md-12">
                                       <div class="row">
                                         <div class="col-lg-12">
-                                          <p class="mb-0"><b>Esitaja:</b> '.$org_name.'</p>
-                                          <p class="mb-0"><b>Asutus:</b> '.$organisation.'</p>
-                                          <p class=""><b>Meeskond:</b> '.$amount.'/'.$max_part.' </p>
+                                          <p class="mb-0"><b>'.$sub_display_text.'</b> '.$org_name.'</p>
+                                          <p class="mb-0"><b>'.$org_display_text.'</b> '.$organisation.'</p>
+                                          <p class=""><b>'.$team_display_text.'</b> '.$amount.'/'.$max_part.' </p>
                                         </div>
                                       </div>
                                     </div>
                                     <div class="col-lg-12">
                                       <a class="project-link font-weight-bold text-uppercase">
-                                        Vaata
+                                        '.$view_display_text.'
                                       </a>
                                       <i class="front-arrow text-right"></i>
                                     </div>
@@ -208,47 +222,79 @@
 
                     <div class="row">
                         <div class="col-lg-12">
+                            <?php
+                                if($_SESSION["lang"] == "ee"){
+                                    $form_info_text = "Projektivorm";
+                                    $form_intro_text = 'Antud aknas saad kiirelt tutvuda ning eelvaadelda projekti taotlusvormi, mille palume järgnevalt allalaadida ning ka ära täita. Seejärel palume liikuda järgmisele viigule "Esita projekt" ning täita sealne kontaktvorm, et saaksime teiega vajadusel ühendust võtta ning lõpetuseks ootame eeltäitud vormi PDF kujul.';
+                                    $form_download_text = "Projektivormi allalaadimiseks vajuta ";
+                                    $form_download_text_2 = "siia";
+                                    $form_heading_text = "Projekti pealkiri *";
+                                    $form_name_text = "Teie nimi *";
+                                    $form_email_text = "Teie email *";
+                                    $form_org_text = "Organisatsiooni nimi *";
+                                    $form_team_text = "Meeskonna suurus (max 10) *";
+                                    $form_pdf_text = "Lae ülesse täidetud projektivorm PDF formaadis *";
+                                    $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
+                                    $consent_link_text = "siit";
+                                    $close_text = "Sulge";
+                                }
+                                else{
+                                    $form_info_text = "Project form";
+                                    $form_intro_text = 'In this window you can look through the project form, download it and fill out. Next click on the submit project, fill the contact form, upload the previously filled project form in pdf and submit.';
+                                    $form_download_text = "TO DOWNLOAD THE PROJECT FORM CLICK ";
+                                    $form_download_text_2 = "HERE";
+                                    $form_heading_text = "Project headline *";
+                                    $form_name_text = "Your name *";
+                                    $form_email_text = "Your e-mail *";
+                                    $form_org_text = "Organisation name *";
+                                    $form_team_text = "The size of the project team (max 10) *";
+                                    $form_pdf_text = "Upload the filled project form in PDF format *";
+                                    $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
+                                    $consent_link_text = "here";
+                                    $close_text = "Close";
+                                }
+                            ?>
                             <form method="POST" action="./project_api.php" enctype="multipart/form-data" id="project_submission">
                                 <nav class="nav nav-pills flex-column flex-sm-row " id="pills-tab" role="tablist">
-                                    <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span>Projektivorm</span></a>
-                                    <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span>Esita projekt</span></a>
+                                    <a class="flex-sm-fill text-sm-center nav-link active text-uppercase text-weight-bold" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><span><?php echo $form_info_text; ?></span></a>
+                                    <a class="flex-sm-fill text-sm-center nav-link text-uppercase text-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><span><?php echo $add_project; ?></span></a>
                                 </nav>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                         <div class="form-group">
-                                            <p class="mt-4">Antud aknas saad kiirelt tutvuda ning eelvaadelda projekti taotlusvormi, mille palume järgnevalt allalaadida ning ka ära täita. Seejärel palume liikuda järgmisele viigule "Esita projekt" ning täita sealne kontaktvorm, et saaksime teiega vajadusel ühendust võtta ning lõpetuseks ootame eeltäitud vormi PDF kujul."
-
+                                            <p class="mt-4">
+                                                <?php echo $form_intro_text; ?>
                                             </p>
                                             <h4 class="text-center my-3">
-                                                <!--<i class="fa fa-4x fa-download"></i>--><label>Projektivormi allalaadimiseks vajuta <a class="btn btn-lg btn-primary" href="../userdata/projekti_taotlusvorm.docx" download="" onclick="gtag('event', 'Lae alla',{'event_category': 'Projektid','event_label':'Lae alla projekti taotlusvorm'});">siia</a></label></h4>
+                                                <!--<i class="fa fa-4x fa-download"></i>--><label><?php echo $form_download_text; ?><a class="btn btn-lg btn-primary" href="../userdata/projekti_taotlusvorm.docx" download="" onclick="gtag('event', 'Lae alla',{'event_category': 'Projektid','event_label':'Lae alla projekti taotlusvorm'});"><?php echo $form_download_text_2; ?></a></label></h4>
                                             <iframe width="100%" height="500px" src="https://docs.google.com/document/d/e/2PACX-1vQFHziWjHPO9fMbDZu7l7TaLq7PFA8COQRc_pz0CludNNmuONrd0NkUokj_QvJQTXEj7Jq5-IZrdrej/pub?embedded=true"></iframe>
 
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         <div class="form-group mt-3">
-                                            <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                            <label>Projekti pealkiri *</label>
+                                            <p class="alert alert-warning font-weight-normal"><?php echo $forms_consent; ?></p>
+                                            <label><?php echo $form_heading_text; ?></label>
                                             <input required type="text" name="project_title" class="form-control" maxlength="85">
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label>Teie nimi *</label>
+                                                <label><?php echo $form_name_text; ?></label>
                                                 <!--<input type="text" name="project_org_name" class="form-control">-->
                                                 <input required type="text" name="project_org_personal_name" class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label>Teie email *</label>
+                                                <label><?php echo $form_email_text; ?></label>
                                                 <input required type="text" name="project_org_personal_email" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-8">
-                                                <label>Organisatsiooni nimi *</label>
+                                                <label><?php echo $form_org_text; ?></label>
                                                 <input required type="text" name="project_org_name" class="form-control">
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label>Meeskonna suurus (max 10) *</label>
+                                                <label><?php echo $form_team_text; ?></label>
                                                 <select required name="max_part" class="form-control">
                                                     <option selected>1</option>
                                                     <option>2</option>
@@ -265,7 +311,7 @@
                                         </div>
                                         <div class="form-group text-center">
                                             <div class="upload-btn-wrapper">
-                                                <button class="btn">Lae ülesse täidetud projektivorm PDF formaadis *</button>
+                                                <button class="btn"><?php echo $form_pdf_text; ?></button>
                                                 <input required type="file" name="project_pdf" id="project_pdf" onchange="showFileName(this.files)">
                                             </div>
 
@@ -273,11 +319,11 @@
                                       <div class="form-group">
                                           <div class="custom-control custom-checkbox">
                                               <input type="checkbox" class="custom-control-input" id="checkpoint_projekt" name="checkpoint_projekt" required="required">
-                                              <label class="custom-control-label text-left" for="checkpoint_projekt">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
+                                              <label class="custom-control-label text-left" for="checkpoint_projekt"><?php echo $consent_form_area; ?><a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank"><?php echo $consent_link_text; ?></a>.</label>
                                           </div>
                                       </div>
                                         <div class="form-group mt-3 text-center">
-                                          <button type="submit" name="submit-form" class="text-center text-uppercase btn btn-primary btn-lg" onclick="gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt" id="regButton">Esita projekt</button>
+                                          <button type="submit" name="submit-form" class="text-center text-uppercase btn btn-primary btn-lg" onclick="gtag('event', 'Salvesta',{'event_category': 'Projektid','event_label':'Esita projekt'});" value="Esita projekt" id="regButton"><?php echo $add_project; ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +332,7 @@
                     </div>
                 </div>
                  <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
                             </div>
             </div>
         </div>
@@ -299,7 +345,7 @@
                     <iframe width="100%" height="500px" src="https://docs.google.com/document/d/e/2PACX-1vT7B16RNai2EJQrSf8PDTHWFiGHwrQB_MF1jhhZwo61Ox9HWJDBlL_IEFBOkHnNzvczU7R1jAy1xOc4/pub?embedded=true"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
                 </div>
             </div>
         </div>
@@ -329,43 +375,61 @@
                         </div>
                         <div class="tab-pane fade show row" id="post-participants" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="col-lg-12 my-3">
+                                <?php
+                                    if($_SESSION["lang"] == "ee"){
+                                        $reg_field_name = "Ees- ja perekonnanimi *";
+                                        $reg_field_cur = "Eriala *";
+                                        $reg_field_email = "E-mail *";
+                                        $reg_field_str = "Tugevused ja oskused";
+                                        $reg_field_join = "Liitu";
+                                        $reg_field_joined = "Liitunud üliõpilased: ";
+                                    }
+                                    else{
+                                        $reg_field_name = "First and last name *";
+                                        $reg_field_cur = "Curriculum *";
+                                        $reg_field_email = "E-mail *";
+                                        $reg_field_str = "Strengths and skills";
+                                        $reg_field_join = "Join";
+                                        $reg_field_joined = "Joined students: ";
+                                    }
+                                ?>
                                 <form class="needs-validation" id="project-join" method="POST" action="./project_api.php">
                                     <div class="form-group">
-                                        <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                        <label>Ees- ja perekonnanimi *</label>
+                                        <p class="alert alert-warning font-weight-normal"><?php echo $forms_consent; ?></p>
+                                        <label><?php echo $reg_field_name; ?></label>
                                         <input class="form-control" type="text" name="fullname" id="project_fullname" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Eriala *</label>
+                                        <label><?php echo $reg_field_cur; ?></label>
                                         <input class="form-control" type="text" name="degree" id="project_degree" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>E-mail *</label>
+                                        <label><?php echo $reg_field_email; ?></label>
                                         <input class="form-control" type="text" name="email" id="project_email" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tugevused ja oskused</label>
+                                        <label><?php echo $reg_field_str; ?></label>
                                         <textarea class="form-control" name="skills" id="skills" rows="2"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                            <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
+                                            <label class="custom-control-label text-left" for="checkpoint"><?php echo $consent_form_area; ?><a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank"><?php echo $consent_link_text; ?></a>.</label>
                                         </div>
                                     </div>
                                     <input type="hidden" name="hash" id="project_hash">
                                     <div class="join-container text-center">
-                                        <button type="submit" class="btn btn-primary" id="joinButton">Liitu</button>
+                                        <button type="submit" class="btn btn-primary" id="joinButton"><?php echo $reg_field_join; ?></button>
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-lg-12"><h5 class="text-center">Liitunud üliõpilased: (<span class="field-participants"></span>)</h5></div>
+                            <div class="col-lg-12"><h5 class="text-center"><?php echo $reg_field_join; ?>(<span class="field-participants"></span>)</h5></div>
                             <div class="col-lg-12 participants-container"><div class="container"><div class="row justify-content-center"></div></div></div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
                 </div>
             </div>
         </div>
