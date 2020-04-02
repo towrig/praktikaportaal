@@ -19,9 +19,126 @@
             if($_SESSION["lang"] == "ee"){
                 $arc_active = "Praegu aktiivsed";
                 $add_profile = "Lisa profiil";
+                $send_email_text = "Saada kiri";
+                $view_text = "Vaata";
             }else{
                 $arc_active = "Currently active";
                 $add_profile = "Upload profile";
+                $send_email_text = "Send email";
+                $view_text = "View";
+            }
+
+            //fields
+            $wf_fields = array();
+            if($_SESSION["lang"] == "ee"){
+                $wf_fields["ajaloo ja arheoloogia instituut"] = "ajaloo ja arheoloogia instituut";
+                $wf_fields["arvutiteaduse instituut"] = "arvutiteaduse instituut";
+                $wf_fields["bio- ja siirdemeditsiini instituut"] = "bio- ja siirdemeditsiini instituut";
+                $wf_fields["eesti ja üldkeeleteaduse instituut"] = "eesti ja üldkeeleteaduse instituut";
+                $wf_fields["Eesti mereinstituut"] = "Eesti mereinstituut";
+                $wf_fields["farmaatsia instituut"] = "farmaatsia instituut";
+                $wf_fields["filosoofia ja semiootika instituut"] = "filosoofia ja semiootika instituut";
+                $wf_fields["füüsika instituut"] = "füüsika instituut";
+                $wf_fields["hambaarstiteaduse instituut"] = "hambaarstiteaduse instituut";
+                $wf_fields["haridusteaduste instituut"] = "haridusteaduste instituut";
+                $wf_fields["Johan Skytte poliitikauuringute instituut"] = "Johan Skytte poliitikauuringute instituut";
+                $wf_fields["keemia instituut"] = "keemia instituut";
+                $wf_fields["kliinilise meditsiini instituut"] = "kliinilise meditsiini instituut";
+                $wf_fields["kultuuriteaduste instituut"] = "kultuuriteaduste instituut";
+                $wf_fields["maailma keelte ja kultuuride kolledž"] = "maailma keelte ja kultuuride kolledž";
+                $wf_fields["majandusteaduskond"] = "majandusteaduskond";
+                $wf_fields["matemaatika ja statistika instituut"] = "matemaatika ja statistika instituut";
+                $wf_fields["molekulaar- ja rakubioloogia instituut"] = "molekulaar- ja rakubioloogia instituut";
+                $wf_fields["Narva kolledž"] = "Narva kolledž";
+                $wf_fields["õigusteaduskond"] = "õigusteaduskond";
+                $wf_fields["ökoloogia ja maateaduste instituut"] = "ökoloogia ja maateaduste instituut";
+                $wf_fields["Pärnu kolledž"] = "Pärnu kolledž";
+                $wf_fields["peremeditsiini ja rahvatervishoiu instituut"] = "peremeditsiini ja rahvatervishoiu instituut";
+                $wf_fields["psühholoogia instituut"] = "psühholoogia instituut";
+                $wf_fields["sporditeaduste ja füsioteraapia instituut"] = "sporditeaduste ja füsioteraapia instituut";
+                $wf_fields["Tartu observatoorium"] = "Tartu observatoorium";
+                $wf_fields["tehnoloogiainstituut"] = "tehnoloogiainstituut";
+                $wf_fields["ühiskonnateaduste instituut"] = "ühiskonnateaduste instituut";
+                $wf_fields["usuteaduskond"] = "usuteaduskond";
+                $wf_fields["Viljandi kultuuriakadeemia"] = "Viljandi kultuuriakadeemia";
+                $wf_fields["muu"] = "muu";
+            }
+            else{
+                $wf_fields["ajaloo ja arheoloogia instituut"] = "Institute of History and Archaeology";
+                $wf_fields["arvutiteaduse instituut"] = "Institute of Computer Science";
+                $wf_fields["bio- ja siirdemeditsiini instituut"] = "Institute of Biomedicine and Translational Medicine";
+                $wf_fields["eesti ja üldkeeleteaduse instituut"] = "Institute of Estonian and General Linguistics";
+                $wf_fields["Eesti mereinstituut"] = "Estonian Marine Institute";
+                $wf_fields["farmaatsia instituut"] = "Institute of Pharmacy";
+                $wf_fields["filosoofia ja semiootika instituut"] = "Institute of Philosophy and Semiotics";
+                $wf_fields["füüsika instituut"] = "Institute of Physics";
+                $wf_fields["hambaarstiteaduse instituut"] = "Institute of Dentistry";
+                $wf_fields["haridusteaduste instituut"] = "Institute of Education";
+                $wf_fields["Johan Skytte poliitikauuringute instituut"] = "Johan Skytte Institute of Political Studies";
+                $wf_fields["keemia instituut"] = "Institute of Chemistry";
+                $wf_fields["kliinilise meditsiini instituut"] = "Institute of Clinical Medicine";
+                $wf_fields["kultuuriteaduste instituut"] = "Institute of Cultural Research";
+                $wf_fields["maailma keelte ja kultuuride kolledž"] = "College of Foreign Languages and Cultures";
+                $wf_fields["majandusteaduskond"] = "School of Economics and Business Administration";
+                $wf_fields["matemaatika ja statistika instituut"] = "Institute of Mathematics and Statistics";
+                $wf_fields["molekulaar- ja rakubioloogia instituut"] = "Institute of Molecular and Cell Biology";
+                $wf_fields["Narva kolledž"] = "Narva College";
+                $wf_fields["õigusteaduskond"] = "School of Law";
+                $wf_fields["ökoloogia ja maateaduste instituut"] = "Institute of Ecology and Earth Sciences";
+                $wf_fields["Pärnu kolledž"] = "Pärnu College";
+                $wf_fields["peremeditsiini ja rahvatervishoiu instituut"] = "Institute of Family Medicine and Public Health";
+                $wf_fields["psühholoogia instituut"] = "Institute of Psychology";
+                $wf_fields["sporditeaduste ja füsioteraapia instituut"] = "Institute of Sport Sciences and Physiotherapy";
+                $wf_fields["Tartu observatoorium"] = "Tartu Observatory";
+                $wf_fields["tehnoloogiainstituut"] = "Institute of Technology";
+                $wf_fields["ühiskonnateaduste instituut"] = "Institute of Social Studies";
+                $wf_fields["usuteaduskond"] = "School of Theology and Religious Studies";
+                $wf_fields["Viljandi kultuuriakadeemia"] = "Viljandi Culture Academy";
+                $wf_fields["muu"] = "other";
+            }
+
+            //form
+            if($_SESSION["lang"] == "ee"){
+                $name_form_area = "Ees- ja perekonnanimi *";
+                $name_form_area_warning = "Palun lisa oma nimi";
+                $email_form_area_warning = "Vajame sinu meiliaadressi, et sulle kinnituslink saata";
+                $work_form_area = "Eriala *";
+                $work_form_area_warning = "Palun anna teada, mis eriala sa õpid";
+                $institute_form_area = "Instituut";
+                $institute_form_area_warning = "Ole hea ja anna teada, mis instituudist sa oled";
+                $photo_form_area = "Lae üles oma profiilipilt";
+                $photo_form_area_warning = "Lae profiilipilt!";
+                $area_form_area = "Soovitav praktika/töö valdkond *";
+                $area_form_area_warning = "Ära unusta märkida, mis valdkonnas soovid töötada";
+                $strengths_form_area = "Tugevused/oskused *";
+                $strengths_form_area_warning = "Palun kirjelda lühidalt oma oskusi";
+                $experience_form_area = "Kogemused";
+                $location_form_area = "Soovitud asukoht";
+                $cv_form_area = "Lae üles oma CV";
+                $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
+                $consent_link_text = "siit";
+                $close_text = "Sulge";
+            }
+            else{
+                $name_form_area = "First and last name *";
+                $name_form_area_warning = "Please insert your name";
+                $email_form_area_warning = "Your e-mail is required for the e-mail confirmation link";
+                $work_form_area = "Curriculum *";
+                $work_form_area_warning = "Please tell us your curriculum";
+                $institute_form_area = "Institute";
+                $institute_form_area_warning = "Please tell us which institute you are from";
+                $photo_form_area = "Upload your profile picture";
+                $photo_form_area_warning = "Upload your profile picture!";
+                $area_form_area = "Preferred internship field *";
+                $area_form_area_warning = "Don't forget to specify your preferred internship field";
+                $strengths_form_area = "Character strengths *";
+                $strengths_form_area_warning = "Please shortly describe your strenghts";
+                $experience_form_area = "Experience";
+                $location_form_area = "Preferred location";
+                $cv_form_area = "Upload your CV";
+                $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
+                $consent_link_text = "here";
+                $close_text = "Close";
             }
         ?>
 
@@ -167,14 +284,14 @@
                                                                                 <p class="card-title font-weight-bold">'.$name_br.'</p>
                                                                                 <p class="card-text font-weight-light">'.$degree.'</p>
                                                                                 <p class="card-text font-weight-light">'.$work.'</p>
-                                                                                <p class="font-weight-bold mt-3">Tugevused</p>
+                                                                                <p class="font-weight-bold mt-3">'.$strengths_form_area.'</p>
                                                                                 <p class="card-text font-weight-light ">'.$tugevused.'</p>
-                                                                                <p class="font-weight-bold">Kogemused</p>
+                                                                                <p class="font-weight-bold">'.$experience_form_area.'</p>
                                                                                 <p class="card-text font-weight-light">'.$kogemused.'</p>
                                                                             </div>
                                                                             <div class="links">
-                                                                              <a href="mailto:'.$email.'" class="text-uppercase">Saada kiri</a>'.
-                                                                                (!empty($row["cvpath"]) ? '<a href="#" onclick="return false;" class="text-uppercase js-open-cv" data-uname="'.$name.'" data-cv="'.$cv.'">Vaata CV\'d</a>':'' ).'
+                                                                              <a href="mailto:'.$email.'" class="text-uppercase">'.$send_email_text.'</a>'.
+                                                                                (!empty($row["cvpath"]) ? '<a href="#" onclick="return false;" class="text-uppercase js-open-cv" data-uname="'.$name.'" data-cv="'.$cv.'">'.$view_text.' CV\'d</a>':'' ).'
                                                                             </div>
                                                                             <i class="arrow-front"></i>
                                                                         </div>
@@ -306,37 +423,37 @@
                                     <label for="work"><?php echo $institute_form_area; ?></label>
                                     <select class="form-control" class="form-control <?php if(!empty($_POST)) { if($institute != "") { echo "is-valid"; }else{ echo "is-invalid"; } } ?>" id="institute" name="institute">
                                         <option selected>...</option>
-                                        <option>ajaloo ja arheoloogia instituut</option>
-                                        <option>arvutiteaduse instituut</option>
-                                        <option>bio- ja siirdemeditsiini instituut</option>
-                                        <option>eesti ja üldkeeleteaduse instituut</option>
-                                        <option>Eesti mereinstituut</option>
-                                        <option>farmaatsia instituut</option>
-                                        <option>filosoofia ja semiootika instituut</option>
-                                        <option>füüsika instituut</option>
-                                        <option>hambaarstiteaduse instituut</option>
-                                        <option>haridusteaduste instituut</option>
-                                        <option>Johan Skytte poliitikauuringute instituut</option>
-                                        <option>keemia instituut</option>
-                                        <option>kliinilise meditsiini instituut</option>
-                                        <option>kultuuriteaduste instituut</option>
-                                        <option>maailma keelte ja kultuuride kolledž</option>
-                                        <option>majandusteaduskond</option>
-                                        <option>matemaatika ja statistika instituut</option>
-                                        <option>molekulaar- ja rakubioloogia instituut</option>
-                                        <option>Narva kolledž</option>
-                                        <option>õigusteaduskond</option>
-                                        <option>ökoloogia ja maateaduste instituut</option>
-                                        <option>Pärnu kolledž</option>
-                                        <option>peremeditsiini ja rahvatervishoiu instituut</option>
-                                        <option>psühholoogia instituut</option>
-                                        <option>sporditeaduste ja füsioteraapia instituut</option>
-                                        <option>Tartu observatoorium</option>
-                                        <option>tehnoloogiainstituut</option>
-                                        <option>ühiskonnateaduste instituut</option>
-                                        <option>usuteaduskond</option>
-                                        <option>Viljandi kultuuriakadeemia</option>
-                                        <option>muu</option>
+                                        <option value="ajaloo ja arheoloogia instituut"><?php echo $wf_fields["ajaloo ja arheoloogia instituut"]; ?></option>
+                                        <option value="arvutiteaduse instituut"><?php echo $wf_fields["arvutiteaduse instituut"]; ?></option>
+                                        <option value="bio- ja siirdemeditsiini instituut"><?php echo $wf_fields["bio- ja siirdemeditsiini instituut"]; ?></option>
+                                        <option value="eesti ja üldkeeleteaduse instituut"><?php echo $wf_fields["eesti ja üldkeeleteaduse instituut"]; ?></option>
+                                        <option value="Eesti mereinstituut"><?php echo $wf_fields["Eesti mereinstituut"]; ?></option>
+                                        <option value="farmaatsia instituut"><?php echo $wf_fields["farmaatsia instituut"]; ?></option>
+                                        <option value="filosoofia ja semiootika instituut"><?php echo $wf_fields["filosoofia ja semiootika instituut"]; ?></option>
+                                        <option value="füüsika instituut"><?php echo $wf_fields["füüsika instituut"]; ?></option>
+                                        <option value="hambaarstiteaduse instituut"><?php echo $wf_fields["hambaarstiteaduse instituut"]; ?></option>
+                                        <option value="haridusteaduste instituut"><?php echo $wf_fields["haridusteaduste instituut"]; ?></option>
+                                        <option value="Johan Skytte poliitikauuringute instituut"><?php echo $wf_fields["Johan Skytte poliitikauuringute instituut"]; ?></option>
+                                        <option value="keemia instituut"><?php echo $wf_fields["keemia instituut"]; ?></option>
+                                        <option value="kliinilise meditsiini instituut"><?php echo $wf_fields["kliinilise meditsiini instituut"]; ?></option>
+                                        <option value="kultuuriteaduste instituut"><?php echo $wf_fields["kultuuriteaduste instituut"]; ?></option>
+                                        <option value="maailma keelte ja kultuuride kolledž"><?php echo $wf_fields["maailma keelte ja kultuuride kolledž"]; ?></option>
+                                        <option value="majandusteaduskond"><?php echo $wf_fields["majandusteaduskond"]; ?></option>
+                                        <option value="matemaatika ja statistika instituut"><?php echo $wf_fields["matemaatika ja statistika instituut"]; ?></option>
+                                        <option value="molekulaar- ja rakubioloogia instituut"><?php echo $wf_fields["molekulaar- ja rakubioloogia instituut"]; ?></option>
+                                        <option value="Narva kolledž"><?php echo $wf_fields["Narva kolledž"]; ?></option>
+                                        <option value="õigusteaduskond"><?php echo $wf_fields["õigusteaduskond"]; ?></option>
+                                        <option value="ökoloogia ja maateaduste instituut"><?php echo $wf_fields["ökoloogia ja maateaduste instituut"]; ?></option>
+                                        <option value="Pärnu kolledž"><?php echo $wf_fields["Pärnu kolledž"]; ?></option>
+                                        <option value="peremeditsiini ja rahvatervishoiu instituut"><?php echo $wf_fields["peremeditsiini ja rahvatervishoiu instituut"]; ?></option>
+                                        <option value="psühholoogia instituut"><?php echo $wf_fields["psühholoogia instituut"]; ?></option>
+                                        <option value="sporditeaduste ja füsioteraapia instituut"><?php echo $wf_fields["sporditeaduste ja füsioteraapia instituut"]; ?></option>
+                                        <option value="Tartu observatoorium"><?php echo $wf_fields["Tartu observatoorium"]; ?></option>
+                                        <option value="tehnoloogiainstituut"><?php echo $wf_fields["tehnoloogiainstituut"]; ?></option>
+                                        <option value="ühiskonnateaduste instituut"><?php echo $wf_fields["ühiskonnateaduste instituut"]; ?></option>
+                                        <option value="usuteaduskond"><?php echo $wf_fields["usuteaduskond"]; ?></option>
+                                        <option value="Viljandi kultuuriakadeemia"><?php echo $wf_fields["Viljandi kultuuriakadeemia"]; ?></option>
+                                        <option value="muu"><?php echo $wf_fields["muu"]; ?></option>
                                     </select>
                                     <div class='invalid-feedback'><?php echo $institute_form_area_warning; ?></div>
                                 </div>
@@ -415,7 +532,7 @@
                     <div class="col-lg-12 pdf-container"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
                 </div>
             </div>
         </div>

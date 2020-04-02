@@ -13,6 +13,53 @@
         $active_offers = "Active offers";
         $add_offer = "Submit offer";
     }
+
+    //fields
+    $wf_fields = array();
+    if($_SESSION["lang"] == "ee"){
+        $wf_fields["Määramata"] = "Määramata";
+        $wf_fields["Arvestusala"] = "Arvestusala";
+        $wf_fields["Ehitus"] = "Ehitus";
+        $wf_fields["Energeetika ja kaevandamine"] = "Energeetika ja kaevandamine";
+        $wf_fields["Haridus ja teadus"] = "Haridus ja teadus";
+        $wf_fields["Info- ja kommunikatsioonitehnoloogia"] = "Info- ja kommunikatsioonitehnoloogia";
+        $wf_fields["Kaubandus, rentimine ja parandus"] = "Kaubandus, rentimine ja parandus";
+        $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"] = "Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus";
+        $wf_fields["Kultuur ja loometegevus"] = "Kultuur ja loometegevus";
+        $wf_fields["Majutus, toitlustus ja turism"] = "Majutus, toitlustus ja turism";
+        $wf_fields["Metalli- ja masinatööstus"] = "Metalli- ja masinatööstus";
+        $wf_fields["Metsandus ja puidutööstus"] = "Metsandus ja puidutööstus";
+        $wf_fields["Õigus"] = "Õigus";
+        $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"] = "Personali- ja administratiivtöö ning ärinõustamine";
+        $wf_fields["Põllumajandus ja toiduainetööstus"] = "Põllumajandus ja toiduainetööstus";
+        $wf_fields["Rõiva-, tekstiili- ja nahatööstus"] = "Rõiva-, tekstiili- ja nahatööstus";
+        $wf_fields["Sotsiaaltöö"] = "Sotsiaaltöö";
+        $wf_fields["Tervishoid"] = "Tervishoid";
+        $wf_fields["Transport, logistika ning mootorsõidukid"] = "Transport, logistika ning mootorsõidukid";
+        $wf_fields["Vee- ja jäätmemajandus ning keskkond"] = "Vee- ja jäätmemajandus ning keskkond";
+    }
+    else{
+        $wf_fields["Määramata"] = "Unselected";
+        $wf_fields["Arvestusala"] = "Accounting";
+        $wf_fields["Ehitus"] = "Construction";
+        $wf_fields["Energeetika ja kaevandamine"] = "Energy and mining";
+        $wf_fields["Haridus ja teadus"] = "Education and research";
+        $wf_fields["Info- ja kommunikatsioonitehnoloogia"] = "ICT";
+        $wf_fields["Kaubandus, rentimine ja parandus"] = "Trade, rentals, repair";
+        $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"] = "Chemicals, rubber, plastic, construction materials";
+        $wf_fields["Kultuur ja loometegevus"] = "Culture and creative industries";
+        $wf_fields["Majutus, toitlustus ja turism"] = "Accommodation, catering, tourism";
+        $wf_fields["Metalli- ja masinatööstus"] = "Metal products, machinery";
+        $wf_fields["Metsandus ja puidutööstus"] = "Forestry, timber";
+        $wf_fields["Õigus"] = "Security, law";
+        $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"] = "HR, business consultancy";
+        $wf_fields["Põllumajandus ja toiduainetööstus"] = "Agriculture, food industry";
+        $wf_fields["Rõiva-, tekstiili- ja nahatööstus"] = "Apparel, textile";
+        $wf_fields["Sotsiaaltöö"] = "Social work";
+        $wf_fields["Tervishoid"] = "Health care";
+        $wf_fields["Transport, logistika ning mootorsõidukid"] = "Transportation, logistics, motor vehicles";
+        $wf_fields["Vee- ja jäätmemajandus ning keskkond"] = "Water, waste and environmental management";
+    }
 ?>
 
 <body id="page-top" class="practiceoffers">
@@ -114,7 +161,7 @@
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
                                                           data-description="'.htmlspecialchars($description).'"
-                                                          data-workfield="'.$workfield.'"
+                                                          data-workfield="'.$wf_fields[$workfield].'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
@@ -140,7 +187,7 @@
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
                                                           data-description="'.htmlspecialchars($description).'"
-                                                          data-workfield="'.$workfield.'"
+                                                          data-workfield="'.$wf_fields[$workfield].'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
@@ -264,26 +311,26 @@
                                 <div class="form-group my-1">
                                     <label class="mr-sm-2"><?php echo $form_workfield; ?></label>
                                     <select class="custom-select mr-sm-2" id="workfield" name="workfield">
-                                        <option value="Määramata" selected>Määramata</option>
-                                        <option value="Arvestusala">Arvestusala</option>
-                                        <option value="Ehitus">Ehitus</option>
-                                        <option value="Energeetika ja kaevandamine">Energeetika ja kaevandamine</option>
-                                        <option value="Haridus ja teadus">Haridus ja teadus</option>
-                                        <option value="Info- ja kommunikatsioonitehnoloogia">Info- ja kommunikatsioonitehnoloogia</option>
-                                        <option value="Kaubandus, rentimine ja parandus">Kaubandus, rentimine ja parandus</option>
-                                        <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus">Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus</option>
-                                        <option value="Kultuur ja loometegevus">Kultuur ja loometegevus</option>
-                                        <option value="Majutus, toitlustus ja turism">Majutus, toitlustus ja turism</option>
-                                        <option value="Metalli- ja masinatööstus">Metalli- ja masinatööstus</option>
-                                        <option value="Metsandus ja puidutööstus">Metsandus ja puidutööstus</option>
-                                        <option value="Õigus">Õigus</option>
-                                        <option value="Personali- ja administratiivtöö ning ärinõustamine">Personali- ja administratiivtöö ning ärinõustamine</option>
-                                        <option value="Põllumajandus ja toiduainetööstus">Põllumajandus ja toiduainetööstus</option>
-                                        <option value="Rõiva-, tekstiili- ja nahatööstus">Rõiva-, tekstiili- ja nahatööstus</option>
-                                        <option value="Sotsiaaltöö">Sotsiaaltöö</option>
-                                        <option value="Tervishoid">Tervishoid</option>
-                                        <option value="Transport, logistika ning mootorsõidukid">Transport, logistika ning mootorsõidukid</option>
-                                        <option value="Vee- ja jäätmemajandus ning keskkond">Vee- ja jäätmemajandus ning keskkond</option>
+                                        <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
+                                        <option value="Arvestusala"><?php echo $wf_fields["Arvestusala"]; ?></option>
+                                        <option value="Ehitus"><?php echo $wf_fields["Ehitus"]; ?></option>
+                                        <option value="Energeetika ja kaevandamine"><?php echo $wf_fields["Energeetika ja kaevandamine"]; ?></option>
+                                        <option value="Haridus ja teadus"><?php echo $wf_fields["Haridus ja teadus"]; ?></option>
+                                        <option value="Info- ja kommunikatsioonitehnoloogia"><?php echo $wf_fields["Info- ja kommunikatsioonitehnoloogia"]; ?></option>
+                                        <option value="Kaubandus, rentimine ja parandus"><?php echo $wf_fields["Kaubandus, rentimine ja parandus"]; ?></option>
+                                        <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"><?php echo $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"]; ?></option>
+                                        <option value="Kultuur ja loometegevus"><?php echo $wf_fields["Kultuur ja loometegevus"]; ?></option>
+                                        <option value="Majutus, toitlustus ja turism"><?php echo $wf_fields["Majutus, toitlustus ja turism"]; ?></option>
+                                        <option value="Metalli- ja masinatööstus"><?php echo $wf_fields["Metalli- ja masinatööstus"]; ?></option>
+                                        <option value="Metsandus ja puidutööstus"><?php echo $wf_fields["Metsandus ja puidutööstus"]; ?></option>
+                                        <option value="Õigus"><?php echo $wf_fields["Õigus"]; ?></option>
+                                        <option value="Personali- ja administratiivtöö ning ärinõustamine"><?php echo $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"]; ?></option>
+                                        <option value="Põllumajandus ja toiduainetööstus"><?php echo $wf_fields["Põllumajandus ja toiduainetööstus"]; ?></option>
+                                        <option value="Rõiva-, tekstiili- ja nahatööstus"><?php echo $wf_fields["Rõiva-, tekstiili- ja nahatööstus"]; ?></option>
+                                        <option value="Sotsiaaltöö"><?php echo $wf_fields["Sotsiaaltöö"]; ?></option>
+                                        <option value="Tervishoid"><?php echo $wf_fields["Tervishoid"]; ?></option>
+                                        <option value="Transport, logistika ning mootorsõidukid"><?php echo $wf_fields["Transport, logistika ning mootorsõidukid"]; ?></option>
+                                        <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
