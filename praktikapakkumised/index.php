@@ -2,15 +2,16 @@
 <?php
     include_once './functions.php';
     include_once './../templates/header.php';
-    $t_pieces = t(array("praktikapak_title","praktikapak_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+    $t_pieces = t(array("praktikapak_title","praktikapak_desc","forms_consent"),$dbhost,$dbname,$dbuser,$dbpassword);
     $title = $t_pieces["praktikapak_title"];
     $description = $t_pieces["praktikapak_desc"];
+    $forms_consent = $t_pieces["forms_consent"];
     if($_SESSION["lang"] == "ee"){
         $active_offers = "Aktiivsed pakkumised";
         $add_offer = "Lisa pakkumine";
     }else{
         $active_offers = "Active offers";
-        $add_offer = "Add offer";
+        $add_offer = "Submit offer";
     }
 ?>
 
@@ -204,21 +205,64 @@
     <div id="regModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-
                 <div class="modal-body">
-
+                    <?php
+                    if($_SESSION["lang"] == "ee"){
+                        $form_heading = "Kuulutuse pealkiri *";
+                        $form_heading_warning = "Palun lisa pealkiri";
+                        $form_workfield = "Valdkond *";
+                        $form_weblink = "Pakkumise link";
+                        $form_pdf_text = "Lisa praktikapakkumise pdf";
+                        $form_org_logo_text = "Lisa organisatsiooni logo *";
+                        $form_org_logo_text_warning = "Sisesta logo!";
+                        $form_intro_text = "Pakkumise tutvustus *";
+                        $form_tasks_text = "Ülesanded";
+                        $form_skills_text = "Ootused";
+                        $form_date_text = "Tähtaeg *";
+                        $form_org_text = "Ettevõte *";
+                        $form_name_text = "Kontaktisiku nimi *";
+                        $form_email_text = "Kontaktemail *";
+                        $form_email_text_warning = "Vajame sinu meiliaadressi, et sulle kinnituslink saata";
+                        $form_location_text = "Asukoht *";
+                        $form_reg_info_text = "Info kandideerimiseks";
+                        $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
+                        $consent_link_text = "siit";
+                        $close_text = "Sulge";
+                    }
+                    else{
+                        $form_heading = "Headline *";
+                        $form_heading_warning = "Please add the headline";
+                        $form_workfield = "Field *";
+                        $form_weblink = "Link to internship offer";
+                        $form_pdf_text = "Upload the offer in PDF format";
+                        $form_org_logo_text = "Upload your company logo *";
+                        $form_org_logo_text_warning = "Upload logo!";
+                        $form_intro_text = "Short description of the internship *";
+                        $form_tasks_text = "Assignments for intern";
+                        $form_skills_text = "Expectations for  intern";
+                        $form_date_text = "Deadline *";
+                        $form_org_text = "Company *";
+                        $form_name_text = "Name of the contact person *";
+                        $form_email_text = "Contact e-mail *";
+                        $form_email_text_warning = "Your e-mail is required for the e-mail confirmation link";
+                        $form_location_text = "Location *";
+                        $form_reg_info_text = "Application information";
+                        $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
+                        $consent_link_text = "here";
+                        $close_text = "Close";
+                    }
+                    ?>
                     <div class="container">
                         <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
-
                             <div class="col-lg-7">
                                 <div class="form-group">
-                                    <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                    <label for="name">Kuulutuse pealkiri *</label>
+                                    <p class="alert alert-warning font-weight-normal"><?php echo $forms_consent; ?></p>
+                                    <label for="name"><?php echo $form_heading; ?></label>
                                     <input required type="text" class="form-control" id="heading" name="heading">
-                                    <div class='invalid-feedback'>Palun lisa pealkiri</div>
+                                    <div class='invalid-feedback'><?php echo $form_heading_warning; ?></div>
                                 </div>
                                 <div class="form-group my-1">
-                                    <label class="mr-sm-2">Valdkond *</label>
+                                    <label class="mr-sm-2"><?php echo $form_workfield; ?></label>
                                     <select class="custom-select mr-sm-2" id="workfield" name="workfield">
                                         <option value="Määramata" selected>Määramata</option>
                                         <option value="Arvestusala">Arvestusala</option>
@@ -243,12 +287,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="website">Pakkumise link</label>
+                                    <label for="website"><?php echo $form_weblink; ?></label>
                                     <input type="text" class="form-control" id="website" name="website">
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lisa praktikapakkumise pdf</button>
+                                        <button class="btn"><?php echo $form_pdf_text; ?></button>
                                         <input type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
                                     </div>
                                 </div>
@@ -261,65 +305,65 @@
                                         <img id="profileImg" src="../userdata/logo_placeholder.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lisa organisatsiooni logo *</button>
+                                        <button class="btn"><?php echo $form_org_logo_text; ?></button>
                                         <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
                                     </div>
-                                    <div class='invalid-feedback'>Sisesta logo!</div>
+                                    <div class='invalid-feedback'><?php echo $form_org_logo_text_warning; ?></div>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="description">Pakkumise tutvustus *</label>
+                                    <label for="description"><?php echo $form_intro_text; ?></label>
                                     <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
                                 <div class="form-group pdf-hide">
-                                    <label for="tasks">Ülesanded</label>
+                                    <label for="tasks"><?php echo $form_tasks_text; ?></label>
                                     <textarea class="form-control" id="tasks" name="tasks" rows="3"></textarea>
                                 </div>
                                 <div class="form-group pdf-hide">
-                                    <label for="skills">Ootused</label>
+                                    <label for="skills"><?php echo $form_skills_text; ?></label>
                                     <textarea class="form-control" id="skills" name="skills" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Tähtaeg *</label>
+                                    <label for="work"><?php echo $form_date_text; ?></label>
                                     <input required type="text" class="form-control" id="datepicker" name="date">
                                 </div>
                                 <div class="form-group">
-                                    <label for="organization">Ettevõte *</label>
+                                    <label for="organization"><?php echo $form_org_text; ?></label>
                                     <input required type="text" class="form-control" id="organization" name="organization">
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Kontaktisiku nimi *</label>
+                                    <label for="work"><?php echo $form_name_text; ?></label>
                                     <input required type="text" class="form-control" id="name" name="name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Kontaktemail *</label>
+                                    <label for="email"><?php echo $form_email_text; ?></label>
                                     <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-                                    <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                    <div class='invalid-feedback'><?php echo $form_email_text_warning; ?></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="location">Asukoht *</label>
+                                    <label for="location"><?php echo $form_location_text; ?></label>
                                     <input required type="text" class="form-control" id="location" name="location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="other">Info kandideerimiseks</label>
+                                    <label for="other"><?php echo $form_reg_info_text; ?></label>
                                     <textarea class="form-control" id="other" name="other" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                        <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
+                                        <label class="custom-control-label text-left" for="checkpoint"><?php echo $consent_form_area; ?><a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank"><?php echo $consent_link_text; ?></a>.</label>
                                     </div>
                                 </div>
-                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
+                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});"><?php echo $add_offer; ?></button>
                             </div>
 
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
                 </div>
             </div>
         </div>

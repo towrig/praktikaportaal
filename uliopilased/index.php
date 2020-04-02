@@ -268,7 +268,7 @@
                             $work_form_area_warning = "Please tell us your curriculum";
                             $institute_form_area = "Institute";
                             $institute_form_area_warning = "Please tell us which institute you are from";
-                            $photo_form_area = "PHOTO - upload your profile picture";
+                            $photo_form_area = "Upload your profile picture";
                             $photo_form_area_warning = "Upload your profile picture!";
                             $area_form_area = "Preferred internship field *";
                             $area_form_area_warning = "Don't forget to specify your preferred internship field";
