@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php
-    include_once './functions.php';
     include_once './../templates/header.php';
     $t_pieces = t(array("praktikapak_title","praktikapak_desc","forms_consent"),$dbhost,$dbname,$dbuser,$dbpassword);
     $title = $t_pieces["praktikapak_title"];
