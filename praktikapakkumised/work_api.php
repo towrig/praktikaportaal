@@ -219,7 +219,8 @@ else if(!empty($_POST) && $_POST["action"] == "addview"){ //increase the amount 
         http_response_code(403);
         echo "View exists! values:".$_COOKIE[str_replace('.','_',$pid)]; 
     }
-}else{
+}
+else{
     http_response_code(403);
     echo "Faulty request!";
 }

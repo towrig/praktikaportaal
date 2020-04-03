@@ -21,7 +21,8 @@
                 $add_profile = "Lisa profiil";
                 $send_email_text = "Saada kiri";
                 $view_text = "Vaata";
-            }else{
+            }
+            else{
                 $arc_active = "Currently active";
                 $add_profile = "Upload profile";
                 $send_email_text = "Send email";

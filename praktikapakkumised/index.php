@@ -6,12 +6,29 @@
     $title = $t_pieces["praktikapak_title"];
     $description = $t_pieces["praktikapak_desc"];
     $forms_consent = $t_pieces["forms_consent"];
+
+    //sorting
+    $query_string_sort = "";
+    $sorting_wf = false;
+    $sorting_loc = false;
+    if(isset($_GET["sort_wf"] && $_GET["sort_wf"] != "Määramata")){
+        $query_string_sort .= " AND workfield = ?";
+        $sorting_wf = true;
+    }
+    if(isset($_GET["sort_loc"]) && $_GET["sort_loc"] != "none"){
+        $query_string_sort .= " AND work_location = ?";
+        $sorting_loc = true;
+    }
+
     if($_SESSION["lang"] == "ee"){
         $active_offers = "Aktiivsed pakkumised";
         $add_offer = "Lisa pakkumine";
-    }else{
+        $sort_text = "Sorteeri";
+    }
+    else{
         $active_offers = "Active offers";
         $add_offer = "Submit offer";
+        $sort_text = "Sort by";
     }
 
     //fields
@@ -60,6 +77,52 @@
         $wf_fields["Transport, logistika ning mootorsõidukid"] = "Transportation, logistics, motor vehicles";
         $wf_fields["Vee- ja jäätmemajandus ning keskkond"] = "Water, waste and environmental management";
     }
+
+    //form
+    if($_SESSION["lang"] == "ee"){
+        $form_heading = "Kuulutuse pealkiri *";
+        $form_heading_warning = "Palun lisa pealkiri";
+        $form_workfield = "Valdkond *";
+        $form_weblink = "Pakkumise link";
+        $form_pdf_text = "Lisa praktikapakkumise pdf";
+        $form_org_logo_text = "Lisa organisatsiooni logo *";
+        $form_org_logo_text_warning = "Sisesta logo!";
+        $form_intro_text = "Pakkumise tutvustus *";
+        $form_tasks_text = "Ülesanded";
+        $form_skills_text = "Ootused";
+        $form_date_text = "Tähtaeg *";
+        $form_org_text = "Ettevõte *";
+        $form_name_text = "Kontaktisiku nimi *";
+        $form_email_text = "Kontaktemail *";
+        $form_email_text_warning = "Vajame sinu meiliaadressi, et sulle kinnituslink saata";
+        $form_location_text = "Asukoht *";
+        $form_reg_info_text = "Info kandideerimiseks";
+        $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
+        $consent_link_text = "siit";
+        $close_text = "Sulge";
+    }
+    else{
+        $form_heading = "Headline *";
+        $form_heading_warning = "Please add the headline";
+        $form_workfield = "Field *";
+        $form_weblink = "Link to internship offer";
+        $form_pdf_text = "Upload the offer in PDF format";
+        $form_org_logo_text = "Upload your company logo *";
+        $form_org_logo_text_warning = "Upload logo!";
+        $form_intro_text = "Short description of the internship *";
+        $form_tasks_text = "Assignments for intern";
+        $form_skills_text = "Expectations for  intern";
+        $form_date_text = "Deadline *";
+        $form_org_text = "Company *";
+        $form_name_text = "Name of the contact person *";
+        $form_email_text = "Contact e-mail *";
+        $form_email_text_warning = "Your e-mail is required for the e-mail confirmation link";
+        $form_location_text = "Location *";
+        $form_reg_info_text = "Application information";
+        $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
+        $consent_link_text = "here";
+        $close_text = "Close";
+    }
 ?>
 
 <body id="page-top" class="practiceoffers">
@@ -81,6 +144,53 @@
                     <div class="col-lg-12">
                         <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down"><?php echo $active_offers; ?></h5>
                     </div>
+                    <div class="col-lg-12">
+                        <!-- sort by: workfield, work_location-->
+                        <select id="sort-loc">
+                            <option value="none" selected>...</option>
+                            <?php
+                                try{
+                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+                                    // set the PDO error mode to exception
+                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                    $query = $conn->prepare('SELECT DISTINCT LOWER(work_location) AS loc FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC');
+                                    $query->execute(array(1));
+                                    $data = $query -> fetchAll();
+                                    foreach($data as $row){
+                                        echo '<option value="'.$row["loc"].'">'.$row["loc"].'</option>';
+                                    }
+                                } catch(PDOException $e){
+                                    echo "Connection failed: " . $e->getMessage();
+                                }
+                            ?>
+                        </select>
+                        <span></span>
+                        <select class="custom-select mr-sm-2" id="sort-wf">
+                            <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
+                            <option value="Arvestusala"><?php echo $wf_fields["Arvestusala"]; ?></option>
+                            <option value="Ehitus"><?php echo $wf_fields["Ehitus"]; ?></option>
+                            <option value="Energeetika ja kaevandamine"><?php echo $wf_fields["Energeetika ja kaevandamine"]; ?></option>
+                            <option value="Haridus ja teadus"><?php echo $wf_fields["Haridus ja teadus"]; ?></option>
+                            <option value="Info- ja kommunikatsioonitehnoloogia"><?php echo $wf_fields["Info- ja kommunikatsioonitehnoloogia"]; ?></option>
+                            <option value="Kaubandus, rentimine ja parandus"><?php echo $wf_fields["Kaubandus, rentimine ja parandus"]; ?></option>
+                            <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"><?php echo $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"]; ?></option>
+                            <option value="Kultuur ja loometegevus"><?php echo $wf_fields["Kultuur ja loometegevus"]; ?></option>
+                            <option value="Majutus, toitlustus ja turism"><?php echo $wf_fields["Majutus, toitlustus ja turism"]; ?></option>
+                            <option value="Metalli- ja masinatööstus"><?php echo $wf_fields["Metalli- ja masinatööstus"]; ?></option>
+                            <option value="Metsandus ja puidutööstus"><?php echo $wf_fields["Metsandus ja puidutööstus"]; ?></option>
+                            <option value="Õigus"><?php echo $wf_fields["Õigus"]; ?></option>
+                            <option value="Personali- ja administratiivtöö ning ärinõustamine"><?php echo $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"]; ?></option>
+                            <option value="Põllumajandus ja toiduainetööstus"><?php echo $wf_fields["Põllumajandus ja toiduainetööstus"]; ?></option>
+                            <option value="Rõiva-, tekstiili- ja nahatööstus"><?php echo $wf_fields["Rõiva-, tekstiili- ja nahatööstus"]; ?></option>
+                            <option value="Sotsiaaltöö"><?php echo $wf_fields["Sotsiaaltöö"]; ?></option>
+                            <option value="Tervishoid"><?php echo $wf_fields["Tervishoid"]; ?></option>
+                            <option value="Transport, logistika ning mootorsõidukid"><?php echo $wf_fields["Transport, logistika ning mootorsõidukid"]; ?></option>
+                            <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
+                        </select>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn" onclick="handleSort"><?php echo $sort_text; ?></button>
+                        </div>
+                    </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
         </section>
@@ -94,23 +204,25 @@
                             <div class="carousel-item active">
                                 <?php
 
-                        function truncate($text, $chars = 25) {
-                            if (strlen($text) <= $chars) {
-                                return $text;
-                            }
-                            $text = $text." ";
-                            $text = substr($text,0,$chars);
-                            $text = substr($text,0,strrpos($text,' '));
-                            $text = $text."...";
-                            return $text;
-                        }
-
                         try {
                             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                             // set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC');
-                            $query->execute(array(1));
+                            if($query_string_add == ""){
+                                $query_string = 'SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC';
+                                $query_arr = array(1);
+                            }else{
+                                $query_string = 'SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() '.$query_string_sort.' ORDER BY id DESC';
+                                $query_arr = array(1);
+                                if($sorting_wf){
+                                    array_push($query_arr, $_GET["sort_wf"]);
+                                }
+                                if($sorting_loc){
+                                    array_push($query_arr, $_GET["sort_loc"]);
+                                }
+                            }
+                            $query = $conn->prepare($query_string);
+                            $query->execute($query_arr);
                             $data = $query -> fetchAll();
                             
                             $j = 0;
@@ -227,10 +339,10 @@
                                 </a>
                             </li>
                             <?php
-                      for($i=0; $i < $pages; $i++){
-                          echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
-                      }
-                    ?>
+                              for($i=0; $i < $pages; $i++){
+                                  echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
+                              }
+                            ?>
                             <li class="page-item" data-index="next">
                                 <a class="page-link" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
@@ -253,52 +365,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <?php
-                    if($_SESSION["lang"] == "ee"){
-                        $form_heading = "Kuulutuse pealkiri *";
-                        $form_heading_warning = "Palun lisa pealkiri";
-                        $form_workfield = "Valdkond *";
-                        $form_weblink = "Pakkumise link";
-                        $form_pdf_text = "Lisa praktikapakkumise pdf";
-                        $form_org_logo_text = "Lisa organisatsiooni logo *";
-                        $form_org_logo_text_warning = "Sisesta logo!";
-                        $form_intro_text = "Pakkumise tutvustus *";
-                        $form_tasks_text = "Ülesanded";
-                        $form_skills_text = "Ootused";
-                        $form_date_text = "Tähtaeg *";
-                        $form_org_text = "Ettevõte *";
-                        $form_name_text = "Kontaktisiku nimi *";
-                        $form_email_text = "Kontaktemail *";
-                        $form_email_text_warning = "Vajame sinu meiliaadressi, et sulle kinnituslink saata";
-                        $form_location_text = "Asukoht *";
-                        $form_reg_info_text = "Info kandideerimiseks";
-                        $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
-                        $consent_link_text = "siit";
-                        $close_text = "Sulge";
-                    }
-                    else{
-                        $form_heading = "Headline *";
-                        $form_heading_warning = "Please add the headline";
-                        $form_workfield = "Field *";
-                        $form_weblink = "Link to internship offer";
-                        $form_pdf_text = "Upload the offer in PDF format";
-                        $form_org_logo_text = "Upload your company logo *";
-                        $form_org_logo_text_warning = "Upload logo!";
-                        $form_intro_text = "Short description of the internship *";
-                        $form_tasks_text = "Assignments for intern";
-                        $form_skills_text = "Expectations for  intern";
-                        $form_date_text = "Deadline *";
-                        $form_org_text = "Company *";
-                        $form_name_text = "Name of the contact person *";
-                        $form_email_text = "Contact e-mail *";
-                        $form_email_text_warning = "Your e-mail is required for the e-mail confirmation link";
-                        $form_location_text = "Location *";
-                        $form_reg_info_text = "Application information";
-                        $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
-                        $consent_link_text = "here";
-                        $close_text = "Close";
-                    }
-                    ?>
+
                     <div class="container">
                         <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
                             <div class="col-lg-7">
@@ -520,6 +587,14 @@
             })
 
         });
+
+        function handleSort(){
+            $sl = $('#sort-loc').val();
+            $sw = $('#sort-wf').val();
+            var args = '?sort_loc='+$sl+'&sort_wf='+$sw;
+            var url = window.location.origin + window.location.pathname + args;
+            window.location.href = url;
+        }
 
         function paginatorClick(e) {
             var carousel = $('#carouselPager');
