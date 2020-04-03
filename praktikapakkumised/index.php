@@ -15,7 +15,7 @@
         $sorting_wf = true;
     }
     if(isset($_GET["sort_loc"]) && $_GET["sort_loc"] != "none"){
-        $query_string_sort .= " AND work_location = ?";
+        $query_string_sort .= " AND LOWER(work_location) = ?";
         $sorting_loc = true;
     }
 
@@ -23,11 +23,15 @@
         $active_offers = "Aktiivsed pakkumised";
         $add_offer = "Lisa pakkumine";
         $sort_text = "Sorteeri";
+        $sort_workfield = "Valdkond";
+        $sort_location = "Asukoht";
     }
     else{
         $active_offers = "Active offers";
         $add_offer = "Submit offer";
-        $sort_text = "Sort by";
+        $sort_text = "Sort";
+        $sort_workfield = "Field";
+        $sort_location = "Location";
     }
 
     //fields
@@ -143,52 +147,62 @@
                     <div class="col-lg-12">
                         <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down"><?php echo $active_offers; ?></h5>
                     </div>
-                    <div class="col-lg-12">
-                        <!-- sort by: workfield, work_location-->
-                        <select id="sort-loc">
-                            <option value="none" selected>...</option>
-                            <?php
-                                try{
-                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
-                                    // set the PDO error mode to exception
-                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                    $query = $conn->prepare('SELECT DISTINCT LOWER(work_location) AS loc FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC');
-                                    $query->execute(array(1));
-                                    $data = $query -> fetchAll();
-                                    foreach($data as $row){
-                                        echo '<option value="'.$row["loc"].'">'.$row["loc"].'</option>';
-                                    }
-                                } catch(PDOException $e){
-                                    echo "Connection failed: " . $e->getMessage();
-                                }
-                            ?>
-                        </select>
-                        <span></span>
-                        <select class="custom-select mr-sm-2" id="sort-wf">
-                            <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
-                            <option value="Arvestusala"><?php echo $wf_fields["Arvestusala"]; ?></option>
-                            <option value="Ehitus"><?php echo $wf_fields["Ehitus"]; ?></option>
-                            <option value="Energeetika ja kaevandamine"><?php echo $wf_fields["Energeetika ja kaevandamine"]; ?></option>
-                            <option value="Haridus ja teadus"><?php echo $wf_fields["Haridus ja teadus"]; ?></option>
-                            <option value="Info- ja kommunikatsioonitehnoloogia"><?php echo $wf_fields["Info- ja kommunikatsioonitehnoloogia"]; ?></option>
-                            <option value="Kaubandus, rentimine ja parandus"><?php echo $wf_fields["Kaubandus, rentimine ja parandus"]; ?></option>
-                            <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"><?php echo $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"]; ?></option>
-                            <option value="Kultuur ja loometegevus"><?php echo $wf_fields["Kultuur ja loometegevus"]; ?></option>
-                            <option value="Majutus, toitlustus ja turism"><?php echo $wf_fields["Majutus, toitlustus ja turism"]; ?></option>
-                            <option value="Metalli- ja masinatööstus"><?php echo $wf_fields["Metalli- ja masinatööstus"]; ?></option>
-                            <option value="Metsandus ja puidutööstus"><?php echo $wf_fields["Metsandus ja puidutööstus"]; ?></option>
-                            <option value="Õigus"><?php echo $wf_fields["Õigus"]; ?></option>
-                            <option value="Personali- ja administratiivtöö ning ärinõustamine"><?php echo $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"]; ?></option>
-                            <option value="Põllumajandus ja toiduainetööstus"><?php echo $wf_fields["Põllumajandus ja toiduainetööstus"]; ?></option>
-                            <option value="Rõiva-, tekstiili- ja nahatööstus"><?php echo $wf_fields["Rõiva-, tekstiili- ja nahatööstus"]; ?></option>
-                            <option value="Sotsiaaltöö"><?php echo $wf_fields["Sotsiaaltöö"]; ?></option>
-                            <option value="Tervishoid"><?php echo $wf_fields["Tervishoid"]; ?></option>
-                            <option value="Transport, logistika ning mootorsõidukid"><?php echo $wf_fields["Transport, logistika ning mootorsõidukid"]; ?></option>
-                            <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
-                        </select>
-                        <div class="upload-btn-wrapper">
-                            <button class="btn" onclick="handleSort"><?php echo $sort_text; ?></button>
-                        </div>
+                    <div class="col-lg-12" style="margin-top:20px">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-5 col-sm-12">
+                                    <span><?php echo $sort_location; ?></span>
+                                    <select class="custom-select mr-sm-2" id="sort-loc">
+                                        <option value="none" selected>...</option>
+                                        <?php
+                                            try{
+                                                $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+                                                // set the PDO error mode to exception
+                                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $query = $conn->prepare('SELECT DISTINCT LOWER(work_location) AS loc FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW()');
+                                                $query->execute(array(1));
+                                                $data = $query -> fetchAll();
+                                                foreach($data as $row){
+                                                    echo '<option value="'.$row["loc"].'">'.$row["loc"].'</option>';
+                                                }
+                                            } catch(PDOException $e){
+                                                echo "Connection failed: " . $e->getMessage();
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-lg-5 col-sm-12">
+                                    <span><?php echo $sort_workfield; ?></span>
+                                    <select class="custom-select mr-sm-2" id="sort-wf">
+                                        <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
+                                        <option value="Arvestusala"><?php echo $wf_fields["Arvestusala"]; ?></option>
+                                        <option value="Ehitus"><?php echo $wf_fields["Ehitus"]; ?></option>
+                                        <option value="Energeetika ja kaevandamine"><?php echo $wf_fields["Energeetika ja kaevandamine"]; ?></option>
+                                        <option value="Haridus ja teadus"><?php echo $wf_fields["Haridus ja teadus"]; ?></option>
+                                        <option value="Info- ja kommunikatsioonitehnoloogia"><?php echo $wf_fields["Info- ja kommunikatsioonitehnoloogia"]; ?></option>
+                                        <option value="Kaubandus, rentimine ja parandus"><?php echo $wf_fields["Kaubandus, rentimine ja parandus"]; ?></option>
+                                        <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"><?php echo $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"]; ?></option>
+                                        <option value="Kultuur ja loometegevus"><?php echo $wf_fields["Kultuur ja loometegevus"]; ?></option>
+                                        <option value="Majutus, toitlustus ja turism"><?php echo $wf_fields["Majutus, toitlustus ja turism"]; ?></option>
+                                        <option value="Metalli- ja masinatööstus"><?php echo $wf_fields["Metalli- ja masinatööstus"]; ?></option>
+                                        <option value="Metsandus ja puidutööstus"><?php echo $wf_fields["Metsandus ja puidutööstus"]; ?></option>
+                                        <option value="Õigus"><?php echo $wf_fields["Õigus"]; ?></option>
+                                        <option value="Personali- ja administratiivtöö ning ärinõustamine"><?php echo $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"]; ?></option>
+                                        <option value="Põllumajandus ja toiduainetööstus"><?php echo $wf_fields["Põllumajandus ja toiduainetööstus"]; ?></option>
+                                        <option value="Rõiva-, tekstiili- ja nahatööstus"><?php echo $wf_fields["Rõiva-, tekstiili- ja nahatööstus"]; ?></option>
+                                        <option value="Sotsiaaltöö"><?php echo $wf_fields["Sotsiaaltöö"]; ?></option>
+                                        <option value="Tervishoid"><?php echo $wf_fields["Tervishoid"]; ?></option>
+                                        <option value="Transport, logistika ning mootorsõidukid"><?php echo $wf_fields["Transport, logistika ning mootorsõidukid"]; ?></option>
+                                        <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 col-sm-12" style="margin-top:20px">
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn" id="sort-button"><?php echo $sort_text; ?></button>
+                                    </div>
+                                </div>
+                            </div><!-- .row -->
+                        </div><!-- .container -->
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
@@ -202,12 +216,25 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <?php
+                        /*
+                        *   Truncates $text to character count. Default amount of characters is 25.
+                        */
 
+                        function truncate($text, $chars = 25) {
+                            if (strlen($text) <= $chars) {
+                                return $text;
+                            }
+                            $text = $text." ";
+                            $text = substr($text,0,$chars);
+                            $text = substr($text,0,strrpos($text,' '));
+                            $text = $text."...";
+                            return $text;
+                        }
                         try {
                             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                             // set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            if($query_string_add == ""){
+                            if($query_string_sort == ""){
                                 $query_string = 'SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC';
                                 $query_arr = array(1);
                             }else{
@@ -542,13 +569,19 @@
             $('.toggleMenu').on('click', openRegModal);
             $('.js-view-modal').on('click', openViewModal);
             $('#submit-all').on('click', ajaxSubmit);
+            $('#sort-button').on('click', handleSort);
 
             //$('[data-toggle="tooltip"]').tooltip();
             $("#datepicker").datepicker({
                 showWeek: true,
                 dateFormat: 'dd-mm-yy'
             });
-
+            <?php if($sorting_wf):?>
+                $('#sort-wf').val("<?php echo $_GET["sort_wf"];?>");
+            <?php endif;?>
+            <?php if($sorting_loc):?>
+                $('#sort-loc').val("<?php echo $_GET["sort_loc"];?>");
+            <?php endif;?>
             // Text Editors
             /*
             $('#description').trumbowyg({
@@ -587,7 +620,7 @@
 
         });
 
-        function handleSort(){
+        function handleSort(e){
             $sl = $('#sort-loc').val();
             $sw = $('#sort-wf').val();
             var args = '?sort_loc='+$sl+'&sort_wf='+$sw;
