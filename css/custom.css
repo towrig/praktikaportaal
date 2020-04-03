@@ -1649,7 +1649,6 @@ body.practice .modal img#profileImg {
 .upload-btn-wrapper .btn {
   border: 2px solid #00489d;
   color: #00489d;
-  background-color: white;
   padding: 8px 20px;
   font-size: 0.9rem;
   font-weight: bold;
@@ -2262,4 +2261,15 @@ pre {
 
 input[required], select[required], textarea[required], .custom-checkbox .custom-control-label[for*=checkpoint]::before {
     border: #ca939b 2px solid!important;
+}
+
+select#sort-wf, select#sort-loc {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    background: #e8e8e8;
+}
+
+.sort-label {
+  color: #04499d;
 }

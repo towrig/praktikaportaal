@@ -147,11 +147,11 @@
                     <div class="col-lg-12">
                         <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down"><?php echo $active_offers; ?></h5>
                     </div>
-                    <div class="col-lg-12" style="margin-top:20px">
+                    <div class="offset-md-1 col-lg-11 p-3 text-center">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-5 col-sm-12">
-                                    <span><?php echo $sort_location; ?></span>
+                                    <span class="text-uppercase h6 sort-label"><?php echo $sort_location; ?></span>
                                     <select class="custom-select mr-sm-2" id="sort-loc">
                                         <option value="none" selected>...</option>
                                         <?php
@@ -172,7 +172,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-5 col-sm-12">
-                                    <span><?php echo $sort_workfield; ?></span>
+                                    <span class="text-uppercase h6 sort-label"><?php echo $sort_workfield; ?></span>
                                     <select class="custom-select mr-sm-2" id="sort-wf">
                                         <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
                                         <option value="Arvestusala"><?php echo $wf_fields["Arvestusala"]; ?></option>
