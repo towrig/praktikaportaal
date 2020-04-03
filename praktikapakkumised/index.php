@@ -11,7 +11,7 @@
     $query_string_sort = "";
     $sorting_wf = false;
     $sorting_loc = false;
-    if(isset($_GET["sort_wf"] && $_GET["sort_wf"] != "Määramata")){
+    if(isset($_GET["sort_wf"]) && $_GET["sort_wf"] != "Määramata"){
         $query_string_sort .= " AND workfield = ?";
         $sorting_wf = true;
     }
