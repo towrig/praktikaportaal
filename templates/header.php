@@ -18,6 +18,7 @@
 
     session_start();
 
+    include_once $CFG->docroot . 'functions.php';
 ?>
 <head>
 
@@ -44,8 +45,6 @@
     <meta property="og:image:width" content="930" />
     <meta property="og:image:height" content="452" />
     <meta property="og:image:alt" content="Futulab - Tulevik algab Sinust!" />
-
-    <?php include $_SERVER["DOCUMENT_ROOT"].'/functions.php'; ?>
 
     <?php
       $isanalytics = '["analytics"]';
