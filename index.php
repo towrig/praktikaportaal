@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
     <?php
-      $title="Tulevik algab Sinust! |";
-      $description = "Futulab toob kokku üliõpilase, ülikooli ja organisatsiooni kogemused ja oskused, et olla parim tulevikutegija!";
-      include_once './templates/header.php';
+    include_once './templates/header.php';
+
+    $t_pieces = t(array("main_title", "main_desc"),$dbhost,$dbname,$dbuser,$dbpassword);
+    $title = $t_pieces["main_title"];
+    $description = $t_pieces["main_desc"];
     ?>
     <body>
         <?php include_once './templates/top-navbar.php';?>
         <!-- Masthead -->
         <?php include_once './templates/frontpage/frontpage-masthead.php';?>
         <!-- Why -->
-        <?php include_once './templates/frontpage/frontpage-why.php';?>  
+        <?php include_once './templates/frontpage/frontpage-why.php';?>
         <!-- Activities -->
         <?php include_once './templates/frontpage/frontpage-activities.php';?>   
         <!-- Statistics -->

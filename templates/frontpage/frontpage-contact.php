@@ -1,10 +1,15 @@
+<!DOCTYPE html>
+<?php
+$t_pieces = t(array("fp-contact_title", "fp-contact1"),$dbhost,$dbname,$dbuser,$dbpassword);
+?>
+
 <section class="page-section" id="contact">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-          <h2 class="mt-0">Võta meiega ühendust!</h2>
+          <h2 class="mt-0"><?php echo $t_pieces["fp-contact_title"];?></h2>
           <hr class="divider my-4">
-          <p class="text-muted mb-5">Kui sul on tekkinud küsimusi või vajad lihtsalt mõnele teemale vastust, siis ära kõhkle ja võta meiega ühendust.</p>
+          <p class="text-muted mb-5"><?php echo $t_pieces["fp-contact1"];?></p>
         </div>
       </div>
       <div class="row">

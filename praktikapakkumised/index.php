@@ -1,9 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
 <?php
-  $title="Praktikapakkumised |";
-  $description = "Otsid praktikanti või tulevast töötajat? Lisa praktikapakkumine ja näita ennast motiveeritud tööandjana. Praktika on suurepärane võimalus koostööks ülikooliga, et leida parimaid tulevasi töötajaid.";
-  include_once './../templates/header.php';
+    include_once './../templates/header.php';
+    $t_pieces = t(array("praktikapak_title","praktikapak_desc","forms_consent"),$dbhost,$dbname,$dbuser,$dbpassword);
+    $title = $t_pieces["praktikapak_title"];
+    $description = $t_pieces["praktikapak_desc"];
+    $forms_consent = $t_pieces["forms_consent"];
+
+    //sorting
+    $query_string_sort = "";
+    $sorting_wf = false;
+    $sorting_loc = false;
+    if(isset($_GET["sort_wf"]) && $_GET["sort_wf"] != "Määramata"){
+        $query_string_sort .= " AND workfield = ?";
+        $sorting_wf = true;
+    }
+    if(isset($_GET["sort_loc"]) && $_GET["sort_loc"] != "none"){
+        $query_string_sort .= " AND LOWER(work_location) = ?";
+        $sorting_loc = true;
+    }
+
+    if($_SESSION["lang"] == "ee"){
+        $active_offers = "Aktiivsed pakkumised";
+        $add_offer = "Lisa pakkumine";
+        $sort_text = "Sorteeri";
+        $sort_workfield = "Valdkond";
+        $sort_location = "Asukoht";
+    }
+    else{
+        $active_offers = "Active offers";
+        $add_offer = "Submit offer";
+        $sort_text = "Sort";
+        $sort_workfield = "Field";
+        $sort_location = "Location";
+    }
+
+    //fields
+    $wf_fields = array();
+    if($_SESSION["lang"] == "ee"){
+        $wf_fields["Määramata"] = "Määramata";
+        $wf_fields["Arvestusala"] = "Arvestusala";
+        $wf_fields["Ehitus"] = "Ehitus";
+        $wf_fields["Energeetika ja kaevandamine"] = "Energeetika ja kaevandamine";
+        $wf_fields["Haridus ja teadus"] = "Haridus ja teadus";
+        $wf_fields["Info- ja kommunikatsioonitehnoloogia"] = "Info- ja kommunikatsioonitehnoloogia";
+        $wf_fields["Kaubandus, rentimine ja parandus"] = "Kaubandus, rentimine ja parandus";
+        $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"] = "Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus";
+        $wf_fields["Kultuur ja loometegevus"] = "Kultuur ja loometegevus";
+        $wf_fields["Majutus, toitlustus ja turism"] = "Majutus, toitlustus ja turism";
+        $wf_fields["Metalli- ja masinatööstus"] = "Metalli- ja masinatööstus";
+        $wf_fields["Metsandus ja puidutööstus"] = "Metsandus ja puidutööstus";
+        $wf_fields["Õigus"] = "Õigus";
+        $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"] = "Personali- ja administratiivtöö ning ärinõustamine";
+        $wf_fields["Põllumajandus ja toiduainetööstus"] = "Põllumajandus ja toiduainetööstus";
+        $wf_fields["Rõiva-, tekstiili- ja nahatööstus"] = "Rõiva-, tekstiili- ja nahatööstus";
+        $wf_fields["Sotsiaaltöö"] = "Sotsiaaltöö";
+        $wf_fields["Tervishoid"] = "Tervishoid";
+        $wf_fields["Transport, logistika ning mootorsõidukid"] = "Transport, logistika ning mootorsõidukid";
+        $wf_fields["Vee- ja jäätmemajandus ning keskkond"] = "Vee- ja jäätmemajandus ning keskkond";
+    }
+    else{
+        $wf_fields["Määramata"] = "Unselected";
+        $wf_fields["Arvestusala"] = "Accounting";
+        $wf_fields["Ehitus"] = "Construction";
+        $wf_fields["Energeetika ja kaevandamine"] = "Energy and mining";
+        $wf_fields["Haridus ja teadus"] = "Education and research";
+        $wf_fields["Info- ja kommunikatsioonitehnoloogia"] = "ICT";
+        $wf_fields["Kaubandus, rentimine ja parandus"] = "Trade, rentals, repair";
+        $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"] = "Chemicals, rubber, plastic, construction materials";
+        $wf_fields["Kultuur ja loometegevus"] = "Culture and creative industries";
+        $wf_fields["Majutus, toitlustus ja turism"] = "Accommodation, catering, tourism";
+        $wf_fields["Metalli- ja masinatööstus"] = "Metal products, machinery";
+        $wf_fields["Metsandus ja puidutööstus"] = "Forestry, timber";
+        $wf_fields["Õigus"] = "Security, law";
+        $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"] = "HR, business consultancy";
+        $wf_fields["Põllumajandus ja toiduainetööstus"] = "Agriculture, food industry";
+        $wf_fields["Rõiva-, tekstiili- ja nahatööstus"] = "Apparel, textile";
+        $wf_fields["Sotsiaaltöö"] = "Social work";
+        $wf_fields["Tervishoid"] = "Health care";
+        $wf_fields["Transport, logistika ning mootorsõidukid"] = "Transportation, logistics, motor vehicles";
+        $wf_fields["Vee- ja jäätmemajandus ning keskkond"] = "Water, waste and environmental management";
+    }
+
+    //form
+    if($_SESSION["lang"] == "ee"){
+        $form_heading = "Kuulutuse pealkiri *";
+        $form_heading_warning = "Palun lisa pealkiri";
+        $form_workfield = "Valdkond *";
+        $form_weblink = "Pakkumise link";
+        $form_pdf_text = "Lisa praktikapakkumise pdf";
+        $form_org_logo_text = "Lisa organisatsiooni logo *";
+        $form_org_logo_text_warning = "Sisesta logo!";
+        $form_intro_text = "Pakkumise tutvustus *";
+        $form_tasks_text = "Ülesanded";
+        $form_skills_text = "Ootused";
+        $form_date_text = "Tähtaeg *";
+        $form_org_text = "Ettevõte *";
+        $form_name_text = "Kontaktisiku nimi *";
+        $form_email_text = "Kontaktemail *";
+        $form_email_text_warning = "Vajame sinu meiliaadressi, et sulle kinnituslink saata";
+        $form_location_text = "Asukoht *";
+        $form_reg_info_text = "Info kandideerimiseks";
+        $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
+        $consent_link_text = "siit";
+        $close_text = "Sulge";
+    }
+    else{
+        $form_heading = "Headline *";
+        $form_heading_warning = "Please add the headline";
+        $form_workfield = "Field *";
+        $form_weblink = "Link to internship offer";
+        $form_pdf_text = "Upload the offer in PDF format";
+        $form_org_logo_text = "Upload your company logo *";
+        $form_org_logo_text_warning = "Upload logo!";
+        $form_intro_text = "Short description of the internship *";
+        $form_tasks_text = "Assignments for intern";
+        $form_skills_text = "Expectations for  intern";
+        $form_date_text = "Deadline *";
+        $form_org_text = "Company *";
+        $form_name_text = "Name of the contact person *";
+        $form_email_text = "Contact e-mail *";
+        $form_email_text_warning = "Your e-mail is required for the e-mail confirmation link";
+        $form_location_text = "Location *";
+        $form_reg_info_text = "Application information";
+        $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
+        $consent_link_text = "here";
+        $close_text = "Close";
+    }
 ?>
 
 <body id="page-top" class="practiceoffers">
@@ -14,16 +136,73 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right">Praktika&shy;pakkumised</h1>
+                        <h1 class="text-uppercase font-weight-bold mt-5 mb-3" data-aos="fade-right"><?php echo $title;?></h1>
                     </div>
                     <div class="col-lg-3">
                         <p class="font-weight-light mb-5" data-aos="fade-right"><?php echo $description; ?></p>
                     </div> <!-- .col-->
                     <div class="col-lg-2" data-aos="fade-in-right">
-                        <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});">Lisa pakkumine</a>
+                        <a id="formToggler" class="toggleMenu text-uppercase" onclick="gtag('event', 'Ava',{'event_category': 'Praktikapakkumised','event_label':'Ava lisa pakkumine'});"><?php echo $add_offer; ?></a>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down">Aktiivsed pakkumised</h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5" data-aos="fade-down"><?php echo $active_offers; ?></h5>
+                    </div>
+                    <div class="col-lg-12" style="margin-top:20px">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-5 col-sm-12">
+                                    <span><?php echo $sort_location; ?></span>
+                                    <select class="custom-select mr-sm-2" id="sort-loc">
+                                        <option value="none" selected>...</option>
+                                        <?php
+                                            try{
+                                                $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+                                                // set the PDO error mode to exception
+                                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $query = $conn->prepare('SELECT DISTINCT LOWER(work_location) AS loc FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW()');
+                                                $query->execute(array(1));
+                                                $data = $query -> fetchAll();
+                                                foreach($data as $row){
+                                                    echo '<option value="'.$row["loc"].'">'.$row["loc"].'</option>';
+                                                }
+                                            } catch(PDOException $e){
+                                                echo "Connection failed: " . $e->getMessage();
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-lg-5 col-sm-12">
+                                    <span><?php echo $sort_workfield; ?></span>
+                                    <select class="custom-select mr-sm-2" id="sort-wf">
+                                        <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
+                                        <option value="Arvestusala"><?php echo $wf_fields["Arvestusala"]; ?></option>
+                                        <option value="Ehitus"><?php echo $wf_fields["Ehitus"]; ?></option>
+                                        <option value="Energeetika ja kaevandamine"><?php echo $wf_fields["Energeetika ja kaevandamine"]; ?></option>
+                                        <option value="Haridus ja teadus"><?php echo $wf_fields["Haridus ja teadus"]; ?></option>
+                                        <option value="Info- ja kommunikatsioonitehnoloogia"><?php echo $wf_fields["Info- ja kommunikatsioonitehnoloogia"]; ?></option>
+                                        <option value="Kaubandus, rentimine ja parandus"><?php echo $wf_fields["Kaubandus, rentimine ja parandus"]; ?></option>
+                                        <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"><?php echo $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"]; ?></option>
+                                        <option value="Kultuur ja loometegevus"><?php echo $wf_fields["Kultuur ja loometegevus"]; ?></option>
+                                        <option value="Majutus, toitlustus ja turism"><?php echo $wf_fields["Majutus, toitlustus ja turism"]; ?></option>
+                                        <option value="Metalli- ja masinatööstus"><?php echo $wf_fields["Metalli- ja masinatööstus"]; ?></option>
+                                        <option value="Metsandus ja puidutööstus"><?php echo $wf_fields["Metsandus ja puidutööstus"]; ?></option>
+                                        <option value="Õigus"><?php echo $wf_fields["Õigus"]; ?></option>
+                                        <option value="Personali- ja administratiivtöö ning ärinõustamine"><?php echo $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"]; ?></option>
+                                        <option value="Põllumajandus ja toiduainetööstus"><?php echo $wf_fields["Põllumajandus ja toiduainetööstus"]; ?></option>
+                                        <option value="Rõiva-, tekstiili- ja nahatööstus"><?php echo $wf_fields["Rõiva-, tekstiili- ja nahatööstus"]; ?></option>
+                                        <option value="Sotsiaaltöö"><?php echo $wf_fields["Sotsiaaltöö"]; ?></option>
+                                        <option value="Tervishoid"><?php echo $wf_fields["Tervishoid"]; ?></option>
+                                        <option value="Transport, logistika ning mootorsõidukid"><?php echo $wf_fields["Transport, logistika ning mootorsõidukid"]; ?></option>
+                                        <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 col-sm-12" style="margin-top:20px">
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn" id="sort-button"><?php echo $sort_text; ?></button>
+                                    </div>
+                                </div>
+                            </div><!-- .row -->
+                        </div><!-- .container -->
                     </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
@@ -37,6 +216,9 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <?php
+                        /*
+                        *   Truncates $text to character count. Default amount of characters is 25.
+                        */
 
                         function truncate($text, $chars = 25) {
                             if (strlen($text) <= $chars) {
@@ -48,13 +230,25 @@
                             $text = $text."...";
                             return $text;
                         }
-
                         try {
                             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                             // set the PDO error mode to exception
                             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC');
-                            $query->execute(array(1));
+                            if($query_string_sort == ""){
+                                $query_string = 'SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() ORDER BY id DESC';
+                                $query_arr = array(1);
+                            }else{
+                                $query_string = 'SELECT * FROM WorkPosts WHERE isvalidated = ? AND end_date >= NOW() '.$query_string_sort.' ORDER BY id DESC';
+                                $query_arr = array(1);
+                                if($sorting_wf){
+                                    array_push($query_arr, $_GET["sort_wf"]);
+                                }
+                                if($sorting_loc){
+                                    array_push($query_arr, $_GET["sort_loc"]);
+                                }
+                            }
+                            $query = $conn->prepare($query_string);
+                            $query->execute($query_arr);
                             $data = $query -> fetchAll();
                             
                             $j = 0;
@@ -105,7 +299,7 @@
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
                                                           data-description="'.htmlspecialchars($description).'"
-                                                          data-workfield="'.$workfield.'"
+                                                          data-workfield="'.$wf_fields[$workfield].'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
@@ -114,6 +308,7 @@
                                                           data-website="'.$website.'"
                                                           data-email="'.$email.'"
                                                           data-name="'.$name.'"
+                                                          data-pdf_path="'.$pdfpath.'"
                                                           data-reg_end="'.$reg_end.'">
                                                           <h6 class="text-uppercase font-weight-bold mt-0">'.$heading.'</h6>
                                                         </a>
@@ -130,7 +325,7 @@
                                                           data-pic="'.$picurl.'"
                                                           data-heading="'.$heading.'"
                                                           data-description="'.htmlspecialchars($description).'"
-                                                          data-workfield="'.$workfield.'"
+                                                          data-workfield="'.$wf_fields[$workfield].'"
                                                           data-tasks="'.$tasks.'"
                                                           data-skills="'.$skills.'"
                                                           data-work_name="'.$work_name.'"
@@ -139,6 +334,7 @@
                                                           data-website="'.$website.'"
                                                           data-email="'.$email.'"
                                                           data-name="'.$name.'"
+                                                          data-pdf_path="'.$pdfpath.'"
                                                           data-reg_end="'.$reg_end.'">Vaata</a>
                                                     <p class="mt-1">Vaatamisi <span class="views font-weight-bold">'.$views.'</span></p>
                                                   </div>
@@ -169,10 +365,10 @@
                                 </a>
                             </li>
                             <?php
-                      for($i=0; $i < $pages; $i++){
-                          echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
-                      }
-                    ?>
+                              for($i=0; $i < $pages; $i++){
+                                  echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
+                              }
+                            ?>
                             <li class="page-item" data-index="next">
                                 <a class="page-link" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
@@ -194,51 +390,49 @@
     <div id="regModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-
                 <div class="modal-body">
 
                     <div class="container">
                         <form class="needs-validation row" action="./work_api.php" method="post" enctype="multipart/form-data" id="form_work">
-
                             <div class="col-lg-7">
                                 <div class="form-group">
-                                    <p class="alert alert-warning font-weight-normal">Futulab on vabatahtlik praktika keskkond. Kõik vormi sisestatud isikuandmed avalikustatakse kodulehel.</p>
-                                    <label for="name">Kuulutuse pealkiri *</label>
+                                    <p class="alert alert-warning font-weight-normal"><?php echo $forms_consent; ?></p>
+                                    <label for="name"><?php echo $form_heading; ?></label>
                                     <input required type="text" class="form-control" id="heading" name="heading">
-                                    <div class='invalid-feedback'>Palun lisa pealkiri</div>
+                                    <div class='invalid-feedback'><?php echo $form_heading_warning; ?></div>
                                 </div>
                                 <div class="form-group my-1">
-                                    <label class="mr-sm-2">Valdkond *</label>
+                                    <label class="mr-sm-2"><?php echo $form_workfield; ?></label>
                                     <select class="custom-select mr-sm-2" id="workfield" name="workfield">
-                                        <option value="Määramata" selected>Määramata</option>
-                                        <option value="Arvestusala">Arvestusala</option>
-                                        <option value="Ehitus">Ehitus</option>
-                                        <option value="Energeetika ja kaevandamine">Energeetika ja kaevandamine</option>
-                                        <option value="Haridus ja teadus">Haridus ja teadus</option>
-                                        <option value="Info- ja kommunikatsioonitehnoloogia">Info- ja kommunikatsioonitehnoloogia</option>
-                                        <option value="Kaubandus, rentimine ja parandus">Kaubandus, rentimine ja parandus</option>
-                                        <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus">Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus</option>
-                                        <option value="Kultuur ja loometegevus">Kultuur ja loometegevus</option>
-                                        <option value="Majutus, toitlustus ja turism">Majutus, toitlustus ja turism</option>
-                                        <option value="Metalli- ja masinatööstus">Metalli- ja masinatööstus</option>
-                                        <option value="Metsandus ja puidutööstus">Metsandus ja puidutööstus</option>
-                                        <option value="Õigus">Õigus</option>
-                                        <option value="Personali- ja administratiivtöö ning ärinõustamine">Personali- ja administratiivtöö ning ärinõustamine</option>
-                                        <option value="Põllumajandus ja toiduainetööstus">Põllumajandus ja toiduainetööstus</option>
-                                        <option value="Rõiva-, tekstiili- ja nahatööstus">Rõiva-, tekstiili- ja nahatööstus</option>
-                                        <option value="Sotsiaaltöö">Sotsiaaltöö</option>
-                                        <option value="Tervishoid">Tervishoid</option>
-                                        <option value="Transport, logistika ning mootorsõidukid">Transport, logistika ning mootorsõidukid</option>
-                                        <option value="Vee- ja jäätmemajandus ning keskkond">Vee- ja jäätmemajandus ning keskkond</option>
+                                        <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
+                                        <option value="Arvestusala"><?php echo $wf_fields["Arvestusala"]; ?></option>
+                                        <option value="Ehitus"><?php echo $wf_fields["Ehitus"]; ?></option>
+                                        <option value="Energeetika ja kaevandamine"><?php echo $wf_fields["Energeetika ja kaevandamine"]; ?></option>
+                                        <option value="Haridus ja teadus"><?php echo $wf_fields["Haridus ja teadus"]; ?></option>
+                                        <option value="Info- ja kommunikatsioonitehnoloogia"><?php echo $wf_fields["Info- ja kommunikatsioonitehnoloogia"]; ?></option>
+                                        <option value="Kaubandus, rentimine ja parandus"><?php echo $wf_fields["Kaubandus, rentimine ja parandus"]; ?></option>
+                                        <option value="Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"><?php echo $wf_fields["Keemia-, kummi-, plasti- ja ehitusmaterjalitööstus"]; ?></option>
+                                        <option value="Kultuur ja loometegevus"><?php echo $wf_fields["Kultuur ja loometegevus"]; ?></option>
+                                        <option value="Majutus, toitlustus ja turism"><?php echo $wf_fields["Majutus, toitlustus ja turism"]; ?></option>
+                                        <option value="Metalli- ja masinatööstus"><?php echo $wf_fields["Metalli- ja masinatööstus"]; ?></option>
+                                        <option value="Metsandus ja puidutööstus"><?php echo $wf_fields["Metsandus ja puidutööstus"]; ?></option>
+                                        <option value="Õigus"><?php echo $wf_fields["Õigus"]; ?></option>
+                                        <option value="Personali- ja administratiivtöö ning ärinõustamine"><?php echo $wf_fields["Personali- ja administratiivtöö ning ärinõustamine"]; ?></option>
+                                        <option value="Põllumajandus ja toiduainetööstus"><?php echo $wf_fields["Põllumajandus ja toiduainetööstus"]; ?></option>
+                                        <option value="Rõiva-, tekstiili- ja nahatööstus"><?php echo $wf_fields["Rõiva-, tekstiili- ja nahatööstus"]; ?></option>
+                                        <option value="Sotsiaaltöö"><?php echo $wf_fields["Sotsiaaltöö"]; ?></option>
+                                        <option value="Tervishoid"><?php echo $wf_fields["Tervishoid"]; ?></option>
+                                        <option value="Transport, logistika ning mootorsõidukid"><?php echo $wf_fields["Transport, logistika ning mootorsõidukid"]; ?></option>
+                                        <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="website">Pakkumise link</label>
+                                    <label for="website"><?php echo $form_weblink; ?></label>
                                     <input type="text" class="form-control" id="website" name="website">
                                 </div>
                                 <div class="form-group text-center">
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles praktikapakkumine PDF formaadis</button>
+                                        <button class="btn"><?php echo $form_pdf_text; ?></button>
                                         <input type="file" name="post_pdf" id="post_pdf" onchange="showFileName(this.files)">
                                     </div>
                                 </div>
@@ -248,68 +442,68 @@
                                 <div class="form-group">
                                     <label for="pilt" class="">Logo</label>
                                     <div id="preview">
-                                        <img id="profileImg" src="../userdata/blank_profile_pic.png" height="200" alt="Image preview...">
+                                        <img id="profileImg" src="../userdata/logo_placeholder.png" height="200" alt="Image preview...">
                                     </div>
                                     <div class="upload-btn-wrapper">
-                                        <button class="btn">Lae üles oma organisatsiooni logo *</button>
+                                        <button class="btn"><?php echo $form_org_logo_text; ?></button>
                                         <input required type="file" accept="image/*" class="form-control-file" id="pilt" name="pilt_full" onchange="previewFile()">
                                     </div>
-                                    <div class='invalid-feedback'>Sisesta logo!</div>
+                                    <div class='invalid-feedback'><?php echo $form_org_logo_text_warning; ?></div>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="description">Pakkumise tutvustus *</label>
+                                    <label for="description"><?php echo $form_intro_text; ?></label>
                                     <textarea required class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
                                 <div class="form-group pdf-hide">
-                                    <label for="tasks">Ülesanded</label>
+                                    <label for="tasks"><?php echo $form_tasks_text; ?></label>
                                     <textarea class="form-control" id="tasks" name="tasks" rows="3"></textarea>
                                 </div>
                                 <div class="form-group pdf-hide">
-                                    <label for="skills">Ootused</label>
+                                    <label for="skills"><?php echo $form_skills_text; ?></label>
                                     <textarea class="form-control" id="skills" name="skills" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Tähtaeg *</label>
+                                    <label for="work"><?php echo $form_date_text; ?></label>
                                     <input required type="text" class="form-control" id="datepicker" name="date">
                                 </div>
                                 <div class="form-group">
-                                    <label for="organization">Ettevõte *</label>
+                                    <label for="organization"><?php echo $form_org_text; ?></label>
                                     <input required type="text" class="form-control" id="organization" name="organization">
                                 </div>
                                 <div class="form-group">
-                                    <label for="work">Kontaktisiku nimi *</label>
+                                    <label for="work"><?php echo $form_name_text; ?></label>
                                     <input required type="text" class="form-control" id="name" name="name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Kontaktemail *</label>
+                                    <label for="email"><?php echo $form_email_text; ?></label>
                                     <input required type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
-                                    <div class='invalid-feedback'>Vajame sinu meiliaadressi, et sulle kinnituslink saata</div>
+                                    <div class='invalid-feedback'><?php echo $form_email_text_warning; ?></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="location">Asukoht *</label>
+                                    <label for="location"><?php echo $form_location_text; ?></label>
                                     <input required type="text" class="form-control" id="location" name="location">
                                 </div>
                                 <div class="form-group">
-                                    <label for="other">Info kandideerimiseks</label>
+                                    <label for="other"><?php echo $form_reg_info_text; ?></label>
                                     <textarea class="form-control" id="other" name="other" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="checkpoint" name="checkpoint" required="required">
-                                        <label class="custom-control-label text-left" for="checkpoint">Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu andmekaitsetingimustega <a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank">siit</a>.</label>
+                                        <label class="custom-control-label text-left" for="checkpoint"><?php echo $consent_form_area; ?><a href="<?php echo $wwwroot;?>andmekaitsetingimused" target="_blank"><?php echo $consent_link_text; ?></a>.</label>
                                     </div>
                                 </div>
-                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});">Lisa pakkumine</button>
+                                <button id="submit-all" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light js-ajax" onclick="gtag('event', 'Salvesta',{'event_category': 'Praktikapakkumised','event_label':'Lisa pakkumine'});"><?php echo $add_offer; ?></button>
                             </div>
 
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sulge</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
                 </div>
             </div>
         </div>
@@ -334,9 +528,11 @@
                                 <div class="post-skills hide-pdf"></div>
                                 <h5 class="hide-pdf">Ülesanded</h5>
                                 <div class="post-tasks hide-pdf"></div>
+                                <h5 class="hide-website">Pakkumise link</h5>
+                                <div class="post-website hide-website" style="overflow:hidden;"></div>
                                 <div class="pdf-container"></div>
-                                <h5>Info kandideerimiseks</h5>
-                                <div class="post-other"></div>
+                                <h5 class="hide-other">Info kandideerimiseks</h5>
+                                <div class="post-other hide-other"></div>
                             </div>
 
                             <div class="col-lg-5 col-contact">
@@ -350,7 +546,6 @@
                                 <div class="post-contact-container">
                                     <span class="post-contact-name"></span>
                                     <span class="post-contact-email"></span>
-                                    <span class="post-org-website" style="overflow:hidden"></span>
                                 </div>
                             </div>
                         </div>
@@ -374,13 +569,19 @@
             $('.toggleMenu').on('click', openRegModal);
             $('.js-view-modal').on('click', openViewModal);
             $('#submit-all').on('click', ajaxSubmit);
+            $('#sort-button').on('click', handleSort);
 
             //$('[data-toggle="tooltip"]').tooltip();
             $("#datepicker").datepicker({
                 showWeek: true,
                 dateFormat: 'dd-mm-yy'
             });
-
+            <?php if($sorting_wf):?>
+                $('#sort-wf').val("<?php echo $_GET["sort_wf"];?>");
+            <?php endif;?>
+            <?php if($sorting_loc):?>
+                $('#sort-loc').val("<?php echo $_GET["sort_loc"];?>");
+            <?php endif;?>
             // Text Editors
             /*
             $('#description').trumbowyg({
@@ -419,6 +620,14 @@
 
         });
 
+        function handleSort(e){
+            $sl = $('#sort-loc').val();
+            $sw = $('#sort-wf').val();
+            var args = '?sort_loc='+$sl+'&sort_wf='+$sw;
+            var url = window.location.origin + window.location.pathname + args;
+            window.location.href = url;
+        }
+
         function paginatorClick(e) {
             var carousel = $('#carouselPager');
             var target = $(e.currentTarget);
@@ -447,8 +656,9 @@
             var deadline = target.data('reg_end');
 
             //pdf stuff
+            console.log(target.data("pdf_path")+";");
             if(target.data("pdf_path") != ""){
-                var pdf_path = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>userdata/projects/" + target.data("pdf_path");
+                var pdf_path = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>userdata/work_pdfs/" + target.data("pdf_path");
                 //attach pdf
                 var pdf_embed = $('<iframe>').attr({
                     'src': pdf_path + '&embedded=true',
@@ -457,11 +667,29 @@
                 modal.find('.pdf-container').html(pdf_embed);
                 modal.find('.hide-pdf').hide();
                 modal.find('.pdf-container').show();
-            }else{
+            }else if (tasks != "" || skills != ""){
                 modal.find('.hide-pdf').show();
+                modal.find('.pdf-container').hide();
+            }else{
+                modal.find('.hide-pdf').hide();
                 modal.find('.pdf-container').hide();
             }
 
+            //website hide logic
+            if(website != ""){
+                $(".hide-website").show();
+                $(".post-website").html("<a target='_blank' href='" + website + "'>" + website + "</a>");
+            }else{
+                $(".hide-website").hide();
+            }
+
+            //other hide logic
+            if(other != ""){
+                $(".post-other").html("<pre>" + other + "</pre>");
+                $(".hide-other").show();
+            }else{
+                $(".hide-other").hide();
+            }
 
             //attach values
             $(".post-heading").html(heading);
@@ -472,10 +700,8 @@
             $(".post-img-container").html("<img src='" + pic + "'>");
             $(".post-org-name").html(work_name);
             $(".post-org-loc").html(work_loc);
-            $(".post-org-website").html("<a target='_blank' href='" + website + "'>" + website + "</a>");
             $(".post-contact-name").html(name);
             $(".post-contact-email").html(email);
-            $(".post-other").html("<pre>" + other + "</pre>");
             $(".post-deadline").html(deadline);
             handleCookies(id);
 

@@ -1,15 +1,21 @@
+<!DOCTYPE html>
+<?php
+//c_title, c_message, c_accept, c_more, c_fixed_1, c_fixed_2
+$t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5", "cookie_title", "cookie_message", "cookie_advanced", "cookie_accept", "cookie_more", "cookie_fixed_1", "cookie_fixed_2", "cookie_fixed_3", "cookie_fixed_4"),$dbhost,$dbname,$dbuser,$dbpassword);
+?>
+
     <footer>
       <div class="container mb-5">
         <div class="row">
           <div class="col-md-12 col-lg-8">
             <div class="row">
               <div class="col-md-4">
-                <h3 class="contact-us" data-aos="fade-right">VÕTA<br>MEIEGA<br>ÜHENDUST!</h3>
+                <h3 class="contact-us" data-aos="fade-right"><?php echo $t_pieces["footer_h1"];?></h3>
               </div>
               <div class="col-md-4">
                 <div class="row">
                   <div class="col-md-12 contact-us-info" data-aos="fade-right">
-                    <p>Kui Sul on küsimusi või mõni teema pakub huvi, siis võta meiega ühendust aadressil</p>
+                    <p><?php echo $t_pieces["footer1"];?></p>
                   </div>
                   <div class="col-md-12" data-aos="fade-right"><a href="mailto:praktika@ut.ee"  onclick="gtag('event', 'Võta ühendust',{'event_category': 'Jalus','event_label':'Võta ühendust!'});">praktika@ut.ee</a></div>
                 </div>
@@ -19,8 +25,8 @@
           <div class="col-md-12 footer-bottom mt-5">
             <div class="row">
               <div class="copyright col-md-9">
-                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light">  </span><a href="<?php echo $wwwroot; ?>andmekaitsetingimused/" class="font-weight-light text-muted">Andmekaitsetingimused</a>
-                <span class="text-muted font-weight-light"> | </span><a href="<?php echo $wwwroot; ?>kasutusjuhend/" class="font-weight-light text-muted">Kasutusjuhend</a>
+                &copy; 2019 - Tartu Ülikool majandusteaduskond<span class="text-muted font-weight-light">  </span><a href="<?php echo $wwwroot; ?>andmekaitsetingimused/" class="font-weight-light text-muted"><?php echo $t_pieces["footer2"];?></a>
+                <span class="text-muted font-weight-light"> | </span><a href="<?php echo $wwwroot; ?>kasutusjuhend/" class="font-weight-light text-muted"><?php echo $t_pieces["footer3"];?></a>
               </div>
               <div class="socialmedia col-md-3 text-right" >
                 <a href="https://twitter.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Twitter'});"><i class="fab fa-2x fa-twitter"></i></a>
@@ -51,24 +57,44 @@
     <!-- PDF viewer -->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>-->
     <script>
+
+    </script>
+    <script>
+    console.log("lang: <?php echo $_SESSION["lang"]; ?>");
       $(function(){
+        $('.lang-switch').on('click', function(e){
+            var formData = new FormData();
+            formData.append("lang", "<?php echo $_SESSION["lang"]; ?>");
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $wwwroot; ?>lang.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData
+            }).done(function(response) {
+                location.reload();
+            }).fail(function(response) {
+                console.log("Failed: "+response.reponseText)
+            });
+        });
         $('body').ihavecookies({
-          title: "Küpsised ja privaatsuspoliitika",
-          message: "Kasutame oma veebilehel küpsiseid ning Google Analyticsi teenust veebilehe külastatavuse statistika analüüsiks.",
+          title: "<?php echo $t_pieces["cookie_title"]; ?>",
+          message: "<?php echo $t_pieces["cookie_message"]; ?>",
           link: "<?php echo $wwwroot; ?>andmekaitsetingimused/",
-          advancedBtnLabel: "Vali küpsised",
-          acceptBtnLabel: "Luba küpsised",
-          moreInfoLabel: "Andmekaitsetingimused",
+          advancedBtnLabel: "<?php echo $t_pieces["cookie_advanced"]; ?>",
+          acceptBtnLabel: "<?php echo $t_pieces["cookie_accept"]; ?>",
+          moreInfoLabel: "<?php echo $t_pieces["cookie_more"]; ?>",
           uncheckBoxes: false,
-          fixedCookieTypeLabel: 'Kohustuslikud',
-          fixedCookieTypeDesc: 'Need küpsised on vajalikud, et tagada võrgulehe toimimine.',
+          fixedCookieTypeLabel: '<?php echo $t_pieces["cookie_fixed_1"]; ?>',
+          fixedCookieTypeDesc: '<?php echo $t_pieces["cookie_fixed_2"]; ?>',
           delay: 10,
 
           cookieTypes: [
             {
-              type: 'Analüütika',
+              type: '<?php echo $t_pieces["cookie_fixed_3"];?>',
               value: 'analytics',
-              description: 'Kasutame Google Analytics teenust, et teostada analüütikat veebilehe külastatavuse analüüsiks.'
+              description: '<?php echo $t_pieces["cookie_fixed_4"];?>'
             }
           ]
         });
@@ -80,7 +106,7 @@
 </script>
 
     <div id="scrollTop">
-      <a href="#why" class="scrollDown text-uppercase" onclick="gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Alla'});">Loe edasi</a>
-      <a href="#" class="scrollBack text-uppercase" onclick="document.documentElement.scrollTop = 0; document.body.scrollTop = 0; gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Üles'});" >Tagasi üles</a>
+      <a href="#why" class="scrollDown text-uppercase" onclick="gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Alla'});"><?php echo $t_pieces["footer4"];?></a>
+      <a href="#" class="scrollBack text-uppercase" onclick="document.documentElement.scrollTop = 0; document.body.scrollTop = 0; gtag('event', 'Kerimine',{'event_category': 'Jalus','event_label':'Üles'});" ><?php echo $t_pieces["footer5"];?></a>
     </div>
 

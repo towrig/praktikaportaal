@@ -1946,10 +1946,6 @@ a.page-link[aria-label=Next]:hover:after {
     height: 62vh;
 }
 
-a.nav-link.lang-switch {
-  display: none;
-}
-
 .navbar-light .navbar-toggler {
   border: none;
 }

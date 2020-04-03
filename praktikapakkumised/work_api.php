@@ -56,7 +56,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     //files and check
 	$checkpoint = ($_POST["checkpoint"] == null ? false : true);
 	$logo = $_FILES["logo"];
-    $post_file = $_FILES["post_pdf"];
+    $post_pdf = $_FILES["post_pdf"];
 	
 	$passedValidation = true;
 	
@@ -81,7 +81,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     
     //parse website
     preg_match("@^https?://@", $website, $web_matches);
-    if(empty($web_matches)){
+    if(empty($web_matches) && !empty($website)){
         $website = 'http://'.$website;
     }
 	//paths to be used later
@@ -111,6 +111,10 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
                     }
 				
 				}
+                else{
+                    $logo_success = false;
+                    $response .= "Picture format wrong!";
+                }
 			}
 		}
         else{
@@ -138,6 +142,10 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
                     }
 
 				}
+                else{
+                    $pdf_success = false;
+                    $response .= "PDF format wrong!";
+                }
 			}
 		}
 	}
@@ -153,9 +161,9 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
-			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,workfield,work_name,work_location,work_website,other,logopath,pdfpath,validationcode,datetime_uploaded,end_date)
-			VALUES(?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
-			$query->execute(array($name, $email, $heading, $post_description, $workfield, $work_name, $location, $website, $other, $logoPath, $pdfPath, $validationcode, $end_date));
+			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,tasks,experience,workfield,work_name,work_location,work_website,other,logopath,pdfpath,validationcode,datetime_uploaded,end_date)
+			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
+			$query->execute(array($name, $email, $heading, $post_description, $tasks, $skills, $workfield, $work_name, $location, $website, $other, $logoPath, $pdfPath, $validationcode, $end_date));
 			$success = sendMail($validationcode, $email, $heading);
             if($success){
                 http_response_code(200);
@@ -180,6 +188,8 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     else{
         if(!$logo_success)
             $response .= "Logo upload failed!";
+        if(!$pdf_success)
+            $response .= "PDF upload failed!";
         http_response_code(403);
         echo $response; 
     }
@@ -209,7 +219,8 @@ else if(!empty($_POST) && $_POST["action"] == "addview"){ //increase the amount 
         http_response_code(403);
         echo "View exists! values:".$_COOKIE[str_replace('.','_',$pid)]; 
     }
-}else{
+}
+else{
     http_response_code(403);
     echo "Faulty request!";
 }
