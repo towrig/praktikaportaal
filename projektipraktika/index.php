@@ -233,7 +233,7 @@
                                     $form_email_text = "Teie email *";
                                     $form_org_text = "Organisatsiooni nimi *";
                                     $form_team_text = "Meeskonna suurus (max 10) *";
-                                    $form_pdf_text = "Lae ülesse täidetud projektivorm PDF formaadis *";
+                                    $form_pdf_text = "Lae üles täidetud projektivorm PDF formaadis *";
                                     $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
                                     $consent_link_text = "siit";
                                     $close_text = "Sulge";
