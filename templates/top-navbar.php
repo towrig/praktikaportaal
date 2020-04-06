@@ -6,7 +6,9 @@ $t_pieces = t(array("top-navb1","top-navb2","top-navb3"),$dbhost,$dbname,$dbuser
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-      <a href="<?php echo $wwwroot; ?>" onclick="gtag('event', 'Tagasi avalehele',{'event_category': 'Pealdis','event_label':'Tagasi avalehele'});"><div id="ut-logo"></div></a>
+        <a href="<?php echo $wwwroot; ?>" onclick="gtag('event', 'Tagasi avalehele',{'event_category': 'Pealdis','event_label':'Tagasi avalehele'});">
+            <div id="ut-logo" style="background-image: url(../img/futulab-<?php if($_SESSION["lang"] != "ee"){ echo "en-"; }?>logo.svg);"></div>
+        </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

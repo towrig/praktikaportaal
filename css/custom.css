@@ -311,14 +311,12 @@ li.list-group-item:hover {
 }
 
 div#ut-logo {
-    background-position: -28px -15px!important;
-    background-size: 100%;
     opacity: 0;
     height: 80px!important;
-    background-size: 100%;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat !important;
     opacity: 0;
-    background: url(../img/futulab-logo.svg) no-repeat!important;
 }
 
 .navbar-scrolled div#ut-logo {
