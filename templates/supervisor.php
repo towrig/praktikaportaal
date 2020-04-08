@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-$t_pieces = t(array("svisor_title","svisor1","svisor2","svisor_h1","svisor3","svisor4","svisor5","svisor6","svisor7",
+$t_pieces = t(array("svisor_title","svisor1","svisor2","svisor_h1","svisor_h2","svisor3","svisor4","svisor5","svisor6","svisor7",
     "svisor8","svisor9","svisor10","svisor11","svisor12","svisor13","svisor14","svisor15","svisor16","svisor17","svisor18",
     "svisor19","svisor20","svisor21","svisor22","svisor23","svisor24","svisor25","svisor26"),$dbhost,$dbname,$dbuser,$dbpassword);
 ?>
