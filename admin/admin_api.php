@@ -83,6 +83,26 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
     }
     
 }
+else if(!empty($_POST) && $_POST["posting-seminar"] == 1){
+
+    $processed_date = date("Y-m-d h:i:s",strtotime($_POST["sem-date"]));
+    $org = $_POST["sem-org"];
+    $heading = $_POST["sem-heading"];
+    $link = $_POST["sem-link"];
+    try {
+        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $conn->prepare('INSERT INTO Seminars(heading, org, link, date) VALUES(?,?,?,?);');
+        $query->execute(array($heading, $org, $link, $processed_date));
+        http_response_code(200);
+        echo $response."OK!";
+        $conn = null;
+    }
+    catch(PDOException $e){
+        http_response_code(403);
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
 //updating registration opening info
 else if (!empty($_POST) && $_POST["reg_update"] == 1){
     

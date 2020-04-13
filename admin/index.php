@@ -96,6 +96,14 @@
                 </div>
             </div>
             <div class="col-md-12 my-5">
+                <h2>Seminarid</h2>
+                <div class="container px-0">
+                    <div class="btn-group btn-group-md align-self-center" >
+                        <span class="btn btn-sm btn-success add-seminar">Lisa seminar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 my-5">
                 <h2>Üleslaetud projektid</h2>
                 <div class="container px-0">
                     <div class="row">
@@ -209,6 +217,44 @@
         </div>
     </div>
     
+    <!-- seminar modal -->
+    <div class="modal fade sem-modal" id="viewModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <div class="col-lg-12 px-0 mb-2">
+                        <h1>Seminari lisamine</h1>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data" id="seminar_post">
+
+                        <div class="form-group mt-3">
+                            <label>Kuupäev:</label>
+                            <input required class="datepicker" type="text" name="sem-date" class="form-control" maxlength="85">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Korraldaja:</label>
+                            <input required type="text" name="sem-org" class="form-control" maxlength="85">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Pealkiri:</label>
+                            <input required type="text" name="sem-heading" class="form-control" maxlength="85">
+                        </div>
+                        <div class="form-group">
+                            <label>Link</label>
+                            <input required type="text" name="sem-link" class="form-control" maxlength="85">
+                        </div>
+
+                        <button id="seminar-submit" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light">Lisa seminar</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../vendor/ui/jquery-ui.min.js"></script>
@@ -228,6 +274,8 @@
             $('.proj-modal').on('click', partModal);
             $('.archive-modal').on('click', archiveModal);
             $('#archive-submit').on('click', archivePost);
+            $('.add-seminar').on('click', seminarModal);
+            $('#seminar-submit').on('click', seminarPost);
             $('.time-form').submit(updateReg);
             
             $(".datepicker").datepicker({
@@ -236,6 +284,8 @@
             });
         });
         
+
+
         function updateReg(e){
             e.preventDefault();
             e.stopPropagation();
@@ -264,6 +314,32 @@
             });
         }
         
+        function seminarModal(e){
+            var target = $(e.currentTarget);
+            var modal = $(".sem-modal").first();
+            modal.modal("show");
+        }
+
+        function seminarPost(e){
+            var target = $(e.currentTarget);
+            let formData = new FormData(document.getElementById('seminar_post'));
+            formData.append("posting-seminar", 1);
+
+            $.ajax({
+                type: 'POST',
+                url: './admin_api.php',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(response) {
+                $('#seminar_post').trigger("reset");
+                console.log(response);
+            }).fail(function(response) {
+                console.log(response);
+            });
+        }
+
         function archiveModal(e){
             var target = $(e.currentTarget);
             var modal = $(".arc-modal").first();

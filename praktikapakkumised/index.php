@@ -524,10 +524,10 @@
                                 <h6>Valdkond: <span class="post-workfield"></span></h6>
                                 <h5>Praktika tutvustus</h5>
                                 <div class="post-description"></div>
-                                <h5 class="hide-pdf">Ootused</h5>
-                                <div class="post-skills hide-pdf"></div>
-                                <h5 class="hide-pdf">Ülesanded</h5>
-                                <div class="post-tasks hide-pdf"></div>
+                                <h5 class="skills-hide">Ootused</h5>
+                                <div class="post-skills skills-hide"></div>
+                                <h5 class="tasks-hide">Ülesanded</h5>
+                                <div class="post-tasks tasks-hide"></div>
                                 <h5 class="hide-website">Pakkumise link</h5>
                                 <div class="post-website hide-website" style="overflow:hidden;"></div>
                                 <div class="pdf-container"></div>
@@ -666,12 +666,17 @@
                 }).css('width', '100%').css('min-height', '512px');
                 modal.find('.pdf-container').html(pdf_embed);
                 modal.find('.hide-pdf').hide();
+                modal.find('.tasks-hide').hide();
+                modal.find('.skills-hide').hide();
                 modal.find('.pdf-container').show();
             }else if (tasks != "" || skills != ""){
-                modal.find('.hide-pdf').show();
-                modal.find('.pdf-container').hide();
-            }else{
-                modal.find('.hide-pdf').hide();
+                console.log("ran this with: "+(tasks != ""));
+                modal.find('.tasks-hide').hide();
+                modal.find('.skills-hide').hide();
+                if(tasks != "")
+                    modal.find('.tasks-hide').show();
+                if(skills != "")
+                    modal.find('.skills-hide').show();
                 modal.find('.pdf-container').hide();
             }
 

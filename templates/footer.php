@@ -78,6 +78,10 @@ $t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5
                 console.log("Failed: "+response.reponseText)
             });
         });
+        $('.sem-link').on('click',function(e){
+            var modal = $(".sem-modal").first();
+            modal.modal("show");
+        });
         $('body').ihavecookies({
           title: "<?php echo $t_pieces["cookie_title"]; ?>",
           message: "<?php echo $t_pieces["cookie_message"]; ?>",
