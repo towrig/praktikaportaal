@@ -2271,3 +2271,18 @@ select#sort-wf, select#sort-loc {
 .sort-label {
   color: #04499d;
 }
+
+/* karli muudatused*/
+.arc-active,
+.arc-inactive{
+    color: #757575;
+    cursor: pointer;
+}
+.arc-active:hover,
+.arc-inactive:hover{
+    text-decoration: underline;
+}
+.arc-active.active,
+.arc-inactive.active{
+    color: #01499d;
+}

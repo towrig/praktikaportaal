@@ -8,10 +8,12 @@
     //for smaller buttons, unworthy of the database
     if($_SESSION["lang"] == "ee"){
         $arc_active = "Esitatud projektid";
+        $arc_inactive = "Lõpetatud projektid";
         $add_project = "Esita projekt";
         $check_timetable = "Vaata ajakava siit!";
     }else{
         $arc_active = "Submitted projects";
+        $arc_inactive = "Finished projects";
         $add_project = "Submit project";
         $check_timetable = "Check timetable here!";
     }
@@ -31,11 +33,6 @@
                         <p class="font-weight-light">
                            <?php echo $description; ?>
                         </p>
-                        <!--
-                        <p class="font-weight-light">
-                          Projektipraktika ideede esitamise tähtaeg on kevadsemestril <b>02.03</b>. Üliõpilased saavad projektidega liituda <b>09.-15.03</b>.
-                        </p>
-                        -->
                         <a href="#" class="text-uppercase font-weight-bold" onclick="timeTableModal(); gtag('event', 'Vaata ajakava',{'event_category': 'Projektid','event_label':'Vaata ajakava siit'});"><?php echo $check_timetable; ?></a>
                     </div> <!-- .col-->
 
@@ -43,7 +40,7 @@
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});"><?php echo $add_project; ?></span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down"><?php echo $arc_active; ?></h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down"><span class="arc-active active"><?php echo $arc_active; ?></span> / <span class="arc-inactive"><?php echo $arc_inactive; ?></span></h5>
                     </div>
 
                 </div> <!-- .row -->
@@ -51,8 +48,8 @@
         </section>
 
 
-        <section class="mb-5" id="profiles">
-            <div class="container"  data-aos="fade-down">
+        <section class="mb-5 profiles-current" id="profiles">
+            <div class="container" data-aos="fade-down">
                 <div class="row">
                     <div id="carouselPager" class="carousel slide col-md-12">
                         <div class="carousel-inner">
@@ -183,6 +180,131 @@
                                 }
                             ?>
                                     </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav aria-label="Pager" class="col-md-12 mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" data-index="prev">
+                                <a class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <?php
+                          for($i=0; $i < $pages; $i++){
+                              echo '<li class="page-item '.($i == 0 ? "active" : "").'" data-index="'.$i.'"><a class="page-link">'.($i+1).'</a></li>';
+                          }
+                        ?>
+                            <li class="page-item" data-index="next">
+                                <a class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5 profiles-past" style="display:none">
+            <div class="container" data-aos="fade-down">
+                <div class="row">
+                    <div id="carouselPager" class="carousel slide col-md-12">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="">
+                                    <div class="row">
+                                        <?php
+
+                                        if($_SESSION["lang"] == "ee"){
+                                            $sub_display_text = "Esitaja:";
+                                            $org_display_text = "Asutus:";
+                                            $team_display_text = "Meeskond:";
+                                            $view_display_text = "Vaata";
+                                        }else{
+                                            $sub_display_text = "Submitter:";
+                                            $org_display_text = "Organisation:";
+                                            $team_display_text = "Team:";
+                                            $view_display_text = "View";
+                                        }
+
+                                try {
+                                    $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+                                    // set the PDO error mode to exception
+                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                    $query = $conn->prepare('SELECT * FROM ArchivedProjects ORDER BY id DESC');
+                                    $query->execute(array());
+                                    $data = $query -> fetchAll();
+                                    $j = 0;
+                                    $max_per_page = 6;
+                                    $pages = 1;
+                                    $queue = false;
+                                    foreach($data as $row){
+
+                                        $organisation = $row["organisation"];
+                                        $org_name = $row["org_name"];
+                                        $name = $row["name"];
+                                        $goals = $row["goals"];
+                                        $actions = $row["actions"];
+                                        $results = $row["results"];
+
+                                        if($queue){
+                                            echo '</div></div></div><div class="carousel-item"><div class="container"><div class="row">';
+                                            $queue = false;
+                                            $pages++;
+                                        }
+                                        $bigstring = '
+                                        <div class="col-md-4 js-modal-arc"
+                                        data-org_name="'.$org_name.'"
+                                        data-organisation="'.$organisation.'"
+                                        data-title="'.$name.'"
+                                        data-goals="'.$goals.'"
+                                        data-actions="'.$actions.'"
+                                        data-results="'.$results.'"
+                                        >
+                                            <div class="card mb-3 p-4">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <h6 class="text-uppercase">'.$name.'</h6>
+                                  </div>
+                                </div>
+                                  <div class="card-footer pb-3">
+                                    <div class="col-md-12">
+                                      <div class="row">
+                                        <div class="col-lg-12">
+                                          <p class="mb-0"><b>'.$sub_display_text.'</b> '.$org_name.'</p>
+                                          <p class="mb-0"><b>'.$org_display_text.'</b> '.$organisation.'</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                      <a class="project-link font-weight-bold text-uppercase">
+                                        '.$view_display_text.'
+                                      </a>
+                                      <i class="front-arrow text-right"></i>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>';
+                                        $bigstring = str_replace("\n","",$bigstring);
+                                        $bigstring = str_replace("\t","",$bigstring);
+                                        echo $bigstring;
+                                        $j++;
+                                        if ($j == $max_per_page){
+                                            $j = 0;
+                                            $queue = true;
+                                        }
+                                    }
+                                } catch (PDOException $e){
+                                    echo "Connection failed: " . $e->getMessage();
+                                }
+                            ?>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -435,6 +557,35 @@
         </div>
     </div>
 
+    <div class="modal fade" id="viewArcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="post-heading"></h2>
+                        </div>
+                        <!-- join and contact-->
+                        <div class="col-lg-8 my-2">
+                            <p class="field-goals my-4"></p>
+                            <p class="field-actions my-4"></p>
+                            <p class="field-results my-4"></p>
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="field-organiser"></h5>
+                            <h5 class="field-org_name"></h5>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $close_text; ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <?php include_once './../templates/footer.php';?>
 
@@ -444,6 +595,20 @@
             $('#regButton').on('click', ajaxSubmit);
             
             $('.js-modal').on('click', viewModal);
+            $('.js-modal-arc').on('click', arcModal);
+
+            $('.arc-active').on('click', function(){
+                $('.profiles-current').show();
+                $('.profiles-past').hide();
+                $('.arc-active').addClass("active");
+                $('.arc-inactive').removeClass("active");
+            });
+            $('.arc-inactive').on('click', function(){
+                $('.profiles-current').hide();
+                $('.profiles-past').show();
+                $('.arc-active').removeClass("active");
+                $('.arc-inactive').addClass("active");
+            });
 
             $('[data-toggle="tooltip"]').tooltip();
 
@@ -552,7 +717,6 @@
             }else{
                 reg_tab.hide();
             }
-
             //attach vars
             modal.find('.post-heading').html(title);
             modal.find('.field-organiser').html(organisation);
@@ -587,6 +751,27 @@
                 }
             }
             modal.modal('show');
+        }
+
+        function arcModal(e){
+            var target = $(e.currentTarget);
+            var modal = $('#viewArcModal');
+
+            var org_name = target.data("org_name");
+            var organisation = target.data("organisation");
+            var title = target.data("title");
+            var goals = target.data("goals");
+            var actions = target.data("actions");
+            var results = target.data("results");
+
+            modal.find('.post-heading').html(title);
+            modal.find('.field-organiser').html(organisation);
+            modal.find('.field-org_name').html(org_name);
+            modal.find('.field-goals').html(goals);
+            modal.find('.field-actions').html(actions);
+            modal.find('.field-results').html(results);
+
+            modal.modal("show");
         }
 
         function createParticipant(arr) {
