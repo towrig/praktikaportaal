@@ -1071,7 +1071,7 @@ small {
     height: 246%;
     width: 499%;
     background-position: left;
-    top: -1645px;
+    top: -1340px;
     lefT: -805px;
     margin-top: 829px;
     position: relative;
@@ -1142,7 +1142,7 @@ i.fas.fa-city.fa-4x.mb-4 {
 a.nav-link {
     border-bottom: 2px solid #e94700;
     text-align: center!important;
-    padding: 10px 14px!important;
+    padding: 10px 4px!important;
     color: #000!important;
     margin: 0;
     font-family: "Rubik"!important;
