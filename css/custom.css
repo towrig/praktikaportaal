@@ -918,11 +918,10 @@ p.align-self-center {
 
 #masthead .card-footer a {
     display: block;
-    padding: 0;
     height: 100%;
     width: 113%;
     margin: -13px 0px 0px -18px;
-    padding-top: 11px;
+    padding: 11px 0 0;
 }
 
 .masthead .card .card-body span {
@@ -1022,11 +1021,23 @@ i.fa-4x.mb-4 {
 /* Title */
 h2.mb-5 {
     color: #01499d;
-    font-size: 5rem;
+    font-size: 43px;
     font-weight: 100;
+    margin-top: 40px;
 }
-h2.mb-5 span {
+h2.mb-5 span.font-weight-bold {
     font-weight: 600;
+}
+
+h2.mb-5 span.no-wrap {
+    white-space: nowrap;
+}
+
+h4.mb-5 {
+    color: #01499d;
+    font-size: 17px;
+    font-weight: 400;
+    margin-top: 40px;!important;
 }
 
 header.masthead {
@@ -1045,11 +1056,11 @@ small {
     background: linear-gradient(to bottom, #e94700de 0% , #e94700de 100% );
     position: absolute;
     width: 400px;
-    height: 117vh;
+    height: 112vh;
     transform: rotate(30deg);
     z-index: 0;
-    top: -92px;
-    left: 30%;
+    top: 20px;
+    left: 31%;
     overflow: hidden;
 }
 .img-cont {

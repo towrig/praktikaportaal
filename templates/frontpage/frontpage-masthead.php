@@ -1,5 +1,5 @@
 <?php
-    $t_pieces = t(array("fp-mh_title","fp-mh_h1","fp-mh_h2","fp-mh_h3","fp-mh1.0","fp-mh1.1","fp-mh1.2","fp-mh2","fp-mh3","fp-mh4","fp-mh5",
+    $t_pieces = t(array("fp-mh_text","fp-mh_title","fp-mh_h1","fp-mh_h2","fp-mh_h3","fp-mh1.0","fp-mh1.1","fp-mh1.2","fp-mh2","fp-mh3","fp-mh4","fp-mh5",
         "fp-mh2.0","fp-mh2.1","fp-mh2.2","fp-mh3.0","fp-mh3.1","fp-mh3.2"),$dbhost,$dbname,$dbuser,$dbpassword);
     $stats = array();
     try {
@@ -33,8 +33,8 @@
   </div>
     <div id="main" class="container">
         <div class="row">
-            
             <div class="col-lg-3 col-md-12">
+                <h4 class="mb-5" data-aos="fade-right"><?php echo $t_pieces["fp-mh_text"];?></h4>
                 <h2 class="mb-5" data-aos="fade-right"><?php echo $t_pieces["fp-mh_title"];?></h2>
             </div>
             <div class="col-lg-9 col-md-12">
