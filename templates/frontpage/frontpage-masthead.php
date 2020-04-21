@@ -34,7 +34,7 @@
     <div id="main" class="container">
         <div class="row">
             <div class="col-lg-3 col-md-12">
-                <h4 class="mb-5" data-aos="fade-right"><?php echo $t_pieces["fp-mh_text"];?></h4>
+                <h3 class="mb-5" data-aos="fade-right"><?php echo $t_pieces["fp-mh_text"];?></h3>
                 <h2 class="mb-5" data-aos="fade-right"><?php echo $t_pieces["fp-mh_title"];?></h2>
             </div>
             <div class="col-lg-9 col-md-12">

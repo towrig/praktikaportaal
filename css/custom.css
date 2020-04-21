@@ -1021,23 +1021,29 @@ i.fa-4x.mb-4 {
 /* Title */
 h2.mb-5 {
     color: #01499d;
-    font-size: 43px;
+    font-size: 50px;
     font-weight: 100;
     margin-top: 40px;
 }
 h2.mb-5 span.font-weight-bold {
     font-weight: 600;
+    white-space: nowrap;
 }
 
 h2.mb-5 span.no-wrap {
     white-space: nowrap;
 }
 
-h4.mb-5 {
-    color: #01499d;
-    font-size: 17px;
-    font-weight: 400;
+h3.mb-5 {
     margin-top: 40px;!important;
+}
+
+h3.mb-5 span {
+    color: #01499d;
+    font-size: 20px;
+    font-weight: 300;
+    font-family: "Rubik"!important;
+    white-space: nowrap;
 }
 
 header.masthead {
@@ -1060,7 +1066,7 @@ small {
     transform: rotate(30deg);
     z-index: 0;
     top: 20px;
-    left: 31%;
+    left: 32%;
     overflow: hidden;
 }
 .img-cont {
@@ -1146,7 +1152,7 @@ a.nav-link {
     color: #000!important;
     font-family: "Rubik"!important;
     font-weight: 400!important;
-    margin: 0 1rem;
+    margin: 0 10px;
 }
 
 a.nav-link.lang-switch {
