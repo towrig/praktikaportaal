@@ -1021,17 +1021,12 @@ i.fa-4x.mb-4 {
 /* Title */
 h2.mb-5 {
     color: #01499d;
-    font-size: 50px;
+    font-size: 54px;
     font-weight: 100;
     margin-top: 40px;
 }
-h2.mb-5 span.font-weight-bold {
+h2.mb-5 span {
     font-weight: 600;
-    white-space: nowrap;
-}
-
-h2.mb-5 span.no-wrap {
-    white-space: nowrap;
 }
 
 h3.mb-5 {
