@@ -359,6 +359,8 @@
                                     $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
                                     $consent_link_text = "siit";
                                     $close_text = "Sulge";
+                                    $iframe_link = "https://docs.google.com/document/d/e/2PACX-1vQFHziWjHPO9fMbDZu7l7TaLq7PFA8COQRc_pz0CludNNmuONrd0NkUokj_QvJQTXEj7Jq5-IZrdrej/pub?embedded=true";
+                                    $dl_link = "../userdata/projekti_taotlusvorm.docx";
                                 }
                                 else{
                                     $form_info_text = "Project form";
@@ -374,6 +376,8 @@
                                     $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
                                     $consent_link_text = "here";
                                     $close_text = "Close";
+                                    $iframe_link = "https://docs.google.com/document/d/e/2PACX-1vQJMVD-6aqp8Cinqy8E_94m_xXDG3XMYlh-VAYBbt97IdJPWT8BpSSfMOGl8dy52g/pub?embedded=true";
+                                    $dl_link = "../userdata/project_form.docx";
                                 }
                             ?>
                             <form method="POST" action="./project_api.php" enctype="multipart/form-data" id="project_submission">
@@ -388,8 +392,8 @@
                                                 <?php echo $form_intro_text; ?>
                                             </p>
                                             <h4 class="text-center my-3">
-                                                <!--<i class="fa fa-4x fa-download"></i>--><label><?php echo $form_download_text; ?><a class="btn btn-lg btn-primary" href="../userdata/projekti_taotlusvorm.docx" download="" onclick="gtag('event', 'Lae alla',{'event_category': 'Projektid','event_label':'Lae alla projekti taotlusvorm'});"><?php echo $form_download_text_2; ?></a></label></h4>
-                                            <iframe width="100%" height="500px" src="https://docs.google.com/document/d/e/2PACX-1vQFHziWjHPO9fMbDZu7l7TaLq7PFA8COQRc_pz0CludNNmuONrd0NkUokj_QvJQTXEj7Jq5-IZrdrej/pub?embedded=true"></iframe>
+                                                <!--<i class="fa fa-4x fa-download"></i>--><label><?php echo $form_download_text; ?><a class="btn btn-lg btn-primary" href="<?php echo $dl_link; ?>" download="" onclick="gtag('event', 'Lae alla',{'event_category': 'Projektid','event_label':'Lae alla projekti taotlusvorm'});"><?php echo $form_download_text_2; ?></a></label></h4>
+                                            <iframe width="100%" height="500px" src="<?php echo $iframe_link; ?>"></iframe>
 
                                         </div>
                                     </div>
