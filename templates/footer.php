@@ -30,7 +30,7 @@ $t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5
               </div>
               <div class="socialmedia col-md-3 text-right" >
                 <a href="https://twitter.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Twitter'});"><i class="fab fa-2x fa-twitter"></i></a>
-                <a href="https://www.facebook.com/tartuylikool" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Facebook'});"><i class="fab fa-2x fa-facebook"></i></a>
+                <a href="https://www.facebook.com/UTfutulab/" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Facebook'});"><i class="fab fa-2x fa-facebook"></i></a>
                 <a href="https://www.instagram.com/unitartu" target="_blank"  onclick="gtag('event', 'Sotsiaalmeedia',{'event_category': 'Jalus','event_label':'Instagram'});"><i class="fab fa-2x fa-instagram"></i></a>
               </div>
             </div>
