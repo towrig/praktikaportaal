@@ -61,7 +61,7 @@ if($_SESSION["lang"] == "ee"){
             $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $query = $conn->prepare("SELECT * FROM Seminars");
+            $query = $conn->prepare("SELECT * FROM Seminars WHERE date >= CURDATE();");
             $query->execute(array());
             $data = $query -> fetchAll();
 

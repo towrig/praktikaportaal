@@ -59,6 +59,7 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
     $name = $_POST["project-name"];
     $org_name = $_POST["project-org_name"];
     $organisation = $_POST["project-organisation"];
+    $team = $_POST["project-team"];
 
     $goal = $_POST["project-goal"];
     $actions = $_POST["project-actions"];
@@ -68,8 +69,8 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
     try {
         $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query = $conn->prepare('INSERT INTO ArchivedProjects(name,organisation,org_name,goal,actions,results,postId) VALUES(?,?,?,?,?,?,?);');
-        $query->execute(array($name, $organisation, $org_name, $goal, $actions, $results, $postId));
+        $query = $conn->prepare('INSERT INTO ArchivedProjects(name,organisation,org_name,team,goal,actions,results,postId) VALUES(?,?,?,?,?,?,?,?);');
+        $query->execute(array($name, $organisation, $org_name, $team, $goal, $actions, $results, $postId));
         $query = $conn->prepare('DELETE FROM ProjectPosts WHERE id = ?;');
         $query->execute(array($postId));
         http_response_code(200);

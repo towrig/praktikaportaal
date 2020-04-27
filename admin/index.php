@@ -139,7 +139,7 @@
                                                 <a class="btn btn-sm btn-success proj-modal" data-id= "'.$p["id"].'" data-ekey="'.$p["edit_key"].'">Vaata osalejaid</a>
                                                 '.(boolval($p["isactivated"])? '':'<a class="btn btn-sm btn-success activate-btn" data-email="'.$p["org_email"].'" data-title="'.$p["title"].'" data-editkey="'.$p["edit_key"].'">Aktiveeri!</a>').'
                                                 <a class="btn btn-sm btn-warning" href="../userdata/projects/'.$p["pdf_path"].'" download>Laadi alla taotlus</a>
-                                                <a class="btn btn-sm btn-danger archive-modal" data-id="'.$p["id"].'" data-title="'.$p["title"].'" data-org_name="'.$p["org_name"].'" data-organisation="'.$p["organisation"].'">Arhiveeri</a>
+                                                <a class="btn btn-sm btn-danger archive-modal" data-id="'.$p["id"].'" data-title="'.$p["title"].'" data-org_name="'.$p["org_name"].'" data-organisation="'.$p["organisation"].'" data-team="'.$p["amount"].'">Arhiveeri</a>
                                             </div>
                                         </div>
                                     </div>
@@ -195,6 +195,10 @@
                             <label>Asutus:</label>
                             <h4 id="modal-project_organisation"></h4>
                         </div>
+                        <div class="form-group mt-3">
+                            <label>Meeskonna suurus:</label>
+                            <h4 id="modal-project_team"></h4>
+                        </div>
                         <div class="form-group">
                             <label>Eesmärk</label>
                             <textarea required class="form-control" id="project-goal" name="project-goal" rows="3"></textarea>
@@ -208,7 +212,7 @@
                             <textarea required class="form-control" id="project-results" name="project-results" rows="3"></textarea>
                         </div>
                         
-                        <button id="archive-submit" type="submit" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light">Arhiveeri!</button>
+                        <button id="archive-submit" type="button" class="mt-3 text-center text-uppercase btn btn-lg btn-primary font-weight-light">Arhiveeri!</button>
                         
                     </form>
                     
@@ -347,20 +351,24 @@
             var title = target.data("title");
             var org_name = target.data("org_name");
             var organisation = target.data("organisation");
+            var team = target.data("team");
             
             $('#archive-submit').data("id",id);
             $('#modal-project_name').html(title);
             $('#modal-project_contact').html(org_name);
             $('#modal-project_organisation').html(organisation);
+            $("#modal-project_team").html(team);
             modal.modal("show");
         }
         
         function archivePost(e){
             var target = $(e.currentTarget);
             let formData = new FormData(document.getElementById('project_archiving'));
+            var form = $("#project_archiving");
             formData.append("project-name", $("#modal-project_name").html());
             formData.append("project-org_name", $("#modal-project_contact").html());
             formData.append("project-organisation", $("#modal-project_organisation").html());
+            formData.append("project-team", $("#modal-project_team").html());
             formData.append("project-id", target.data("id"));
             formData.append("archiving", 1);
             
@@ -372,6 +380,8 @@
                 contentType: false,
                 processData: false
             }).done(function(response) {
+                form.trigger("reset");
+                $(".arc-modal").first().modal("hide");
                 console.log(response);
             }).fail(function(response) {
                 console.log(response);
