@@ -5,17 +5,33 @@
     $title = $t_pieces["projektipak_title"];
     $description = $t_pieces["projektipak_desc"];
     $forms_consent = $t_pieces["forms_consent"];
+
     //for smaller buttons, unworthy of the database
     if($_SESSION["lang"] == "ee"){
         $arc_active = "Esitatud projektid";
         $arc_inactive = "Lõpetatud projektid";
         $add_project = "Esita projekt";
         $check_timetable = "Vaata ajakava siit!";
+        $sort_language = "Keel";
+        $sort_text = "Sorteeri";
+        $lang_ee = "eesti";
+        $lang_eng = "inglise";
     }else{
         $arc_active = "Submitted projects";
         $arc_inactive = "Finished projects";
         $add_project = "Submit project";
         $check_timetable = "Check timetable here!";
+        $sort_language = "Language";
+        $sort_text = "Sort";
+        $lang_ee = "Estonian";
+        $lang_eng = "English";
+    }
+
+    $query_string_sort = "";
+    $sorting_lang = false;
+    if(isset($_GET["sort_lang"]) && $_GET["sort_lang"] != "none"){
+        $query_string_sort .= " AND lang = ?";
+        $sorting_lang = true;
     }
 ?>
 
@@ -42,7 +58,25 @@
                     <div class="col-lg-12">
                         <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down"><span class="arc-active active"><?php echo $arc_active; ?></span> / <span class="arc-inactive"><?php echo $arc_inactive; ?></span></h5>
                     </div>
-
+                    <div class="offset-md-1 col-lg-11 p-3 text-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-12" style="margin-left:300px">
+                                    <span class="text-uppercase h6 sort-label"><?php echo $sort_language; ?></span>
+                                    <select class="custom-select mr-sm-2" id="sort-lang">
+                                        <option value="none" selected>...</option>
+                                        <option value="ee"><?php echo $lang_ee; ?></option>
+                                        <option value="eng"><?php echo $lang_eng; ?></option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 col-sm-12" style="margin-top:20px">
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn" id="sort-button"><?php echo $sort_text; ?></button>
+                                    </div>
+                                </div>
+                            </div><!-- .row -->
+                        </div><!-- .container -->
+                    </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
         </section>
@@ -74,9 +108,18 @@
                                     $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                                     // set the PDO error mode to exception
                                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                    $query = $conn->prepare('SELECT * FROM ProjectPosts WHERE isactivated = ? ORDER BY id DESC');
-                                    $query->execute(array(1));
+                                    if($query_string_sort == "") {
+                                        $query_string = 'SELECT * FROM ProjectPosts WHERE isactivated = ? ORDER BY id DESC';
+                                        $query_arr = array(1);
+                                    } else {
+                                        $query_string = 'SELECT * FROM ProjectPosts WHERE isactivated = ? '.$query_string_sort.' ORDER BY id DESC';
+                                        $query_arr = array(1);
+                                        array_push($query_arr, $_GET["sort_lang"]);
+                                    }
+                                    $query = $conn->prepare($query_string);
+                                    $query->execute($query_arr);
                                     $data = $query -> fetchAll();
+
                                     $j = 0;
                                     $max_per_page = 6;
                                     $pages = 1;
@@ -341,7 +384,6 @@
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-
                     <div class="row">
                         <div class="col-lg-12">
                             <?php
@@ -616,6 +658,12 @@
 
             $('[data-toggle="tooltip"]').tooltip();
 
+            $('#sort-button').on('click', handleSort);
+
+            <?php if($sorting_lang):?>
+            $('#sort-lang').val("<?php echo $_GET["sort_lang"];?>");
+            <?php endif;?>
+
             $('.pagination .page-item').on('click', paginatorClick);
             $('#carouselPager').carousel({
                 interval: false,
@@ -632,7 +680,6 @@
                 $('#post-home-tab').addClass('show').addClass('active');
                 $('#post-participants-tab').removeClass('show').removeClass('active');
             })
-            
         });
         
         var participants = <?php echo json_encode($participants);?>;
@@ -799,6 +846,13 @@
                   document.getElementById("project_pdf").parentElement.appendChild(fname);
               }
           }
+
+        function handleSort(e){
+            $sl = $('#sort-lang').val();
+            var args = '?sort_lang='+$sl;
+            var url = window.location.origin + window.location.pathname + args;
+            window.location.href = url;
+        }
 
     </script>
 
