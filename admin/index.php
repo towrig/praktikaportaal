@@ -159,7 +159,10 @@
         <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    
+                    <div>
+                        <input type="text" id="emails-container" value="">
+                        <button onclick="myFunction()">Copy emails</button>
+                    </div>
                     <div class="col-lg-12 participants-container">
                         <div class="container">
                             <div class="row"></div>
@@ -288,7 +291,12 @@
             });
         });
         
-
+        function myFunction() {
+            var copyText = document.getElementById("emails-container");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+        }
 
         function updateReg(e){
             e.preventDefault();
@@ -395,11 +403,13 @@
             var post_part = participants[target.data("id")];
             var p_c = modal.find('.participants-container .container .row');
             p_c.empty();
+            modal.find('#emails-container').val("");
             if (post_part.length != 0) {
                 for (var i = 0; i < post_part.length; i++) {
                     p_c.append(createParticipant(post_part[i], ekey));
                 }
             }
+            modal.find('#emails-container').val(modal.find('#emails-container').val().substring(2));
             $('.part-btn').on('click', handleParticipant);
             modal.modal("show");
         }
@@ -429,6 +439,8 @@
         function createParticipant(arr, ekey) {
             var name = arr[0];
             var email = arr[1];
+            var prev_val = $('#emails-container').val();
+            $('#emails-container').val(prev_val+", "+email);
             var degree = arr[2];
             var skills = arr[3];
             var is_accepted = arr[4];
