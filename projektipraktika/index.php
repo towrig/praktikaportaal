@@ -397,6 +397,7 @@
                                     $form_email_text = "Teie email *";
                                     $form_org_text = "Organisatsiooni nimi *";
                                     $form_team_text = "Meeskonna suurus (max 10) *";
+                                    $form_lang_text = "Keel *";
                                     $form_pdf_text = "Lae üles täidetud projektivorm PDF formaadis *";
                                     $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
                                     $consent_link_text = "siit";
@@ -414,6 +415,7 @@
                                     $form_email_text = "Your e-mail *";
                                     $form_org_text = "Organisation name *";
                                     $form_team_text = "The size of the project team (max 10) *";
+                                    $form_lang_text = "Language *";
                                     $form_pdf_text = "Upload the filled project form in PDF format *";
                                     $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
                                     $consent_link_text = "here";
@@ -457,11 +459,11 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-8">
+                                            <div class="form-group col-md-5">
                                                 <label><?php echo $form_org_text; ?></label>
                                                 <input required type="text" name="project_org_name" class="form-control">
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-5">
                                                 <label><?php echo $form_team_text; ?></label>
                                                 <select required name="max_part" class="form-control">
                                                     <option selected>1</option>
@@ -474,6 +476,13 @@
                                                     <option>8</option>
                                                     <option>9</option>
                                                     <option>10</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label><?php echo $form_lang_text; ?></label>
+                                                <select required name="lang_select" class="form-control">
+                                                    <option selected>ee</option>
+                                                    <option>eng</option>
                                                 </select>
                                             </div>
                                         </div>
