@@ -46,6 +46,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
     $skills = $_POST["skills"];
     $end_date = $_POST["date"];
     $other = $_POST["other"]; //info for candidating
+    $lang = $_POST["lang"];
     
     //org specific
     $work_name = $_POST["organization"];
@@ -61,7 +62,7 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 	$passedValidation = true;
 	
 	//basic ones
-	if(!isset($checkpoint) || empty($heading) || empty($post_description) || empty($work_name) || empty($location) || empty($name) || empty($workfield)){
+	if(!isset($checkpoint) || empty($heading) || empty($post_description) || empty($work_name) || empty($location) || empty($name) || empty($workfield) || empty($lang)){
 		$passedValidation = false;
 	}
 	
@@ -161,10 +162,10 @@ if(!empty($_POST) && $_POST["action"] == "addpost"){
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//echo "Connected to PDO successfully"; 
-			$query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,tasks,experience,workfield,work_name,work_location,work_website,other,logopath,pdfpath,validationcode,datetime_uploaded,end_date)
-			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
-			$query->execute(array($name, $email, $heading, $post_description, $tasks, $skills, $workfield, $work_name, $location, $website, $other, $logoPath, $pdfPath, $validationcode, $end_date));
-			$success = sendMail($validationcode, $email, $heading);
+            $query = $conn->prepare('INSERT INTO WorkPosts(name,email,heading,description,tasks,experience,workfield,work_name,work_location,lang,work_website,other,logopath,pdfpath,validationcode,datetime_uploaded,end_date)
+			VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, NOW(),?);');
+            $query->execute(array($name, $email, $heading, $post_description, $tasks, $skills, $workfield, $work_name, $location, $lang, $website, $other, $logoPath, $pdfPath, $validationcode, $end_date));
+            $success = sendMail($validationcode, $email, $heading);
             if($success){
                 http_response_code(200);
                 echo $response."OK!";

@@ -2272,7 +2272,7 @@ input[required], select[required], textarea[required], .custom-checkbox .custom-
     border: #ca939b 2px solid!important;
 }
 
-select#sort-wf, select#sort-loc {
+select#sort-wf, select#sort-loc, select#sort-lang {
     border: none;
     border-bottom: 1px solid #ddd;
     border-radius: 0;

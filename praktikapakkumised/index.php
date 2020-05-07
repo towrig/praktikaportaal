@@ -10,6 +10,7 @@
     $query_string_sort = "";
     $sorting_wf = false;
     $sorting_loc = false;
+    $sorting_lang = false;
     if(isset($_GET["sort_wf"]) && $_GET["sort_wf"] != "Määramata"){
         $query_string_sort .= " AND workfield = ?";
         $sorting_wf = true;
@@ -19,12 +20,20 @@
         $sorting_loc = true;
     }
 
+    if(isset($_GET["sort_lang"]) && $_GET["sort_lang"] != "none"){
+        $query_string_sort .= " AND lang = ?";
+        $sorting_lang = true;
+    }
+
     if($_SESSION["lang"] == "ee"){
         $active_offers = "Aktiivsed pakkumised";
         $add_offer = "Lisa pakkumine";
         $sort_text = "Sorteeri";
         $sort_workfield = "Valdkond";
         $sort_location = "Asukoht";
+        $sort_language = "Keel";
+        $lang_ee = "eesti";
+        $lang_eng = "inglise";
     }
     else{
         $active_offers = "Active offers";
@@ -32,6 +41,9 @@
         $sort_text = "Sort";
         $sort_workfield = "Field";
         $sort_location = "Location";
+        $sort_language = "Language";
+        $lang_ee = "Estonian";
+        $lang_eng = "English";
     }
 
     //fields
@@ -99,6 +111,7 @@
         $form_email_text = "Kontaktemail *";
         $form_email_text_warning = "Vajame sinu meiliaadressi, et sulle kinnituslink saata";
         $form_location_text = "Asukoht *";
+        $form_lang = "Keel *";
         $form_reg_info_text = "Info kandideerimiseks";
         $consent_form_area = "Olen teadlik, et kõik vormi sisestatud isikuandmed avalikustatakse Futulabi kodulehel. Tutvu adnmekaitsetingimustega ";
         $consent_link_text = "siit";
@@ -121,6 +134,7 @@
         $form_email_text = "Contact e-mail *";
         $form_email_text_warning = "Your e-mail is required for the e-mail confirmation link";
         $form_location_text = "Location *";
+        $form_lang = "Language *";
         $form_reg_info_text = "Application information";
         $consent_form_area = "I am aware that the personal data uploaded by users onto the form will be published on Futulab. Read the data protection policy ";
         $consent_link_text = "here";
@@ -150,7 +164,7 @@
                     <div class="offset-md-1 col-lg-11 p-3 text-center">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-5 col-sm-12">
+                                <div class="col-lg-3 col-sm-12">
                                     <span class="text-uppercase h6 sort-label"><?php echo $sort_location; ?></span>
                                     <select class="custom-select mr-sm-2" id="sort-loc">
                                         <option value="none" selected>...</option>
@@ -171,7 +185,7 @@
                                         ?>
                                     </select>
                                 </div>
-                                <div class="col-lg-5 col-sm-12">
+                                <div class="col-lg-3 col-sm-12">
                                     <span class="text-uppercase h6 sort-label"><?php echo $sort_workfield; ?></span>
                                     <select class="custom-select mr-sm-2" id="sort-wf">
                                         <option value="Määramata" selected><?php echo $wf_fields["Määramata"]; ?></option>
@@ -194,6 +208,13 @@
                                         <option value="Tervishoid"><?php echo $wf_fields["Tervishoid"]; ?></option>
                                         <option value="Transport, logistika ning mootorsõidukid"><?php echo $wf_fields["Transport, logistika ning mootorsõidukid"]; ?></option>
                                         <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <span class="text-uppercase h6 sort-label"><?php echo $sort_language; ?></span>
+                                    <select class="custom-select mr-sm-2" id="sort-lang">
+                                        <option value="ee" selected><?php echo $lang_ee; ?></option>
+                                        <option value="eng"><?php echo $lang_eng; ?></option>
                                     </select>
                                 </div>
                                 <div class="col-lg-2 col-sm-12" style="margin-top:20px">
@@ -245,6 +266,9 @@
                                 }
                                 if($sorting_loc){
                                     array_push($query_arr, $_GET["sort_loc"]);
+                                }
+                                if($sorting_lang){
+                                    array_push($query_arr, $_GET["sort_lang"]);
                                 }
                             }
                             $query = $conn->prepare($query_string);
@@ -426,6 +450,14 @@
                                         <option value="Vee- ja jäätmemajandus ning keskkond"><?php echo $wf_fields["Vee- ja jäätmemajandus ning keskkond"]; ?></option>
                                     </select>
                                 </div>
+                                <div class="form-group my-1">
+                                    <label class="mr-sm-2"><?php echo $form_lang; ?></label>
+                                    <select class="custom-select mr-sm-2" id="lang" name="lang">
+                                        <option value="none" selected>...</option>
+                                        <option value="ee"><?php echo $lang_ee; ?></option>
+                                        <option value="eng"><?php echo $lang_eng; ?></option>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="website"><?php echo $form_weblink; ?></label>
                                     <input type="text" class="form-control" id="website" name="website">
@@ -582,6 +614,9 @@
             <?php if($sorting_loc):?>
                 $('#sort-loc').val("<?php echo $_GET["sort_loc"];?>");
             <?php endif;?>
+            <?php if($sorting_lang):?>
+                $('#sort-lang').val("<?php echo $_GET["sort_lang"];?>");
+            <?php endif;?>
             // Text Editors
             /*
             $('#description').trumbowyg({
@@ -623,7 +658,8 @@
         function handleSort(e){
             $sl = $('#sort-loc').val();
             $sw = $('#sort-wf').val();
-            var args = '?sort_loc='+$sl+'&sort_wf='+$sw;
+            $slg = $('#sort-lang').val();
+            var args = '?sort_loc='+$sl+'&sort_wf='+$sw+'&sort_lang='+$slg;
             var url = window.location.origin + window.location.pathname + args;
             window.location.href = url;
         }
