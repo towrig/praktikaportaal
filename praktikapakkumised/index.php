@@ -213,7 +213,7 @@
                                 <div class="col-lg-3 col-sm-12">
                                     <span class="text-uppercase h6 sort-label"><?php echo $sort_language; ?></span>
                                     <select class="custom-select mr-sm-2" id="sort-lang">
-                                        <option value="none" selected>.../option>
+                                        <option value="none" selected>...</option>
                                         <option value="ee"><?php echo $lang_ee; ?></option>
                                         <option value="eng"><?php echo $lang_eng; ?></option>
                                     </select>
