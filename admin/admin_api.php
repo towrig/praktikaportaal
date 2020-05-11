@@ -125,7 +125,23 @@ else if (!empty($_POST) && $_POST["reg_update"] == 1){
         echo "Connection failed: " . $e->getMessage();
     }
     
-    
+}
+else if (!empty($_POST) && $_POST["activating-post"] == 1){
+    $id = $_POST["id"];
+    $email = $_POST["email"];
+    try {
+        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $conn->prepare('UPDATE WorkPosts SET isvalidated = ?, email = ? WHERE id = ?');
+        $query->execute(array(1, $email, $id));
+        http_response_code(200);
+        echo $response."OK!";
+        $conn = null;
+    }
+    catch(PDOException $e){
+        http_response_code(403);
+        echo "Connection failed: " . $e->getMessage();
+    }
 }
 else{
     http_response_code(403);

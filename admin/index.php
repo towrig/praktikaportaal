@@ -17,6 +17,8 @@
 
 	$projects = array();
     $participants = array();
+
+    $inactive_work_posts = array();
 	try {
 		$conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
 		// set the PDO error mode to exception
@@ -59,7 +61,20 @@
             $i+= 1;
 	    }
         
-	    $conn = null;
+	    $query = $conn->prepare('SELECT * FROM WorkPosts WHERE isvalidated = 0');
+        $query->execute();
+        $data = $query -> fetchAll();
+        $j = 0;
+        foreach($data as $row){
+            $entity = array();
+            $entity["heading"] = $row["heading"];
+            $entity["id"] = $row["id"];
+            $entity["email"] = $row["email"];
+            $inactive_work_posts[$j] = $entity;
+            $entity = null;
+            $j++;
+        }
+
 	}catch (PDOException $e){
 		echo "Connection failed: " . $e->getMessage();
 	}
@@ -100,6 +115,26 @@
                 <div class="container px-0">
                     <div class="btn-group btn-group-md align-self-center" >
                         <span class="btn btn-sm btn-success add-seminar">Lisa seminar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 my-5">
+                <h2>Aktiveerimata praktikapakkumised</h2>
+                <div class="container px-0">
+                    <div class="row">
+                        <?php
+                        foreach($inactive_work_posts as $post){
+                            echo '<div class="col-md-12 '.$post["id"].'-container">
+                                    <div class="card">
+                                    <div class="card-body text-left">
+                                    <span style="font-size:18px;font-weight: bold;">'.$post["heading"].'</span>
+                                    <input type="text" value="'.$post["email"].'" id="post-'.$post["id"].'" style="width:30%;">
+                                    <button class="btn btn-sm btn-success activate-work" data-id="'.$post["id"].'">Uuenda</button>
+                                    </div>
+                                    </div>
+                                  </div>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -283,6 +318,7 @@
             $('#archive-submit').on('click', archivePost);
             $('.add-seminar').on('click', seminarModal);
             $('#seminar-submit').on('click', seminarPost);
+            $('.activate-work').on('click', activateWork);
             $('.time-form').submit(updateReg);
             
             $(".datepicker").datepicker({
@@ -291,6 +327,32 @@
             });
         });
         
+        function activateWork(e){
+            var target = $(e.currentTarget);
+            var id = target.data("id");
+            var email = $("#post-"+id).val();
+            var container = $(id+"-container");
+            let formData = new FormData();
+            console.log(id+" "+email);
+            formData.append("activating-post", 1);
+            formData.append("id", id);
+            formData.append("email", email);
+
+            $.ajax({
+                type: 'POST',
+                url: './admin_api.php',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(response) {
+                container.remove();
+                console.log(response);
+            }).fail(function(response) {
+                console.log(response);
+            });
+        }
+
         function myFunction() {
             var copyText = document.getElementById("emails-container");
             copyText.select();
