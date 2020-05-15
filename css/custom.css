@@ -2284,6 +2284,24 @@ select#sort-wf, select#sort-loc, select#sort-lang {
 }
 
 /* karli muudatused*/
+.admin-info-change{
+    position: relative;
+    width: auto;
+}
+.admin-info-change textarea{
+    background: inherit;
+    color: inherit;
+    width: 100%;
+    outline: none;
+}
+.admin-info-change .admin-change-content{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #e94700;
+    display: none;
+    z-index: 9999;
+}
 .arc-active,
 .arc-inactive{
     color: #757575;

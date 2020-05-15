@@ -56,11 +56,47 @@ $t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5
     <script src="<?php echo $wwwroot; ?>js/jquery.ihavecookies.min.js"></script>
     <!-- PDF viewer -->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>-->
+    <?php if($_SESSION["admin"]):?>
+    <!-- ADMIN SCRIPTS -->
     <script>
+        $(function(){
+            $('.admin-change-content').on('click', create_editable_block);
+            $('a').on('click', function(e){
+                if($(e.currentTarget).find('.admin-info-change').length){
+                    e.preventDefault();
+                }
+            });
+            $('.admin-info-change textarea').focus(function(e){
+                $('.admin-change-content').hide();
+                $(e.currentTarget).parent().find('.admin-change-content').show();
+            });
+        });
+        function create_editable_block(e){
+            var target = $(e.currentTarget);
+            var key = target.data("key");
+            var content = $("#content-"+key).val();
+            var formData = new FormData();
+            formData.append("changing-content", 1);
+            formData.append("key", key);
+            formData.append("content", content);
 
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo $wwwroot; ?>admin/admin_api.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData
+            }).done(function(response) {
+                console.log(response);
+            }).fail(function(response) {
+                console.log(response);
+            });
+        }
     </script>
+    <?php endif;?>
+
     <script>
-    console.log("lang: <?php echo $_SESSION["lang"]; ?>");
       $(function(){
         $('.lang-switch').on('click', function(e){
             var formData = new FormData();

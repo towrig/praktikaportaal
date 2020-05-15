@@ -81,7 +81,7 @@
     <link href="<?php echo $wwwroot; ?>css/creative.min.css" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link href="<?php echo $wwwroot; ?>css/custom.css?v=2" rel="stylesheet">
+    <link href="<?php echo $wwwroot; ?>css/custom.css?v=3" rel="stylesheet">
     
     <link rel="stylesheet" href="<?php echo $wwwroot; ?>vendor/ui/jquery-ui.min.css">
     <link rel="stylesheet" href="<?php echo $wwwroot; ?>js/trumbowyg/ui/trumbowyg.min.css">

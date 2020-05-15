@@ -1,4 +1,5 @@
 <?php 
+session_start();
     // Load config.php
     $CFG = new stdClass();
     $CFG->docroot = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
@@ -102,14 +103,16 @@
 
     <div class="container">
         <div class="row">
-
-            <div class="col-md-12 my-5 d-none">
+            <?php if (!$_SESSION["admin"]): ?>
+            <div class="col-md-12 my-5">
                 <h3>Sisesta võti ja vajuta nuppu muutmisreziimi aktiveerimiseks</h3>
                 <input type="text" name="key" class="admin-key-input">
                 <div class="btn-group btn-group-md align-self-center" id="editmodeActivator">
                     <span class="btn btn-sm btn-success" onclick="activateEditmode()">Aktiveeri muutimisreziim</span>
                 </div>
             </div>
+            <?php endif;?>
+            <?php if ($_SESSION["admin"]): ?>
             <div class="col-md-12 my-5">
                 <h2>Seminarid</h2>
                 <div class="container px-0">
@@ -185,7 +188,7 @@
                     </div>
                 </div>
             </div>
-
+            <?php endif;?>
         </div>
     </div>
     
@@ -236,6 +239,21 @@
                         <div class="form-group mt-3">
                             <label>Meeskonna suurus:</label>
                             <h4 id="modal-project_team"></h4>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label>Semester:</label>
+                            <select name="project-semester" id="project-semester">
+                                <option>sügis</option>
+                                <option>kevad</option>
+                            </select>
+                            <select name="project-year" id="project-year">
+                                <?php
+                                    for($i = date("Y")+1; $i > 2019; $i--){
+                                        echo "<option>".$i."</option>";
+                                    }
+                                ?>
+                                <option>2019</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Eesmärk</label>
@@ -309,7 +327,7 @@
     <script src="../js/creative.min.js"></script>-->
     <script src="../js/trumbowyg/trumbowyg.min.js"></script>
     <script type="text/javascript">
-        
+        <?php if($_SESSION["admin"]): ?>
         var participants = <?php echo json_encode($participants);?>;
         
         $(document).ready(function() {
@@ -319,6 +337,7 @@
             $('.add-seminar').on('click', seminarModal);
             $('#seminar-submit').on('click', seminarPost);
             $('.activate-work').on('click', activateWork);
+            $('.activate-btn').on('click', activateProject);
             $('.time-form').submit(updateReg);
             
             $(".datepicker").datepicker({
@@ -512,26 +531,6 @@
             return $('<div>').addClass("col-lg-3 participant m-2").html("<h6>" + name + "</h6>" + "<p>" + email + "</p>" + "<p>" + degree + "</p>" + "<p>" + skills + "</p>"+acceptButton);
         }
         
-        function activateEditmode() {
-            let formData = new FormData();
-            formData.append("edit_key", $('.admin-key-input').val());
-            $.ajax({
-                type: 'POST',
-                url: 'admin_api.php',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
-            }).done(function(response) {
-                console.log(response);
-                sessionStorage.setItem("editkey",response);
-                $('#editmodeActivator').after("<div class='alert alert-success'>Muutmine aktiveeritud. Lülitub välja brauseri sulgemisel.</div>");
-            }).fail(function(response) {
-                console.log(response);
-                $('#editmodeActivator').after("<div class='alert alert-danger'>Muutmise aktiveeritmine ebaõnnestus!</div>");
-            });
-        }
-        
         function activateProject(e) {
             var key = $(e.currentTarget).data("editkey");
             var title = $(e.currentTarget).data("title");
@@ -555,7 +554,30 @@
                 console.log(response);
             });
         }
-        $('.activate-btn').on('click', activateProject);
+        
+        <?php endif; ?>
+        function activateEditmode() {
+            let formData = new FormData();
+            var val = $('.admin-key-input').val();
+            formData.append("activate-editmode", 1);
+            formData.append("key", val);
+            $.ajax({
+                type: 'POST',
+                url: 'admin_api.php',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(response) {
+                console.log(response);
+                $('#editmodeActivator').after("<div class='alert alert-success'>Muutmine aktiveeritud. Lülitub välja brauseri sulgemisel. Leht uueneb varsti.</div>");
+                setTimeout(function(){window.location.reload();}, 500);
+            }).fail(function(response) {
+                console.log(response);
+                $('#editmodeActivator').after("<div class='alert alert-danger'>Muutmise aktiveeritmine ebaõnnestus!</div>");
+            });
+        }
+
 
     </script>
 </body>

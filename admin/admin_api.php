@@ -1,4 +1,5 @@
 <?php 
+session_start();
 // Load config.php
 $CFG = new stdClass();
 $CFG->docroot = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
@@ -66,11 +67,14 @@ else if(!empty($_POST) && $_POST["archiving"] == 1){
     $results = $_POST["project-results"];
     $postId = $_POST["project-id"];
     
+    $semester = $_POST["project-semester"];
+    $year = $_POST["project-year"];
+
     try {
         $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query = $conn->prepare('INSERT INTO ArchivedProjects(name,organisation,org_name,team,goal,actions,results,postId) VALUES(?,?,?,?,?,?,?,?);');
-        $query->execute(array($name, $organisation, $org_name, $team, $goal, $actions, $results, $postId));
+        $query = $conn->prepare('INSERT INTO ArchivedProjects(name,organisation,org_name,semester,year,team,goal,actions,results,postId) VALUES(?,?,?,?,?,?,?,?,?,?);');
+        $query->execute(array($name, $organisation, $org_name, $semester, $year, $team, $goal, $actions, $results, $postId));
         $query = $conn->prepare('DELETE FROM ProjectPosts WHERE id = ?;');
         $query->execute(array($postId));
         http_response_code(200);
@@ -136,6 +140,50 @@ else if (!empty($_POST) && $_POST["activating-post"] == 1){
         $query->execute(array(1, $email, $id));
         http_response_code(200);
         echo $response."OK!";
+        $conn = null;
+    }
+    catch(PDOException $e){
+        http_response_code(403);
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+//editmode
+else if (!empty($_POST) && $_POST["activate-editmode"] == 1){
+    $key = $_POST["key"];
+
+    try {
+        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $conn->prepare('SELECT * FROM editkeys WHERE hashCode = ?');
+        $query->execute(array($key));
+        $data = $query -> fetchAll();
+        if(!empty($data)){
+            $_SESSION["admin"] = true;
+            http_response_code(200);
+            echo "Admin activated!";
+        }else{
+            http_response_code(403);
+            echo "Wrong admin key!";
+        }
+        $conn = null;
+    }
+    catch(PDOException $e){
+        http_response_code(403);
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+else if (!empty($_POST) && $_POST["changing-content"] == 1){
+    $key = $_POST["key"];
+    $content = $_POST["content"];
+    $lang = $_SESSION["lang"];
+    try {
+        $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $conn->prepare('UPDATE PageContent SET content = ? WHERE tag = ? AND language = ?');
+        $query->execute(array($content, $key, $lang));
+
+        http_response_code(200);
+        echo "Set ".$key." to ".$content;
         $conn = null;
     }
     catch(PDOException $e){

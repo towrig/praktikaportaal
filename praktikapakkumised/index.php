@@ -692,7 +692,6 @@
             var deadline = target.data('reg_end');
 
             //pdf stuff
-            console.log(target.data("pdf_path")+";");
             if(target.data("pdf_path") != ""){
                 var pdf_path = "../js/pdf/web/viewer.html?file=<?php echo $wwwroot;?>userdata/work_pdfs/" + target.data("pdf_path");
                 //attach pdf
@@ -705,7 +704,7 @@
                 modal.find('.tasks-hide').hide();
                 modal.find('.skills-hide').hide();
                 modal.find('.pdf-container').show();
-            }else if (tasks != "" || skills != ""){
+            }else{
                 console.log("ran this with: "+(tasks != ""));
                 modal.find('.tasks-hide').hide();
                 modal.find('.skills-hide').hide();
