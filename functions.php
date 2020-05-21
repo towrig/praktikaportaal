@@ -23,7 +23,7 @@
         $uneditables = array("fp-mh_h1","fp-mh1.0","fp-mh1.1", "fp-mh1.2","fp-mh2", "fp-mh3", "fp-mh_h2",
                              "fp-mh2.0", "fp-mh2.1", "fp-mh2.2", "fp-mh_h3", "fp-mh_text", "fp-mh_title",
                              "fp-mh3.0", "fp-mh3.1", "fp-mh3.2", "fp-mh4", "fp-mh5",
-                             "top-navb1", "top-navb2", "top-navb3");
+                             "top-navb1", "top-navb2", "top-navb3", "footer1", "footer2", "footer3", "footer4", "footer5");
         $q_string = "?";
         $return_arr = array();
         for($i = 1; $i < count($arr); $i++){

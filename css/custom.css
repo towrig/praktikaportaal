@@ -2284,6 +2284,17 @@ select#sort-wf, select#sort-loc, select#sort-lang {
 }
 
 /* karli muudatused*/
+.admin-info-change .trumbowyg-box,
+.admin-info-change .trumbowyg-editor,
+.admin-info-change .trumbowyg-textarea{
+    min-height: 50px !important;
+}
+.admin-info-change .trumbowyg-editor{
+    padding: 5px 20px;
+}
+.admin-info-change .trumbowyg-button-pane{
+    display:none;
+}
 .admin-info-change{
     position: relative;
     width: auto;

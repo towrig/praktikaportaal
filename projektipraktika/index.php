@@ -16,7 +16,11 @@
         $sort_text = "Sorteeri";
         $lang_ee = "eesti";
         $lang_eng = "inglise";
-    }else{
+        $sort_spring = "kevad";
+        $sort_fall = "sügis";
+        $sort_year = "Aasta";
+    }
+    else{
         $arc_active = "Submitted projects";
         $arc_inactive = "Finished projects";
         $add_project = "Submit project";
@@ -25,6 +29,9 @@
         $sort_text = "Sort";
         $lang_ee = "Estonian";
         $lang_eng = "English";
+        $sort_spring = "spring";
+        $sort_fall = "fall";
+        $sort_year = "Year";
     }
 
     $query_string_sort = "";
@@ -32,6 +39,21 @@
     if(isset($_GET["sort_lang"]) && $_GET["sort_lang"] != "none"){
         $query_string_sort .= " AND lang = ?";
         $sorting_lang = true;
+    }
+
+    $sorting_semester = false;
+    $sorting_year = false;
+    $archived_sort_string = "";
+    if(isset($_GET["semester"]) && $_GET["semester"] != "none"){
+        $archived_sort_string .= "semester = ?";
+        $sorting_semester = true;
+    }
+    if(isset($_GET["year"]) && $_GET["year"] != "none"){
+        if($sorting_semester){
+            $archived_sort_string .= " AND ";
+        }
+        $archived_sort_string .= "year = ?";
+        $sorting_year = true;
     }
 ?>
 
@@ -56,12 +78,12 @@
                         <span id="formToggler" class="toggleMenu text-uppercase" onclick="openModal(); gtag('event', 'Ava',{'event_category': 'Projektid','event_label':'Esita projekt'});"><?php echo $add_project; ?></span>
                     </div>
                     <div class="col-lg-12">
-                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down"><span class="arc-active active"><?php echo $arc_active; ?></span> / <span class="arc-inactive"><?php echo $arc_inactive; ?></span></h5>
+                        <h5 class="text-uppercase text-center font-weight-bold mt-5"  data-aos="fade-down"><span class="arc-active <?php if(!($sorting_semester || $sorting_year)):?>active<?php endif;?>"><?php echo $arc_active; ?></span> / <span class="arc-inactive <?php if($sorting_semester || $sorting_year):?>active<?php endif;?>"><?php echo $arc_inactive; ?></span></h5>
                     </div>
-                    <div class="offset-md-1 col-lg-11 p-3 text-center">
+                    <div class="col-lg-12 p-3 text-center sort-active-posts" <?php if($sorting_semester || $sorting_year):?>style="display:none"<?php endif;?>>
                         <div class="container">
-                            <div class="row">
-                                <div class="col-lg-3 col-sm-12" style="margin-left:300px">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3 col-sm-12">
                                     <span class="text-uppercase h6 sort-label"><?php echo $sort_language; ?></span>
                                     <select class="custom-select mr-sm-2" id="sort-lang">
                                         <option value="none" selected>...</option>
@@ -77,12 +99,43 @@
                             </div><!-- .row -->
                         </div><!-- .container -->
                     </div>
+                    <div class="col-lg-12 p-3 text-center sort-archived-posts" <?php if(!($sorting_semester || $sorting_year)):?>style="display:none"<?php endif;?>>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3 col-sm-12" >
+                                    <span class="text-uppercase h6 sort-label"><?php echo $sort_year; ?></span>
+                                    <select class="custom-select mr-sm-2" id="sort-year">
+                                        <option value="none" selected>...</option>
+                                        <?php
+                                            for($i = date("Y")+1; $i > 2019; $i--){
+                                                echo "<option>".$i."</option>";
+                                            }
+                                        ?>
+                                        <option>2019</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-sm-12">
+                                    <span class="text-uppercase h6 sort-label">Semester</span>
+                                    <select class="custom-select mr-sm-2" id="sort-semester">
+                                        <option value="none" selected>...</option>
+                                        <option value="sügis"><?php echo $sort_fall; ?></option>
+                                        <option value="kevad"><?php echo $sort_spring; ?></option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2 col-sm-12" style="margin-top:20px">
+                                    <div class="upload-btn-wrapper">
+                                        <button class="btn" id="sort-button-arc"><?php echo $sort_text; ?></button>
+                                    </div>
+                                </div>
+                            </div><!-- .row -->
+                        </div><!-- .container -->
+                    </div>
                 </div> <!-- .row -->
             </div> <!-- .container -->
         </section>
 
 
-        <section class="mb-5 profiles-current" id="profiles">
+        <section class="mb-5 profiles-current" <?php if($sorting_semester || $sorting_year):?>style="display:none"<?php endif;?> id="profiles">
             <div class="container" data-aos="fade-down">
                 <div class="row">
                     <div id="carouselPager" class="carousel slide col-md-12">
@@ -253,7 +306,7 @@
             </div>
         </section>
 
-        <section class="mb-5 profiles-past" style="display:none">
+        <section class="mb-5 profiles-past" <?php if(!($sorting_semester || $sorting_year)):?>style="display:none"<?php endif;?>>
             <div class="container" data-aos="fade-down">
                 <div class="row">
                     <div id="carouselPager" class="carousel slide col-md-12">
@@ -279,8 +332,20 @@
                                     $conn = new PDO('mysql:host='.$dbhost.';dbname='.$dbname.';charset=utf8', $dbuser , $dbpassword);
                                     // set the PDO error mode to exception
                                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                    $query = $conn->prepare('SELECT * FROM ArchivedProjects ORDER BY id DESC');
-                                    $query->execute(array());
+                                    if($sorting_semester || $sorting_year){
+                                        $query = $conn->prepare('SELECT * FROM ArchivedProjects WHERE '.$archived_sort_string.' ORDER BY id DESC');
+                                        $sort_arr = array();
+                                        if($sorting_semester){
+                                            array_push($sort_arr, $_GET["semester"]);
+                                        }
+                                        if($sorting_year){
+                                            array_push($sort_arr, $_GET["year"]);
+                                        }
+                                        $query->execute($sort_arr);
+                                    }else{
+                                        $query = $conn->prepare('SELECT * FROM ArchivedProjects ORDER BY id DESC');
+                                        $query->execute(array());
+                                    }
                                     $data = $query -> fetchAll();
                                     $j = 0;
                                     $max_per_page = 6;
@@ -655,12 +720,16 @@
             $('.arc-active').on('click', function(){
                 $('.profiles-current').show();
                 $('.profiles-past').hide();
+                $('.sort-active-posts').show();
+                $('.sort-archived-posts').hide();
                 $('.arc-active').addClass("active");
                 $('.arc-inactive').removeClass("active");
             });
             $('.arc-inactive').on('click', function(){
                 $('.profiles-current').hide();
                 $('.profiles-past').show();
+                $('.sort-active-posts').hide();
+                $('.sort-archived-posts').show();
                 $('.arc-active').removeClass("active");
                 $('.arc-inactive').addClass("active");
             });
@@ -668,9 +737,16 @@
             $('[data-toggle="tooltip"]').tooltip();
 
             $('#sort-button').on('click', handleSort);
-
             <?php if($sorting_lang):?>
             $('#sort-lang').val("<?php echo $_GET["sort_lang"];?>");
+            <?php endif;?>
+
+            $('#sort-button-arc').on('click', handleSortArc);
+            <?php if($sorting_semester):?>
+            $('#sort-semester').val("<?php echo $_GET["semester"];?>");
+            <?php endif;?>
+            <?php if($sorting_year):?>
+            $('#sort-year').val("<?php echo $_GET["year"];?>");
             <?php endif;?>
 
             $('.pagination .page-item').on('click', paginatorClick);
@@ -859,6 +935,13 @@
         function handleSort(e){
             $sl = $('#sort-lang').val();
             var args = '?sort_lang='+$sl;
+            var url = window.location.origin + window.location.pathname + args;
+            window.location.href = url;
+        }
+        function handleSortArc(e){
+            $sy = $('#sort-year').val();
+            $ss = $('#sort-semester').val();
+            var args = '?semester='+$ss+'&year='+$sy;
             var url = window.location.origin + window.location.pathname + args;
             window.location.href = url;
         }

@@ -66,9 +66,24 @@ $t_pieces = t(array("footer_h1","footer1","footer2","footer3","footer4","footer5
                     e.preventDefault();
                 }
             });
-            $('.admin-info-change textarea').focus(function(e){
+            $('.admin-info-change textarea').trumbowyg({
+                btns: [
+                    ['viewHTML'],
+                    ['undo', 'redo'], // Only supported in Blink browsers
+                    ['formatting'],
+                    ['strong', 'em', 'del'],
+                    ['unorderedList', 'orderedList']
+                ],
+                autogrow: true
+            });
+            /*$('.trumbowyg-box').focusout(function(event) {
+                $(this).find('.trumbowyg-button-pane').fadeOut(200);
+            });*/
+            $('.trumbowyg-box').focusin(function(event) {
+                $('.trumbowyg-button-pane').fadeOut(200);
+                $(this).find('.trumbowyg-button-pane').fadeIn(200);
                 $('.admin-change-content').hide();
-                $(e.currentTarget).parent().find('.admin-change-content').show();
+                $(this).parent().find('.admin-change-content').show();
             });
         });
         function create_editable_block(e){
